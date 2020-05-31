@@ -1,0 +1,168 @@
+<!--<div class="center" style="width:50%; height:80%;margin:auto;">-->
+<!--<div style="margin-right: 65%;">
+  <button (click)="Show2Proposals=!Show2Proposals">Submitting another lecture proposal</button>
+  <div *ngIf="Show2Proposals">
+    <label style="color:red;">     Submission is permitted only to sub-divisional lecturers:</label><br />
+    <label style="cursor:pointer;" (click)="OpenSecondProposal()"> For more click here</label>
+  </div>
+</div>-->
+<div class="containerDivGeneric">
+  <br />
+  <div div class="col-md-10 marginAuto" style="margin-left:20%; ">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
+      <h4 class="header-border" style="width:80%;">THE 18TH WORLD CONGRESS OF JEWISH STUDIES</h4>
+
+    </div>
+  </div>
+  <div class="col-md-10 marginAuto" style="margin-left:20%;">
+
+    <div>
+      <br />
+      <div class="containerDivGeneric">
+        <div class="col-md-10" style="padding-left: 0% !important;">
+          <h5 style="color:#27b5e5">PROPOSED LECTURE IN ASTRUCTURED SESSION</h5>
+          <div class="backGray col-md-9">
+            <br />
+            <div class="row margin-top">
+              <label class="col-md-4">Full Name [English]</label>
+              <label class="col-md-4 floatLeft">Full Name [Hebrew]</label>
+              <label class="col-md-4 floatLeft">Email</label>
+            </div>
+            <div class="row margin-top">
+              <div class="col-md-4">
+                <input type="text" value="{{FirstName}} {{ LastName}}" style="width:90%;" />
+              </div> <div class="col-md-4 floatLeft">
+                <input type="text" value="{{NameHebrew.FirstName}} {{NameHebrew.LastName}}" style="width:90%;" />
+              </div><div class="col-md-4 floatLeft" style="text-align:right;">
+                <input type="text" value="{{LoginUserName}}" style="width:100%;" />
+              </div>
+            </div>
+            <div class="row margin-top" style="margin-left:1%">
+              <label class="col-md-5">Division</label>
+              <label class="col-md-3 floatLeft" style="margin-left:15% !important;">Subdivision</label>
+            </div>
+            <div class="row margin-top">
+              <div class="col-md-6">
+                <select *ngIf="showLikeProp==false" style="background:content-box;width:90%" #t (change)="selectDivision($event.target.value)" [(ngModel)]="Division">
+                  <option [value]="Division" selected>{{Division}}</option>
+                  <option *ngFor="let Division of ArrDivision" [value]="Division">
+                    {{Division}}
+                  </option>
+                </select>
+                <label *ngIf="showLikeProp==true" style="width:90%"> {{Division}}</label>
+              </div>
+              <div class="col-md-6" style="text-align:right; ">
+                <select *ngIf="showLikeProp==false" style="background: content-box;width:85%" #t (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision">
+                  <option [value]="SubDivision" selected>{{SubDivision}}</option>
+                  <option *ngFor="let SubDivision of ArrSubDivision" [value]="SubDivision">
+                    {{SubDivision}}
+                  </option>
+                </select>
+                <label *ngIf="showLikeProp==true" style="width:90%;display: inline-flex;"> {{SubDivision}}</label>
+
+              </div>
+
+            </div>
+            <br /><br />
+          </div>
+          <br /><br />
+          <div class="row margin-top">
+            <label class="col-md-5">Lecture title [English]</label>
+            <label class="col-md-5">Academic Affiliation</label>
+          </div>
+          <div class="row margin-top">
+            <input type="text" class="col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
+            <input type="text" class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==false" />
+            <label class="col-md-3" *ngIf="showLikeProp==true">{{TitleEnglish}}</label>
+            <label class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==true"></label>
+          </div>
+          <div class="row margin-top">
+            <label class="col-md-5">Lecture title [Hebrew]</label>
+            <label class="col-md-5 floatLeft">Lecture language</label>
+          </div>
+          <div class="row margin-top">
+            <input type="text" class="col-md-3" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
+            <label class="col-md-3" *ngIf="showLikeProp==true">{{TitleHebrew}}</label>
+            <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language" *ngIf="showLikeProp==false" class="col-md-3" style="margin-left:18%">
+              <option [value]="Language" selected>{{Language}}</option>
+              <option *ngFor="let Language of ArrLanguage" [value]="Language">
+                {{Language}}
+              </option>
+            </select>
+            <label style="margin-left:18%" class="col-md-3" *ngIf="showLikeProp==true">{{Language}}</label>
+
+          </div>
+          <div class="row margin-top">
+            <label class="col-md-5">Abstract</label>
+            <label class="col-md-5 floatLeft">Keywords</label>
+          </div>
+          <div class="row margin-top">
+            <textarea *ngIf="showLikeProp==false" [(ngModel)]="Proposal" style="width:291px;height:97px;" class="col-md-3"></textarea>
+            <textarea *ngIf="showLikeProp==false" [(ngModel)]="Keywords" style="width:291px;height:97px;margin-left:18%" class="col-md-3"></textarea>
+            <label *ngIf="showLikeProp==true" class="col-md-3">{{Proposal}}</label>
+            <label *ngIf="showLikeProp==true" style="margin-left:18%" class="col-md-3">{{Keywords}}</label>
+          </div>
+          <br /><br />
+          <div class="row">
+            <button (click)="Draft()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-2" style="margin-left:20%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
+            <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-2" style="margin-left:3%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
+            <button (click)="Draft()" *ngIf="showLikeProp==true" disabled class="fill-btn-disabled col-md-2" style="margin-left:20%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
+            <button (click)="Save()" *ngIf="showLikeProp==true" disabled class="fill-btn-disabled col-md-2" style="margin-left:3%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
+            <br /><br />
+            <label *ngIf="SaveDraft">The draft saved</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div>
+  <label style="display: inline-block;width: 120px;">Division:</label>
+  <select #t (change)="selectDivision($event.target.value)" [(ngModel)]="Division" *ngIf="SessionName==null">
+    <option [value]="Division" selected>{{Division}}</option>
+    <option *ngFor="let Division of ArrDivision" [value]="Division">
+      {{Division}}
+    </option>
+  </select>
+  <label *ngIf="SessionName!=null">{{Division}}</label>
+  <br /><br />
+  <label style="display: inline-block;width: 120px;"> Sub Division:</label>
+  <select #t (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" *ngIf="SessionName==null">
+    <option [value]="SubDivision" selected>{{SubDivision}}</option>
+    <option *ngFor="let SubDivision of ArrSubDivision" [value]="SubDivision">
+      {{SubDivision}}
+    </option>
+  </select>
+  <label *ngIf="SessionName!=null">{{SubDivision}}</label>
+
+  <br /><br />
+  <label style="display: inline-block;width: 120px;">Lecture title:</label><input type="text" [(ngModel)]="TitleEnglish" style="margin-right: 10px;" />
+  <label style="display: inline-block;width: 180px;">Lecture title (Hebrew):</label><input type="text" [(ngModel)]="TitleHebrew" /><br /><br />
+  <label style="display: inline-block;width: 120px;">Proposal(250 words)</label><textarea [(ngModel)]="Proposal"></textarea><br /><br />
+  <label style="display: inline-block;width: 120px;">Language</label>
+  <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
+    <option [value]="Language" selected>{{Language}}</option>
+    <option *ngFor="let Language of ArrLanguage" [value]="Language">
+      {{Language}}
+    </option>
+  </select><br /><br />
+  <label style="display: inline-block;width: 120px;">Keywords</label><textarea [(ngModel)]="Keywords"></textarea><br /><br />
+  <input type="radio" name="one\two" value="1" (change)="showTwo=false" /><label>Lone Lecturer</label>
+  <input type="radio" name="one\two" value="2" (change)="showTwo=true" /><label>Shared lecture</label>
+  <div *ngIf="showTwo">
+    <br /><label>Enter email and name</label>
+    <br />
+    <br />
+    <label style="margin-right:20px">Email</label><input type="text" [(ngModel)]="Email2" style="margin-right:20px" />
+    <label style="margin-right:20px">Name</label><input type="text" [(ngModel)]="Name2" />
+  </div>
+  <div style="padding-left:50px;padding-top:30px;">
+    <button (click)="Draft()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">Save draft</button>
+    <button (click)="Save()" class="fill-btn-blue" style="padding:10px;width:150px;">Submit</button>
+    <br /><br />
+    <label *ngIf="SaveDraft">The draft saved</label>
+  </div>
+</div>
+  </div>-->

@@ -1,0 +1,50 @@
+.di {
+  width: 250px;
+  margin: 10px;
+  text-align: center;
+}
+.big {
+  /*height: 20%;*/
+  width: 15%;
+  max-height: unset;
+  overflow: hidden;
+  font-size: large;
+  /*min-height: 500px;*/
+}
+
+.centerA {
+  width: 80%;
+  /*height: 60%;*/
+  margin: auto;
+  top: 100px;
+  left: 15%;
+  position: fixed;
+  /* background: white; */
+  /*background-color: #ffffffc2;*/
+  /* text-align:center;*/
+  /*margin-left: 40px;*/
+  /*font-size: large;*/
+}
+
+.marg10 {
+  margin-bottom: 10px;
+}
+.di2 {
+  width: 100px;
+  margin: 10px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.fill-btn-blue {
+  background-color: #026fa7;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+}

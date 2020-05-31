@@ -1,0 +1,156 @@
+.di
+{
+  width:250px;
+  margin:10px;
+  text-align:center;
+}
+.di2 {
+  width: 100px;
+  margin: 10px;
+  margin-right:20px;
+  text-align:center;
+}
+.big {
+  /*height: 20%;*/
+  width: 15%;
+  max-height: unset;
+  overflow: hidden;
+  font-size:large;
+  /*min-height: 500px;*/
+}
+.header-border {
+  top: 100px;
+  margin-top: 50px;
+  border-bottom: 1px solid;
+  /*border-width: 70%;*/
+  color: #48c3ed;
+  border-bottom-color: #27b5e5;
+}
+.header-WithOut-border {
+  top: 100px;
+  margin-top: 50px;
+  /*border-bottom: 1px solid;*/
+  /*border-width: 70%;*/
+  color: #27b5e5;
+  /*border-bottom-color: #27b5e5;*/
+}
+.row-heder{
+  background-color:#c3bdbd;
+  border-bottom:1px solid;
+  padding-top:1%;
+}
+.header-modal {
+  color: #27b5e5;
+}
+.Non-Border-select {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: gray;
+}
+.row-Table {
+  height: 50px;
+  border-bottom: 1px solid;
+  padding-top: 1%;
+}
+.centerA {
+  width: 80%;
+  /*height: 60%;*/
+  margin: auto;
+  top: 100px;
+  left: 15%;
+  position: fixed;
+  /* background: white; */
+  /*background-color: #ffffffc2;*/
+  /* text-align:center;*/
+  /*margin-left: 40px;*/
+  /*font-size: large;*/
+}
+.marg10{
+  margin-bottom:10px;
+}
+.fill-btn-blue {
+  background-color: #27b5e5;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  width: 130px;
+}
+
+.Pending{
+  color:#ffd800;
+  font-weight:bold;
+}
+
+.Accepted {
+  color: #709446;
+  font-weight: bold;
+}
+.Rejected {
+  color: #d45555;
+  font-weight: bold;
+}
+.pagination {
+  /*background-color:#c3bdbd*/
+  direction: rtl;
+}
+/*div#dtBasicExample_paginate {
+  background-color: lightgrey;
+}*/
+.col-sm-12.col-md-5 {
+  background-color: lightgrey !important;
+}
+.col-sm-12.col-md-7 {
+  background-color: lightgrey !important;
+}
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+.mat-header-cell {
+  background-color: #E8E8E8 !important;
+  color: #167c9f !important;
+  font-weight: bold !important;
+}
+
+:host ::ng-deep.mat-paginator .mat-paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 56px;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+  background-color: #E8E8E8 !important;
+  color: #167c9f !important;
+  font-weight: bold !important;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.txtStyle{
+  color:#beb9b9;
+  font-weight:bold;
+}
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}

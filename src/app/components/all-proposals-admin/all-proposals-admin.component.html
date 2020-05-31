@@ -1,0 +1,146 @@
+<div class="container right">
+  <div class="top-line">
+    <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
+  </div>
+</div>
+
+<div class="big">
+  <br /><br /><br />
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="container">
+      <ul class="nav navbar-nav" routerLinkActive="active" style="list-style: none;">
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/">Registration</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/AllProposalsAdmin">All proposals</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/Drafts">All drafts not saved</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/Judges">Judges</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/RegistrationOneEnglish">Proposal - single (English)</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/RegistrationOneHebrew">Proposal - single (Hebrew)</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/CongressRegistrationSession">Proposal - Session (English)</a></li>
+        <li class="nav-item marg10"><a class="nav-link" style="color:black;text-decoration: none" routerLink="/CongressRegistrationSessionHebrew">Proposal - Session (Hebrew)</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+<br /><br />
+<div class="centerA" style="overflow-x:scroll;height:80%">
+  <div style="display: flex;padding-right:40%;direction:rtl;padding-bottom:40px;">
+    <label style="margin-left:20px;"> שדה לסינון</label>
+    <select (change)="SelectField($event.target.value)" [(ngModel)]="field" style="width:120px;margin-left:20px;">
+      <option *ngFor="let field of Fields" [value]="field">
+        {{field}}
+      </option>
+    </select>
+    <label style="margin-left:20px;">ערך</label>
+    <select (change)="SelectValues($event.target.value)" [(ngModel)]="Value" style="width:120px;margin-left:20px;">
+      <option *ngFor="let Value of Values" [value]="Value">
+        {{Value}}
+      </option>
+    </select>
+    <label (click)="NoFilter()" style="cursor:pointer;margin-right:30px;">ביטול סינון</label>
+  </div>
+  <br /><br />
+  <div style="display: -webkit-box;">
+
+    <div class="di2" style="width:20px; height:20px;">Edit</div>
+    <div class="di"> User Name</div>
+    <div class="di"> Division</div>
+    <div class="di"> SubDivision</div>
+    <div class="di"> TitleEnglish</div>
+    <div class="di"> TitleHebrew</div>
+    <!-- <td class="di"> Proposal</td>-->
+    <div class="di2"> Language</div>
+    <div class="di"> Keywords</div>
+    <div class="di"> SessionName</div>
+    <div class="di"> Chairman</div>
+    <div class="di"> Status</div>
+    <div class="di"> Remarks</div>
+    <br /><br /><br />
+
+  </div>
+  <div *ngFor="let item of PropJudges" style="display: -webkit-box;">
+    <div><img src="/assets/images/edit.png" style="width: 20px;height: 20px;" (click)="editProp(item)" class="di2" /></div>
+    <div class="di">{{item.FirstNameEnglish}}        {{item.LastNameEnglish}} </div>
+    <div class="di">{{item.Division}}</div>
+    <div class="di">{{item.SubDivision}}</div>
+    <div class="di">{{item.TitleEnglish}}</div>
+    <div class="di">{{item.TitleHebrew}}</div>
+
+
+
+    <!-- <div  class="di">{{item.Proposal}}</div>-->
+    <div class="di2">{{item.Language}}</div>
+    <div class="di">{{item.Keywords}}</div>
+    <div class="di">{{item.SessionName}}</div>
+    <div class="di">{{item.Chairman}}</div>
+    <div class="di">{{item.Status}}</div>
+    <div class="di">{{item.Remarks}}</div>
+  </div>
+
+</div>
+
+<!--</div>-->
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!--<span class="">-->
+    <!--<router-outlet></router-outlet>-->
+    <app-edit-prop [id]="itempropID" *ngIf="isShowProp" #modal>
+
+      <img src="/assets/images/close.png" (click)="isShowProp = !isShowProp" style="width: 30px;height: 30px;" /><br /><br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> User Name</span> <span style="display: inline-block;margin-top:20px;margin-bottom:20px;margin-left:20px;">{{oneProp.UserName}} </span><br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> Division</span><input type="text" value="{{oneProp.Division}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" />
+      <select #t (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="width:120px;margin-left:20px;">
+        <option *ngFor="let division of ArrDivision" [value]="division">
+          {{division}}
+        </option>
+      </select><br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> SubDivision</span><input type="text" value="{{oneProp.SubDivision}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" />
+      <select #t [(ngModel)]="subdivision" style="width:120px;margin-left:20px;">
+        <option *ngFor="let subdivision of ArrSubDivision" [value]="subdivision">
+          {{subdivision}}
+        </option>
+      </select><br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> TitleEnglish</span>
+      <span style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.TitleEnglish}}</span>
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> TitleHebrew</span>
+      <span style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.TitleHebrew}}</span>
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;"> Proposal</span>
+      <span style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.Proposal}}</span>
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;"> Language</span>
+      <span style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.Language}}</span>
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;"> Keywords</span>
+      <span style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.Keywords}}</span>
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;">SessionName</span>
+      <input type="text" value="{{oneProp.SessionName}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" [(ngModel)]="SessionName" />
+      <!--<span *ngIf="oneProp.SessionName!=null" style="display: inline-block;margin-bottom:20px;margin-left:20px;margin-top:20px;">{{oneProp.SessionName}}</span>-->
+
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> Chairman</span>
+      <input type="text" value="{{oneProp.Chairman}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" [(ngModel)]="Chairman" />
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> Status</span>
+      <input type="text" value="{{oneProp.Status}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" [(ngModel)]="Status" />
+      <br />
+      <span style="margin-bottom:20px;margin-left:20px;margin-top:20px;width:90px;float:left;"> Remarks</span>
+      <input type="text" value="{{oneProp.Remarks}}" style="margin-bottom:20px;margin-left:20px;margin-top:20px;" [(ngModel)]="Remarks" />
+      <br />
+      <div style="margin-left: 30%;">
+        <button (click)="Save()" class="fill-btn-blue" style="padding:10px">Save</button>
+      </div>
+
+
+    </app-edit-prop>
+  </div>
+</div>
+<!--</div>-->

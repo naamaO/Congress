@@ -1,0 +1,36 @@
+
+<div class="container right">
+  <div class="top-line">
+    <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
+  </div>
+</div>
+
+
+<br /><br /><br /><br />
+                  <!--<div class="img-map-bg-wrap">
+                    <img src="/assets/images/books.PNG" class="img-map-bg">
+                  </div>-->
+                  <div class="center-div-wrap ">
+                    <div class="center-div row center22  ">
+                      <div class="margin-b-15 bold res-white">Login</div>
+
+                      <div class="margin-b-15">
+                        <input type="text" [(ngModel)]="Email" placeholder="Email" />
+                      </div>
+                      <div class="margin-b-15" style="position: relative;">
+                        <input type="text" [(ngModel)]="Password" placeholder="Password" style="position: relative;" />
+                      </div>
+                      <!--<button (click)="forget()" class="pull-right margin-t-13 under-line res-white" role="button">
+    reset Password
+  </button>-->
+                      <div class="border-button margin-b-30 " ></div>
+                      <div style="display:block;"><br />
+                        <div (click)="forget()" class=" margin-t-13 under-line res-white" role="button" tabindex="0">  reset Password</div>
+                        <div (click)="Support(Email)" class=" margin-t-13 under-line res-white" role="button" tabindex="0">support</div>
+                      </div>
+                      <label class="red" *ngIf="ShowError">Username or password are incorrect</label>
+                      <label class="red" *ngIf="ShowErrorEmail">Enter Email</label>
+                      <br /><br /><br />
+                      <button (click)="SendCheckUserPassword()" class="fill-btn-blue">Send</button>
+                    </div>
+                  </div>

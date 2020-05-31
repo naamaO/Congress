@@ -1,0 +1,26 @@
+.center {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  top: 100px;
+  left: 400px;
+  position: fixed;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: left;
+  font-size: large;
+}
+
+.fill-btn-blue {
+  background-color: #026fa7;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+}

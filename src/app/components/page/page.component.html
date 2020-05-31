@@ -1,0 +1,710 @@
+<form class="body">
+
+  <div>
+    <div class="top-line">
+      <div class="headerTop">
+        <label >מערכת שמאות מתקדמת</label>
+
+      </div>
+   <!--   <img class="logo-img" src="/assets/images/build.PNG" />-->
+    </div>
+  </div>
+
+  <div class="container rtl center">
+    <div class="row marg ">
+
+      <div class="col-lg-3">
+        <select class="mrgin" (change)="borrower($event.target.value)">
+          <option value="שם הלווה">:שם הלווה</option>
+          <option value="שמות הלווים" >:שמות הלווים</option>
+        </select>
+        <input type="text" class="mrgin non-border" />
+        <input type="text" class="mrgin" id="borrower" name="borrower" *ngIf="show"/>
+
+      </div>
+
+      <div class="col-lg-9">
+        <label>    :ת.ז</label>
+        <input type="text" class="mrgin" />
+      </div>
+    </div>
+    <div class="row  marg">
+      <label>        :מטרת ההלוואה</label>
+      <select class="mrgin">
+        <option>רכישה</option>
+        <option>בנייה עצמית</option>
+        <option>שיפוצים</option>
+        <option>נכס קיים</option>
+        <option>הרחבה - תוספת לבניה קיימת</option>
+
+      </select>
+    </div>
+    <div class="row">
+      <label>          זהות מזמין השומה:   </label>
+      <select class="mrgin">
+        <option>הלווה כמפורט לעיל</option>
+        <option>הלווים כמפורט לעיל</option>
+
+
+      </select>
+    </div>
+    <div class="row">
+      <label>     מטרת השומה ביטחון אשראי:   </label>
+      <select class="mrgin">
+        <option>רגילה</option>
+        <option>מורחבת</option>
+
+
+      </select>
+    </div>
+    <div class="row">
+      <label> המועד הקובע לשומה:   </label>
+      <input type="date" class="mrgin" />
+    </div>
+
+    <div class="row head">
+      <br />
+      <label> ביקור הנכס   </label>
+    </div>
+    <div class="row">
+      <br />
+
+      <label class="header">  עורך הביקור:    </label>
+      <label>נערך ביקור פיזי בנכס בתאריך:</label>
+      <input type="date" class="mrgin" />
+      <label class="header"> ע"י:    </label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label class="header">תפקיד:</label>
+      <input type="text" class="mrgin" />
+      <label class="header">   מציג הנכס- שם : </label>
+      <input type="text" class="mrgin" />
+      <label class="header">זיהוי המציג ע"י: </label>
+      <select class="mrgin">
+        <option>ת.ז</option>
+        <option>רשיון נהיגה</option>
+        <option>דרכון</option>
+        <option>אחר</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>כתובת מלאה:</label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label>פרטי הרישום:</label>
+      <label class="mrgin">גוש:</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">חלקה</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">תת חלקה</label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label>מספר מגרש</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">בתב"ע </label>
+      <input type="text" class="mrgin" />
+
+    </div>
+    <div class="row">
+      <label>מס' כניסה/מבנה </label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <br />
+      <label>
+        תמונות הנכס (יצורפו לפחות 2 תמונות: האחת חזית הנכס, והשנייה תמונת פנים).
+        התמונות יהיו לפחות בגודל מזערי של 6 ס"מ ויכללו כיתוב בדבר התאריך שבה צולמו
+      </label>
+    </div>
+    <div class="row">
+      <br />
+      <label>תאור כללי של הסביבה והבניין</label>
+
+    </div>
+    <div class="row">
+      <label>מאפייני הסביבה (סמן ופרט)</label>
+      <select class="mrgin">
+        <option>מגורים</option>
+        <option>מסחר</option>
+        <option>תעשייה</option>
+        <option>משרדים</option>
+        <option>אחר</option>
+
+      </select>
+      <input type="text" class="mrgin" />
+    </div>
+
+    <div class="row">
+      <label>מיקום הנכס (סמן ופרט)</label>
+      <select class="mrgin">
+        <option>מרכזי </option>
+        <option>צדדי</option>
+        <option>סואן</option>
+        <option>שקט</option>
+
+      </select>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label>סוג הבניין (סמן ופרט)</label>
+      <select class="mrgin">
+        <option>בית משותף</option>
+        <option>צמוד קרקע</option>
+        <option>נחלה ומרכיביה</option>
+        <option>מבנה תעשייתי</option>
+        <option>אחר</option>
+      </select>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label>     	מאפייני הבניין:</label>
+    </div>
+    <div class="row">
+      <label>מצבו הפיזי:</label>
+      <label class="mrgin">ישן</label>
+
+      <label class="mrgin">בן</label>
+      <input type="number" class="mrgin wid" />
+      <label class="mrgin">שנים</label>
+      <label class="mrgin">(אומדן)</label>
+
+    </div>
+    <div class="row">
+      <label class="right">חדש </label>
+      <select class="mrgin">
+        <option>מאוכלס</option>
+        <option>לא מאוכלס</option>
+
+      </select>
+    </div>
+    <div class="row">
+      <label class="right">בבניה</label>
+      <input type="number" class="mrgin wid" />
+      <label class="mrgin">% בניה נוכחי</label>
+    </div>
+    <div class="row">
+      <label class="right">תחזוקתו</label>
+      <select class="mrgin">
+        <option>רגילה</option>
+        <option>טובה</option>
+        <option>אחר</option>
+      </select>
+    </div>
+    <div class="row">
+      <label class="right">הבניין בנוי </label>
+      <select class="mrgin">
+        <option>בלוקים ובטון</option>
+        <option>טרומי</option>
+        <option>אחר</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>מעלית </label>
+      <select class="mrgin">
+        <option>אין</option>
+        <option>יש</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>חיפוי חיצוני </label>
+      <select class="mrgin">
+        <option>שפריץ</option>
+        <option>טיח</option>
+        <option>בטון</option>
+        <option>אבן</option>
+        <option>פסיפס</option>
+        <option>אחר</option>
+
+      </select>
+    </div>
+    <div class="row">
+      <label>מס' קומות  </label>
+      <select class="mrgin">
+        <option>מעל לקומת עמודים</option>
+        <option>קרקע</option>
+        <option>מרתף</option>
+        <option>אחר</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>תאור הנכס:</label>
+    </div>
+    <div class="row">
+      <label class="right">מספר הדירה ע"פ הסימון בבניין :</label>
+      <input type="number" class="mrgin" />
+    </div>
+
+    <div class="row">
+      <label class="right">קומת הדירה בבניין: </label>
+      <input type="number" class="mrgin" />
+    </div>
+    <div class="row">
+      <label class="right">תאור הדירה:</label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label class="right">כיוונים: </label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label class="right">הצמדות: </label>
+      <select class="mrgin">
+        <option>חצר </option>
+        <option>מחסן</option>
+        <option>חניה</option>
+        <option>אחר</option>
+      </select>
+      <label class="mrgin">- יש לפרט מהות ההצמדה ושטחה במ"ר</label>
+      <input type="text" class="mrgin" />
+    </div>
+    <div class="row">
+      <label>שיפוצים (תיאור מהות השיפוץ במידה ויש) </label>
+      <textarea class="mrgin"></textarea>
+      <!--  <input type="text" class="mrgin" />-->
+    </div>
+    <div class="row">
+      <label>מצב תחזוקת ורמת הגימור :</label>
+      <textarea class="mrgin"></textarea>
+    </div>
+    <div class="row">
+      <label>שטח הקרקע המיוחס לנכס (בבניה צמודת קרקע / דירות גן ): </label>
+      <input type="number" class="mrgin wid" />
+      <label class="mrgin">מ"ר  (המקור לנתון השטח </label>
+      <input type="text" class="mrgin" />
+      <label>)</label>
+    </div>
+    <div class="row">
+      <label> שטח הדירה הרשום:</label>
+      <input type="number" class="mrgin wid" />
+      <label class="mrgin">מ"ר</label>
+    </div>
+    <div class="row">
+      <label>שטח בנוי ברוטו (כהגדרתו בתקן שמאי מספר 9): </label>
+      <input type="number" class="mrgin wid" />
+      <label class="mrgin">מ"ר (המקור לנתון השטח)</label>
+      <select class="mrgin" (change)="change_area($event.target.value)">
+        <option value="חוזה רכישה">חוזה רכישה </option>
+        <option value="תחשיב של השמאי"> תחשיב של השמאי</option>
+        <option value="אחר">אחר</option>
+      </select>
+      <input type="text" class="mrgin" *ngIf="show1" />
+    </div>
+    <div class="row">
+      <label> פרטים נוספים  והערות :</label>
+      <textarea class="mrgin"></textarea>
+    </div>
+
+    <div class="row">
+      <input type="button" value="+" (click)="expanded()"/>
+      <label >	מצב תכנוני (בשמאות מורחבת בלבד)</label>
+      <br />
+      <label *ngIf="expandedShow">תוכניות בניין עיר בתוקף :</label>
+    </div>
+
+
+
+    <div class="row">
+      <table class="table table-hover" *ngIf="expandedShow">
+        <thead>
+          <tr>
+            <td>מספר תכנית</td>
+            <td>תאריך מתן תוקף</td>
+            <td>י.פ.</td>
+            <td>יעוד הנכס וזכויות הבניה בהתאם לתוכנית</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <input type="button" value="+" (click)="Ground()"/>
+      <label>בבניה צמודת קרקע, יפורט גם:</label>
+
+    </div>
+
+    <div class="row" *ngIf="showGround">
+      <label>שטח המגרש:</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">(המקור לשטח -</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">)</label>
+      <br />
+      <label>
+        זכויות הבניה ע"פ תכניות בתוקף -
+      </label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label> מספר קומות מירבי -</label>
+       <input type="text" class="mrgin" />
+      <br />
+       <label>  שטח בניה מירבי מותר -</label>
+      <input type="text" class="mrgin" />
+     <br />
+     <label>
+       קווי בנין -
+     </label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label> הוראות אחרות -</label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label>תכניות מופקדות -</label>
+      <input type="text" class="mrgin" />     
+    </div>
+    <div class="row ">
+      <br />
+      <label>
+        פירוט נוסף (הפקעות, לוח הקצאות, תשריטים רלוונטיים וכו') -
+      </label>
+      <br />
+      <label>
+        ככל שבנסח הרישום מופיעה הערה בדבר הפקעה , יש לפרט את מהות ההערה , והאם ההפקעה עשויה לפגוע בנכס המוערך
+      </label>
+      <textarea class="mrgin"></textarea>
+    </div>
+    <div class="row ">
+      <label>
+        סיכום המצב התכנוני המפרט את יעוד הקרקע בהתאם לתוכניות בניין עיר וזכויות הבניה המוקנות לנכס נשוא ההערכה בהתאם לתוכניות בניין עיר.
+        האם קיימות זכויות בניה בלתי מנוצלות. (האם ניתן לממש את הזכויות הנ"ל ?)
+        מבנה מסוכן - ככל שידוע לך כי המבנה נמצא ברשימת המבנים המסוכנים יש לציין זאת בסעיף זה וכן לפרט את העלויות הצפויות לצורך הסרת המבנה מרשימה זו (חלקו היחסי של הנכס המוערך), ולחזור על כך בסיום השמאות  בהערות לתשומת לב הבנק.
+        תיק עבירה בגין חריגות בניה – בדירות גן / גג / מרתף / צמודי קרקע - ככל שנמצא מידע לגבי חריגות בניה / תיק עבירה בוועדה המקומית יש לפרט זאת בסעיף זה.
+      </label>
+    </div>
+    <div class="row">
+      <input type="button" value="+"/>
+      <label>היתרי בנייה -</label>
+    </div>
+    <div class="row">
+      <table class="table table-hover" >
+        <thead>
+          <tr>
+            <td>מספר היתר</td>
+            <td>תאריך היתר</td>
+            <td>מהות היתר</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <label>טופס 4  - </label>
+      <select class="mrgin">
+        <option>אין </option>
+        <option>יש</option>
+      </select>
+      <label class="mrgin">(תאריך</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">)</label>
+      <br />
+      <label>תעודת גמר  </label>
+      <select class="mrgin">
+        <option>אין </option>
+        <option>יש</option>
+      </select>
+      <label class="mrgin">(מספר </label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">),</label>
+      <label class="mrgin">(תאריך</label>
+      <input type="text" class="mrgin" />
+      <label class="mrgin">)</label>
+    </div>
+
+    <div class="row">
+      <label>פירוט חריגות בנייה שאותרו (מיקום, מהות החריגה, היקף החריגה):</label>
+      <br />
+      <label>או</label>
+      <br />
+      <label>הבהרה כי בבדיקה שערך השמאי לא נמצאו חריגות בניה בנכס.	</label>
+      <br />
+      <label>לצרף תשריט הדירה מתוך היתר הבניה </label>
+      <br />
+      <label>	מצב משפטי (הזכויות בנכס)</label>
+      <br />
+      <label>הקרקע שבה הנכס הנדון ידועה כ</label>
+      <select class="mrgin">
+        <option>כחלקה </option>
+        <option>בגוש</option>
+        <option>מגרש</option>
+        <option>ע"פ תב"ע</option>
+
+      </select>
+      <br />
+      <label>לצרף נסח רישום (או פלט מידע שהופק באמצעות האינטרנט)</label>
+      <br />
+      <label>יש לפרט את הקשר המשפטי בין הלווה לבין הנכס: </label>
+      <select class="mrgin">
+        <option>בעלים </option>
+        <option>חוכר</option>
+        <option>רוכש</option>
+        <option>אחר</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>יש לפרט את תאריך הרכישה , מחיר הרכישה, מועד מסירת החזקה בהתאם להסכם </label>
+      <textarea class="mrgin"></textarea>
+    </div>
+    <div class="row">
+      <label>פרוט הזכויות בנכס:</label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label>- בעלים רשום:</label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label>חוכר </label>
+      <select class="mrgin">
+        <option>רשום  </option>
+        <option>לא רשום</option>
+      </select>
+      <label class="mrgin">תנאי החכירה: </label>
+      <input type="text" class="mrgin"/>
+      <br />
+      <label>מטרת החכירה - </label>
+      <input type="text" class="mrgin" />
+      <br />
+      <label>תקופת החכירה -</label>
+      <input type="text" class=" mrgin" />
+      <label class="mrgin">אופציה להארכה </label>
+      <select class="mrgin">
+        <option>כן </option>
+        <option>לא</option>
+      </select>
+      <label class="mrgin">- עד יום</label>
+    </div>
+    <div class="row">
+      <label>דמי החכירה </label>
+      <select class="mrgin">
+        <option>מהוון </option>
+        <option>לא מהוון</option>
+      </select>
+      <br />
+      <label>תנאים נוספים - </label>
+      <br />
+      <label>- זכויות אחרות </label>
+      <select class="mrgin">
+        <option>חוזיות </option>
+        <option>זיקות הנאה</option>
+        <option>וכיוצ"ב</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>מסמכי זכויות, אסמכתאות לאמור לעיל:</label>
+      <select class="mrgin">
+        <option>נסח רישום </option>
+        <option>חוזה חכירה חתום</option>
+        <option>חוזה רכישה חתום</option>
+        <option>אחר</option>
+      </select>
+      <label class="mrgin">אחר (כולל תאריך האסמכתא, תשריטי הנכס המצורפים לחוזה הרכישה / חכירה ).</label>
+    </div>
+    <div class="row">
+      <input type="button" value="+" (click)="Registered()"/>
+      <label>- בנכסים הרשומים בפנקס הבתים המשותפים - </label>
+    </div>
+    <div class="row" *ngIf="showRegistered">
+      <label>-	תאור</label>
+      <br />
+      <label>-	קומה</label>
+      <br />
+      <label>-	שטח רשום</label>
+      <br />
+      <label>-	החלק ברכוש המשותף</label>
+      <br />
+      <label>-	הצמדות (סימון, תאור, שטח)</label>
+      <br />
+      <label>-	תקנון מצוי / מוסכם (תנאים מיוחדים)</label>
+    </div>
+    <div class="row">
+      <label>        - שכירות      </label>
+        <label> -  דמי השכירות :</label>
+        <label> אסמכתא (לצרף העתק חוזה שכירות חתום מתאריך              )</label>
+        <br /> 
+        <label>השוכר - </label>
+        <br />
+        <label>המשכיר - </label>
+        <br />
+        <label>מהות השכירות </label>
+        <select class="mrgin">
+          <option>חופשית </option>
+          <option>מוגנת</option>
+        </select>
+        <br />
+        <label>תקופת השכירות - (יש לוודא כי תקופת השכירות בחוזה בתוקף בתאריך הקובע)  </label>
+        <br />
+        <label>אופציות להארכה – </label>
+    </div>
+    <div class="row">
+      <label>(ככל שיש שוכר בנכס יש לפרט תנאי חוזה השכירות  ולאמוד את שווי הזכויות בכפוף לחוזה השכירות)</label>
+      <br />
+      <label>
+        בסיכום הפרק המשפטי יש לכלול :
+        התייחסות  בשמאות להתאמה / חוסר התאמה בין הנכס המוערך לבין הזכויות המשפטיות המוצעות לשיעבוד . כאמור , יש לפרט את הזיהוי המשפטי ולצרף את המסמך הנדון לשמאות .
+        -	יש לצרף את התשריטים והמסמכים הרלוונטיים בגוף השמאות
+        לדוגמא :  לציין אם  קיימת התאמה בין תשריט חוזה הרכישה לתשריט היתר הבניה לשטח הנכס הבנוי בפועל. ככל שאין התאמה יש לפרט את חוסר ההתאמה.
+        ככל שיש מחזיק בנכס ללא חוזה שכירות – יש לציין זאת , ולפרט במה מותנה אומדן השווי שנקבע . ( לדוגמא : חתימה על חוזה שכירות(בתנאי השוק , כאשר שכר הדירה משולם באופן שוטף) / החתמת המחזיק בנכס שאינו בעל זכויות ויפנה את הנכס מיידית ללא קבלת שום פיצוי ככל שידרש לכך  וכו' )
+      </label>
+      <a >
+        מצ"ב טבלה המפרטת מתי נדרש לעיין בחוזה החכירה (נספח ב)
+      </a>
+    </div>
+    <div class="row">
+      <label>	השומה (בשקלים חדשים) - לתאריך הדו"ח -</label>
+      <br />
+
+      <table class="table table-hover" >
+        <thead>
+          <tr>
+            <td class="width textCenter">      </td>
+            <td class="widthBig textCenter">סעיף הערכה</td>
+            <td class="textCenter"> ש"ח</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="mrgin width" value="א" />
+            </td>
+            <td>
+              <input type="text" class="mrgin widthBig" value="שווי הנכס במצב הנוכחי" />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin width" value="ב" />
+            </td>
+            <td>
+              <input type="text" class="mrgin widthBig" value="שווי למימוש מהיר / כפוי"/>
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin width" value="ג" />
+            </td>
+            <td>
+              <input type="text" class="mrgin widthBig" value="ערך כינון    "/>
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="mrgin width" value="ד" />
+            </td>
+            <td>
+              <input type="text" class="mrgin widthBig" value="אומדן גס של  שווי  הקרקע של הנכס המוערך  " />
+            </td>
+            <td>
+              <input type="text" class="mrgin" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <label>	מיסוי והיטלים (במידה וידועים)</label>
+      <textarea class="mrgin"></textarea>
+    </div>
+    <div class="row">
+      <label>ערות כלליות התניות וסייגים - לתשומת לב הבנק : </label>
+      <textarea class="mrgin"></textarea>
+
+    </div>
+    <div class="row">
+      <label>       	הצהרה </label>
+      <br />
+      <label>הריני מצהיר בזה כי:</label>
+      <br />
+      <label> -	אין לי עניין בנכס הנדון ושומתו נעשתה על פי מיטב ידיעתי והכשרתי המקצועית .</label>
+      <br />
+      <label>        -	מסמך זה נעשה בהתאם למבנה ולהנחיות הבנק </label>
+    </div>
+  </div>
+
+</form>

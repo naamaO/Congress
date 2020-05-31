@@ -1,0 +1,84 @@
+<!--<div class="container right">
+  <div class="top-line">
+    <img class="logo-img" src="/assets/images/logo.png" />
+  </div>
+</div>-->
+
+
+<div style="background-color:#fff;height:150px;width:100%;">
+  <div style="width:100%;border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/logo.png" style="position:fixed; top:20px;" />
+    </div>
+  </div>
+</div>
+
+
+
+<div class="top-line" style="width:1550px;height:150px;">
+  <img style="width:100%;height:150px;" src="/assets/images/books.PNG" />
+</div>
+<br /><br />
+
+<div>
+  <div class="header-table  " style="width:100%;  padding-left: 100px;margin: auto; color:black;">
+    <div class="col-md-8 marginAuto ">
+
+      <span class="col-md-3  floatRight">שם</span>
+      <span class="col-md-3  floatRight">מחיר</span>
+      <span class="col-md-3  floatRight">כמות</span>
+      <span class="col-md-3  floatRight">סה"כ</span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+
+<div style="width: 100%;margin: auto;">
+  <div class="col-md-8 marginAuto">
+
+    <div *ngFor="let item of DB" style="position:relative; ">
+      <div class="clear"></div>
+
+      <div class="row" style="margin-bottom:2%;display:block">
+        <div class="col-md-3 floatRight">
+          <img src="{{item.ImageBook}}" style="width:20%;height:100px;padding-top:5%;" />
+          <span style="padding: 20px;width:80%;padding-right: 30px; text-align:right;float:left;">{{item.NameBook}} </span>
+        </div>
+        <div class="col-md-3 floatRight" style="text-align:center;padding-right:5%;">
+
+          <span *ngIf="item.SallePrice==0">{{item.PriceBook}} </span>
+
+          <span *ngIf="item.SallePrice!=0">{{item.SallePrice}} </span>
+        </div>
+        <div class="col-md-3 floatRight" style="text-align:center">
+
+          <span><label style="padding: 10px;border: 1px solid black;" (click)="deleteQuantity(item)">-</label> </span>
+          <span><label style="padding: 10px;border: 1px solid black;">{{item.Quantity}}</label> </span>
+
+          <span><label style="padding: 10px;border: 1px solid black;" (click)="AddQuantity(item)">+</label> </span>
+        </div>
+        <div class="col-md-3 floatRight" style="text-align:center">
+
+          <span>{{item.Total}}</span>
+        </div>
+      </div>
+      <div style="cursor:pointer;position:absolute;left:-10%;top:0;" (click)="RemoveQuantity(item)"><span>X</span></div>
+
+    </div>
+    <!--<span class="col-md-2 margin-t-9 ng-binding padd" style="padding: 20px;padding-left: 30px;padding-right: 30px;width:200px;text-align:center;"><button (click)="AddQuantity(item)">Add Quantity</button></span>-->
+    <!--<span class="col-md-2 margin-t-9 ng-binding padd column" style="padding: 20px;padding-left: 60px;padding-right: 30px;width:200px;text-align:center;cursor:pointer" (click)="RemoveQuantity(item)">X</span>-->
+  </div>
+</div>
+
+<br /><br />
+<div class="col-md-8 " style="margin:auto;text-align:center;">
+  <br /><br /><label>סה"כ:</label><input type="number" [(ngModel)]="Total" />
+</div>
+<div class="clear"></div>
+<br /><br />
+      <div class="col-md-8 " style="margin:auto;text-align:center">
+
+        <button (click)="SendToNew()" class="fill-btn-blue" style="margin-right:10px;">חזרה </button>
+
+        <button (click)="SendToTranzila()" class="fill-btn-blue">תשלום</button>
+      </div>

@@ -1,0 +1,95 @@
+<br />
+<div class="row">
+  <div class="clearfix"></div>
+
+  <div class="col-md-5">
+    <h5 style="color:#27b5e5">SUBMIT A SESSION</h5>
+    <br /><br />
+    <div class="row margin-top">
+      <label>Session title[English]</label>
+    </div>
+    <div class="row margin-top">
+      <input type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" />
+    </div>
+    <div class="row margin-top">
+      <label>Session title[Hebrew]</label>
+    </div>
+    <div class="row margin-top">
+      <input type="text" [(ngModel)]="SessionName" style="width:80%;" />
+    </div>
+    <div class="row margin-top">
+      <label>Division:</label>
+    </div>
+    <div class="row margin-top">
+      <select (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;">
+        <option *ngFor="let Division of ArrDivision" [value]="Division">
+          {{Division}}
+        </option>
+      </select>
+    </div>
+    <div class="row margin-top">
+      <label>Subdivision:</label>
+    </div>
+    <div class="row margin-top">
+      <select [(ngModel)]="SubDivision" style="background:none;width:80%;">
+        <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
+          {{SubDivision}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!--<div class="clearfix"></div>
+  <div class="clear"></div>-->
+
+  <div class="col-md-5 backGray floatLeft ddiv">
+    <br />
+    <h6 style="color:#27b5e5">Session participants</h6>
+    <br /><br />
+    <div class="row margTop2">
+      <label class="col-md-5 margLeft9">Chairman:</label>
+      <label class="col-md-5">Email:</label>
+    </div>
+    <div class="row ">
+      <input type="text" [(ngModel)]="ChairmanName" class="margLeft9" />
+      <input type="text" [(ngModel)]="ChairmanEmail" class="margLeft9" />
+    </div>
+    <div class="row margTop2">
+      <label class="col-md-5 margLeft9">Full Name:</label>
+      <label class="col-md-5">Email:</label>
+    </div>
+    <div class="row">
+      <input type="text" [(ngModel)]="Name1" class="margLeft9" />
+      <input type="text" [(ngModel)]="Email1" class="margLeft9" />
+    </div>
+    <div class="row margTop2">
+      <label class="col-md-5 margLeft9">Full Name:</label>
+      <label class="col-md-5">Email:</label>
+    </div>
+    <div class="row">
+      <input type="text" [(ngModel)]="Name2" class="margLeft9" />
+      <input type="text" [(ngModel)]="Email2" class="margLeft9" />
+    </div>
+    <div class="row margTop2">
+      <label class="col-md-5 margLeft9">Full Name:</label>
+      <label class="col-md-5">Email:</label>
+    </div>
+    <div class="row">
+      <input type="text" [(ngModel)]="Name3" class="margLeft9" />
+      <input type="text" [(ngModel)]="Email3" class="margLeft9" />
+    </div>
+    <div class="row margTop2">
+      <label class="col-md-5 margLeft9">Full Name:</label>
+      <label class="col-md-5">Email:</label>
+    </div>
+    <div class="row">
+      <input type="text" [(ngModel)]="Name4" class="margLeft9" />
+      <input type="text" [(ngModel)]="Email4" class="margLeft9" />
+    </div>
+    <br /><br />
+  </div>
+  <div class="col-md-8 margTop2" style="text-align:center;">
+    <button (click)="SendInviteMember()" class="fill-btn-blue ">SEND</button>
+  </div>
+
+</div>

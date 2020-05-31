@@ -1,0 +1,70 @@
+
+  <!--<div class="centerHebrew" style="width:60%; height:80%;margin:auto;    ">-->
+<div style="margin-left: 65%;">
+  <!--<button (click)="Show2Proposals=!Show2Proposals">הגשת הצעת הרצאה נוספת</button>-->
+  <div *ngIf="Show2Proposals">
+    <label style="color:red;margin-right: 50px;">ההגשה מותרת אך ורק למרצים מתת חטיבת:</label><br />
+    <label style="cursor:pointer;" (click)="OpenSecondProposal()"> להמשך לחץ כאן</label>
+  </div>
+</div>
+<div>
+    <br /><br />
+  <div >
+    <div >
+      <select (change)="selectDivision($event.target.value)" [(ngModel)]="Division" *ngIf="SessionName==null">
+        <option [value]="Division" selected>{{Division}}</option>
+
+        <option *ngFor="let Division of ArrDivision" [value]="Division">
+          {{Division}}
+        </option>
+      </select>
+      <label style="margin-left: 20px;display: inline-block;width: 80px;text-align:right;margin-right: 170px;">חטיבה</label>
+      <label *ngIf="SessionName!=null" style="margin-right: 10px;margin-left: 300px;">{{Division}}</label>
+      <br /><br />
+      <select (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" *ngIf="SessionName==null">
+        <option [value]="SubDivision" selected>{{SubDivision}}</option>
+        <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
+          {{SubDivision}}
+        </option>
+      </select>
+      <label style="margin-left: 20px;display: inline-block;width: 80px;text-align:right;margin-right: 170px;"> תת חטיבה</label>
+
+      <label *ngIf="SessionName!=null" style="margin-right: 10px;margin-left: 300px;">{{SubDivision}}</label>
+      <br /><br />
+    </div>
+            <input type="text" [(ngModel)]="TitleEnglish" style="margin-right: 10px;margin-left: 480px;" /> <label style="margin-left: 20px;display: inline-block;width: 120px;">כותרת הרצאה</label><br /><br />
+            <input type="text" [(ngModel)]="TitleHebrew" style="margin-right: 10px;margin-left: 480px;" /> <label style="margin-left: 20px;display: inline-block;width: 120px;">כותרת הרצאה</label><br /><br />
+            <!--<input type="text" [(ngModel)]="TitleHebrew" style="margin-right: 10px;margin-left: 100px;"/>-->
+            <!--<label style="display: inline-block;width: 180px;margin-left: 20px;" class="la">כותרת הרצאה:</label><br /><br />-->
+            <textarea [(ngModel)]="Proposal"></textarea><label style="display: inline-block;padding-left:30px;">הצעה (250 מילים)</label><br /><br />
+            <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
+              <option [value]="Language" selected>{{Language}}</option>
+              <option *ngFor="let lang of ArrLanguage" [value]="lang">
+                {{lang}}
+              </option>
+            </select>
+            <label style="display: inline-block;padding-left:30px;">שפה</label>
+            <br /><br />
+            <textarea [(ngModel)]="Keywords"></textarea><label style="display: inline-block;padding-left:30px;">מילות מפתח:</label><br /><br />
+            <div style="float:right;direction:rtl;margin-right:15%;">
+              <input type="radio" name="one\two" value="1" (change)="showTwo=false" /><label>מרצה בודד</label>
+              <input type="radio" name="one\two" value="2" (change)="showTwo=true" /><label>הרצאה משותפת</label>
+              <div *ngIf="showTwo" style="margin-bottom:30px;">
+                <br /><label>הכנס שם ואימייל</label>
+                <br />
+                <br />
+                <label style="margin-left:20px">אימייל</label><input type="text" [(ngModel)]="Email2" style="margin-left:20px" />
+                <label style="margin-left:20px">שם</label><input type="text" [(ngModel)]="Name2" />
+              </div>
+            </div>
+            <br /><br />
+            <div style="padding-left:50px;padding-top:30px;margin-left:300px">
+              <button (click)="Draft()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">שמירה כטיוטה</button>
+              <button (click)="Save()" class="fill-btn-blue" style="padding:10px;width:150px;">שלח</button>
+              <br /><br />
+              <label *ngIf="SaveDraft">הטיוטה נשמרה</label>
+
+            </div>
+          </div>
+  </div>
+

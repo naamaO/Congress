@@ -1,0 +1,19 @@
+.underLine {
+  text-decoration: underline;
+}
+.centerDiv {
+  direction: rtl;
+  width: 60%;
+  height: 100%;
+  margin: auto;
+}
+span{
+  font-size:large;
+}
+.link{
+  cursor:pointer;
+
+}
+.link:hover {
+  color: #27b5e5;
+}

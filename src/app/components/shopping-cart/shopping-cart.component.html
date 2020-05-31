@@ -1,0 +1,78 @@
+
+<div style="background-color:#fff;height:150px;width:100%;">
+  <div style="width:100%;border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="top-line">
+  <img class="book-jornal" src="/assets/images/books.PNG" />
+</div>
+<br /><br />
+
+<div>
+  <div class="header-table  " style="width:100%;  padding-left: 100px;margin: auto; color:black;">
+    <div class="col-md-8 marginAuto ">
+      <span class="col-md-3  floatLeft">Product</span>
+      <span class="col-md-3  floatLeft">Price</span>
+      <span class="col-md-3  floatLeft">Quantity</span>
+      <span class="col-md-3  floatLeft">Total</span>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<div style="width: 100%;margin: auto;">
+  <div class="col-md-8 marginAuto">
+    <div *ngFor="let item of DB" style="position:relative; ">
+      <div class="row" style="margin-bottom:2%;">
+        <div class="col-md-3 floatLeft">
+          <img src="{{item.ImageBook}}" style="width:20%;height:100px;padding-top:5%;float:left;" />
+          <span style="padding: 20px;width:80%;padding-right: 30px; text-align:left;float:left;">{{item.NameBook}} </span>
+        </div>
+        <div class="col-md-3 floatLeft" style="    padding-left: 9%;">
+          <span *ngIf="item.SallePrice==0">{{item.PriceBook}} </span>
+
+          <span *ngIf="item.SallePrice!=0">{{item.SallePrice}} </span>
+        </div>
+        <div class="col-md-3 floatLeft" style="    padding-left: 5%;">
+          <span><label style="padding: 10px;border: 0.5px solid black;" (click)="deleteQuantity(item)">-</label> </span>
+          <span><label style="padding: 10px;border: 0.5px solid black;">{{item.Quantity}}</label> </span>
+          <span><label style="padding: 10px;border: 0.5px solid black;" (click)="AddQuantity(item)">+</label> </span>
+        </div>
+        <div class="col-md-3 floatLeft" style="    padding-left: 5%;">
+
+          <span>{{item.Total}}</span>
+          <!--<span class="col-md-2 margin-t-9 ng-binding padd" style="padding: 20px;padding-left: 30px;padding-right: 30px;width:200px;text-align:center;"><button (click)="AddQuantity(item)">Add Quantity</button></span>-->
+        </div>
+
+      </div>
+      <div style="cursor:pointer;position:absolute;right:10%;top:0;" (click)="RemoveQuantity(item)"><span>X</span></div>
+
+    </div>
+
+  </div>
+
+</div>
+<br /><br />
+<!--<div class="clear"></div>-->
+<div class="col-md-8 " style="margin:auto;text-align:center;">
+
+  <label>Total:</label><input type="number" [(ngModel)]="Total" />
+</div>
+<div class="clear"></div>
+<br /><br />
+<div class="col-md-8 " style="margin:auto;text-align:center">
+
+
+
+  <button (click)="SendToNew()" class="fill-btn-blue" style="margin-right:5%;">Back </button>
+
+  <button (click)="SendToTranzila()" class="fill-btn-blue">pay</button>
+</div>
+

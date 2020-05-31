@@ -1,0 +1,42 @@
+
+<div style="background-color:#fff;height:150px;width:100%;">
+  <div style="width:100%;border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+    </div>
+  </div>
+</div>
+
+
+
+<div class="containerDivGeneric">
+  <div class="row">
+    <img style="width:100%;" src="/assets/images/books.PNG" />
+  </div>
+</div>
+<div class="col-md-12  marginAuto" style="display:flex;top:50px;">
+
+
+
+  <div class="col-md-3">
+    <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;"><img width="400" height="550" src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" /></div>
+
+  </div>
+  <div class="col-md-6 floatRight">
+
+    <h1 >{{DetailsBook.Name}}</h1>
+    <span  style="text-align:center;"><label style="padding: 10px;border: 1px solid black;" (click)="Quantity=Quantity-1">-</label> </span>
+    <span  style="text-align:center;"><label style="padding: 10px;border: 1px solid black;">{{Quantity}}</label> </span>
+
+    <span style="text-align:center;"><label style="padding: 10px;border: 1px solid black;" (click)="Quantity=Quantity+1">+</label> </span>
+
+
+    <p class="price"><span  *ngIf="DetailsBook.SallePrice==0"><span class="woocommerce-Price-currencySymbol">$</span>{{DetailsBook.Price}}</span></p>
+    <p class="price"><span class="table-block woocommerce-Price-amount amount" *ngIf="DetailsBook.SallePrice!=0" style=" text-decoration: line-through;margin-right:30px;"><span class="woocommerce-Price-currencySymbol">$</span>{{DetailsBook.Price}}</span></p>
+    <p class="price"><span class="table-block woocommerce-Price-amount amount" *ngIf="DetailsBook.SallePrice!=0"><span class="woocommerce-Price-currencySymbol">$</span>{{DetailsBook.SallePrice}}</span></p>
+      <p style=" font-size:medium;">{{DetailsBook.Details}}</p>
+        <img class="icon-cart" src="/assets/images/icon-cart.png" />
+        <button (click)="AddCart(DetailsBook)">Add to cart</button>
+  </div>
+</div>
+

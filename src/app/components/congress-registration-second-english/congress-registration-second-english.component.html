@@ -1,0 +1,54 @@
+<!--<div class="center" style="width:50%; height:80%;margin:auto;">-->
+<div class="centerA">
+  <div>
+    <br /><br />
+
+    <div>
+      <label style="display: inline-block;width: 120px;">Division:</label>
+      <select #t (change)="selectDivision($event.target.value)" [(ngModel)]="Division" *ngIf="SessionName==null">
+        <option [value]="Division" selected>{{Division}}</option>
+        <option *ngFor="let Division of ArrDivision" [value]="Division">
+          {{Division}}
+        </option>
+      </select>
+      <label *ngIf="SessionName!=null">{{Division}}</label>
+      <br /><br />
+      <label style="display: inline-block;width: 120px;"> Sub Division:</label>
+      <select #t (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" *ngIf="SessionName==null">
+        <option [value]="SubDivision" selected>{{SubDivision}}</option>
+        <option *ngFor="let SubDivision of ArrSubDivision" [value]="SubDivision">
+          {{SubDivision}}
+        </option>
+      </select>
+      <label *ngIf="SessionName!=null">{{SubDivision}}</label>
+
+      <br /><br />
+      <label style="display: inline-block;width: 120px;">Lecture title:</label><input type="text" [(ngModel)]="TitleEnglish" style="margin-right: 10px;" />
+      <label style="display: inline-block;width: 180px;">Lecture title (Hebrew):</label><input type="text" [(ngModel)]="TitleHebrew" /><br /><br />
+      <label style="display: inline-block;width: 120px;">Proposal(250 words)</label><textarea [(ngModel)]="Proposal"></textarea><br /><br />
+      <label style="display: inline-block;width: 120px;">Language</label>
+      <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
+        <option [value]="Language" selected>{{Language}}</option>
+        <option *ngFor="let Language of ArrLanguage" [value]="Language">
+          {{Language}}
+        </option>
+      </select><br /><br />
+      <label style="display: inline-block;width: 120px;">Keywords</label><textarea [(ngModel)]="Keywords"></textarea><br /><br />
+      <input type="radio" name="one\two" value="1" (change)="showTwo=false" /><label>Lone Lecturer</label>
+      <input type="radio" name="one\two" value="2" (change)="showTwo=true" /><label>Shared lecture</label>
+      <div *ngIf="showTwo">
+        <br /><label>Enter email and name</label>
+        <br />
+        <br />
+        <label style="margin-right:20px">Email</label><input type="text" [(ngModel)]="Email2" style="margin-right:20px" />
+        <label style="margin-right:20px">Name</label><input type="text" [(ngModel)]="Name2" />
+      </div>
+      <div style="padding-left:50px;padding-top:30px;">
+        <button (click)="Draft()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">Save draft</button>
+        <button (click)="Save()" class="fill-btn-blue" style="padding:10px;width:150px;">Submit</button>
+        <br /><br />
+        <label *ngIf="SaveDraft">The draft saved</label>
+      </div>
+    </div>
+  </div>
+</div>

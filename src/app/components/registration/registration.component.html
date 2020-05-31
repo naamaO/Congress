@@ -1,0 +1,68 @@
+<div style="background-color:#fff;height:80px;width:100%;">
+  <div style="width:100%;border-bottom:1px solid;position:fixed;height:100px;background-color: white;z-index: 1000;top: 0;">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+    </div>
+  </div>
+</div>
+
+
+<br /><br />
+<div class="containerDivGeneric">
+  <div class="col-md-10  marginAuto">
+    <br />
+    <label class="margin">Title</label>
+    <select [(ngModel)]="selectedTitle">
+      <option *ngFor="let c of Titels" [ngValue]="c">{{c}}</option>
+    </select>
+    <label>First name in English </label> <input type="text" [(ngModel)]="FirstNameEnglish" />
+    <label>Last name in Hebrew</label> <input type="text" [(ngModel)]="FirstNameHebrew" /><br />
+    <label class="margin">Last name in English </label> <input type="text" [(ngModel)]="LastNameEnglish" />
+    <label>Last name in Hebrew</label> <input type="text" [(ngModel)]="LastNameHebrew" /><br />
+    <label style="float:left;margin-left:60px;">Email</label> <input type="email" [(ngModel)]="Email" /><br />
+    <label class="margin">Country</label>
+    <select [(ngModel)]="selectedCountry">
+      <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
+    </select>
+    <label>City</label> <input type="text" [(ngModel)]="City" />
+    <label>Street</label> <input type="text" [(ngModel)]="Street" /><br />
+    <label class="margin">Home Number</label> <input type="text" [(ngModel)]="NumberHome" />
+    <label class="margin">PostCode</label> <input type="text" [(ngModel)]="PostCode" /><br />
+    <label class="margin">Phone number 1</label> <input type="text" [(ngModel)]="NumberPhone1" />
+    <label>Phone number 2</label> <input type="text" [(ngModel)]="NumberPhone2" /><br />
+    <label class="margin">ID or Passport no</label> <input type="text" [(ngModel)]="ID" />
+    <label>Bio</label><textarea [(ngModel)]="Bio"></textarea><br />
+    <label class="margin">Student</label> <input type="checkbox" [(ngModel)]="Students" />
+    <label>retiree without research fund</label>  <input type="checkbox" [(ngModel)]="WithoutStudemt" />
+    <h4 class="margin">member </h4>
+    <label class="margin">AJS</label> <input type="checkbox" [(ngModel)]="AJS" />
+    <label>EAJS</label>  <input type="checkbox" [(ngModel)]="EAJS" />
+    <h4 class="margin">Language </h4>
+
+    <label class="margin">Hebrew</label> <input type="checkbox" [(ngModel)]="Hebrew" />
+    <label>English</label>  <input type="checkbox" [(ngModel)]="English" />
+    <label>Both</label>  <input type="checkbox" [(ngModel)]="Both" /><br /><br />
+    <br />
+    <!--  <label class="margin">Password</label><input type="text" [(ngModel)]="Password" />-->
+    <label *ngIf="showErroePass">ERROR</label>
+    <br /><br />
+  </div>
+  <label (click)="RegistrationUser()" class="fill-btn-blue" style="margin-left:45%;cursor:pointer;">Send</label>
+
+</div>
+
+
+<!--//</form>-->
+<div class="modal fade" id="myModal" role="dialog" *ngIf="ShowMessage">
+  <div  class="modal-dialog">
+    <app-message  #modal>
+      <button (click)="close()" aria-label="Close" class="dialog__close-btn" style="background-color:#ba2323">X</button>
+      <br /><br />
+      <label>
+        Your details:
+        A username and password will be emailed to you.
+        If you do not receive an email in the next few minutes, you may have a problem, please make this listing from the beginning and make sure the email is correct.
+      </label>
+    </app-message>
+  </div>
+</div>

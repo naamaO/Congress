@@ -1,0 +1,35 @@
+<div class="centerHebrew1" style=" height:20%;margin:auto;float:right;text-align:center;">
+  <div style="direction:rtl; width:100%;margin-bottom:20px;">
+    <div style="display:inline-flex">
+    <label style="width:120px">חטיבה</label>
+
+    <select (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="width:180px;">
+      <option *ngFor="let Division of ArrDivision" [value]="Division">
+        {{Division}}
+      </option>
+    </select>
+  </div>
+    <div style="display:inline-flex">
+  <label style="width:120px;"> תת חטיבה</label>
+
+  <select (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" style="width:180px;margin-right:15px;">
+    <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
+      {{SubDivision}}
+    </option>
+  </select>
+</div>
+  </div>
+  <input type="text" [(ngModel)]="Name1" style="margin-right: 10px;" /><label style="padding-left: 20px;display: inline-block;width: 120px;">שם</label>
+  <input type="text" [(ngModel)]="Email1" /><label style="padding-left: 20px;display: inline-block;width: 120px;">מייל</label><br /><br />
+  <input type="text" [(ngModel)]="Name2" style="margin-right: 10px;" /> <label style="padding-left: 20px;display: inline-block;width: 120px;">שם</label>
+  <input type="text" [(ngModel)]="Email2" /><label style="padding-left: 20px;display: inline-block;width: 120px;">מייל</label><br /><br />
+  <input type="text" [(ngModel)]="Name3" style="margin-right: 10px;" /><label style="padding-left: 20px;display: inline-block;width: 120px;">שם</label>
+  <input type="text" [(ngModel)]="Email3" /><label style="display: inline-block;width: 120px;padding-left: 20px;">מייל</label><br /><br />
+  <div>
+    <input type="text" [(ngModel)]="SessionName" style="margin-right: 10px;" /><label style="padding-left: 20px;display: inline-block;width: 120px;">שם מושב</label>
+  <!--  <input type="text" [(ngModel)]="Chairman" /><label style="display: inline-block;width: 120px;padding-left: 20px;">יו"ר</label>-->
+  </div><br />
+  <div style="padding-left:200px;">
+    <button (click)="SendInviteMember()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">שלח</button>
+  </div>
+</div>

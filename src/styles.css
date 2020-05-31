@@ -1,0 +1,173 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*[override].centerB {
+  color: aqua;
+  margin: 150px;
+  position: sticky;
+  padding-top: 40%;
+}*/
+/*body {
+  width: 2560px;
+  height:1440px;
+}*/
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+.containerDivGeneric {
+  width: 100%;
+  height: 100%;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.clear {
+  clear: both;
+}
+
+.floatLeft {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}
+
+.marginAuto {
+  margin: auto;
+}
+
+.margLeft9 {
+  margin-left: 9%;
+}
+
+.header-border {
+  top: 100px;
+  margin-top: 50px;
+  border-bottom: 1px solid;
+  /*border-width: 70%;*/
+  color: #27b5e5;
+  border-bottom-color: #27b5e5;
+}
+
+.marginLeft15 {
+  margin-left: 15%;
+}
+
+.margTop2 {
+  margin-top: 2%;
+}
+
+input:focus {
+  outline: none;
+  border-bottom-color: #27b5e5 !important;
+}
+
+select:focus {
+  outline: none;
+}
+
+.center {
+  width: 60%;
+  /*height: 60%;*/
+  margin: auto;
+  /*top: 100px;*/
+  left: 15%;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: left;
+  font-size: large;
+  color: black;
+}
+
+.centerSession {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  top: 50px;
+  left: 12%;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: left;
+  font-size: large;
+  color: black;
+}
+
+.centerHebrew {
+  width: 60%;
+  /*height: 60%;*/
+  margin: auto;
+  /*top: 100px;*/
+  right: 400px;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: right;
+  font-size: large;
+  color: black;
+}
+
+.centerHebrewSession {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  top: 100px;
+  right: 27%;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: right;
+  font-size: large;
+  color: black;
+}
+
+.centerHebrew1 {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  top: 150px;
+  right: 20%;
+  position: fixed;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: right;
+  font-size: large;
+  color: black;
+}
+
+.center22 {
+  width: 30%;
+  height: 60%;
+  margin: auto;
+  top: 50px;
+  left: 100px;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: left;
+  font-size: large;
+  color: black;
+  text-align: center;
+}
+
+.center111 {
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  top: 100px;
+  left: 200px;
+  position: relative;
+  /* background: white; */
+  background-color: #ffffffc2;
+  /*text-align: center;*/
+  float: left;
+  font-size: large;
+  color: black;
+}

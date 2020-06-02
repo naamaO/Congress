@@ -50,7 +50,7 @@ import { Thank3Component } from './components/thank3/thank3.component';
 //import { Observable } from 'rxjs/Observable';
 import {
   MatFormFieldModule, MatAutocompleteModule,
-  MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+    MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatExpansionModule,
   MatSortModule, MatTableModule, MatIconModule, MatSelectModule, MatDatepickerModule, NativeDateModule, MAT_DATE_FORMATS
 } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -116,6 +116,7 @@ import { CongressRegistrationSingleComponent } from './components/congress-regis
     MatSelectModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
+    MatExpansionModule,
     //MatButtonModule,
     //MatCheckboxModule, MatSelect, MatOption, MatFormField,
     BrowserModule,

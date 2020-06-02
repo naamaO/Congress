@@ -14,6 +14,7 @@ import { map, startWith } from 'rxjs/operators';
 
 import 'datatables.net';
 import 'datatables.net-bs4';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -60,6 +61,7 @@ export class JudgesComponent implements OnInit {
   public isShowPropArrSession: boolean;
   public dataSource = new MatTableDataSource<Judges>();
   public dataSourcFilter = new MatTableDataSource<Judges>();
+  public showPropSession: boolean;
   page = 1;
   pageSize = 4;
   pages = [];
@@ -75,25 +77,28 @@ export class JudgesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   editProp(item: Judges) {
-    this.itempropID = item;
-    //if (item.SessionId == 0) {
+      this.itempropID = item;
+      if (item.SessionName == null) {
       this.serverService.getId_W_Proposals(item).subscribe((events) => {
         this.oneProp = events;
         this.SessionName = this.oneProp.SessionName;
         this.Chairman = this.oneProp.Chairman;
         this.Remarks = this.oneProp.Remarks;
-        this.Status = this.oneProp.Status;
-        this.isShowProp = true;
+          this.Status = this.oneProp.Status;
+          this.isShowProp = true;
       });
-    //}
-    //else {
-    //  this.serverService.getId_W_ProposalsSession(item).subscribe((events) => {
-    //    this.ArrPropSession = events;
-    //    this.isShowPropArrSession = true;
-    //  });
-    //}
+    }
+    else {
+      this.serverService.getId_W_ProposalsSession(item).subscribe((events) => {
+          this.ArrPropSession = events;
+          this.SessionName = item.SessionName;
+          this.Chairman = item.Chairman;
+          this.isShowPropArrSession = true;
+      });
+    }
 
-  }
+    }
+   
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 

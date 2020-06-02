@@ -182,8 +182,8 @@ export class ServerService {
   getId_W_Proposals(item: Judges): Observable<Judges> {
     return this.http.get<Judges>(this.port + "/api/Home/GetJudgeInterfaceBiIdProp?Id=" + item.IdProposal)
   }
-  getId_W_ProposalsSession(item: Judges): Observable<Judges[]> {
-    return this.http.get<Judges[]>(this.port + "/api/Home/getId_W_ProposalsSession?Id=" + item.IdProposal)
+    getId_W_ProposalsSession(item: Judges): Observable<Judges[]> {
+        return this.http.get<Judges[]>(this.port + "/api/Home/getId_W_ProposalsSession?session=" + item.SessionName)
   }
   sendUpdateProp(newProp: Judges) {
     this.http.post(this.port + "/api/Home/UpdateProp", newProp).subscribe();

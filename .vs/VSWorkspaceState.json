@@ -4,11 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\components",
+    "\\src\\app\\components\\invite-members",
     "\\src\\app\\components\\judges",
     "\\src\\app\\components\\new",
     "\\src\\app\\components\\shopping-cart",
-    "\\src\\app\\components\\user-pass"
+    "\\src\\app\\components\\welcome",
+    "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\components\\new\\new.component.ts",
+  "SelectedNode": "\\src\\app\\components\\judges\\judges.component.ts",
   "PreviewInSolutionExplorer": false
 }

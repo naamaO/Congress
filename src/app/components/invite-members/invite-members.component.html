@@ -3,7 +3,26 @@
   <div class="clearfix"></div>
 
   <div class="col-md-5">
-    <h5 style="color:#27b5e5">SUBMIT A SESSION</h5>
+    <h5 style="color:#27b5e5">
+      SUBMIT A SESSION
+      <div class="tooltip">
+        <img src="/assets/images/TooltipIcon.png" />
+        <span class="tooltiptext" style="text-align:left;padding-left:2%;">
+          1. A session title in English and Hebrew(if possible)<br />
+          2. A session abstract (up to 250 words)<br />
+          3. Complete names and email addressof all
+          session particlpants including the lectures
+          and the session chairperson.<br />
+          4. A session consist of four lectures or three
+          lectures and response, in addition to a session
+          cahir. If you cannot find four particlpants and
+          a chair , you may apply with three lectures on the
+          candition that the Academic committee may add
+          a fours lectures to the session
+        </span>
+      </div>
+
+    </h5>
     <br /><br />
     <div class="row margin-top">
       <label>Session title[English]</label>
@@ -12,7 +31,17 @@
       <input type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" />
     </div>
     <div class="row margin-top">
-      <label>Session title[Hebrew]</label>
+      <label>
+        Session title[Hebrew]
+        <div class="tooltipSmall">
+          <img src="/assets/images/TooltipIcon.png" />
+          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
+           Not mandatory for<br />
+            English speakers<br />
+          </span>
+        </div>
+
+      </label>
     </div>
     <div class="row margin-top">
       <input type="text" [(ngModel)]="SessionName" style="width:80%;" />

@@ -9,7 +9,7 @@
 <br />
 <div class="containerDivGeneric">
   <div class="col-md-10" style="padding-left: 0% !important;">
-    <h5 style="color:#27b5e5">PROPOSED LECTURE IN ASTRUCTURED SESSION</h5>
+    <h5 style="color:#27b5e5">Proposal for a lecture in the pre-organized session titled: {{SessionName}}</h5>
     <div class="backGray col-md-10">
       <br />
       <h6 style="color: #27b5e5;margin-left:2%">My Details</h6><br />
@@ -36,8 +36,8 @@
       <label class="col-md-5">Academic Affiliation</label>
     </div>
     <div class="row margin-top">
-      <input type="text" class="col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
-      <input type="text" class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==false" />
+      <input #testInput type="text" class="col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
+      <input #testInput type="text" class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==false" />
       <label class="col-md-3" *ngIf="showLikeProp==true">{{TitleEnglish}}</label>
       <label class="col-md-3" style="margin-left:18%"></label>
     </div>
@@ -46,7 +46,8 @@
       <label class="col-md-5 floatLeft">Lecture language</label>
     </div>
     <div class="row margin-top">
-      <input type="text" class="col-md-3" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
+      <input #testInput type="text" class="col-md-3" ng-pattern="pattern" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
+
       <select *ngIf="showLikeProp==false" #t (change)="selectlang($event.target.value)" [(ngModel)]="Language" class="col-md-3" style="margin-left:18%">
         <option [value]="Language" selected>{{Language}}</option>
         <option *ngFor="let Language of ArrLanguage" [value]="Language">
@@ -62,8 +63,8 @@
       <label class="col-md-5 floatLeft">Keywords</label>
     </div>
     <div class="row margin-top">
-      <textarea [(ngModel)]="Proposal" style="width:291px;height:97px;" class="col-md-3" *ngIf="showLikeProp==false"></textarea>
-      <textarea [(ngModel)]="Keywords" style="width:291px;height:97px;margin-left:18%" class="col-md-3" *ngIf="showLikeProp==false"></textarea>
+      <textarea #testInput [(ngModel)]="Proposal" style="width:291px;height:97px;" class="col-md-3" *ngIf="showLikeProp==false"></textarea>
+      <textarea #testInput [(ngModel)]="Keywords" style="width:291px;height:97px;margin-left:18%" class="col-md-3" *ngIf="showLikeProp==false"></textarea>
       <label class="col-md-3" *ngIf="showLikeProp==true">{{Proposal}}</label>
       <label class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==true">{{Keywords}}</label>
     </div>
@@ -127,3 +128,6 @@
   </div>
 </div>
   </div>-->
+<!--function ctrl($scope) {
+      $scope.pattern = /[\u0590-\u05FF]+/g;
+      }-->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,8 @@ import { Name } from 'src/classes/Name';
   styleUrls: ['./congress-registration-one.component.css']
 })
 export class CongressRegistrationOneComponent implements OnInit {
+  @ViewChild("testInput") testInput;
+
   public Show2Proposals: boolean;
   public showTwo: boolean;
   public Email2: string;
@@ -66,6 +68,9 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.LastName = events.LastName;
     });
 
+  }
+  ngAfterViewInit() {
+    this.testInput.nativeElement.focus();
   }
   getCookie(key: string) {
     return this.cookieService.get(key);

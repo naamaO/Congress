@@ -38,7 +38,7 @@ export class JudgesComponent implements OnInit {
     public FilterValues: string[];
     public field: string;
     public Fields: string[] = ['Name', 'Div', 'Sub Div', 'Title'];
-    public displayedColumns: string[] = ['UserName', 'Division', 'SubDivision', 'SessionName', 'TitleEnglish', 'Language',
+    public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'SessionName', 'TitleEnglish', 'Language',
         'Status', 'Review'];
     public DB: Proposals[];
     public PropJudges: Judges[];
@@ -96,7 +96,18 @@ export class JudgesComponent implements OnInit {
                 this.isShowPropArrSession = true;
             });
         }
+    }
 
+    getImgIcon(item: Judges) {
+        if (item.SessionName == null)
+            return "/assets/images/single.gif";
+        else {
+            if (item.SessionName) {
+                //to do check - isGroupMissing
+                //  return "/assets/images/group_missing.gif";
+                return "/assets/images/group.gif";
+            }
+        }
     }
 
     private _filter(value: string): string[] {
@@ -138,40 +149,70 @@ export class JudgesComponent implements OnInit {
 
     Save() {
         this.newProp = new Judges();
-        if (this.Division == "")
-            this.newProp.Division = this.oneProp.Division;
-        else
+        if (this.oneProp.Division == null)
             this.newProp.Division = this.Division;
-        if (this.Division == "")
-            this.newProp.SubDivision = this.oneProp.SubDivision;
-
         else
+            if (this.Division == "")
+                this.newProp.Division = this.oneProp.Division;
+
+        if (this.oneProp.SubDivision == null)
             this.newProp.SubDivision = this.subdivision;
+        else
+            if (this.subdivision == "")
+                this.newProp.SubDivision = this.oneProp.SubDivision;
+
 
         this.newProp.IdProposal = this.oneProp.IdProposal;
         this.newProp.UserName = this.oneProp.UserName;
-        this.newProp.TitleEnglish = this.oneProp.TitleEnglish;
-        this.newProp.TitleHebrew = this.oneProp.TitleHebrew;
-        this.newProp.Proposal = this.oneProp.Proposal;
-        this.newProp.Language = this.oneProp.Language;
-        this.newProp.Keywords = this.oneProp.Keywords;
-        this.newProp.SessionName = this.SessionName;
-        this.newProp.Chairman = this.Chairman;
-        this.newProp.Remarks = this.Remarks;
-        this.newProp.Status = this.Status;
-
+        if (this.oneProp.TitleEnglish == null)
+            this.newProp.TitleEnglish = "";
+        else
+            this.newProp.TitleEnglish = this.oneProp.TitleEnglish;
+        if (this.oneProp.TitleHebrew == null)
+            this.newProp.TitleHebrew = "";
+        else
+            this.newProp.TitleHebrew = this.oneProp.TitleHebrew;
+        if (this.oneProp.Proposal == null)
+            this.newProp.Proposal = "";
+        else
+            this.newProp.Proposal = this.oneProp.Proposal;
+        if (this.oneProp.Language == null)
+            this.newProp.Language = "";
+        else
+            this.newProp.Language = this.oneProp.Language;
+        if (this.oneProp.Keywords == null)
+            this.newProp.Keywords = "";
+        else
+            this.newProp.Keywords = this.oneProp.Keywords;
+        if (this.oneProp.SessionName == null)
+            this.newProp.SessionName = "";
+        else
+            this.newProp.SessionName = this.oneProp.SessionName;
+        if (this.oneProp.Chairman == null)
+            this.newProp.Chairman = "";
+        else
+            this.newProp.Chairman = this.oneProp.Chairman;
+        if (this.oneProp.Remarks == null)
+            this.newProp.Remarks = "";
+        else
+            this.newProp.Remarks = this.oneProp.Remarks;
+        if (this.oneProp.Status == null)
+            this.newProp.Status = "";
+        else
+            this.newProp.Status = this.oneProp.Status;
 
         this.serverService.sendUpdateProp(this.newProp);
         this.isShowProp = false;
     }
 
     SavePropSession(PropSession) {
-        console.log("PropSession", PropSession)
         this.newProp = new Judges();
-        if (this.Division == "")
-            this.newProp.Division = PropSession.Division;
-        else
+        if (PropSession.Division == null)
             this.newProp.Division = this.Division;
+        else
+            if (this.Division == "")
+                this.newProp.Division = PropSession.Division;
+
         if (PropSession.SubDivision == null)
             this.newProp.SubDivision = this.subdivision;
         else
@@ -181,22 +222,45 @@ export class JudgesComponent implements OnInit {
 
         this.newProp.IdProposal = PropSession.IdProposal;
         this.newProp.UserName = PropSession.UserName;
-        this.newProp.TitleEnglish = PropSession.TitleEnglish;
-        this.newProp.TitleHebrew = PropSession.TitleHebrew;
-        this.newProp.Proposal = PropSession.Proposal;
-        this.newProp.Language = PropSession.Language;
-        this.newProp.Keywords = PropSession.Keywords;
-        this.newProp.SessionName = this.SessionName;
+        if (PropSession.TitleEnglish == null)
+            this.newProp.TitleEnglish = "";
+        else
+            this.newProp.TitleEnglish = PropSession.TitleEnglish;
+        if (PropSession.TitleHebrew == null)
+            this.newProp.TitleHebrew = "";
+        else
+            this.newProp.TitleHebrew = PropSession.TitleHebrew;
+        if (PropSession.Proposal == null)
+            this.newProp.Proposal = "";
+        else
+            this.newProp.Proposal = PropSession.Proposal;
+        if (PropSession.Language == null)
+            this.newProp.Language = "";
+        else
+            this.newProp.Language = PropSession.Language;
+        if (PropSession.Keywords == null)
+            this.newProp.Keywords = "";
+        else
+            this.newProp.Keywords = PropSession.Keywords;
+        if (PropSession.SessionName == null)
+            this.newProp.SessionName = "";
+        else
+            this.newProp.SessionName = PropSession.SessionName;
         if (PropSession.Chairman == null)
             this.newProp.Chairman = "";
         else
-        this.newProp.Chairman = this.Chairman;
-        this.newProp.Remarks = this.Remarks;
-        this.newProp.Status = this.Status;
-
+            this.newProp.Chairman = PropSession.Chairman;
+        if (PropSession.Remarks == null)
+            this.newProp.Remarks = "";
+        else
+            this.newProp.Remarks = PropSession.Remarks;
+        if (PropSession.Status == null)
+            this.newProp.Status = "";
+        else
+            this.newProp.Status = PropSession.Status;
 
         this.serverService.sendUpdateProp(this.newProp);
-        this.isShowProp = false;
+        this.isShowPropArrSession = true;
     }
 
     selectDivision(div: string) {

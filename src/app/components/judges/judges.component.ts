@@ -38,7 +38,7 @@ export class JudgesComponent implements OnInit {
     public FilterValues: string[];
     public field: string;
     public Fields: string[] = ['Name', 'Div', 'Sub Div', 'Title'];
-    public displayedColumns: string[] = ['UserName', 'Division', 'SubDivision', 'SessionName', 'TitleEnglish', 'Language',
+    public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'SessionName', 'TitleEnglish', 'Language',
         'Status', 'Review'];
     public DB: Proposals[];
     public PropJudges: Judges[];
@@ -96,7 +96,18 @@ export class JudgesComponent implements OnInit {
                 this.isShowPropArrSession = true;
             });
         }
+    }
 
+    getImgIcon(item: Judges) {
+        if (item.SessionName == null)
+            return "/assets/images/single.gif";
+        else {
+            if (item.SessionName) {
+                //to do check - isGroupMissing
+                //  return "/assets/images/group_missing.gif";
+                return "/assets/images/group.gif";
+            }
+        }
     }
 
     private _filter(value: string): string[] {
@@ -189,28 +200,6 @@ export class JudgesComponent implements OnInit {
             this.newProp.Status = "";
         else
             this.newProp.Status = this.oneProp.Status;
-        //if (this.Division == "")
-        //    this.newProp.Division = this.oneProp.Division;
-        //else
-        //    this.newProp.Division = this.Division;
-        //if (this.Division == "")
-        //    this.newProp.SubDivision = this.oneProp.SubDivision;
-
-        //else
-        //    this.newProp.SubDivision = this.subdivision;
-
-        //this.newProp.IdProposal = this.oneProp.IdProposal;
-        //this.newProp.UserName = this.oneProp.UserName;
-        //this.newProp.TitleEnglish = this.oneProp.TitleEnglish;
-        //this.newProp.TitleHebrew = this.oneProp.TitleHebrew;
-        //this.newProp.Proposal = this.oneProp.Proposal;
-        //this.newProp.Language = this.oneProp.Language;
-        //this.newProp.Keywords = this.oneProp.Keywords;
-        //this.newProp.SessionName = this.SessionName;
-        //this.newProp.Chairman = this.Chairman;
-        //this.newProp.Remarks = this.Remarks;
-        //this.newProp.Status = this.Status;
-
 
         this.serverService.sendUpdateProp(this.newProp);
         this.isShowProp = false;

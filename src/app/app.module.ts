@@ -52,12 +52,12 @@ import { Thank3Component } from './components/thank3/thank3.component';
 import {
   MatFormFieldModule, MatAutocompleteModule,
     MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatExpansionModule,
-  MatSortModule, MatTableModule, MatIconModule, MatSelectModule, MatDatepickerModule, NativeDateModule, MAT_DATE_FORMATS
+  MatSortModule, MatTableModule, MatIconModule, MatSelectModule, MatDatepickerModule, NativeDateModule, MAT_DATE_FORMATS, MatPaginatorIntl
 } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -118,6 +118,7 @@ import { CongressRegistrationSingleComponent } from './components/congress-regis
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatExpansionModule,
+    NgxPaginationModule,
     //MatButtonModule,
     //MatCheckboxModule, MatSelect, MatOption, MatFormField,
     BrowserModule,
@@ -133,7 +134,7 @@ import { CongressRegistrationSingleComponent } from './components/congress-regis
   //  //MatButtonModule,
   //  //MatCheckboxModule, MatSelect, MatOption, MatFormField
   ],
-  providers: [ServerService, CookieService],
+  providers: [ServerService, CookieService,MatPaginatorIntl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,6 +10,7 @@
   width: 2560px;
   height:1440px;
 }*/
+
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 .containerDivGeneric {
   width: 100%;
@@ -19,7 +20,9 @@
 .width100 {
   width: 100%;
 }
-
+.margLeft3 {
+  margin-left: 3%;
+}
 .clear {
   clear: both;
 }
@@ -80,7 +83,12 @@ select:focus {
   font-size: large;
   color: black;
 }
-
+.margLeft7{
+  margin-left:7%;
+}
+.headerGray {
+  color: gray;
+}
 .centerSession {
   width: 60%;
   height: 60%;

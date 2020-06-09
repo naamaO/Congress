@@ -8,6 +8,7 @@ import { Proposals } from '../../../classes/Proposals';
 import { CookieService } from 'angular2-cookie';
 import { __await } from 'tslib';
 import { Name } from 'src/classes/Name';
+import { FormBuilder, FormControl, Validator, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-congress-registration-one',
   templateUrl: './congress-registration-one.component.html',
@@ -15,7 +16,10 @@ import { Name } from 'src/classes/Name';
 })
 export class CongressRegistrationOneComponent implements OnInit {
   @ViewChild("testInput") testInput;
-
+  //@Input()
+  userFormGroup: FormGroup;
+  public angForm: FormGroup;
+  pattern: string | RegExp
   public Show2Proposals: boolean;
   public showTwo: boolean;
   public Email2: string;
@@ -25,7 +29,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   public ArrDivision: string[];
   public ArrSubDivision: string[];
   public ShowSub: boolean;
-  public ArrLanguage: string[];
+  public ArrLanguage: string[]=['English','עברית'];
   public UserName: string;
   public Division: string;
   public SubDivision: string;
@@ -37,19 +41,33 @@ export class CongressRegistrationOneComponent implements OnInit {
   public SessionName: string;
   public FirstName: string;
   public LastName: string;
+  public FirstNameHebrew: string;
+  public LastNameHebrew: string;
   public LoginUserName: string;
+  public Title: string;
+  public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
+
   public showLikeProp: boolean = false;
-  constructor(public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+  constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
 
     //__await(500);
     //  this.serverService.DivisionEnglish().subscribe((events) => {
     //  this.ArrDivision = events;
     //  this.ShowSub = true;
     //});
-
+    
     this.serverService.selectDraft().subscribe((events) => {
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
+
+      if (this.SubDivision == 'Ldino') {
+        this.ArrLanguage = ['עברית','English','Ladino']
+      }
+      if (this.SubDivision == 'Yiddish') {
+        this.ArrLanguage = ['עברית', 'English', 'Yiddish']
+      } if (this.SubDivision == 'Latin American Jewry Section') {
+        this.ArrLanguage = ['עברית', 'English', 'Português','Español']
+      }
       this.TitleEnglish = events.TitleEnglish;
       this.TitleHebrew = events.TitleHebrew;
       this.Proposal = events.Proposal;
@@ -66,6 +84,9 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
       this.LastName = events.LastName;
+      this.FirstNameHebrew = events.FirstNameHebrew;
+      this.LastNameHebrew = events.LastNameHebrew;
+      this.Title = events.Title;
     });
 
   }
@@ -90,7 +111,10 @@ export class CongressRegistrationOneComponent implements OnInit {
   setCookie(Div: string) {
     this.cookieService.put('Division', Div);
   }
+
   ngOnInit() {
+    //this.angForm = new FormGroup({
+    //  name: new FormControl('', Validators.pattern(/^-?(0|[1-9]\d*)?$/) )}) ‏
     this.LoginUserName = (this.getCookie('UserName'));
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
@@ -140,6 +164,9 @@ export class CongressRegistrationOneComponent implements OnInit {
 
   }
   selectlang(lan: string) {
+  }
+  changeProp() {
+
   }
   OpenSecondProposal() {
     //this.serverService.enterSecondDraft();

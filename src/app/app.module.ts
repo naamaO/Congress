@@ -44,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Thank1Component } from './components/thank1/thank1.component';
 import { Thank2Component } from './components/thank2/thank2.component';
 import { Thank3Component } from './components/thank3/thank3.component';
+
 //import { ModalModule, BsModalRef } from 'ngx-bootstrap';
 
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

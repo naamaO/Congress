@@ -24,23 +24,63 @@
           <h5 style="color:#27b5e5">PROPOSED LECTURE IN ASTRUCTURED SESSION</h5>
           <div class="backGray col-md-9">
             <br />
-            <div class="row margin-top">
-              <label class="col-md-4">Full Name [English]</label>
-              <label class="col-md-4 floatLeft">Full Name [Hebrew]</label>
-              <label class="col-md-4 floatLeft">Email</label>
-            </div>
-            <div class="row margin-top">
-              <div class="col-md-4">
-                <input type="text" value="{{FirstName}} {{ LastName}}" style="width:90%;" />
-              </div> <div class="col-md-4 floatLeft">
-                <input type="text" value="{{NameHebrew.FirstName}} {{NameHebrew.LastName}}" style="width:90%;" />
-              </div><div class="col-md-4 floatLeft" style="text-align:right;">
-                <input type="text" value="{{LoginUserName}}" style="width:100%;" />
-              </div>
+            <div class="row margin-top" style="margin-left:1%">
+              <label class="col-md-1 headerGray">Title</label>
+              <label class="col-md-3 headerGray">Full Name [English]</label>
+              <label class="col-md-3 headerGray">
+                Full Name [Hebrew]
+                <div class="tooltipSmall">
+                  <img src="/assets/images/TooltipIcon.png" />
+                  <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
+                    Not mandatory for<br />
+                    English speakers<br />
+                  </span>
+                </div>
+              </label>
+              <label class="col-md-4 floatLeft headerGray">Email</label>
             </div>
             <div class="row margin-top" style="margin-left:1%">
-              <label class="col-md-5">Division</label>
-              <label class="col-md-3 floatLeft" style="margin-left:15% !important;">Subdivision</label>
+              <!--  <label  > </label>-->
+              <select class="col-md-1" style="background:content-box;">
+                <option [value]="Division" selected>{{Title}}</option>
+                <option *ngFor="let tit of ArrTitle" [value]="tit">
+                  {{tit}}
+                </option>
+              </select>
+              <div class="col-md-3">
+                <input type="text" value="{{FirstName}}" [(ngModel)]="FirstName" style="width:45%;" />
+                <input type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width:45%;margin-left:2%;" />
+              </div>
+              <div class="col-md-3">
+                <input type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;" />
+                <input type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;margin-left:2%;" />
+              </div>
+            <!--</div>-->
+            <div class="col-md-4 floatLeft" style="text-align:right;">
+              <input type="text" value="{{LoginUserName}}" style="width:100%;" />
+            </div>
+
+            <!--<label class="col-md-3">{{FirstName}}  {{LastName}}</label>
+  <label class="col-md-3">{{FirstNameHebrew}}  {{LastNameHebrew}}</label>-->
+            <!-- <label class="col-md-5 floatLeft">{{LoginUserName}}</label>-->
+          </div>
+            <!--<div class="row margin-top">
+    <label class="col-md-4">Full Name [English]</label>
+    <label class="col-md-4 floatLeft">Full Name [Hebrew]</label>
+    <label class="col-md-4 floatLeft">Email</label>
+  </div>
+  <div class="row margin-top">
+    <div class="col-md-4">
+      <input type="text" value="{{FirstName}} {{ LastName}}" style="width:90%;" />
+    </div> <div class="col-md-4 floatLeft">
+      <input type="text" value="{{NameHebrew.FirstName}} {{NameHebrew.LastName}}" style="width:90%;" />
+    </div><div class="col-md-4 floatLeft" style="text-align:right;">
+      <input type="text" value="{{LoginUserName}}" style="width:100%;" />
+    </div>
+  </div>-->
+            <div class="row margin-top" style="margin-left:1%">
+              <label class="col-md-5 headerGray">Division</label>
+              <label class="col-md-3 floatLeft headerGray" style="margin-left:15% !important;">Subdivision</label>
             </div>
             <div class="row margin-top">
               <div class="col-md-6">
@@ -68,8 +108,8 @@
           </div>
           <br /><br />
           <div class="row margin-top">
-            <label class="col-md-5">Lecture title [English]</label>
-            <label class="col-md-5">Academic Affiliation</label>
+            <label class="col-md-5 headerGray">Lecture title [English]</label>
+            <label class="col-md-5 headerGray">Academic Affiliation</label>
           </div>
           <div class="row margin-top">
             <input type="text" class="col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
@@ -78,8 +118,8 @@
             <label class="col-md-3" style="margin-left:18%" *ngIf="showLikeProp==true"></label>
           </div>
           <div class="row margin-top">
-            <label class="col-md-5">Lecture title [Hebrew]</label>
-            <label class="col-md-5 floatLeft">Lecture language</label>
+            <label class="col-md-5 headerGray">Lecture title [Hebrew ]</label>
+            <label class="col-md-5 floatLeft headerGray">Lecture language</label>
           </div>
           <div class="row margin-top">
             <input type="text" class="col-md-3" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
@@ -94,8 +134,8 @@
 
           </div>
           <div class="row margin-top">
-            <label class="col-md-5">Abstract</label>
-            <label class="col-md-5 floatLeft">Keywords</label>
+            <label class="col-md-5 headerGray">Abstract</label>
+            <label class="col-md-5 floatLeft headerGray">Keywords</label>
           </div>
           <div class="row margin-top">
             <textarea *ngIf="showLikeProp==false" [(ngModel)]="Proposal" style="width:291px;height:97px;" class="col-md-3"></textarea>

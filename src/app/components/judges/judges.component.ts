@@ -8,7 +8,9 @@ import { Proposals } from '../../../classes/Proposals';
 import { Judges } from '../../../classes/Judges';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator,PageEvent } from '@angular/material/paginator';
+import {MatPaginatorIntl} from '@angular/material';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
@@ -22,7 +24,7 @@ import { forEach } from '@angular/router/src/utils/collection';
     templateUrl: './judges.component.html',
     styleUrls: ['./judges.component.css']
 })
-export class JudgesComponent implements OnInit {
+export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
@@ -36,13 +38,15 @@ export class JudgesComponent implements OnInit {
     public prop: Judges;
     public Values: string[];
     public FilterValues: string[];
+    public filterOfValue = {};
     public field: string;
-    public Fields: string[] = ['Name', 'Div', 'Sub Div', 'Title'];
-    public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'SessionName', 'TitleEnglish', 'Language',
+    public Fields: string[] = ['All','Name', 'Div', 'Sub Div', 'Title'];
+    public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'TitleEnglish', 'SessionName', 'Language',
         'Status', 'Review'];
     public DB: Proposals[];
     public PropJudges: Judges[];
-    public isShowProp: boolean;
+    public isShowProp: boolean = false;
+    public isShowPropArrSession: boolean = false;
     public itempropID: Judges;
     public oneProp: Judges;
     public Chairman: string;
@@ -58,23 +62,78 @@ export class JudgesComponent implements OnInit {
     public subdivision: string = "";
     public Value: string;
     public ArrPropSession: Judges[];
-    public isShowPropArrSession: boolean;
     public dataSource = new MatTableDataSource<Judges>();
     public dataSourcFilter = new MatTableDataSource<Judges>();
+    filterSelectObj = [];
     public showPropSession: boolean;
     page = 1;
     pageSize = 4;
     pages = [];
     collection = [];
     collectionSize = 12;//= this.PropJudges.length;
+    pageEvent: PageEvent;
+    p: number = 1;
+    size = 10;
+    pageIndex = 1;
+    data: any;
+    constructor(public router: Router, private serverService: ServerService,
+         private http: HttpClient, private MatPaginatorIntl:MatPaginatorIntl) {
 
-    constructor(public router: Router, private serverService: ServerService, private http: HttpClient) {
-
+ // Object to create Filter for
+      this.filterSelectObj = [
+        {
+          name: 'UserName',
+          columnProp: 'UserName',
+          options: []
+        }, {
+          name: 'Division',
+          columnProp: 'Division',
+          options: []
+        }, {
+          name: 'SubDivision',
+          columnProp: 'SubDivision',
+          options: []
+        }, {
+          name: 'TitleEnglish',
+          columnProp: 'TitleEnglish',
+          options: []
+        }, {
+          name: 'SessionName',
+          columnProp: 'SessionName',
+          options: []
+        }, {
+            name: 'Language',
+            columnProp: 'Language',
+            options: []
+        }, {
+            name: 'Status',
+            columnProp: 'Status',
+            options: []
+        }
+      ]
 
     }
+
+    pageChanged(event:any){
+        // this.page=event;
+        this.pageIndex=event;
+        // this.data=this.dataSource.data;
+        console.log("this.dataSource.data",this.dataSource.data)
+        this.dataSource.data = this.data.slice(event * this.size - this.size, event * this.size);
+        console.log("this.dataSource.data",this.dataSource.data)
+      }
+      
+
     ngAfterViewInit(): void {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator._intl.itemsPerPageLabel ='Displaynig';
+        this.dataSource.paginator._intl.nextPageLabel ='Displaynig';
+        this.dataSource.paginator._intl.previousPageLabel ='Displaynig';
+        console.log("this.dataSource.data",this.dataSource.data)
+
+        this.data=this.dataSource.data;
+
     }
     editProp(item: Judges) {
         this.itempropID = item;
@@ -132,8 +191,12 @@ export class JudgesComponent implements OnInit {
             case "Sub Div":
                 this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SubDivision + " ").toLowerCase().includes(search) }) as Judges[];
                 break;
+            case "All":
+                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SubDivision + " ").toLowerCase().includes(search) }) as Judges[];
+                break;
         }
-    } ngOnInit() {
+    }
+    ngOnInit() {
 
         this.myControl.valueChanges.subscribe(newValue => {
             this.filterValues(newValue);
@@ -144,9 +207,78 @@ export class JudgesComponent implements OnInit {
         this.serverService.getAll_W_Proposals().subscribe(val => {
             this.dataSource.data = val as Judges[];
             this.dataSourcFilter.data = val as Judges[];
+            this.data = this.dataSource.data;
+            console.log("this.data",this.data )
+            this.dataSource.filterPredicate = this.createFilter();
+            this.filterSelectObj.filter((o) => {
+                o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+              });
         });
     }
+ // Get Uniqu values from columns to build filter
+  getFilterObject(fullObj, key) {
+      
+    const uniqChk = [];
+    fullObj.filter((obj) => {
+      if (!uniqChk.includes(obj[key])) {
+        uniqChk.push(obj[key]);
+      }
+      return obj;
+    });
+    return uniqChk;
+  }
+  
+  filterChange(filter, event) {
+    let filterOfValue = {}
+    this.filterOfValue[filter.columnProp] = event.target.value.trim().toLowerCase()
+    this.dataSource.filter = JSON.stringify(this.filterOfValue)
+  }
 
+  // Custom filter method fot Angular Material Datatable
+  createFilter() {
+    let filterFunction = function (data: any, filter: string): boolean {
+      let searchTerms = JSON.parse(filter);
+      let isFilterSet = false;
+      for (const col in searchTerms) {
+        if (searchTerms[col].toString() !== '') {
+          isFilterSet = true;
+        } else {
+          delete searchTerms[col];
+        }
+      }
+
+     // console.log(searchTerms);
+
+      let nameSearch = () => {
+        let found = false;
+        if (isFilterSet) {
+          for (const col in searchTerms) {
+            searchTerms[col].trim().toLowerCase().split(' ').forEach(word => {
+                if (data[col]!=null){
+              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) {
+                found = true
+              }}
+            });
+          }
+          return found
+        } else {
+          return true;
+        }
+      }
+      return nameSearch()
+    }
+    return filterFunction
+  }
+
+
+  // Reset table filters
+  resetFilters() {
+    this.filterOfValue = []
+    this.filterSelectObj.forEach((value, key) => {
+      value.modelValue = undefined;
+    })
+    this.dataSource.filter = "";
+  }
     Save() {
         this.newProp = new Judges();
         if (this.oneProp.Division == null)
@@ -272,12 +404,13 @@ export class JudgesComponent implements OnInit {
 
     SelectField() {
         this.serverService.GetValuesByField(this.field).subscribe(val => {
-        this.Values = val; this.FilterValues = val;
+        this.Values = val; 
+        this.FilterValues = val;
         });
 
     }
-    SelectValues(value: string) {
 
+    SelectValues(value: string) {
         if (this.field == 'Name') {
             this.dataSource.data = this.dataSourcFilter.data.filter(function (item) {
                 var str = item.FirstNameEnglish + ' ' + item.LastNameEnglish;
@@ -292,7 +425,9 @@ export class JudgesComponent implements OnInit {
         if (this.field == 'Title') {
             this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.TitleEnglish.toLowerCase().includes(value) }) as Judges[];
         }
-
+        if (this.field == 'All') {
+            this.dataSource.data = this.dataSourcFilter.data;
+        }
     }
     NoFilter() {
         this.serverService.getAll_W_Proposals().subscribe(val => this.PropJudges = val);

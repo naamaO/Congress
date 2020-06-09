@@ -16,14 +16,15 @@
     <div class="col-md-1">
       <mat-form-field style="width:95%">
         <mat-label>All</mat-label>
-        <mat-select (selectionChange)="SelectField()" [(ngModel)]="field">
+        <mat-select (selectionChange)="SelectValues()" [(ngModel)]="field">
           <mat-option *ngFor="let field of Fields" [value]="field">
             {{field}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-2">
+    <label class="lable-line">|</label>
+    <div class="col-md-2 padding-7">
       <form class="example-form" style="width:95%">
         <mat-form-field class="example-full-width">
           <input type="text"
@@ -31,10 +32,10 @@
                  aria-label="Number"
                  matInput
                  [formControl]="myControl">
-
         </mat-form-field>
       </form>
     </div>
+      <mat-icon class="mat-icon-rtl-mirror Search-icon" >search</mat-icon>
     <div class="col-md-2"></div>
   </div>
 </div>
@@ -43,6 +44,7 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
+
       <table mat-table [dataSource]="dataSource" matSort>
    
         <ng-container matColumnDef="Icon">
@@ -53,72 +55,131 @@
         </ng-container>
 
         <ng-container matColumnDef="UserName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Lecture Name </th>
+
+          <th  mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[0]" ngDefaultControl >
+             <label class="lable-th"> Lecture Name </label>
+              <select matNativeControl name="{{filterSelectObj[0].columnProp}}" [(ngModel)]="filterSelectObj[0].modelValue"
+                (change)="filterChange(filterSelectObj[0],$event)">
+                <option value=""  mat-header-cell>Lecture Name</option>
+                <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[0].options">{{item}}</option>
+              </select>
+            </mat-form-field>
+             <!-- Lecture Name  -->
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.FirstNameEnglish}} {{element.LastNameEnglish}}</td>
         </ng-container>
 
         <ng-container matColumnDef="Division">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Division </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[1]" ngDefaultControl  >
+              <label class="lable-th">Division </label>
+               <select matNativeControl name="{{filterSelectObj[1].columnProp}}" [(ngModel)]="filterSelectObj[1].modelValue"
+                 (change)="filterChange(filterSelectObj[1],$event)">
+                 <option value=""  mat-header-cell>Division</option>
+                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[1].options">{{item}}</option>
+               </select>
+             </mat-form-field>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.Division}} </td>
         </ng-container>
 
         <ng-container matColumnDef="SubDivision">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Division </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[1]" ngDefaultControl  >
+              <label class="lable-th">Sub Division </label>
+               <select matNativeControl name="{{filterSelectObj[2].columnProp}}" [(ngModel)]="filterSelectObj[2].modelValue"
+                 (change)="filterChange(filterSelectObj[2],$event)">
+                 <option value=""  mat-header-cell>Sub Division</option>
+                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[2].options">{{item}}</option>
+               </select>
+             </mat-form-field>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.SubDivision}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="TitleEnglish">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Lecture Title </th>
-          <td mat-cell *matCellDef="let element"> {{element.TitleEnglish}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="SessionName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Session Title </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[3]" ngDefaultControl  >
+              <label class="lable-th">Session Title </label>
+               <select matNativeControl name="{{filterSelectObj[3].columnProp}}" [(ngModel)]="filterSelectObj[3].modelValue"
+                 (change)="filterChange(filterSelectObj[3],$event)">
+                 <option value=""  mat-header-cell>Session Title</option>
+                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[3].options">{{item}}</option>
+               </select>
+             </mat-form-field>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.SessionName}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="TitleEnglish">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[4]" ngDefaultControl  >
+                <label class="lable-th">Lecture Title </label>
+                 <select matNativeControl name="{{filterSelectObj[4].columnProp}}" [(ngModel)]="filterSelectObj[4].modelValue"
+                   (change)="filterChange(filterSelectObj[4],$event)">
+                   <option value=""  mat-header-cell>Lecture Title</option>
+                   <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[4].options">{{item}}</option>
+                 </select>
+               </mat-form-field>
+               </th>
+          <td mat-cell *matCellDef="let element"> {{element.TitleEnglish}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="Language">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Language </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[5]" ngDefaultControl  >
+              <label class="lable-th"> Language  </label>
+               <select matNativeControl name="{{filterSelectObj[5].columnProp}}" [(ngModel)]="filterSelectObj[5].modelValue"
+                 (change)="filterChange(filterSelectObj[5],$event)">
+                 <option value=""  mat-header-cell> Language </option>
+                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[5].options">{{item}}</option>
+               </select>
+             </mat-form-field>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.Language}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[4]" ngDefaultControl  >
+              <label class="lable-th">Status </label>
+               <select matNativeControl name="{{filterSelectObj[6].columnProp}}" [(ngModel)]="filterSelectObj[6].modelValue"
+                 (change)="filterChange(filterSelectObj[6],$event)">
+                 <option value=""  mat-header-cell>Status</option>
+                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[6].options">{{item}}</option>
+               </select>
+             </mat-form-field>
+             </th>
           <td mat-cell *matCellDef="let element"><span class="{{element.Status}}"> {{element.Status}} </span></td>
         </ng-container>
 
         <ng-container matColumnDef="Review">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Review </th>
           <td mat-cell *matCellDef="let element">
-            <img src="/assets/images/edit.png" style="width: 20px;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModal" />
+            <img *ngIf="element.SessionName==null" src="/assets/images/edit.png" style="width: 20px;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModalPropSession" />
+            <img *ngIf="element.SessionName" src="/assets/images/edit.png" style="width: 20px;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModalPropArrSession" />
+
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: {itemsPerPage: size, currentPage: p, totalItems: dataSource.data.length};"></tr>
       </table>
 
-      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50,100]">
-      </mat-paginator>
+      <mat-paginator class="s-paginator" [pageSize]="10" [pageSizeOptions]="[10, 25, 50,100]">
+      </mat-paginator>         
+      <pagination-controls (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>
     </div>
     <div class="col-md-2"></div>
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
 <div class="container-fluid" *ngIf="isShowProp">
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <div class="modal fade" id="myModal" role="dialog" >
+      <div class="modal fade" id="myModalPropSession" role="dialog">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -244,12 +305,11 @@
   </div>
 </div>
 
-
 <div class="container-fluid" *ngIf="isShowPropArrSession">
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal fade" id="myModalPropArrSession" role="dialog">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -398,15 +458,4 @@
 
                 </mat-expansion-panel>
               </mat-accordion>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2"></div>
-  </div>
-</div>
-
 

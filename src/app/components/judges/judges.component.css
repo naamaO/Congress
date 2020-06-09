@@ -154,3 +154,43 @@ th.mat-header-cell {
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
   z-index: 99999 !important;
 }
+
+.padding-7{
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.lable-line{
+  color: rgba(0,0,0,.42);
+  padding-top: 22px;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+.Search-icon{
+  color: #167c9f;
+  padding-top: 22px;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+.th-form-filter ::ng-deep .mat-form-field-infix {
+  width: 110px !important;
+}
+.th-form-filter ::ng-deep .mat-input-underline {
+  display: none;
+}
+.th-form-filter ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0rem; 
+}
+.th-form-filter ::ng-deep .lable-th{
+background-color: #E8E8E8 !important;
+color: #167c9f !important;
+font-weight: bold !important;
+margin-bottom: 0rem;
+}
+
+.s-paginator {
+/* float: left; */
+}
+
+.pagination-controls{
+  margin-top: -42px;
+}

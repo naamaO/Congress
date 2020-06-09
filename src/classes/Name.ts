@@ -1,6 +1,9 @@
 export class Name {
 
-  FirstName; string;
+  Title: string;
+  FirstName: string;
   LastName: string;
+  FirstNameHebrew: string;
+  LastNameHebrew: string;
 
 }

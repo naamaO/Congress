@@ -38,6 +38,10 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public LoginUserName: string;
   public FirstName: string;
   public LastName: string;
+  public FirstNameHebrew: string;
+  public LastNameHebrew: string;
+  public Title: string;
+  public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
   constructor(public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.DivisionEnglish().subscribe((events) => {
@@ -47,6 +51,9 @@ export class CongressRegistrationSingleComponent implements OnInit {
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
       this.LastName = events.LastName;
+      this.FirstNameHebrew = events.FirstNameHebrew;
+      this.LastNameHebrew = events.LastNameHebrew;
+      this.Title = events.Title;
     })
     // this.serverService.getName().subscribe(val => this.Name = val);
     this.serverService.getNameHebrew().subscribe(val => this.NameHebrew = val);

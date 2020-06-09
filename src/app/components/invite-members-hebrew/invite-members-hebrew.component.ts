@@ -55,21 +55,21 @@ export class InviteMembersHebrewComponent implements OnInit {
     this.c = new invited();
     this.d = new invited();
 
-    this.a.Name = this.Name1;
+   // this.a.Name = this.Name1;
     this.a.Email = this.Email1;
     this.a.SessionName = this.SessionName;
     //this.a.Chairman = this.Chairman;
     this.a.Division = this.Division;
     this.a.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.a);
-    this.b.Name = this.Name2;
+  //  this.b.Name = this.Name2;
     this.b.Email = this.Email2;
     this.b.SessionName = this.SessionName;
     //this.b.Chairman = this.Chairman;
     this.b.Division = this.Division;
     this.b.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.b);
-    this.c.Name = this.Name3;
+   // this.c.Name = this.Name3;
     this.c.Email = this.Email3;
     this.c.SessionName = this.SessionName;
     //this.c.Chairman = this.Chairman;

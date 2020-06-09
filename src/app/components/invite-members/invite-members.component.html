@@ -3,22 +3,62 @@
   <div class="clearfix"></div>
 
   <div class="col-md-5">
-    <h5 style="color:#27b5e5">SUBMIT A SESSION</h5>
+    <h5 style="color:#27b5e5">
+      SUBMIT A SESSION
+      <div class="tooltip">
+        <img src="/assets/images/TooltipIcon.png" />
+        <span class="tooltiptext" style="text-align:left;padding-left:2%;">
+          1. A session title in English and Hebrew(if possible)<br />
+          2. A session abstract (up to 250 words)<br />
+          3. Complete names and email addressof all
+          session particlpants including the lectures
+          and the session chairperson.<br />
+          4. A session consist of four lectures or three
+          lectures and response, in addition to a session
+          cahir. If you cannot find four particlpants and
+          a chair , you may apply with three lectures on the
+          candition that the Academic committee may add
+          a fours lectures to the session
+        </span>
+      </div>
+
+    </h5>
     <br /><br />
     <div class="row margin-top">
-      <label>Session title[English]</label>
+      <label class="headerGray">
+        Session title[English]
+        <div class="tooltipSmall">
+          <img src="/assets/images/TooltipIcon.png" />
+          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
+            Not mandatory for<br />
+            English speakers<br />
+          </span>
+        </div>
+      </label>
     </div>
     <div class="row margin-top">
-      <input type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" />
+      <input #testInput type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" />
     </div>
-    <div class="row margin-top">
-      <label>Session title[Hebrew]</label>
+    <div class="colorFocus">
+      <div class="row margin-top">
+        <label class="headerGray">
+          Session title[Hebrew]
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" />
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
+              Not mandatory for<br />
+              English speakers<br />
+            </span>
+          </div>
+
+        </label>
+      </div>
+      <div class="row margin-top">
+        <input #testInput type="text" [(ngModel)]="SessionName" style="width:80%;" />
+      </div>
     </div>
-    <div class="row margin-top">
-      <input type="text" [(ngModel)]="SessionName" style="width:80%;" />
-    </div>
-    <div class="row margin-top">
-      <label>Division:</label>
+    <div class="row margin-top ">
+      <label class="headerGray">Division:</label>
     </div>
     <div class="row margin-top">
       <select (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;">
@@ -28,7 +68,7 @@
       </select>
     </div>
     <div class="row margin-top">
-      <label>Subdivision:</label>
+      <label class="headerGray">Subdivision:</label>
     </div>
     <div class="row margin-top">
       <select [(ngModel)]="SubDivision" style="background:none;width:80%;">
@@ -37,54 +77,130 @@
         </option>
       </select>
     </div>
+    <div class="row margin-top">
+      <label class="headerGray"> Session Abstract:</label>
+    </div>
+    <div class="row margin-top">
+      <textarea #testInput [(ngModel)]="Proposal" style="width:80%;height:97px;"></textarea>
+
+    </div>
   </div>
 
   <!--<div class="clearfix"></div>
   <div class="clear"></div>-->
 
-  <div class="col-md-5 backGray floatLeft ddiv">
+  <div class="col-md-5 backGray floatLeft ddiv" id="Back" >
     <br />
-    <h6 style="color:#27b5e5">Session participants</h6>
+    <h4 style="color:#27b5e5">
+      Session participants
+      <div class="tooltipSmall">
+        <img src="/assets/images/TooltipIcon.png" />
+        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;font-size:small;width:300px !important; height:180px !important">
+          Please add the names and email addresses of all<br />
+          the particlpants in your proposed session <br />
+          Including yourself. preferably in the order you <br />
+          would like their papers to be presented at the congress <br />
+          All particlpants will receive notification<br />
+          by email that you submitted them as part of this<br />
+           session<br />
+          The lecturers will receive instructions and a<br />
+          like to submit their individual lecture proposals
+        </span>
+      </div>
+
+
+    </h4>
+    <h6 style="color:#27b5e5">In the order you would like to be presented at thr congress</h6>
     <br /><br />
     <div class="row margTop2">
-      <label class="col-md-5 margLeft9">Chairman:</label>
-      <label class="col-md-5">Email:</label>
+      <label class="col-md-1 headerGray">Title</label>
+      <label class="col-md-4 margLeft3 headerGray">Chairperson:</label>
+      <label class="col-md-4 margLeft7 headerGray">Email:</label>
     </div>
     <div class="row ">
-      <input type="text" [(ngModel)]="ChairmanName" class="margLeft9" />
-      <input type="text" [(ngModel)]="ChairmanEmail" class="margLeft9" />
+      <select [(ngModel)]="TitleChair" style="background:content-box;">
+        <option value="Prof"> Prof </option>
+        <option value="Dr4"> Dr</option>
+        <option value="Mr4"> Mr  </option>
+        <option value="Ms4"> Ms </option>
+      </select>
+      <div class="col-md-5">
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="FirstNameChair" class="margLeft3" />
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="LastNameChair" class="margLeft3" />
+      </div>
+      <input #testInput type="text" [(ngModel)]="ChairmanEmail" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-5 margLeft9">Full Name:</label>
-      <label class="col-md-5">Email:</label>
+      <label class="col-md-1 headerGray">Title</label>
+      <label class="col-md-4 margLeft3 headerGray">Lecture Name:</label>
+      <label class="col-md-4 margLeft7 headerGray">Email:</label>
     </div>
     <div class="row">
-      <input type="text" [(ngModel)]="Name1" class="margLeft9" />
-      <input type="text" [(ngModel)]="Email1" class="margLeft9" />
+      <select [(ngModel)]="Title1" style="background:content-box;">
+        <option value="Prof"> Prof </option>
+        <option value="Dr4"> Dr</option>
+        <option value="Mr4"> Mr  </option>
+        <option value="Ms4"> Ms </option>
+      </select>
+      <div class="col-md-5">
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="FirstName1" class="margLeft3" />
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="LastName1" class="margLeft3" />
+      </div>
+      <input #testInput type="text" [(ngModel)]="Email1" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-5 margLeft9">Full Name:</label>
-      <label class="col-md-5">Email:</label>
+      <label class="col-md-1 headerGray">Title</label>
+      <label class="col-md-4 margLeft3 headerGray">Lecture Name:</label>
+      <label class="col-md-4 margLeft7 headerGray">Email:</label>
     </div>
     <div class="row">
-      <input type="text" [(ngModel)]="Name2" class="margLeft9" />
-      <input type="text" [(ngModel)]="Email2" class="margLeft9" />
+      <select [(ngModel)]="Title2" style="background:content-box;">
+        <option value="Prof"> Prof </option>
+        <option value="Dr4"> Dr</option>
+        <option value="Mr4"> Mr  </option>
+        <option value="Ms4"> Ms </option>
+      </select>
+      <div class="col-md-5">
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="FirstName2" class="margLeft3" />
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="LastName2" class="margLeft3" />
+      </div>
+      <input #testInput type="text" [(ngModel)]="Email2" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-5 margLeft9">Full Name:</label>
-      <label class="col-md-5">Email:</label>
+      <label class="col-md-1headerGray">Title</label>
+      <label class="col-md-4 margLeft3 headerGray">Lecture Name:</label>
+      <label class="col-md-4 margLeft7 headerGray">Email:</label>
     </div>
     <div class="row">
-      <input type="text" [(ngModel)]="Name3" class="margLeft9" />
-      <input type="text" [(ngModel)]="Email3" class="margLeft9" />
+      <select [(ngModel)]="Title3" style="background:content-box;">
+        <option value="Prof"> Prof </option>
+        <option value="Dr4"> Dr</option>
+        <option value="Mr4"> Mr  </option> 
+        <option value="Ms4"> Ms </option>
+      </select>
+      <div class="col-md-5">
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="FirstName3" class="margLeft3" />
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="LastName3" class="margLeft3" />
+      </div>
+      <input #testInput type="text" [(ngModel)]="Email3" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-5 margLeft9">Full Name:</label>
-      <label class="col-md-5">Email:</label>
+      <label class="col-md-1 headerGray">Title</label>
+      <label class="col-md-4 margLeft3 headerGray ">Lecture Name:</label>
+      <label class="col-md-4 margLeft7 headerGray">Email:</label>
     </div>
-    <div class="row">
-      <input type="text" [(ngModel)]="Name4" class="margLeft9" />
-      <input type="text" [(ngModel)]="Email4" class="margLeft9" />
+    <div class="row ">
+      <select [(ngModel)]="Title4" style="background:content-box;">
+        <option value="Prof"> Prof </option>
+        <option value="Dr4"> Dr</option>
+        <option value="Mr4"> Mr  </option>
+        <option value="Ms4"> Ms </option>
+      </select>
+      <div class="col-md-5">
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="FirstName4" class="margLeft3" />
+        <input style="width:45%;" #testInput type="text" [(ngModel)]="LastName4" class="margLeft3" />
+      </div>
+      <input #testInput type="text" [(ngModel)]="Email4" class="margLeft3" />
     </div>
     <br /><br />
   </div>
@@ -93,3 +209,53 @@
   </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid" *ngIf="showErrEmpty">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" (click)="showErrEmpty=!showErrEmpty">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                <div class="divERR col-md-5 marginAuto">
+                  <br />
+                  <h4>ERROR</h4>
+                  <br />  <label>You must fill in all fields!</label>
+                  <br /><br />
+                </div>
+              </div>
+              
+              <br /><br /><br /><br /><br /><br />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+
+
+
+
+
+

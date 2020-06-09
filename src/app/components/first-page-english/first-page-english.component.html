@@ -1,40 +1,91 @@
-<div class="centerDiv">
-  <h1>
-    SUBMIT A PROPOSAL FOR A SESSION OR A LECTURE AT THE 18TH WORLD CONGRESS OF JEWISH STUDIES
-  </h1>
-  <span> We strongly encourage the submission of proposals for complete sessions.
-    A complete session at the Congress consists of</span><br />
-  <span>A)	4 lectures or </span><br />
-  <span>B)	3 lectures and a respondent </span>
-  <span>and a session chair</span>
-  <span>Lecturers may submit only one proposal and may lecture only ONCE during the Congress. In addition, they may serve as chairs of other sessions.</span><br />
-  <span>Sessions may not be organized around recently published academic monographs.</span><br />
-  <h2 class="underLine">Submit a Session</h2>
-  <br />
-  <h2 class="link"><a class="link" style="color:black;text-decoration: none" (click)="NavSession()">1.	CREATE A SESSION</a></h2>
-  <br />
-  <span>One of the lecturers or the session chair creates a session, providing </span><br />
-  <span> [1] A session title in English and Hebrew (if possible)</span><br />
-  <span> [2]A session abstract (up to 250 words) </span><br />
-  <span> [3] Complete names and email addresses of all session participants, including the lecturers and the session chair </span><br />
-  <span> [4] A session consist of four lectures or three lectures and a response</span><br />
-  <span>, in addition to a session chair. If you cannot find four participants and a chair, you may apply with three lectures on the condition that the Academic Committee may add a fourth lecturer to the session.</span><br />
-  <h2>2.	SESSION PARTICIPANTS SUBMIT LECTURE PROPOSALS</h2><br />
-  <span>The participants of the created session receive a notification email with a link and are request to submit their lecture proposals.</span><br />
-  <h2>Session Chair </h2><br />
-  <span>•	The session chair is responsible to introduce the lecturers and manage the time frame of the session, as well as questions and comments from the audience. </span><br />
-  <span>•	The respondent may serve as the session chair</span><br />
-  <span>•	A person may serve as chair in more than one session, as long as this can be accommodated within the timetable of the Congress sessions.</span><br />
-  <span>•	Session chairs are required to pay membership and Congress fees. </span><br />
-  <h2 class="underLine"><a class="link underLine" style="color:black;text-decoration: none" (click)="NavSingle()">Proposals for Individual Papers</a></h2><br />
-  <span>Lecturers may submit only one proposal. </span><br />
-  <span>If you are not part of a pre-organized session, you may submit an individual paper. If accepted, the academic committee will add you to a session at its discretion. </span><br />
-  <span>In order to submit a proposal for an individual paper, you will be asked to provide</span><br />
-  <span>[1] A lcture title in English and Hebrew (if possible)</span><br />
-  <span> [2]An abstract of your lecture (up to 250 words) </span><br />
-  <span>[3] keywords </span><br />
-  <br /><br /><br /><br />
+<div class="containerDivGeneric">
+  <div class="col-md-10 marginAuto" style="margin-left:15%;">
+    <div class="top-line">
+      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
+
+      <h4 class="header-border">THE 18TH WORLD CONGRESS OF JEWISH STUDIES</h4>
+
+      <div class="centerDiv" style="width:100%!important;">
+        <br />
+        <h4 style="color:#27b5e5;">
+          SUBMIT A PROPOSAL FOR A SESSION OR A LECTURE AT THE 18TH WORLD CONGRESS OF JEWISH STUDIES
+        </h4>
+        <span>
+          We strongly encourage the submission of proposals for complete sessions.
+          A complete session at the Congress consists of
+        </span><br />
+        <span style="font-weight:bold;color:#026fa7">4 lectures </span><br />
+        <span style="font-weight:bold;"> OR </span><br />
+        <span style="font-weight:bold;color:#026fa7">3 lectures, a respondent, and a chairperson </span><br />
+        <span>Please note: Sessions may not be organized around recently published academic monographs.</span><br />
+        <span>If you are not part of a pre-organized session, you may submit an individual paper. Lecturers may submit only one proposal and may present only ONCE during the Congress. An individual may serve more than once as a session chair.</span><br />
+        <br />
+        <h6 style="cursor:pointer;color:#27b5e5;" (click)="NavSessionOpen($event)" class="open">SUBMIT A PROPOSSAL FOR A SESSION</h6>
+        <br />
+        <div *ngIf="ShowSession">
+          <label style="font-size:large;color:#026fa7;font-weight:bold;">[1]	OPEN A WUJS USER ACCOUNT</label>
+          <br />
+          <span>
+            In order to submit a session proposal,
+            you need a user account with the World Union of Jewish Studies.
+            If you do not have a username and password,
+            you will be asked to sign in as a new user. Once have a user name and password,
+            you can submit a proposal for a session at the World Congress of Jewish Studies.
+          </span><br />
+          <label style="font-size:large;color:#026fa7;font-weight:bold;">[2]	CREATE A SESSION</label>
+          <br />
+          <span>One of the lecturers or the session participants submits a proposal for a session, including </span><br />
+          <span>1.	a session title</span><br />
+          <span>2.	a general abstract (up to 250 words) </span><br />
+          <span> 3.	full names and email addresses of the other lecturers and the chairperson. </span><br />
+          <span>
+            The session should consist of four lectures or three lectures and a response,
+            in addition to a session chair.
+            If you cannot find four participants and a chair,
+            you may apply with three lectures with the understanding that the
+            Academic Committee may add a fourth lecturer to the session.
+          </span><br />
+          <label style="font-size:large;color:#026fa7;font-weight:bold;">[3]	SESSION PARTICIPANTS SUBMIT LECTURE PROPOSALS</label><br />
+          <span>
+            The participants in the created session
+            will receive a notification email with a request to submit their individual lecture proposals.
+          </span><br />
+          <label style="cursor:pointer;color:#27b5e5" (click)="NavSession()">Click here to SUBMIT A PROPOSAL FOR A SESSION</label>
+
+          <br /><label style="font-size:large;">Role of Session Chairs </label><br />
+          <span>•	The session chair is responsible for introducing the lecturers and managing the time frame of the session, as well as fielding questions and comments from the audience. </span><br />
+          <span>•	The respondent may serve as the session chair</span><br />
+          <span>•	A person may serve as chair in more than one session, as long as this can be accommodated within the timetable of the Congress sessions.</span><br />
+          <span>•	Session chairs, like other Congress participants,  are required to pay membership and Congress fees.</span><br />
+        </div>
+        <h6 style="color:#27b5e5;text-decoration: none;cursor:pointer;" (click)="NavSingleOpen($event)" class="open">SUBMIT A PROPOSAL FOR A SINGLE LECTURE <label style="font-size:medium;color:#27b5e5;">(only for lectures that are NOT part of pre-organized sessions</label></h6><br />
+        <div *ngIf="ShowSingle">
+          <span>Individuals may submit proposals outside of the framework of a specific session. If the proposal is accepted, the academic committee will add you to a session at its discretion. </span><br />
+          <label style="font-size:large;color:#026fa7;font-weight:bold;">[1]	OPEN A WUJS USER ACCOUNT</label>
+          <br />
+          <span>
+            In order to submit a lecture proposal,
+            you need a user account with the World Union of Jewish Studies.
+            If you do not have a username and password, you will be asked to sign in as a new user.
+            Once have a user name and password,
+            you can submit a proposal for a lecture at the World Congress of Jewish Studies.
+          </span><br />
+          <label style="cursor:pointer;color:#27b5e5" (click)="NavSingle()">
+            Click here to SUBMIT A PROPOSAL FOR AN INDIVIDUAL LECTURE that is NOT part of a pre-organized session.
+          </label>
+          <br /><br /><br /><br />
+        </div>
+        <h6 style="color:#27b5e5;text-decoration: none;cursor:pointer;" (click)="NavEvaluation($event)" class="open">EVALUATION AND APPROVAL  OF PROPOSALS  <label style="font-size:medium;color:#27b5e5;">(only for lectures that are NOT part of pre-organized sessions</label></h6><br />
+        <div *ngIf="showEval">
+
+          <span>
+            The academic committee
+            of the World Union of Jewish will review the proposals for sessions and individual papers.
+          </span>
+          <span>Notifications about the committee’s decisions will be sent out by February 2021.</span>
+        </div>
 
 
-
-</div>
+      </div>
+    </div>
+  </div>

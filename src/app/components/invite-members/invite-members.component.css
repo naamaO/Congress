@@ -12,10 +12,106 @@
   font-size: large;
 }
 
-.margin-top {
-  margin-top: 5%;
+
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
 }
 
+  /* Tooltip text */
+  .tooltipSmall .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    /*top: -5%;*/
+  }
+
+.tooltiptextSmall:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptextSmall {
+  width: 200px !important;
+  height: 60px !important;
+}
+
+.tooltipSmall:hover .tooltiptextSmall {
+  visibility: visible;
+}
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -5%;
+  }
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptext {
+  width: 400px !important;
+  height: 200px !important;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.margin-top {
+  margin-top: 3%;
+}
+
+i.request-card-hidden {
+  opacity: 0;
+}
 input {
   border-top: none;
   border-right: none;
@@ -31,6 +127,7 @@ select {
 }
 
 .backGray {
+  padding-left:3%;
   background-color: #f3f2f2;
   margin-top: 4%;
 }
@@ -58,4 +155,48 @@ select {
   top: 50%;
   border: 20px solid transparent;
   border-right: 20px solid #f3f2f2;
+}
+
+
+
+
+
+.colorFocus:active, .colorFocus:focus {
+  color: #27b5e5;
+}
+
+
+.divERR:after {
+  top: 100%;
+  content: " ";
+  position: absolute;
+  bottom: -10px;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}
+
+.divERR:before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px;
+  border-color: transparent transparent #27b5e5;
+  /*top: -18%*/
+}
+
+.divERR {
+  color: #27b5e5;
+  border: 1px solid #27b5e5;
+  border-left: none !important;
+  border-right: none !important;
 }

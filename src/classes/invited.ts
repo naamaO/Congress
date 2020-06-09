@@ -1,8 +1,10 @@
 export class invited {
-
-  Name: string;
+  Title: string;
+  FirstName: string;
+  LastName: string;
   Email: string;
-  ChairmanName: string;
+  FirstNameChair: string;
+  LastNameChair: string;
   ChairmanEmail: string;
   SessionName: string;
   SessionNameEnglish: string;

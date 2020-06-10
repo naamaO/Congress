@@ -38,6 +38,8 @@ export class NewHebrewComponent implements OnInit {
   public ShowColor: boolean = false;
   public num: number;
   public item2: shoppingCart;
+  p: number = 1;
+
   constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);

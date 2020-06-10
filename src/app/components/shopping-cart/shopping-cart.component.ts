@@ -19,6 +19,7 @@ import { __await } from 'tslib';
 export class ShoppingCartComponent implements OnInit {
   public DB: shoppingCart[];
   public Total: number;
+  public num: number;
 
   constructor(private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
@@ -32,7 +33,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
     this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
     //this.serverService.getAllDBShoppingCart().subscribe((events) => {
     //  this.DB = events;
     //  alert(this.DB.length);
@@ -55,9 +56,17 @@ export class ShoppingCartComponent implements OnInit {
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
     });
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
+
   }
+
   ngOnInit() {
   }
+
+  NavigCart() {
+    this.router.navigateByUrl("/ShoppingCart");
+  }
+  
   AddQuantity(item: shoppingCart) {
     //alert(item.NameBook + "uu");
 

@@ -1,26 +1,27 @@
+
+
 <!--<div class="center">
   <form class="center-form">-->
 
-  <div style="background-color:#fff;height:100%;width:100%;">
-    <div style="border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;width:100%;">
-      <div style="margin-left:80%;top:60px;position:fixed;">
-        <img style="width:80px;height:40px; cursor:pointer;" src="/assets/images/icon-cart.png" (click)="NavigCart()" />
-        <!--<span  style="cursor:pointer;margin-top:40px;" (click)="NavigCart()" class="nav">Cart </span>-->
+  <!-- <div style="background-color:#fff;height:100%;width:100%;"> -->
+    <div style="width:100%;height:35px;background-color: white;z-index: 1000;top: 0;">
+      <div style="margin-left:80%;top:60px;position:fixed;"> 
         <span class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
-      </div>
-
-      <div class="top-line">
-        <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+        <img style="width:80px;height:40px; cursor:pointer;" src="/assets/images/icon-cart.png" (click)="NavigCart()" />
       </div>
     </div>
-  </div>
-  <div class="containerDivGeneric" style="margin-top: 100px;">
+      <!-- <div class="top-line">
+        <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+      </div> 
+    </div>-->
+  <!-- </div> -->
+  <!-- <div class="containerDivGeneric" style="margin-top: 100px;">
     <div class="row">
         <img src="/assets/images/books.PNG"  style="width:100%;"/>
       </div>
-      </div>
-      <br /><br />
-      <div class="col-md-8 " style="margin:auto;text-align:center">
+      </div>-->
+      <br /><br /> 
+      <div class="col-md-8 " style="margin:auto;">
         <div>
           <span class="span">World Union  of Jewish Studies publishes a periodical and annotated editions of primary sources in Jewish studies</span><br />
           <span class="span">in two different series </span><br />
@@ -28,29 +29,25 @@
           <span class="span">and the Eshkolot Series in cooperation with the Herzog Academic College</span><br /><br /><br />
         </div>
 
-
-
-
-
               <!--<div class="DivPic">-->
-              <div class="row width100" >
+              <div class="row width100" style="text-align:center">
                 
                 <div class="col-md-4 floatLeft ">
                   <img style="margin-left:10%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
 
                   <img style="margin-left:10%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
-                  <br /><label>Sources of Jewish culture</label>
+                  <br /><label class="label" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">Sources of Jewish culture</label>
                 </div>
                 <div class="col-md-4 floatLeft">
                   <img style="margin-left:8%; cursor:pointer; " src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
                   <img style="margin-left:8%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
 
-                <br />  <label>Jewish studies</label>
+                <br />  <label class="label" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">Jewish studies</label>
                 </div>
                 <div class="col-md-4 floatLeft">
                   <img style="margin-left:2%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
                   <img style="margin-left:2%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==true" />
-                 <br /> <label>Eshkolot</label>
+                 <br /> <label class="label"(click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">Eshkolot</label>
                 </div>
                 <br />
               </div>
@@ -63,24 +60,50 @@
         </div>
       </div>
       <div>
-        
+              <br /><br /> 
+      <div class="col-md-8 " style="margin:auto;">
+        <div *ngIf="ShowBlue1==true" class="category-paragraph">
+          <span class="span">The series "Sources for the Study of Jewish Culture" is a series of critical annotated editions of a wide</span><br />
+          <span class="span">range of sources in Jewish Studies: Philosophy, Halakha, Poetry and more - many of which are published for</span><br />
+          <span class="span">the first time.It is published by the World Union of Jewish Studies and the Rabbi Moshe and Amalia</span><br />
+          <span class="span"> Rosen Foundation.The books are available in Hebrew only.</span><br /><br /><br />
+        </div>
+        <div *ngIf="ShowBlue2==true" class="category-paragraph">
+          <span class="span">Jewish Studies is the annual journal of the World Union of Jewish Studies.</span><br />
+          <span class="span"> Articles published in Jewish Studies are also available on <a href="https://drive.google.com/file/d/1TvROQ-BPMOsL-KA8aFzu7Az7uL84Pqm6/view" class="span-link" target="_blank">JStor</a>. Submission instructions can be found <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">here</a>.</span><br /><br /><br />
+          </div>
+        <div *ngIf="ShowBlue3==true" class="category-paragraph">
+          <span class="span">"Eshkolot" is a series of books published in association with Herzog College.</span><br /><br /><br />
+        </div>
+      </div>
         <div >
           <div class="col-md-10 marginAuto">
             <ul class="products clearfix products-4" >
-              <div *ngFor="let item of DB " class="col-md-4 floatLeft" style="height:720px;" >
+              <div *ngFor="let item of DB | paginate: { itemsPerPage: 5, currentPage: p , totalItems: DB.length} " class="col-md-4 floatLeft" style="height:770px;" >
 
                 <li>
                   <div class="container" >
                     <div class="background" style="text-align:center; align-items: center">
                       <div style="margin:auto;">-</div>
                     </div>
-                    <div class="border-book featured-image content" style="height: 390px; text-align: center; display: flex;align-items: center;justify-content: center;">
-                      <img (click)="Detais(item)" (mouseenter)="ShowColor=true" style="margin:auto; display:block;" width="250" height="300" src={{item.Image}} class=" attachment-shop_catalog size-shop_catalog wp-post-image im" sizes="(max-width: 500px) 100vw, 500px"> <div class="cart-loading"><i class="fusion-icon-spinner"></i></div>
+                    <div class="border-book featured-image content" 
+                    style="height: 404px;width:296px; color:#85a6b7; text-align: center; display: flex;align-items: center;justify-content: center;">
+                    <div class="view overlay">
+                    <img (click)="Detais(item)" (mouseenter)="ShowColor=true"
+                       style="margin:8px; display:block; width:279px; height:387px;"
+                        color="#85a6b7" src={{item.Image}} 
+                        class="attachment-shop_catalog size-shop_catalog wp-post-image im" 
+                        sizes="(max-width: 500px) 100vw, 500px">
+                       <div class="cart-loading"> 
+                         <i class="fusion-icon-spinner"></i>
+                        </div>
+                      </div>
                     </div>
+                    
                   </div>
-                  <div class="fusion-product-content">
+                  <div class="fusion-product-content" style="width: 296px; margin: auto;">
                     <div class="product-details">
-                      <div class="product-details-container" style="margin-top:20px; font-size:17px;">
+                      <div class="product-details-container" style="margin-top:20px;margin-bottom:30px; font-size:17px;">
                         <span class="product-title" data-fontsize="16" data-lineheight="30" (click)="Detais(item)">
 
                           <a style="font-size:20px;">
@@ -92,27 +115,30 @@
         {{item.Details}}
       </a>-->
 
-                      <div class="fusion-price-rating" style="padding-top:20px;padding-bottom:3px;">
+                      <!-- <div class="fusion-price-rating" style="padding-top:20px;padding-bottom:3px;">
 
 
                         <span class="price"><span style="font-size:18px;" class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0"><span style="font-size:18px;" class="woocommerce-Price-currencySymbol"></span>{{item.Price}}</span></span>
                         <span class="price"><span style="font-size:18px;    text-decoration: line-through;margin-right:30px;" class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0"><span style="font-size:18px;" class="woocommerce-Price-currencySymbol"></span>{{item.Price}}</span></span>
                         <span class="price"><span style="font-size:18px;" class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0"><span style="font-size:18px;" class="woocommerce-Price-currencySymbol"></span>{{item.SallePrice}}</span></span>
-                      </div>
+                      </div> -->
 
                     </div>
                     <div class="product-buttons">
                       <div class="product-buttons-container clearfix">
-                        <img class="icon-cart" src="/assets/images/icon-cart.png" />
-                        <span style="cursor:pointer" (click)="AddCart(item)">Add to cart</span>
-                        <img class="icon-details" src="/assets/images/icon-details2.png" />
-                        <span style="cursor:pointer" (click)="Detais(item)">Details</span>
+                        <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
+                        <button (click)="Detais(item)" class="buy-btn" >BUY</button>
+                        <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
+                        <!-- <span style="cursor:pointer" (click)="Detais(item)">Details</span> -->
                       </div>
                     </div>
+
                   </div>
                 </li>
               </div>
             </ul>
+            <pagination-controls class="paginator"  previousLabel=" " nextLabel=" " (pageChange)="p = $event" maxSize="5"></pagination-controls>
+            <br/><br/><br/>
           </div>
         </div>
       </div>

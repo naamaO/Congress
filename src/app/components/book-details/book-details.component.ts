@@ -19,8 +19,11 @@ export class BookDetailsComponent implements OnInit {
   public Id: number;
   private sub: any;
   public DetailsBook: book;
+  public num: number;
+
   constructor(public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
 
   ngOnInit() {
@@ -33,6 +36,9 @@ export class BookDetailsComponent implements OnInit {
       // alert(this.t + "uu");
     });
     });
+  }
+  NavigCart() {
+    this.routers.navigateByUrl("/ShoppingCart");
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

@@ -20,8 +20,11 @@ export class BookDetailsHebrewComponent implements OnInit {
   public Id: number;
   private sub: any;
   public DetailsBook: book;
+  public num: number;
+
   constructor(public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
 
   ngOnInit() {
@@ -36,6 +39,9 @@ export class BookDetailsHebrewComponent implements OnInit {
         // alert(this.t + "uu");
       });
     });
+  }
+  NavigCart() {
+    this.routers.navigateByUrl("/ShoppingCart");
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -59,6 +65,7 @@ export class BookDetailsHebrewComponent implements OnInit {
   
     if (this.UserNameLogin != "") {
       this.serverService.enterItemToCart(this.item2);
+      this.serverService.getNumProduct().subscribe(val => this.num = val);
     }
     else {
       this.routers.navigateByUrl("/");

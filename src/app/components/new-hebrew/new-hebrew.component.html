@@ -1,104 +1,128 @@
+
 <!--<div class="center">
   <form class="center-form">-->
-<div style="position:relative;">
+<!-- <div style="position:relative;">
   <div style="background-color:#fff;height:100%;width:100%;">
-    <div style="width:100%;border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;">
-      <div style="margin-right:40%;top:60px;position:fixed;">
+   --> <div style="width:100%;height:35px;background-color: white;z-index: 1000;top: 0;">
+      <div style="margin-left:80%;top:60px;position:fixed;"> 
         <span class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
         <img style="width:80px;height:40px; cursor:pointer;" src="/assets/images/icon-cart.png" (click)="NavigCart()" />
       </div>
-      <div class="top-line">
+      <!-- <div class="top-line">
         <img class="logo-img" src="/assets/images/logo.png" style="position:fixed; top:20px;" />
-      </div>
+      </div> 
     </div>
-  </div>
-</div>
-<div class="containerDivGeneric"style="margin-top: 100px;">
+  </div>-->
+</div> 
+<!-- <div class="containerDivGeneric"style="margin-top: 100px;">
   <div class="row">
     <img style="width:100%;" src="/assets/images/books.PNG" />
   </div>
-</div>
-<br /><br />
-<div class="col-md-8 " style="margin:auto;text-align: center;">
+</div>-->
+<br /><br /> 
+<div class="col-md-8" style="margin:auto;">
   <div>
     <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
     <span class="span"> בשתי סדרות שונות</span><br />
     <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
-    <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br />
+    <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br /><br /><br />
   </div>
-  <div class="row width100">
+  <div class="row width100" style="text-align:center"></div>
 
     <div class="col-md-4 floatRight ">
 
       <img style="margin-left:7%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
       <img style="margin-left:7%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue1==true" />
       <br />
-      <label>מקורות התרבות היהודית</label>
+      <label class="label"  (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות היהודית</label>
     </div>
     <div class="col-md-4 floatRight ">
       <img style="margin-left:8%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
       <img style="margin-left:8%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
       <br />
-      <label>לימודי יהדות</label>
+      <label class="label" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">לימודי יהדות</label>
     </div>
     <div class="col-md-4 floatRight ">
       <img style="margin-left:2%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
       <img style="margin-left:2%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue3==true" />
       <br />
-      <label>אשכולות</label>
+      <label class="label" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">אשכולות</label>
     </div>
   </div>
 
-</div>
 <div class="clear"></div>
 <div class="container">
-  <div class="row">
-    <div class="border-button margin-b-30 col-md-20"></div>
-
+  <div class="row" style="margin:auto">
+    <div class="border-buttom margin-b-30 col-md-20"></div>
   </div>
 </div>
 
+<br /><br /> 
+<div class="col-md-8 " style="margin:auto;">
+  <div class="category-paragraph">
+    <div *ngIf="ShowBlue1==true" class="category-paragraph">
+    <span class="span">"מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות.</span><br />
+    <span class="span"> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank"> Jstor.</a></span><br />
+    <span class="span"> <a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור </a> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא .</span><br /><br /><br />
+   </div>
+   <div *ngIf="ShowBlue2==true" class="category-paragraph">
+    <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
+    <span class="span">קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי.</span><br /><br /><br />
+   </div>
+   <div *ngIf="ShowBlue3==true" class="category-paragraph">
+    <span class="span">סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג.</span><br /><br /><br />
+   </div>
+  </div>
+</div>
 <div class="col-md-10 marginAuto">
   <ul class="products clearfix products-4" style="padding-right:5px;">
-    <div *ngFor="let item of DB " class="col-md-4 floatRight" style="height:720px;">
+    <div *ngFor="let item of DB | paginate: { itemsPerPage: 5, currentPage: p , totalItems: DB.length}  " class="col-md-4 floatRight" style="height:720px;">
 
       <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;">
-        <div class="border-book featured-image" style="height: 390px; text-align: center; display: flex;align-items: center;justify-content: center;">
-          <img (click)="Detais(item)" style="margin:auto" width="250" height="300" src={{item.Image}} class="attachment-shop_catalog size-shop_catalog wp-post-image" sizes="(max-width: 500px) 100vw, 500px"> <div class="cart-loading"><i class="fusion-icon-spinner"></i></div>
+        <div class="border-book featured-image" style="height: 404px;width:296px; color:#85a6b7;text-align: center; display: flex;align-items: center;justify-content: center;">
+          <img (click)="Detais(item)" 
+           style="margin:8px; width:279px; height:387px" src={{item.Image}}
+            class="attachment-shop_catalog size-shop_catalog wp-post-image"
+           sizes="(max-width: 500px) 100vw, 500px"> 
+           <div class="cart-loading">
+             <i class="fusion-icon-spinner" ></i></div>
         </div>
-        <div class="fusion-product-content">
+        <div class="fusion-product-content" style="width: 296px; margin: auto;">
           <div class="product-details">
-            <div class="product-details-container" style=" height:130px;font-size:17px;float:right;text-align:right;">
+            <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:17px;float:right;text-align:right;">
               <span class="product-title" data-fontsize="16" data-lineheight="30" (click)="Detais(item)">
                 <a style="font-size:20px;">
                   {{item.Name}}
                 </a>
               </span>
               <br /><br /><br />
-              <div>
+              <!-- <div>
                 <span style="font-size:18px;" *ngIf="item.SallePrice==0">{{item.Price}}</span>
                 <span style="font-size:18px;" *ngIf="item.SallePrice!=0">{{item.SallePrice}}</span>
 
                 <span style="font-size:18px;text-decoration: line-through;margin-left:30px;" *ngIf="item.SallePrice!=0">{{item.Price}}</span>
-              </div>
+              </div> -->
               <br />
-              <div style="direction:rtl; float:right;">
-                <img class="icon-cart" src="/assets/images/icon-cart.png" />
-                <span style="cursor:pointer" (click)="AddCart(item)">הוספה לסל</span>
-                <img class="icon-details" src="/assets/images/icon-details2.png" />
-                <span style="cursor:pointer" (click)="Detais(item)">פרטים </span>
-              </div>
+              <div class="product-buttons">
+                <div class="product-buttons-container clearfix">
+              <!-- <div style="direction:rtl; float:right;"> -->
+                <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
+                <button  (click)="Detais(item)" class="buy-btn">קנה</button>
+                <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
+                <!-- <span style="cursor:pointer" (click)="Detais(item)">  פרטים </span> -->
+              <!-- </div>-->
+            </div> 
+             </div>
+
+          <!-- <br /><br /><br /> -->
             </div>
           </div>
-
-          <br /><br /><br />
-
         </div>
       </li>
     </div>
-
   </ul>
-
+  <pagination-controls class="paginator"   previousLabel=" " nextLabel=" "(pageChange)="p = $event" maxSize="5"></pagination-controls>
+  <br/><br/><br/>
 </div>
 
 

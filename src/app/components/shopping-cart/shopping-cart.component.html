@@ -1,28 +1,40 @@
 
-<div style="background-color:#fff;height:150px;width:100%;">
+<!-- <div style="background-color:#fff;height:150px;width:100%;">
   <div style="width:100%;border-bottom:1px solid;position:fixed;height:150px;background-color: white;z-index: 1000;top: 0;">
     <div class="top-line">
       <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
     </div>
   </div>
-</div>
+</div> -->
 
 
 
 
 
-<div class="top-line">
+<!-- <div class="top-line">
   <img class="book-jornal" src="/assets/images/books.PNG" />
+</div> -->
+<div style="width:100%;height:35px;background-color: white;z-index: 1000;top: 0;">
+  <div style="margin-left:80%;top:60px;position:fixed;"> 
+    <span class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
+    <img style="width:80px;height:40px; cursor:pointer;" src="/assets/images/icon-cart.png" (click)="NavigCart()" />
+  </div>
 </div>
-<br /><br />
 
+<br /><br />
+<div class="col-md-8" style="margin:auto;">
+  <div>
+    <span class="span" class="shopping-cart-title"> {{num}} books in your cart</span><br /><br />
+  </div>
+</div>
 <div>
-  <div class="header-table  " style="width:100%;  padding-left: 100px;margin: auto; color:black;">
+  <div class="header-table" style="width:100%;  padding-left: 100px;margin: auto; color:black;">
     <div class="col-md-8 marginAuto ">
-      <span class="col-md-3  floatLeft">Product</span>
-      <span class="col-md-3  floatLeft">Price</span>
-      <span class="col-md-3  floatLeft">Quantity</span>
-      <span class="col-md-3  floatLeft">Total</span>
+      <span class="col-md-3  floatLeft table-title" style="padding-left:0">Product</span>
+      <!-- <span class="col-md-3  floatLeft table-title">Name</span> -->
+      <span class="col-md-3  floatLeft table-title">Price</span>
+      <span class="col-md-3  floatLeft table-title">Quantity</span>
+      <span class="col-md-3  floatLeft table-title">Total</span>
     </div>
   </div>
 </div>
@@ -31,23 +43,23 @@
   <div class="col-md-8 marginAuto">
     <div *ngFor="let item of DB" style="position:relative; ">
       <div class="row" style="margin-bottom:2%;">
-        <div class="col-md-3 floatLeft">
-          <img src="{{item.ImageBook}}" style="width:20%;height:100px;padding-top:5%;float:left;" />
-          <span style="padding: 20px;width:80%;padding-right: 30px; text-align:left;float:left;">{{item.NameBook}} </span>
+        <div class="col-md-3 floatLeft" style="padding-left: 97px;">
+          <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:5%;float:left;" />
+          <span style="position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; padding: 20px;width:80%;padding-right: 30px; text-align:left;float:left;">{{item.NameBook}} </span>
         </div>
-        <div class="col-md-3 floatLeft" style="    padding-left: 9%;">
-          <span *ngIf="item.SallePrice==0">{{item.PriceBook}} </span>
+        <div class="col-md-3 floatLeft" style="padding-left: 9%;">
+          <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.PriceBook}} </span>
 
-          <span *ngIf="item.SallePrice!=0">{{item.SallePrice}} </span>
+          <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.SallePrice}} </span>
         </div>
-        <div class="col-md-3 floatLeft" style="    padding-left: 5%;">
-          <span><label style="padding: 10px;border: 0.5px solid black;" (click)="deleteQuantity(item)">-</label> </span>
-          <span><label style="padding: 10px;border: 0.5px solid black;">{{item.Quantity}}</label> </span>
-          <span><label style="padding: 10px;border: 0.5px solid black;" (click)="AddQuantity(item)">+</label> </span>
+        <div class="col-md-3 floatLeft" style="padding-left: 5%;">
+          <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;" (click)="deleteQuantity(item)">-</label> </span>
+          <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;">{{item.Quantity}}</label> </span>
+          <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;" (click)="AddQuantity(item)">+</label> </span>
         </div>
-        <div class="col-md-3 floatLeft" style="    padding-left: 5%;">
+        <div class="col-md-3 floatLeft" style="padding-left: 5%;">
 
-          <span>{{item.Total}}</span>
+          <span style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.Total}}</span>
           <!--<span class="col-md-2 margin-t-9 ng-binding padd" style="padding: 20px;padding-left: 30px;padding-right: 30px;width:200px;text-align:center;"><button (click)="AddQuantity(item)">Add Quantity</button></span>-->
         </div>
 
@@ -62,17 +74,26 @@
 <br /><br />
 <!--<div class="clear"></div>-->
 <div class="col-md-8 " style="margin:auto;text-align:center;">
-
-  <label>Total:</label><input type="number" [(ngModel)]="Total" />
+ <div class="col-md-6" style="margin:auto;margin-right: 0;"> 
+      <span class="span" class="cart-total-title">Cart totals</span>
+      <br /><br />
+  <div class="col-md-12 input-total" style="padding: 12px;">
+  <label class="col-md-3" style="padding-left: 0; text-align: start;float:left ;color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;padding-left: 0;">Subtotal: </label>
+  <label  class="col-md-3 label-cart-total" style="color:black"> 15</label>
+  <br /><br />
+  <label class="col-md-3" style="padding-left: 0; text-align: start;float:left;color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;padding-left: 0;">Total: </label>
+  <label class="col-md-3 label-cart-total" style="color:#026fa7">15</label>
+  </div>
+  <br /><br />
+ <div class="col-md-12 " style="float: left;">
+  <!-- <button (click)="SendToNew()" class=" col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left;">Back </button> -->
+  <button (click)="SendToTranzila()" class="col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: right; margin-right: 45px;width: 150px;">checkout</button>
+</div>
+ </div> 
+ 
 </div>
 <div class="clear"></div>
 <br /><br />
-<div class="col-md-8 " style="margin:auto;text-align:center">
 
 
-
-  <button (click)="SendToNew()" class="fill-btn-blue" style="margin-right:5%;">Back </button>
-
-  <button (click)="SendToTranzila()" class="fill-btn-blue">pay</button>
-</div>
 

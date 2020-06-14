@@ -74,10 +74,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[1]" ngDefaultControl  >
               <label class="lable-th">Division </label>
-               <select matNativeControl name="{{filterSelectObj[1].columnProp}}" [(ngModel)]="filterSelectObj[1].modelValue"
-                 (change)="filterChange(filterSelectObj[1],$event)">
+               <select #SelectDiv matNativeControl name="{{filterSelectObj[1].columnProp}}" [(ngModel)]="filterSelectObj[1].modelValue"
+                 (change)="filterChange(filterSelectObj[1],$event)" (click)="ChangecolorBlueDiv()">
                  <option value=""  mat-header-cell>Division</option>
-                 <option  mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[1].options">{{item}}</option>
+                 <option  mat-header-cell [value]="" *ngFor="let item of filterSelectObj[1].options">{{item}}</option>
                </select>
              </mat-form-field>
           </th>

@@ -27,6 +27,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
+  @ViewChild('SelectDiv') SelectDiv: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -232,8 +233,12 @@ export class JudgesComponent  implements OnInit  {
     let filterOfValue = {}
     this.filterOfValue[filter.columnProp] = event.target.value.trim().toLowerCase()
     this.dataSource.filter = JSON.stringify(this.filterOfValue)
-  }
+    this.SelectDiv.nativeElement.style.color = "#E8E8E8 ";
 
+  }
+  ChangecolorBlueDiv() {
+    this.SelectDiv.nativeElement.style.color = "#167c9f ";
+  }
   // Custom filter method fot Angular Material Datatable
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

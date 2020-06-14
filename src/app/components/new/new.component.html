@@ -82,23 +82,25 @@
               <div *ngFor="let item of DB | paginate: { itemsPerPage: 5, currentPage: p , totalItems: DB.length} " class="col-md-4 floatLeft" style="height:770px;" >
 
                 <li>
-                  <div class="container" >
+                  <div class="container">
                     <div class="background" style="text-align:center; align-items: center">
                       <div style="margin:auto;">-</div>
                     </div>
-                    <div class="border-book featured-image content" 
+                    <!--<div class=" featured-image content"
+  style="position:absolute;margin-left:15%; height: 404px;width:296px; background-color:black; text-align: center; display: flex;align-items: center;justify-content: center;"></div>-->
+                   <div class="border-book featured-image content"
                     style="height: 404px;width:296px; color:#85a6b7; text-align: center; display: flex;align-items: center;justify-content: center;">
                     <div class="view overlay">
-                    <img (click)="Detais(item)" (mouseenter)="ShowColor=true"
-                       style="margin:8px; display:block; width:279px; height:387px;"
-                        color="#85a6b7" src={{item.Image}} 
-                        class="attachment-shop_catalog size-shop_catalog wp-post-image im" 
-                        sizes="(max-width: 500px) 100vw, 500px">
-                       <div class="cart-loading"> 
-                         <i class="fusion-icon-spinner"></i>
-                        </div>
+                      <img (click)="Detais(item)" (mouseenter)="ShowColor=true"
+                           style="margin:8px; display:block; width:279px; height:387px;"
+                           color="#85a6b7" src={{item.Image}}
+                           class="attachment-shop_catalog size-shop_catalog wp-post-image im"
+                           sizes="(max-width: 500px) 100vw, 500px">
+                      <div class="cart-loading">
+                        <i class="fusion-icon-spinner"></i>
                       </div>
                     </div>
+                  </div>
                     
                   </div>
                   <div class="fusion-product-content" style="width: 296px; margin: auto;">

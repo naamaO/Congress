@@ -45,13 +45,13 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid #27b5e5;
   left: -8px;
-  top: 20%;
+  top: 5%;
   color: pink;
 }
 
 .tooltiptextSmall {
   width: 200px !important;
-  height: 60px !important;
+  height: 130px !important;
 }
 
 .tooltipSmall:hover .tooltiptextSmall {
@@ -161,11 +161,11 @@ select {
 
 
 
-.colorFocus:active, .colorFocus:focus {
+
+
+.colorFocusCode {
   color: #27b5e5;
 }
-
-
 .divERR:after {
   top: 100%;
   content: " ";

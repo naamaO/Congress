@@ -19,7 +19,7 @@ import { HostListener } from "@angular/core";
 })
 
 export class NewComponent implements OnInit {
- 
+  public NotOver: boolean = true;
   public screenHeight: number;
   public screenWidth: number;
   public UserNameLogin: string;

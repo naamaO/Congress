@@ -8,7 +8,54 @@
   font-size: medium;
   margin-top: 20px;
 }
+.btn-outline-secondary:hover{
+  color:black;
+  background-color:pink;
+}
+.tooltip {
+  position: relative;
+  display: contents;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
 
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: wheat;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+
+  }
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid black;
+  left: -8px;
+  top: 7px;
+  color:pink;
+}
+.tooltiptext{
+  width:400px !important;
+  height:200px !important;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+/*.tooltip-inner {
+  max-width: 350px;
+  width: 350px;
+}*/
 .input {
   width: 20%;
   height: 40px;

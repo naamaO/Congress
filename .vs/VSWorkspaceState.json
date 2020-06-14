@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\components",
+    "\\src\\app\\components\\book-details",
     "\\src\\app\\components\\congress-registration-one",
     "\\src\\app\\components\\congress-registration-single",
     "\\src\\app\\components\\first-page-english",
-    "\\src\\app\\components\\invite-members",
-    "\\src\\app\\components\\invite-members-hebrew",
-    "\\src\\app\\components\\registration-one-english"
+    "\\src\\app\\components\\new",
+    "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\components\\first-page-english\\first-page-english.component.ts",
+  "SelectedNode": "\\src\\app\\components\\new\\new.component.css",
   "PreviewInSolutionExplorer": false
 }

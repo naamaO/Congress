@@ -50,7 +50,7 @@ import { Thank3Component } from './components/thank3/thank3.component';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { Observable } from 'rxjs/Observable';
 import {
-  MatFormFieldModule, MatAutocompleteModule,
+  MatFormFieldModule, MatAutocompleteModule,MatDividerModule,MatCardModule,
     MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatExpansionModule,
   MatSortModule, MatTableModule, MatIconModule, MatSelectModule, MatDatepickerModule, NativeDateModule, MAT_DATE_FORMATS, MatPaginatorIntl
 } from '@angular/material';
@@ -106,6 +106,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatDividerModule,
+    MatCardModule,
     NgxMatSelectSearchModule,
     MatIconModule,
     MatInputModule,

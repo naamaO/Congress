@@ -12,8 +12,6 @@ import { __await } from 'tslib';
 import { shoppingCart } from 'src/classes/shoppingCart';
 import { group } from '@angular/animations';
 import { HostListener } from "@angular/core";
-import * as $ from 'jquery';
-
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -21,7 +19,7 @@ import * as $ from 'jquery';
 })
 
 export class NewComponent implements OnInit {
-  public NotOver: boolean = true;
+ 
   public screenHeight: number;
   public screenWidth: number;
   public UserNameLogin: string;
@@ -137,7 +135,7 @@ export class NewComponent implements OnInit {
   SendToCart() {
     this.router.navigateByUrl("/ShoppingCart");
   }
-  Detais(item: book) {
+  Details(item: book) {
    // this.ShowDetails = !this.ShowDetails;
     //this.IdDetails = item.Id;
     //this.serverService.Detais(item.Id).subscribe((events) => {

@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-invite-members',
   templateUrl: './invite-members.component.html',
@@ -19,6 +20,26 @@ import { MatPaginator } from '@angular/material/paginator';
 export class InviteMembersComponent implements OnInit {
   @ViewChild("testInput") testInput;
   @ViewChild('myModal') openModal: ElementRef;
+  @ViewChild('headerHebrew') headerHebrew: ElementRef;
+  @ViewChild('headerEnglish') headerEnglish: ElementRef;
+  @ViewChild('headerDivision') headerDivision: ElementRef;
+  @ViewChild('headerSubDiv') headerSubDiv: ElementRef;
+  @ViewChild('headerAbs') headerAbs: ElementRef;
+  @ViewChild('headerT1') headerT1: ElementRef;
+  @ViewChild('headerT2') headerT2: ElementRef;
+  @ViewChild('headerT3') headerT3: ElementRef;
+  @ViewChild('headerT4') headerT4: ElementRef;
+  @ViewChild('headerTC') headerTC: ElementRef;
+  @ViewChild('headerN1') headerN1: ElementRef;
+  @ViewChild('headerN2') headerN2: ElementRef;
+  @ViewChild('headerN3') headerN3: ElementRef;
+  @ViewChild('headerN4') headerN4: ElementRef;
+  @ViewChild('headerNC') headerNC: ElementRef;
+  @ViewChild('headerE1') headerE1: ElementRef;
+  @ViewChild('headerE2') headerE2: ElementRef;
+  @ViewChild('headerE3') headerE3: ElementRef;
+  @ViewChild('headerE4') headerE4: ElementRef;
+  @ViewChild('headerEC') headerEC: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -74,6 +95,9 @@ export class InviteMembersComponent implements OnInit {
     this.testInput.nativeElement.focus();
   }
   ngOnInit() {
+    $("input").focus(function () {
+      $("header").css("color", "#27b5e5").fadeOut(2000);
+    });
   }
   selectDivision(div: string) {
     this.serverService.SubDivisionEnglish(div).subscribe((events) => {
@@ -154,6 +178,112 @@ export class InviteMembersComponent implements OnInit {
       this.showErrEmpty = true;
     }
   }
-
+  focusHebrew() {
+    this.headerHebrew.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusHebrew() {
+    this.headerHebrew.nativeElement.style.color = "gray";
+  } focusAbs() {
+    this.headerAbs.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusAbs() {
+    this.headerAbs.nativeElement.style.color = "gray";
+  }
+  focusEnglish() {
+    this.headerEnglish.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusEnglish() {
+    this.headerEnglish.nativeElement.style.color = "gray";
+  }
+  focusDivision() {
+    this.headerDivision.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusDivision() {
+    this.headerDivision.nativeElement.style.color = "gray";
+  }
+  focusSubDiv() {
+    this.headerSubDiv.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusSubDiv() {
+    this.headerSubDiv.nativeElement.style.color = "gray";
+  }
+  focusNC() {
+    this.headerNC.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusNC() {
+    this.headerNC.nativeElement.style.color = "gray";
+  } focusN4() {
+    this.headerN4.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusN4() {
+    this.headerN4.nativeElement.style.color = "gray";
+  } focusN3() {
+    this.headerN3.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusN3() {
+    this.headerN3.nativeElement.style.color = "gray";
+  } focusN2() {
+    this.headerN2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusN2() {
+    this.headerN2.nativeElement.style.color = "gray";
+  } focusN1() {
+    this.headerN1.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusN1() {
+    this.headerN1.nativeElement.style.color = "gray";
+  } focusEC() {
+    this.headerEC.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusEC() {
+    this.headerEC.nativeElement.style.color = "gray";
+  } focusE4() {
+    this.headerE4.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusE4() {
+    this.headerE4.nativeElement.style.color = "gray";
+  } focusE3() {
+    this.headerE3.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusE3() {
+    this.headerE3.nativeElement.style.color = "gray";
+  } focusE2() {
+    this.headerE2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusE2() {
+    this.headerE2.nativeElement.style.color = "gray";
+  } focusE1() {
+    this.headerE1.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusE1() {
+    this.headerE1.nativeElement.style.color = "gray";
+  }
+  focusT2() {
+    this.headerT2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusT2() {
+    this.headerT2.nativeElement.style.color = "gray";
+  } focusTC() {
+    this.headerTC.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusTC() {
+    this.headerTC.nativeElement.style.color = "gray";
+  }
+  focusT1() {
+    this.headerT1.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusT1() {
+    this.headerT1.nativeElement.style.color = "gray";
+  } focusT4() {
+    this.headerT4.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusT4() {
+    this.headerT4.nativeElement.style.color = "gray";
+  } focusT3() {
+    this.headerT3.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusT3() {
+    this.headerT3.nativeElement.style.color = "gray";
+  }
 }
 

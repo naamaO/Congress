@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -13,11 +13,14 @@ import {MatPaginatorIntl} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import  $ from 'jquery';
 
 import 'datatables.net';
 import 'datatables.net-bs4';
 import { forEach } from '@angular/router/src/utils/collection';
-
+//declare var $: JQueryStatic;
+//import * as $ from 'jquery';
+//<script type="text/javascript" src = "assets/js/jquery-2.1.1.min.js" > </script>
 
 @Component({
     selector: 'app-judges',
@@ -27,9 +30,12 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
+  @ViewChild('SelectDiv') SelectDiv: ElementRef;
+  //@ViewChild('edit') edit: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  public Dark: boolean = false;
+  over: boolean[];
     public myControl = new FormControl();
     public options: string[] = ['One', 'Two', 'Three'];
     public filteredOptions: Observable<string[]>;
@@ -75,11 +81,14 @@ export class JudgesComponent  implements OnInit  {
     p: number = 1;
     size = 10;
     pageIndex = 1;
-    data: any;
+  data: any;
+  public imgSrc: string = "/assets/images/Edit.jpg";
+
     constructor(public router: Router, private serverService: ServerService,
          private http: HttpClient, private MatPaginatorIntl:MatPaginatorIntl) {
-
+      //alert("rr");
  // Object to create Filter for
+
       this.filterSelectObj = [
         {
           name: 'UserName',
@@ -114,6 +123,7 @@ export class JudgesComponent  implements OnInit  {
 
     }
 
+ 
     pageChanged(event:any){
         // this.page=event;
         this.pageIndex=event;
@@ -124,7 +134,8 @@ export class JudgesComponent  implements OnInit  {
       }
       
 
-    ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
+ 
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.dataSource.paginator._intl.itemsPerPageLabel ='Displaynig';
@@ -196,15 +207,17 @@ export class JudgesComponent  implements OnInit  {
                 break;
         }
     }
-    ngOnInit() {
-
+  ngOnInit() {
+   // alert("ss");
+      
         this.myControl.valueChanges.subscribe(newValue => {
             this.filterValues(newValue);
         })
         this.serverService.DivisionEnglish().subscribe((events) => {
             this.ArrDivision = events;
         });
-        this.serverService.getAll_W_Proposals().subscribe(val => {
+    this.serverService.getAll_W_Proposals().subscribe(val => {
+      this.over = new Array(val.length);
             this.dataSource.data = val as Judges[];
             this.dataSourcFilter.data = val as Judges[];
             this.data = this.dataSource.data;
@@ -227,13 +240,29 @@ export class JudgesComponent  implements OnInit  {
     });
     return uniqChk;
   }
-  
+  imageDark(element) {
+    //alert("hover");
+   // element.setAttribute('src', '/assets/images/EditHover.jpg');
+    this.imgSrc = "/assets/images/EditHover.jpg";
+   // this.edit.nativeElement.src = "/assets/images/EditHover.jpg"
+  }
+  imageNormal(){
+    this.imgSrc = "/assets/images/Edit.jpg";
+  }
   filterChange(filter, event) {
+    //this.SelectDiv.nativeElement.style.color = "#E8E8E8";
+
     let filterOfValue = {}
     this.filterOfValue[filter.columnProp] = event.target.value.trim().toLowerCase()
-    this.dataSource.filter = JSON.stringify(this.filterOfValue)
+    this.dataSource.filter = JSON.stringify(this.filterOfValue);
+    // this.SelectDiv.nativeElement.se
+    //document.getElementsByClassName
+   // document.getElementById["SelectDiv"].
   }
-
+   
+  ChangecolorBlueDiv() {
+   // this.SelectDiv.nativeElement.style.color = "#167c9f";
+  }
   // Custom filter method fot Angular Material Datatable
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

@@ -12,6 +12,8 @@ import { __await } from 'tslib';
 import { shoppingCart } from 'src/classes/shoppingCart';
 import { group } from '@angular/animations';
 import { HostListener } from "@angular/core";
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',

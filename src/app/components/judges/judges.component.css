@@ -9,6 +9,11 @@
   margin: 10px;
   margin-right:20px;
   text-align:center;
+}.di2:hover {
+  width: 100px;
+  margin: 10px;
+  margin-right:20px;
+  text-align:center;
 }
 .big {
   /*height: 20%;*/
@@ -186,9 +191,23 @@ color: #167c9f !important;
 font-weight: bold !important;
 margin-bottom: 0rem;
 }
+.selects::selection {
+  color: red;
+  background: yellow;
+}
+.selects::-moz-selection { /* Cosde for Firefox */
+  color: red;
+  background: yellow;
+}
+#SelectDiv .mat-form-field-type-mat-native-select .mat-input-element{
+  color:green;
+}
+.bold{
+  font-weight:bold;
+}
 
 .s-paginator {
-/* float: left; */
+  /* float: left; */
 }
 
 .pagination-controls{

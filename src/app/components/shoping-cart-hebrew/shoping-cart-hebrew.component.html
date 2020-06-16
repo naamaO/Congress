@@ -20,61 +20,99 @@
 </div> -->
 <div class="body">
 
-<div style="width:100%;height:35px;background-color: white;z-index: 1000;top: 0;">
-  <div style="margin-left:80%;top:60px;position:fixed;"> 
-    <span class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
-    <img style="width:80px;height:40px; cursor:pointer;" src="/assets/images/icon-cart.png" (click)="NavigCart()" />
+  <div style="background-color:#fff;height:158px;width:100%;">
+    <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
+      <div class="top-line">
+        <div style="z-index: 1000;top: 0;">
+          <div style="margin-left:64%;top:60px;position:fixed;"> 
+            <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
+            <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
+            <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
+        </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<br /><br />
 <div class="col-md-8" style="margin:auto;">
   <div>
     <span class="span" class="shopping-cart-title" style="direction: rtl;float: right;">  {{num}} ספרים בסל</span><br /><br />
   </div>
 </div>
+<br /><br />
 <div>
   <div class="header-table" style="width:100%;  padding-left: 100px;margin: auto; color:black;">
-    <div class="col-md-8 marginAuto ">
+    <div class="col-md-10 marginAuto"  style="right: 43px;">
 
       <span class="col-md-3  floatRight table-title" style="text-align: end;">שם</span>
       <span class="col-md-3  floatRight table-title">מחיר</span>
       <span class="col-md-3  floatRight table-title">כמות</span>
-      <span class="col-md-3  floatRight table-title">סה"כ</span>
+      <span class="col-md-3  floatRight table-title" style="padding: 0;">סה"כ</span>
+      <span class="col-md-3  floatRight table-title"></span>
     </div>
   </div>
 </div>
+<br /><br />
+<div class="container">
+  <div class="row" style="margin: auto;height: 0.01px;">
+    <div class="col-md-10 border-buttom margin-b-30" style="margin-right: 13%;flex: 0 0 79.333333%;max-width: 79.333333%;"></div>
+  </div>
+</div> 
+<br /><br />
 <div class="clear"></div>
 
 <div style="width: 100%;margin: auto;">
-  <div class="col-md-8 marginAuto">
+  <div class="col-md-12 marginAuto">
 
     <div *ngFor="let item of DB" style="position:relative; ">
-      <div class="clear"></div>
-
       <div class="row" style="margin-bottom:2%;display:block">
-        <div class="col-md-3 floatRight" >
+        <div class="col-md-3 floatRight" style="margin-right: 96px; " >
           <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:5%; " />
-          <span style="position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal;padding: 20px;width:80%;padding-right: 30px; text-align:right;float:left;">{{item.NameBook}} </span>
+          <span style="position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal;padding: 20px;padding-right: 30px; text-align:right;float:left;">{{item.NameBook}} </span>
         </div>
-        <div class="col-md-3 floatRight" style="text-align:center;padding-right:5%;">
+        <div class="col-md-3 floatRight" style="text-align:center;">
 
-          <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.PriceBook}} </span>
+          <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.PriceBook}} </span>
 
-          <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.SallePrice}} </span>
+          <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.SallePrice}} </span>
         </div>
-        <div class="col-md-3 floatRight" style="text-align:center">
+        <div class="col-md-3 floatRight" style="text-align:center;padding-left: 163px;padding-right: 0;">
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;" (click)="deleteQuantity(item)">-</label> </span>
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;">{{item.Quantity}}</label> </span>
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid gray;padding: 10px;" (click)="AddQuantity(item)">+</label> </span>
         </div>
-        <div class="col-md-3 floatRight" style="text-align:center">
+        <div class="col-md-1 floatRight" style="text-align:center;    padding-left: 162px;">
 
-          <span style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">{{item.Total}}</span>
+          <span style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
         </div>
+        <div class="col-md-1 floatRight" style="text-align:center;top: -23px;">
+         <div style="cursor:pointer;position:absolute;top:0;" (click)="RemoveQuantity(item)">
+          <span>X</span> 
+         </div>
+        </div>
+        
+        <!-- <div class="container">
+          <div class="row" style="margin: auto;height: 0.01px;">
+            <div class="col-md-10 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+          </div>
+        </div>   -->
       </div>
-      <div style="cursor:pointer;position:absolute;left:-10%;top:0;" (click)="RemoveQuantity(item)"><span>X</span></div>
-
-    </div>
+      <!-- <div class="container">
+          <div class="row" style="margin: auto;height: 0.01px;">
+            <div class="col-md-11 border-buttom margin-b-30" style="margin-left: 4%;"></div>
+          </div>
+        </div>  -->
+        <div class="container">
+          <div class="row" style="margin: auto;height: 0.01px;">
+            <div class="col-md-10 border-buttom margin-b-30" style="margin-top: -42px;margin-right: 12%;"></div>
+          </div>
+        </div> 
+      <!-- <div style="cursor:pointer;position:absolute;left:-10%;top:0;" (click)="RemoveQuantity(item)"><span>X</span></div> -->
+       <!-- <div class="container">
+        <div class="row" style="margin: auto;height: 0.01px;">
+          <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+        </div>
+      </div>    -->
+     </div>
     <!--<span class="col-md-2 margin-t-9 ng-binding padd" style="padding: 20px;padding-left: 30px;padding-right: 30px;width:200px;text-align:center;"><button (click)="AddQuantity(item)">Add Quantity</button></span>-->
     <!--<span class="col-md-2 margin-t-9 ng-binding padd column" style="padding: 20px;padding-left: 60px;padding-right: 30px;width:200px;text-align:center;cursor:pointer" (click)="RemoveQuantity(item)">X</span>-->
   </div>
@@ -88,25 +126,50 @@
     <label style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;">
      :סה"כ  </label>
 </div> -->
-
-<div class="col-md-8 " style="margin:auto;text-align:center;">
-  <div class="col-md-6" style="margin:auto;margin-right: 0;"> 
-       <span class="span" class="cart-total-title">Cart totals</span>
+<!-- <div class="container">
+  <div class="row" style="margin: auto;height: 0.01px;">
+    <div class="col-md-10 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+  </div>
+</div> -->
+<div class="row" style="margin:auto;text-align:center;">
+  <div class="col-md-8" style="float: right;margin-right: 0px;margin-left: 30%;margin-bottom: 5%;"> 
+    <div class="col-md-8" style="margin:auto;margin-right: 0;"> 
+       <span class="span" class="cart-total-title">סה"כ בעגלת הקניות</span>
        <br /><br />
+      <div class="container">
+        <div class="row" style="margin: auto;height: 0.01px;">
+          <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+        </div>
+      </div>
    <div class="col-md-12 input-total" style="padding: 12px;">
    <label class="col-md-3" style="color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;">:סה"כ </label>
-   <label  class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:black"> 15</label>
+   <label  class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:black">₪{{this.Total}}</label>
    <br /><br />
+   <div class="container">
+    <div class="row" style="height: 0.01px;">
+      <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+    </div>
+  </div>
+  <br />
    <label class="col-md-3" style="color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;">:סה"כ </label>
-   <label class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:#026fa7">15</label>
+   <label class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:#026fa7">₪{{this.Total}}</label>
    </div>
    <br /><br />
+   <div class="container">
+    <div class="row" style="height: 0.01px;">
+      <div class=" border-buttom margin-b-30" style="margin-right: 2%;flex: 0 0 94.666667%; max-width: 94.666667%;"></div>
+    </div>
+  </div> 
+  <br />
   <div class="col-md-12 " style="float: left;">
    <!-- <button (click)="SendToNew()" class=" col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left;">חזרה </button> -->
-   <button (click)="SendToTranzila()" class="col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: right; margin-right: 45px;">תשלום</button>
+   <button (click)="SendToTranzila()" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left; width: 145px;">תשלום</button>
  </div>
+ <br /><br />
+
   </div> 
   
+</div>  
  </div>
 <div class="clear"></div>
 <br /><br />
@@ -116,4 +179,4 @@
 
         <button (click)="SendToTranzila()" class="fill-btn-blue checkout-btn">תשלום</button>
       </div> -->
-    </div>
+</div>

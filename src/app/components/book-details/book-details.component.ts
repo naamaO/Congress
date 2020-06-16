@@ -62,13 +62,16 @@ export class BookDetailsComponent implements OnInit {
     this.item2.UserName = this.UserNameLogin;
 
     if (this.UserNameLogin != "") {
-      this.serverService.enterItemToCart(this.item2);
+      this.serverService.enterItemToCart(this.item2).subscribe((events) => {
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+      });
     }
 
     else {
       this.routers.navigateByUrl("/");
 
-    }
+    }    
+
 
   }
 

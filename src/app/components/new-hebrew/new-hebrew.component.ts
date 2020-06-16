@@ -38,9 +38,22 @@ export class NewHebrewComponent implements OnInit {
   public ShowColor: boolean = false;
   public num: number;
   public item2: shoppingCart;
-  p: number = 1;
-
+  public p: number = 1;
+  public Total: number = 1;
+  public DBShoppingCart: shoppingCart[];
   constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.serverService.getAllDBShoppingCart().subscribe((val) => {
+      this.DBShoppingCart = val;
+        for (var i = 0; i < this.DB.length; i++) {
+          if (this.DB[i].SallePrice == 0)
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+          else
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+  
+        }
+      });
+      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+      
     this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 
@@ -125,8 +138,12 @@ export class NewHebrewComponent implements OnInit {
     this.changePlaying();
     this.changePlaying();
 
-  }  SendToCart() {
+  } 
+   SendToCart() {
     this.router.navigateByUrl("/ShoppingCartHebrew");
+  }
+  SendToTranzila() {
+     this.router.navigate(['Pay', this.Total]);
   }
   Detais(item: book) {
     // this.ShowDetails = !this.ShowDetails;

@@ -12,6 +12,7 @@ import { Judges } from '../../classes/Judges';
 import { Drafts } from 'src/classes/Drafts';
 import { CookieService } from 'angular2-cookie';
 import { Name } from 'src/classes/Name';
+import { ReturnStatement } from '@angular/compiler';
 @Injectable({
   providedIn: 'root'
 })
@@ -49,10 +50,10 @@ export class ServerService {
     return this.http.get<shoppingCart[]>(this.port + "/api/Home/getFromDBCart?LoginUserName=" + this.LoginUserName);
 
   }
-  enterItemToCart(item: shoppingCart) {
+  enterItemToCart(item: shoppingCart):any {
     this.LoginUserName = (this.getCookie('UserName'));
     //item.login = this.LoginUserName;
-    this.http.post(this.port + "/api/Home/PostToCart", item).subscribe();
+   return this.http.post(this.port + "/api/Home/PostToCart", item).subscribe();
   }
   postAddQuantity(item: shoppingCart) {
     this.http.post(this.port + "/api/Home/postAddQuantity", item).subscribe();

@@ -213,3 +213,47 @@ margin-bottom: 0rem;
 .pagination-controls{
   margin-top: -42px;
 }
+.paginator{
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.paginator  ::ng-deep .ngx-pagination li {
+  padding: 0.1875rem 0.625rem;
+background:none; 
+color: #026fa7;
+font-weight: normal;
+cursor: default;
+
+}
+.paginator  ::ng-deep .ngx-pagination a{
+  color: #026fa7 !important;
+  font-weight: normal;
+
+}
+.paginator  ::ng-deep .ngx-pagination .current{
+  padding: 0.1875rem 0.625rem;
+background:none; 
+color: #026fa7;
+font-weight: bold;
+cursor: default;
+}
+.paginator  ::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+  content: '<' !important;
+}
+.paginator  ::ng-deep .ngx-pagination .pagination-next.disabled::after {
+  content: '>' !important;
+}
+
+.paginator  ::ng-deep .ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before{ 
+  content: '<' !important;
+ }
+ .paginator  ::ng-deep.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after { 
+  content: '>' !important; }
+
+.pagination-controls{
+  margin-top: -42px;
+}

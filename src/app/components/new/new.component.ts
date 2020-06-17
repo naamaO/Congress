@@ -46,12 +46,25 @@ export class NewComponent implements OnInit {
   //playing: boolean = false;
   p: number = 1;
   changeImg: boolean;
+  public Total: number;
+  public DBShoppingCart: shoppingCart[];
+
   constructor(private ngZone: NgZone,private cd: ChangeDetectorRef,public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.getAllDBFromServer().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
     this.onResize();
     this.changeImg = false;
-
+    this.serverService.getAllDBShoppingCart().subscribe((val) => {
+      this.DBShoppingCart = val;
+        for (var i = 0; i < this.DBShoppingCart.length; i++) {
+          if (this.DBShoppingCart[i].SallePrice == 0)
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+          else
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+  
+        }
+      });
+      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
   }
   @HostListener('window:resize', ['$event'])
   onResize(event?) {
@@ -71,6 +84,9 @@ export class NewComponent implements OnInit {
   ngOnInit() {
    
   }
+  SendToTranzila() {
+    this.router.navigate(['Pay', this.Total]);
+ }
   NavigCart() {
     this.router.navigateByUrl("/ShoppingCart");
 

@@ -1,6 +1,5 @@
 import { Component, OnInit,Input,OnDestroy } from '@angular/core';
 import { book } from '../../../classes/classItem'
-//import { Router } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerService } from '../../services/server.service';
 import { HttpClient } from '@angular/common/http';
@@ -20,10 +19,23 @@ export class BookDetailsComponent implements OnInit {
   private sub: any;
   public DetailsBook: book;
   public num: number;
+  public Total: number;
+  public DBShoppingCart: shoppingCart[];
 
   constructor(public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
     this.serverService.getNumProduct().subscribe(val => this.num = val);
+    this.serverService.getAllDBShoppingCart().subscribe((val) => {
+      this.DBShoppingCart = val;
+        for (var i = 0; i < this.DBShoppingCart.length; i++) {
+          if (this.DBShoppingCart[i].SallePrice == 0)
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+          else
+            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+        }
+      });
+      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+
   }
 
   ngOnInit() {
@@ -39,11 +51,14 @@ export class BookDetailsComponent implements OnInit {
   }
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
-  }
+  } 
+   SendToTranzila() {
+    this.routers.navigate(['Pay', this.Total]);
+ }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
+ 
   getCookie(key: string) {
     return this.cookieService.get(key);
   }

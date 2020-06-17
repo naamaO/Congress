@@ -39,13 +39,14 @@ export class NewHebrewComponent implements OnInit {
   public num: number;
   public item2: shoppingCart;
   public p: number = 1;
-  public Total: number = 1;
+  public Total: number;
   public DBShoppingCart: shoppingCart[];
+
   constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
       this.DBShoppingCart = val;
-        for (var i = 0; i < this.DB.length; i++) {
-          if (this.DB[i].SallePrice == 0)
+        for (var i = 0; i < this.DBShoppingCart.length; i++) {
+          if (this.DBShoppingCart[i].SallePrice == 0)
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
           else
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
@@ -53,7 +54,7 @@ export class NewHebrewComponent implements OnInit {
         }
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-      
+
     this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 

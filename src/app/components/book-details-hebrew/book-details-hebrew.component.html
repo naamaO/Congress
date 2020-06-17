@@ -20,11 +20,57 @@
     <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
-          <div style="margin-left:64%;top:60px;position:fixed;"> 
-            <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
-            <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
-            <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
+
+          <div style="margin-left:64%;top:60px;position:fixed;">
+            <div class="tooltipSmall" >
+          <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" >{{num}}</span>
+          <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
+          <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
+          <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
+           <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+            <div>
+              <span  class="span" class="shopping-cart-title" 
+              style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
+              , sans-serif;font-weight: bold;font-size:20px;">{{num}} books in your cart</span>
+              <br />
+              <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+              <br />
+            </div>
+          </div>
+          <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
+          <div *ngFor="let item of DB; let i = index"  style="position:relative; ">
+            <div *ngIf="i<=2" >
+              <div  style="display: flex;justify-content:space-around; padding-top:5%;">
+            <img  class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
+            <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
+            <span  class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">${{item.Total}}</span>
+          </div> 
+            <br/>
+          <mat-divider></mat-divider>
+          </div>
+          </div>
+          </div>    
+          <div  style="margin:auto;">
+            <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+              <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+              <div class="row" style="float: left;width: 370px; margin-top:5px;">
+                    <div class="row" style="width: 370px;">
+                      <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; 
+                      padding-left: 39px; padding-bottom: 10px;">Total </label>
+                      <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px;
+                     padding-right: 0px; margin-left: 121px;float: right;">${{this.Total}}</label>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                    <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">VIEW/EDIT CART</button>   
+                    <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzilaPay()" style=" padding-right: 9px; padding-left: 0;  float: right;  width: 155px;margin-left: 0;margin-right: 31px; height: 54px;">CHECOUT</button>
+                </div>
+                  </div>
+            </div> 
+          </div>
+          </mat-card>
         </div>
+
+       </div>
         </div>
       </div>
     </div>
@@ -41,15 +87,15 @@
         <br /><br />
         <div class="row">
         <div style="margin-left: 15px;" >
-        <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>$</span>{{DetailsBook.Price}}</span>
-        <span class="price" *ngIf="DetailsBook.SallePrice!=0" style=" text-decoration: line-through;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
+        <!-- <span class="price" ><span>$</span>{{DetailsBook.Price}}</span> -->
+        <span class="price"  style=" text-decoration: line-through;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
         <span class="price" *ngIf="DetailsBook.SallePrice!=0"><span>$</span>{{DetailsBook.SallePrice}}</span>
         </div> 
         <div  style="margin: 0; margin-left: 55px;">
-          <!-- (click)="Quantity=Quantity-1 -->
-          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;"  (click)="Quantity=Quantity-1">-</label> </span>
+          <!-- (click)="deleteQuantity(DetailsBook)"-->
+          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity-1"   >-</label> </span>
          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;">{{Quantity}}</label> </span>
-         <span  style="width:200px;text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity+1">+</label> </span>
+         <span  style="width:200px;text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity+1  ">+</label> </span>
          </div>
         </div>
         <br />

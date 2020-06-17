@@ -14,56 +14,43 @@
               <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
               <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
               <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
-              
-              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 573px !important;width: 370px!important;">   
-                           <!-- <app-shoping-cart-hebrew></app-shoping-cart-hebrew> -->
+              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                 <div>
-                  <span class="span" class="shopping-cart-title" style="direction: rtl; color:#026fa7; font-family:'Open Sans', sans-serif;font-weight: bold;font-size:20px;">ספרים בסל {{num}}</span>
+                  <span  class="span" class="shopping-cart-title" 
+                  style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
+                  , sans-serif;font-weight: bold;font-size:20px;">ספרים בסל {{num}}</span>
                   <br />
-                  <!-- <div class="container">
-                    <div class="row" style="margin: auto;height: 0.01px;">
-                      <div class="border-buttom margin-b-30" ></div>
-                    </div>
-                  </div>  -->
-                  <mat-divider></mat-divider>
+                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                   <br />
-
                 </div>
               </div>
-              <div class="col-md" style=" overflow-y: scroll; margin:auto;">
+              <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
               <div *ngFor="let item of DBShoppingCart; let i = index"  style="position:relative; ">
                 <div *ngIf="i<=2" >
-                  <div style="  display: flex;justify-content:space-around; padding-top:5%;">
-                <img src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                <span style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
-                <span style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
-                </div>
+                  <div  style="display: flex;justify-content:space-around; padding-top:5%;">
+                <img  class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
+                <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
+                <span  class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
+              </div> 
                 <br/>
               <mat-divider></mat-divider>
               </div>
-            
               </div>
               </div>    
               <div  style="margin:auto;">
-                <div class="col-md" style="justify-content:space-around;z-index: 1000;bottom: 0;margin:auto;background-color:#fff;">
-                  <mat-divider></mat-divider>
-
-                  <div class="row" style="float: left;top: 5px;width: 370px;">
-                        <br />
-
-                        <br />
+                <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                  <div class="row" style="float: left;width: 370px; margin-top:5px;">
                         <div class="row" >
-                        <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">:סה"כ </label>
+                        <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">סה"כ </label>
                         <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;padding-left: 217px;float: right;">₪{{this.Total}}</label>
                         </div>
-                        <div class="row" >
-                        <button  class="view-cart-btn" style="float: left;" (click)="NavigCart()">הצג/ערוך עגלה</button>   
-                      <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzila()" style="padding-right: 0;padding-left: 0; float: left;width: 150px;">תשלום</button>
+                        <div class="row" style=" margin-top: 10px;">
+                        <button  class="view-cart-btn" style="float: left;width: 155px;margin-left: 31px;" (click)="NavigCart()">הצג/ערוך עגלה</button>   
+                      <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzila()" style="padding-right: 0;padding-left: 0; float: left;    margin-left: 25px;width: 155px;">תשלום</button>
                     </div>
                       </div>
-                   <br/>
-                   <br/>
                 </div> 
               </div>
               </mat-card>
@@ -176,11 +163,11 @@
           <div class="product-details">
             <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
               <span class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
-                <div class="tooltipSmall" >
+                <div class="tooltipSmallC" >
                  <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;" >
                   {{item.Name}}
                 </a>
-                 <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;height: fit-content !important;">
+                 <span class="tooltiptextSmallC" style="text-align:left;padding-left:2%;height: fit-content !important;">
                   {{item.Name}}
                    </span>
                  </div>

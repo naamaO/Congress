@@ -60,8 +60,13 @@
                            padding-right: 0px; margin-left: 121px;float: right;">${{this.Total}}</label>
                           </div>
                           <div class="row" style="margin-top: 10px;">
-                          <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">VIEW/EDIT CART</button>   
-                          <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzila()" style=" padding-right: 9px; padding-left: 0;  float: right;  width: 155px;margin-left: 0;margin-right: 31px; height: 54px;">CHECOUT</button>
+                          <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
+                          <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="    padding-right: 5px;
+                          padding-left: 0;
+                          float: right;
+                          width: 155px;
+                          margin-left: 212px;
+                          height: 54px;">CHECKOUT</button>
                       </div>
                         </div>
                   </div> 
@@ -100,14 +105,14 @@
         <span class="price" *ngIf="DetailsBook.SallePrice!=0"><span>$</span>{{DetailsBook.SallePrice}}</span>
         </div>
         <div  style="margin: 0; margin-left: 55px;">
-          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity-1">-</label> </span>
+          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;"   (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1">-</label> </span>
          <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;">{{Quantity}}</label> </span>
          <span  style="width:200px;text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity+1">+</label> </span>
          </div>
       </div>
         <br />
      <p style="font-size:medium;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px; color: #026fa7">{{DetailsBook.Details}}</p> 
-     <button class="buy-btn" (click)="SendToTranzila(DetailsBook)">Buy</button>
+     <button class="buy-btn" (click)="NavigCart()">Buy</button>
      <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
      <button  class="add-to-cart-btn" (click)="AddCart(DetailsBook)">Add to cart</button>
   <br/><br/>

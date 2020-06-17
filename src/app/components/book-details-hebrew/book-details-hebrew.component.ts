@@ -81,10 +81,10 @@ export class BookDetailsHebrewComponent implements OnInit {
   
     if (this.UserNameLogin != "") {
       this.serverService.enterItemToCart(this.item2);
-      // this.num= this.num+this.item2.Quantity;
-      console.log(this.num)
+      this.changePlaying();
+       this.changePlaying();
       this.serverService.getNumProduct().subscribe(val => this.num = val);
-      console.log(this.num)
+
 
     }
     else {
@@ -119,7 +119,7 @@ export class BookDetailsHebrewComponent implements OnInit {
        this.serverService.postdeleteQuantity(item);
 
       this.changePlaying();
-      // this.changePlaying();
+       this.changePlaying();
     }
     else{
       this.Quantity=0;

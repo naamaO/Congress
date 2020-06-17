@@ -43,8 +43,14 @@
                           <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;margin-left: 0px;margin-right: 18px;float: right;">${{this.Total}}</label>
                           </div>
                           <div class="row" style="margin-top: 10px;">
-                          <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">VIEW/EDIT CART</button>   
-                          <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzila()" style=" padding-right: 9px; padding-left: 0;  float: right;  width: 155px;margin-left: 0;margin-right: 31px; height: 54px;">CHECOUT</button>
+                          <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
+                          <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
+                          padding-left: 0;
+                          float: right;
+                          width: 155px;
+                          margin-left: 212px;
+                          margin-right: 31px;
+                          height: 54px;">CHECKOUT</button>
                       </div>
                         </div>
                   </div> 
@@ -87,13 +93,13 @@
                     <img style="margin-left:10%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
   
                     <img style="margin-left:10%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
-                    <br /><label class="label"  (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">Sources of Jewish culture</label>
+                    <br /><label class="label"  (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">Sources of Jewish Culture</label>
                   </div>
                   <div class="col-md-4 floatLeft">
                     <img style="margin-left:50%; cursor:pointer; " src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
                     <img style="margin-left:50%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
   
-                  <br />  <label class="label" style="margin-left: 49%;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">Jewish studies</label>
+                  <br />  <label class="label" style="margin-left: 49%;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">Jewish Studies</label>
                   </div>
                   <div class="col-md-4 floatLeft">
                     <img style="margin-left:72%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />

@@ -47,8 +47,13 @@
                         <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;padding-left: 217px;float: right;">₪{{this.Total}}</label>
                         </div>
                         <div class="row" style=" margin-top: 10px;">
-                        <button  class="view-cart-btn" style="float: left;width: 155px;margin-left: 31px;" (click)="NavigCart()">הצג/ערוך עגלה</button>   
-                      <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzila()" style="padding-right: 0;padding-left: 0; float: left;    margin-left: 25px;width: 155px;">תשלום</button>
+                        <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
+                      <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
+                      padding-left: 0;
+                      float: right;
+                      width: 155px;
+                      margin-left: 212px;
+                      height: 54px;">תשלום</button>
                     </div>
                       </div>
                 </div> 
@@ -60,27 +65,8 @@
       </div>
     </div>
   </div>
-      <!-- <div class="top-line">
-        <img class="logo-img" src="/assets/images/logo.png" style="position:fixed; top:20px;" />
-      </div> 
-    </div>
-  </div>-->
-<!-- </div> 
-<div class="tooltipSmall" >
-  <img src="/assets/images/TooltipIcon.png" />
-  ---------------------------------------------
-  <app-shoping-cart-hebrew ></app-shoping-cart-hebrew>
-  <span class="tooltiptext" style="text-align:left;padding-left:2%;"> 
-
-  </span>
-</div> -->
-<!-- <div class="containerDivGeneric"style="margin-top: 100px;">
-  <div class="row">
-    <img style="width:100%;" src="/assets/images/books.PNG" />
-  </div>
-</div>-->
 <div class="col-md-12" style="margin:auto;text-align:left">
-  <div>
+  <div style="text-align: right;">
     <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
     <span class="span"> בשתי סדרות שונות</span><br />
     <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
@@ -117,19 +103,19 @@
 </div>
 
 <br /><br /> 
-<div class="col-md-12 " style="margin:auto;text-align:left">
-  <div class="category-paragraph">
+<div class="col-md-12 " style="margin:auto;text-align:right">
+  <div class="category-paragraph" >
     <div *ngIf="ShowBlue1==true" class="category-paragraph">
-    <span class="span">"מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות.</span><br />
-    <span class="span"> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank"> Jstor.</a></span><br />
-    <span class="span"> <a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור</a> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא .</span><br /><br /><br />
+    <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
+    <span class="span"><a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">.Jstor</a> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך </span><br />
+    <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא<a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור </a></span><br /><br /><br />
    </div>
    <div *ngIf="ShowBlue2==true" class="category-paragraph">
     <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
-    <span class="span">קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי.</span><br /><br /><br />
+    <span class="span">.קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי</span><br /><br /><br />
    </div>
    <div *ngIf="ShowBlue3==true" class="category-paragraph">
-    <span class="span">סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג.</span><br /><br /><br />
+    <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
    </div>
   </div>
 </div>

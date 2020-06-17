@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
                 <div *ngFor="let item of DBShoppingCart; let i = index"  style="position:relative; ">
-                  <div *ngIf="i<=2" >
+                  <div >
                     <div  style="display: flex;justify-content:space-around; padding-top:5%;">
                   <img  class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
                   <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>

@@ -52,7 +52,14 @@ export class BookDetailsComponent implements OnInit {
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
   } 
-   SendToTranzila() {
+   SendToTranzila(item:shoppingCart) {
+    let total:any;
+    if((item.SallePrice!=null)||(item.SallePrice!=0)){
+      total = this.Quantity*item.SallePrice;
+    }
+    else{
+      total = this.Quantity*item.PriceBook;
+    }
     this.routers.navigate(['Pay', this.Total]);
  }
   ngOnDestroy() {

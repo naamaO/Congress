@@ -175,7 +175,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: {itemsPerPage: size, currentPage: p, totalItems: dataSource.data.length};"></tr>
       </table>
       <pagination-controls style="font-weight: bold;
-    color: #167c9f;position:absolute;margin-top:10px;font-size: 12px;margin-left:60%;" (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>
+    color: #167c9f;position:absolute;margin-top:10px;font-size: 12px;margin-left:60%;"previousLabel="" nextLabel="" (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>
 
       <mat-paginator class="s-paginator" [pageSize]="10" [pageSizeOptions]="[10, 25, 50,100]" style="width:100%; float:left;">
 

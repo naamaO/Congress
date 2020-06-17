@@ -52,7 +52,8 @@ export class BookDetailsComponent implements OnInit {
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
   } 
-   SendToTranzila() {
+  SendToTranzila() {
+  
     this.routers.navigate(['Pay', this.Total]);
  }
   ngOnDestroy() {

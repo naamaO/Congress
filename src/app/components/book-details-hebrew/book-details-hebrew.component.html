@@ -29,9 +29,9 @@
           <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
            <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
             <div>
-              <span  class="span" class="shopping-cart-title" 
-              style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
-              , sans-serif;font-weight: bold;font-size:20px;">{{num}} books in your cart</span>
+              <span class="span" class="shopping-cart-title"
+                    style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
+              , sans-serif;font-weight: bold;font-size:20px;"> ספרים בסל שלך {{num}} </span>
               <br />
               <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
               <br />
@@ -56,13 +56,13 @@
               <div class="row" style="float: left;width: 370px; margin-top:5px;">
                     <div class="row" style="width: 370px;">
                       <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; 
-                      padding-left: 39px; padding-bottom: 10px;">Total </label>
+                      padding-left: 39px; padding-bottom: 10px;">סך הכל </label>
                       <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px;
                      padding-right: 0px; margin-left: 121px;float: right;">${{this.Total}}</label>
                     </div>
                     <div class="row" style="margin-top: 10px;">
-                    <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">VIEW/EDIT CART</button>   
-                    <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzilaPay()" style=" padding-right: 9px; padding-left: 0;  float: right;  width: 155px;margin-left: 0;margin-right: 31px; height: 54px;">CHECOUT</button>
+                    <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">צפיה/עריכה </button>   
+                    <button  class="fill-btn-blue checkout-btn" (click)="SendToTranzilaPay()" style=" padding-right: 9px; padding-left: 0;  float: right;  width: 155px;margin-left: 0;margin-right: 31px; height: 54px;">קניה</button>
                 </div>
                   </div>
             </div> 

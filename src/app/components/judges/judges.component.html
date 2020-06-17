@@ -60,10 +60,10 @@
 
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[0]" ngDefaultControl>
-              <label class="lable-th"> Lecture Name </label>
+              <label class="lable-th" style="font-size: medium;"> Lecture Name </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[0].columnProp}}" [(ngModel)]="filterSelectObj[0].modelValue"
                       (change)="filterChange(filterSelectObj[0],$event)">
-                <option style="color:#167c9f;" value="" mat-header-cell>Lecture Name</option>
+                <option style="color:#167c9f;" value="" mat-head er-cell>Lecture Name</option>
                 <option style="color:#167c9f;" mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[0].options">{{item}}</option>
               </select>
             </mat-form-field>
@@ -75,7 +75,7 @@
         <ng-container matColumnDef="Division">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[1]" ngDefaultControl>
-              <label class="lable-th">Division </label>
+              <label class="lable-th"style="font-size: medium;">Division </label>
               <select style="color:#E8E8E8;" class="selects" id="SelectDiv" #SelectDiv matNativeControl name="{{filterSelectObj[1].columnProp}}" [(ngModel)]="filterSelectObj[1].modelValue"
                       (click)="ChangecolorBlueDiv()" (change)="filterChange(filterSelectObj[1],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell>Division</option>
@@ -89,7 +89,7 @@
         <ng-container matColumnDef="SubDivision">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[1]" ngDefaultControl>
-              <label class="lable-th">Sub Division </label>
+              <label class="lable-th" style="font-size: medium;">Sub Division </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[2].columnProp}}" [(ngModel)]="filterSelectObj[2].modelValue"
                       (change)="filterChange(filterSelectObj[2],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell>Sub Division</option>
@@ -103,7 +103,7 @@
         <ng-container matColumnDef="SessionName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[3]" ngDefaultControl>
-              <label class="lable-th">Session Title </label>
+              <label class="lable-th" style="font-size: medium;">Session Title </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[3].columnProp}}" [(ngModel)]="filterSelectObj[3].modelValue"
                       (change)="filterChange(filterSelectObj[3],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell>Session Title</option>
@@ -117,7 +117,7 @@
         <ng-container matColumnDef="TitleEnglish">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[4]" ngDefaultControl>
-              <label class="lable-th">Lecture Title </label>
+              <label class="lable-th" style="font-size: medium;">Lecture Title </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[4].columnProp}}" [(ngModel)]="filterSelectObj[4].modelValue"
                       (change)="filterChange(filterSelectObj[4],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell>Lecture Title</option>
@@ -131,7 +131,7 @@
         <ng-container matColumnDef="Language">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[5]" ngDefaultControl>
-              <label class="lable-th"> Language  </label>
+              <label class="lable-th" style="font-size: medium;"> Language  </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[5].columnProp}}" [(ngModel)]="filterSelectObj[5].modelValue"
                       (change)="filterChange(filterSelectObj[5],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell> Language </option>
@@ -145,7 +145,7 @@
         <ng-container matColumnDef="Status">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[4]" ngDefaultControl>
-              <label class="lable-th">Status </label>
+              <label class="lable-th" style="font-size: medium;">Status </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[6].columnProp}}" [(ngModel)]="filterSelectObj[6].modelValue"
                       (change)="filterChange(filterSelectObj[6],$event)">
                 <option style="color:#167c9f;" value="" mat-header-cell>Status</option>
@@ -157,7 +157,7 @@
         </ng-container>
         
         <ng-container matColumnDef="Review">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Review </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Review </th>
           <td mat-cell *matCellDef="let element; let i = index;">
             <img [src]="over[i] ? '/assets/images/EditHover.jpg' : '/assets/images/Edit.jpg'"
                  (mouseover)="over[i] = true"
@@ -174,8 +174,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns | paginate: {itemsPerPage: size, currentPage: p, totalItems: dataSource.data.length};"></tr>
       </table>
-      <pagination-controls style="font-weight: bold;
-    color: #167c9f;position:absolute;margin-top:10px;font-size: 12px;margin-left:60%;" (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>
+      <!--<pagination-controls style="font-weight: bold;
+    color: #167c9f;position:absolute;margin-top:10px;font-size: 12px;margin-left:60%;"previousLabel="" nextLabel="" (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>-->
 
       <mat-paginator class="s-paginator" [pageSize]="10" [pageSizeOptions]="[10, 25, 50,100]" style="width:100%; float:left;">
 

@@ -46,8 +46,9 @@ export class JudgesComponent  implements OnInit  {
     public FilterValues: string[];
     public filterOfValue = {};
     public field: string;
-    public Fields: string[] = ['All','Name', 'Div', 'Sub Div', 'Title'];
-    public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'TitleEnglish', 'SessionName', 'Language',
+// public Fields: string[] = ['All','Name', 'Div', 'Sub Div', 'Title'];
+public Fields: string[] = ['All','Lecturer Name', 'Lecture Name', 'Session Name'];
+public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'TitleEnglish', 'SessionName', 'Language',
         'Status', 'Review'];
     public DB: Proposals[];
     public PropJudges: Judges[];
@@ -187,26 +188,29 @@ export class JudgesComponent  implements OnInit  {
     }
     filterValues(search: string) {
         switch (this.field) {
-            case "Name":
+            case "Lecturer Name":
                 this.dataSource.data = this.dataSourcFilter.data.filter(function (item) {
                     var str = (item.FirstNameEnglish + " ").replace(/\s/g, '') + ' ' + (item.LastNameEnglish + " ").replace(/\s/g, '');
                     return (str + " ").toLowerCase().includes(search)
                 }) as Judges[];
                 break;
-            case "Title":
-                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.TitleEnglish + " ").toLowerCase().includes(search) }) as Judges[];
+            case "Lecture Name":
+                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) {
+                     return (item.UserName + " ").toLowerCase().includes(search)
+                     }) as Judges[];
                 break;
-            case "Div":
-                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.Division + " ").toLowerCase().includes(search) }) as Judges[];
+            case "Session Name":
+                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SessionName + " ").toLowerCase().includes(search) }) as Judges[];
                 break;
-            case "Sub Div":
-                this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SubDivision + " ").toLowerCase().includes(search) }) as Judges[];
-                break;
+            // case "Sub Div":
+            //     this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SubDivision + " ").toLowerCase().includes(search) }) as Judges[];
+            //     break;
             case "All":
                 this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return (item.SubDivision + " ").toLowerCase().includes(search) }) as Judges[];
                 break;
         }
     }
+
   ngOnInit() {
    // alert("ss");
       
@@ -446,18 +450,20 @@ export class JudgesComponent  implements OnInit  {
                 return !str.toLowerCase().includes(value)
             }) as Judges[];
         }
-        if (this.field == 'Div')
-            this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.Division.toLowerCase().includes(value) }) as Judges[];
-        if (this.field == 'Sub Div')
-            this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.SubDivision.toLowerCase().includes(value) }) as Judges[];
-
-        if (this.field == 'Title') {
-            this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.TitleEnglish.toLowerCase().includes(value) }) as Judges[];
-        }
+        if (this.field == 'Lecture Name'){
+            this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.UserName.toLowerCase().includes(value) }) as Judges[];
+         }
+          if (this.field == 'Session Name'){
+            this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.SessionName.toLowerCase().includes(value) }) as Judges[];
+          }
+        // if (this.field == 'Title') {
+        //     this.dataSource.data = this.dataSourcFilter.data.filter(function (item) { return !item.TitleEnglish.toLowerCase().includes(value) }) as Judges[];
+        // }
         if (this.field == 'All') {
             this.dataSource.data = this.dataSourcFilter.data;
         }
     }
+
     NoFilter() {
         this.serverService.getAll_W_Proposals().subscribe(val => this.PropJudges = val);
     }

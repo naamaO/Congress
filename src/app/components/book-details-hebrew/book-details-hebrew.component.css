@@ -142,9 +142,76 @@ h3:hover {
   position: relative;
 }
 
-
-
-
+.checkout-btn{
+  background-color: #0b4e6f;
+  color: white; 
+  font-family:'Open Sans', sans-serif;
+  text-transform: uppercase; 
+  font-weight: normal; 
+  font-size:18px;
+  margin-right: 10px;
+  margin-left: 40px;
+}
+.checkout-btn:hover{
+  background-color:  #6190a9 ;
+  color: white; 
+  font-family:'Open Sans', sans-serif;
+  text-transform: uppercase; 
+  font-weight: normal; 
+  font-size:18px;;
+}
+.fill-btn-blue {
+  background-color: #0b4e6f;
+  padding: 10px 0px;
+  border: none;
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  /*border-radius: 20px;*/
+  cursor: pointer;
+}
+.view-cart-btn{
+  background-color: #ffffff;
+  outline: #0b4e6f;
+  color: #0b4e6f;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 18px;
+  cursor: pointer;
+  padding-right: 0;
+  padding-left: 0;
+  padding: 10px 0px;
+  width: 150px;
+  height: 55px;
+  margin-left: 30px;
+}
+.view-cart-btn:hover{
+background-color:#0b4e6f;
+color:#ffffff;
+font-family:'Open Sans', sans-serif;
+text-transform: uppercase; 
+font-weight: normal; 
+font-size:18px;
+}
+.right-cart-number { 
+  /* background: rgba(7, 181, 229, 0.80); */
+  /* margin-left: 40px; */
+  max-width: fit-content;
+  min-width: fit-content;
+  height: fit-content;
+  color: #fff;
+  /* border-radius: 10px; */
+  position: absolute;
+  top: 8px;
+  left: 46px;
+  font-size: 13px;
+  /* line-height: 20px; */
+  text-align: center;
+  /* padding: 0 2px; */
+  padding-top: 7%;
+  cursor: pointer;
+  }
 h4:before {
   content: '\f07a';
   font-family: fontawesome;
@@ -248,4 +315,77 @@ margin: 0;
   text-transform: uppercase; 
   font-weight: normal; 
   font-size:18px;
+}
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #e9e9e4;
+  left: -8px;
+  top: 20%;
+  color: #026fa7;
+}
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmall .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #e9e9e4;
+    color: #026fa7;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    /*top: -5%;*/
+  }
+   .tooltiptextSmall:before{
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid white;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  right: 30px;
+  top: -3%;
+  color: #026fa7;
+} 
+.tooltiptextSmall {
+  width: 200px !important;
+  height: 60px !important;
+}
+
+.tooltipSmall:hover .tooltiptextSmall {
+  visibility: visible;
+}
+
+.tooltiptext {
+  width: 200px !important;
+  height: 150px !important;
+}
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

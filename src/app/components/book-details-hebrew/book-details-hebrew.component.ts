@@ -24,7 +24,7 @@ export class BookDetailsHebrewComponent implements OnInit {
   public Total: number;
   public num: number;
   public DB: shoppingCart[];
-
+ 
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
     this.serverService.getNumProduct().subscribe(val => this.num = val);
@@ -55,6 +55,7 @@ export class BookDetailsHebrewComponent implements OnInit {
       });
     });
   }
+  
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
   }
@@ -80,7 +81,7 @@ export class BookDetailsHebrewComponent implements OnInit {
   
     if (this.UserNameLogin != "") {
       this.serverService.enterItemToCart(this.item2);
-      this.num= this.num+this.item2.Quantity;
+      // this.num= this.num+this.item2.Quantity;
       console.log(this.num)
       this.serverService.getNumProduct().subscribe(val => this.num = val);
       console.log(this.num)
@@ -114,10 +115,11 @@ export class BookDetailsHebrewComponent implements OnInit {
     if(this.Quantity!==0)
     {   
        this.Quantity=this.Quantity-1;
+       console.log("item:",item,"this.Quantity:",this.Quantity)
        this.serverService.postdeleteQuantity(item);
 
       this.changePlaying();
-      this.changePlaying();
+      // this.changePlaying();
     }
     else{
       this.Quantity=0;
@@ -131,12 +133,13 @@ export class BookDetailsHebrewComponent implements OnInit {
   AddQuantity(item: shoppingCart) {
     //alert(item.NameBook + "uu");
 
-    //
+    this.Quantity=this.Quantity+1;
+    console.log("item:",item,"this.Quantity:",this.Quantity)
     this.serverService.postAddQuantity(item)//.subscribe((events) => {
     //
     //this.router.navigateByUrl("/ShoppingCart");
     this.changePlaying();
-    this.changePlaying(); 
+    // this.changePlaying(); 
     //  alert(item.NameBook + "uu");
     //});
 
@@ -152,7 +155,9 @@ export class BookDetailsHebrewComponent implements OnInit {
     }
     this.routers.navigate(['Pay', total]);
   }
-
+  SendToTranzilaPay() {
+    this.routers.navigate(['Pay', this.Total]);
+  }
   SendToNew() {
     this.routers.navigateByUrl("/newHebrew");
 

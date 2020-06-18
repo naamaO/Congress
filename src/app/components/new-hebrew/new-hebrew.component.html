@@ -1,78 +1,79 @@
-
 <div class="body">
-<!--<div class="center">
-  <form class="center-form">-->
-<!-- <div style="position:relative;">
-  <div style="background-color:#fff;height:100%;width:100%;">
-   -->
-   <div style="background-color:#fff;height:158px;width:100%;">
+  <!--<div class="center">
+    <form class="center-form">-->
+  <!-- <div style="position:relative;">
+    <div style="background-color:#fff;height:100%;width:100%;">
+     -->
+  <div style="background-color:#fff;height:158px;width:100%;">
     <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
-          <div style="margin-left:64%;top:60px;position:fixed;"> 
-            <div class="tooltipSmall" >
+          <div style="margin-left:64%;top:60px;position:fixed;">
+            <div class="tooltipSmall">
               <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
               <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
               <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
-              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
-               <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
-                <div>
-                  <span  class="span" class="shopping-cart-title" 
-                  style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
-                  , sans-serif;font-weight: bold;font-size:20px;">ספרים בסל {{num}}</span>
-                  <br />
-                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
-                  <br />
+              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
+                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+                  <div>
+                    <span class="span" class="shopping-cart-title"
+                          style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
+                  , sans-serif;font-weight: bold;font-size:20px;">ספרים בסל{{num}}</span>
+                    <br />
+                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                    <br />
+                  </div>
                 </div>
-              </div>
-              <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
-              <div *ngFor="let item of DBShoppingCart; let i = index"  style="position:relative; ">
-                <div >
-                  <div  style="display: flex;justify-content:space-around; padding-top:5%;">
-                <img  class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
-                <span  class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
-              </div> 
-                <br/>
-              <mat-divider></mat-divider>
-              </div>
-              </div>
-              </div>    
-              <div  style="margin:auto;">
-                <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
-                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
-                  <div class="row" style="float: left;width: 370px; margin-top:5px;">
-                        <div class="row" >
+                <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
+                  <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
+                    <div>
+                      <div style="display: flex;justify-content:space-around; padding-top:5%;">
+                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
+                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
+                        <span class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
+                      </div>
+                      <br />
+                      <mat-divider></mat-divider>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin:auto;">
+                  <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                    <div class="row" style="float: left;width: 370px; margin-top:5px;">
+                      <div class="row">
                         <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">סה"כ </label>
                         <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;padding-left: 217px;float: right;">₪{{this.Total}}</label>
-                        </div>
-                        <div class="row" style=" margin-top: 10px;">
+                      </div>
+                      <div class="row" style=" margin-top: 10px;">
                         <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
-                      <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
+                        <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
                       padding-left: 0;
                       float: right;
                       width: 155px;
                       margin-left: 212px;
-                      height: 54px;">תשלום</button>
-                    </div>
+                      height: 54px;">
+                          תשלום
+                        </button>
                       </div>
-                </div> 
-              </div>
+                    </div>
+                  </div>
+                </div>
               </mat-card>
-              </div>
-        </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<div class="col-md-12" style="margin:auto;text-align:left">
-  <div style="text-align: right;">
-    <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
-    <span class="span"> בשתי סדרות שונות</span><br />
-    <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
-    <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br /><br /><br />
-  </div>
-  <div class="row width100" style="text-align:center"></div>
+  <div class="col-md-12" style="margin:auto;text-align:left">
+    <div style="text-align: right;">
+      <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
+      <span class="span"> בשתי סדרות שונות</span><br />
+      <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
+      <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br /><br /><br />
+    </div>
+    <div class="row width100" style="text-align:center"></div>
 
     <div class="col-md-4 floatRight ">
 
@@ -95,119 +96,114 @@
     </div>
   </div>
 
-<div class="clear"></div>
-<div class="container">
-  <div class="row" style="margin:auto">
-    <div class="co-md-10 border-buttom margin-b-30"></div>
+  <div class="clear"></div>
+  <div class="container">
+    <div class="row" style="margin:auto">
+      <div class="co-md-10 border-buttom margin-b-30"></div>
+    </div>
   </div>
-</div>
 
-<br /><br /> 
-<div class="col-md-12 " style="margin:auto;text-align:right">
-  <div class="category-paragraph" >
-    <div *ngIf="ShowBlue1==true" class="category-paragraph">
-    <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
-    <span class="span"><a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">.Jstor</a> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך </span><br />
-    <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא<a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור </a></span><br /><br /><br />
-   </div>
-   <div *ngIf="ShowBlue2==true" class="category-paragraph">
-    <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
-    <span class="span">.קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי</span><br /><br /><br />
-   </div>
-   <div *ngIf="ShowBlue3==true" class="category-paragraph">
-    <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
-   </div>
+  <br /><br />
+  <div class="col-md-12 " style="margin:auto;text-align:right">
+    <div class="category-paragraph">
+      <div *ngIf="ShowBlue1==true" class="category-paragraph">
+        <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
+        <span class="span"><a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">.Jstor</a> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך </span><br />
+        <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא<a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור </a></span><br /><br /><br />
+      </div>
+      <div *ngIf="ShowBlue2==true" class="category-paragraph">
+        <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
+        <span class="span">.קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי</span><br /><br /><br />
+      </div>
+      <div *ngIf="ShowBlue3==true" class="category-paragraph">
+        <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
+      </div>
+    </div>
   </div>
-</div>
-<div class="col-md-12 marginAuto"style="padding:0px;">
-  <ul class="products clearfix products-4" style="padding:0px;">
-  
-    <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
-      <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
-        <li >
-        <div class="container" >
+  <div class="col-md-12 marginAuto" style="padding:0px;">
+    <ul class="products clearfix products-4" style="padding:0px;">
+
+      <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
+        <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
+        <li>
+          <div class="container">
             <div class="background" style="text-align:center; align-items: center">
-            <div style="margin:auto;"></div>
+              <div style="margin:auto;"></div>
+            </div>
           </div>
-        </div>
-        <div  class="border-book featured-image content" (click)="Detais(item)"
-        [style.background-image]="'url('+item.Image+')'"
-       style="background-size: contain; position:relative;
+          <div class="border-book featured-image content" (click)="Detais(item)"
+               [style.background-image]="'url('+item.Image+')'"
+               style="background-size: contain; position:relative;
         z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
          center; display: flex;align-items: center;justify-content: center;">
-        <div class="view overlay">
-<!-- <img (click)="Detais(item)" 
-           style="margin:8px; width:279px; height:387px" src={{item.Image}}
-            class="attachment-shop_catalog size-shop_catalog wp-post-image"
-           sizes="(max-width: 500px) 100vw, 500px">  -->
-           <div class="cart-loading">
-             <i class="fusion-icon-spinner" ></i>
-            </div>
-        </div>
-      </div>
-        <div class="fusion-product-content" style="width: 296px; margin: auto;">
-          <div class="product-details">
-            <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
-              <span class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
-                <div class="tooltipSmallC" >
-                 <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;" >
-                  {{item.Name}}
-                </a>
-                 <span class="tooltiptextSmallC" style="text-align:left;padding-left:2%;height: fit-content !important;">
-                  {{item.Name}}
-                   </span>
-                 </div>
-                
-              </span>
-              <div class="fusion-price-rating" style="padding-bottom:15px; padding-top: 15px;">
-                <span class="price" style="font-size:18px">
-                 <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0">
-                  <span class="woocommerce-Price-currencySymbol">₪</span> {{item.Price}}
-                  </span>
-                </span>
-
-               <span class="old-price" style="font-size:18px;text-decoration: line-through;">
-                 <span 
-                  class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0" style="color: #026fa7;">
-                  <span
-                  class="woocommerce-Price-currencySymbol">₪</span>{{item.Price}}
-                 </span>
-               </span>
-
-               <span class="price" style="font-size:18px">
-                 <span
-                  class="woocommerce-Price-amount amount" 
-                  *ngIf="item.SallePrice!=0">
-                  <span 
-                   class="woocommerce-Price-currencySymbol">₪</span>{{item.SallePrice}}
-                 </span>
-               </span>
-             </div> 
-              <!-- <div>
-                <span style="font-size:18px;" *ngIf="item.SallePrice==0">{{item.Price}}</span>
-                <span style="font-size:18px;" *ngIf="item.SallePrice!=0">{{item.SallePrice}}</span>
-
-                <span style="font-size:18px;text-decoration: line-through;margin-left:30px;" *ngIf="item.SallePrice!=0">{{item.Price}}</span>
-              </div> -->
-              <div class="product-buttons">
-                <div class="product-buttons-container clearfix">
-              <!-- <div style="direction:rtl; float:right;"> -->
-                <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
-                <button  (click)="Detais(item)" class="buy-btn">קניה</button>
-                <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
-                <!-- <span style="cursor:pointer" (click)="Detais(item)">  פרטים </span> -->
-              <!-- </div>-->
-            </div> 
-             </div>
-
-          <!-- <br /><br /><br /> -->
+            <div class="view overlay">
+              <!-- <img (click)="Detais(item)"
+                         style="margin:8px; width:279px; height:387px" src={{item.Image}}
+                          class="attachment-shop_catalog size-shop_catalog wp-post-image"
+                         sizes="(max-width: 500px) 100vw, 500px">  -->
+              <div class="cart-loading">
+                <i class="fusion-icon-spinner"></i>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    </div>
-  </ul>
-  <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
-  <br/><br/><br/>
-</div>
+          <div class="fusion-product-content" style="width: 296px; margin: auto;">
+            <div class="product-details">
+              <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
+                <span class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
+                  <div class="tooltipSmallC">
+                    <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
+                      {{item.Name}}
+                    </a>
+                    <span class="tooltiptextSmallC" style="text-align:left;padding-left:2%;height: fit-content !important;">
+                      {{item.Name}}
+                    </span>
+                  </div>
+
+                </span>
+                <div class="fusion-price-rating" style="padding-bottom:15px; padding-top: 15px;">
+                  <span class="price" style="font-size:18px">
+                    <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0">
+                      <span class="woocommerce-Price-currencySymbol">₪</span> {{item.Price}}
+                    </span>
+                  </span>
+
+                  <span class="old-price" style="font-size:18px;text-decoration: line-through;">
+                    <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0" style="color: #026fa7;">
+                      <span class="woocommerce-Price-currencySymbol">₪</span>{{item.Price}}
+                    </span>
+                  </span>
+
+                  <span class="price" style="font-size:18px">
+                    <span class="woocommerce-Price-amount amount"
+                          *ngIf="item.SallePrice!=0">
+                      <span class="woocommerce-Price-currencySymbol">₪</span>{{item.SallePrice}}
+                    </span>
+                  </span>
+                </div>
+                <!-- <div>
+                  <span style="font-size:18px;" *ngIf="item.SallePrice==0">{{item.Price}}</span>
+                  <span style="font-size:18px;" *ngIf="item.SallePrice!=0">{{item.SallePrice}}</span>
+                  <span style="font-size:18px;text-decoration: line-through;margin-left:30px;" *ngIf="item.SallePrice!=0">{{item.Price}}</span>
+                </div> -->
+                <div class="product-buttons">
+                  <div class="product-buttons-container clearfix">
+                    <!-- <div style="direction:rtl; float:right;"> -->
+                    <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
+                    <button (click)="Detais(item)" class="buy-btn">קניה</button>
+                    <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
+                    <!-- <span style="cursor:pointer" (click)="Detais(item)">  פרטים </span> -->
+                    <!-- </div>-->
+                  </div>
+                </div>
+
+                <!-- <br /><br /><br /> -->
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
+    <br /><br /><br />
+  </div>
 </div>

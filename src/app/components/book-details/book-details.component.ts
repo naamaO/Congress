@@ -1,11 +1,10 @@
-import { Component, OnInit,Input,OnDestroy, NgZone } from '@angular/core';
-import { book } from '../../../classes/classItem';
+import { Component, OnInit,Input,OnDestroy } from '@angular/core';
+import { book } from '../../../classes/classItem'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerService } from '../../services/server.service';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie';
 import { shoppingCart } from 'src/classes/shoppingCart';
-import { __await } from 'tslib';
 
 @Component({
   selector: 'app-book-details',
@@ -23,7 +22,7 @@ export class BookDetailsComponent implements OnInit {
   public Total: number;
   public DBShoppingCart: shoppingCart[];
 
-  constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
+  constructor(public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
     this.serverService.getNumProduct().subscribe(val => this.num = val);
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
@@ -53,14 +52,8 @@ export class BookDetailsComponent implements OnInit {
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
   } 
-   SendToTranzila(item:shoppingCart) {
-    let total:any;
-    if((item.SallePrice!=null)||(item.SallePrice!=0)){
-      total = this.Quantity*item.SallePrice;
-    }
-    else{
-      total = this.Quantity*item.PriceBook;
-    }
+  SendToTranzila() {
+  
     this.routers.navigate(['Pay', this.Total]);
  }
   ngOnDestroy() {
@@ -70,30 +63,11 @@ export class BookDetailsComponent implements OnInit {
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
-
-  
-  
-  changePlaying() {
-    __await (1000);
-    this.ngZone.run(() => {
-      this.serverService.getAllDBShoppingCart().subscribe((val) => {
-        this.DBShoppingCart = val;
-        for (var i = 0; i < this.DBShoppingCart.length; i++) {
-          if (this.DBShoppingCart[i].SallePrice == 0)
-            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
-          else
-            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
-
-        }
-      });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-    });
-    this.serverService.getNumProduct().subscribe(val => this.num = val);
-  }
   AddCart(item: book) {
-    this.item2 = new shoppingCart();  
-    // this.cart.push(item);
+    
     this.UserNameLogin = (this.getCookie('UserName'));
+    this.item2 = new shoppingCart();
+
     //this.item2.Id = item.Id;
     this.item2.IdBook = item.Id;
     this.item2.NameBook = item.Name;
@@ -102,17 +76,19 @@ export class BookDetailsComponent implements OnInit {
     this.item2.Quantity = this.Quantity;
     this.item2.SallePrice = item.SallePrice;
     this.item2.UserName = this.UserNameLogin;
-  
+
     if (this.UserNameLogin != "") {
-      this.serverService.enterItemToCart(this.item2);
-      this.changePlaying();
-       this.changePlaying();
-      this.serverService.getNumProduct().subscribe(val => this.num = val);
+      this.serverService.enterItemToCart(this.item2).subscribe((events) => {
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+      });
     }
+
     else {
       this.routers.navigateByUrl("/");
 
-    }
+    }    
+
+
   }
 
 }

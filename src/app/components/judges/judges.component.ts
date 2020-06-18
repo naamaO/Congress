@@ -47,7 +47,7 @@ export class JudgesComponent  implements OnInit  {
     public filterOfValue = {};
     public field: string;
 // public Fields: string[] = ['All','Name', 'Div', 'Sub Div', 'Title'];
-public Fields: string[] = ['All','Name', 'Lecture Name', 'Session Name'];
+public Fields: string[] = ['All','Lecturer Name', 'Lecture Name', 'Session Name'];
 public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision', 'TitleEnglish', 'SessionName', 'Language',
         'Status', 'Review'];
     public DB: Proposals[];
@@ -188,7 +188,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     }
     filterValues(search: string) {
         switch (this.field) {
-            case "Name":
+            case "Lecturer Name":
                 this.dataSource.data = this.dataSourcFilter.data.filter(function (item) {
                     var str = (item.FirstNameEnglish + " ").replace(/\s/g, '') + ' ' + (item.LastNameEnglish + " ").replace(/\s/g, '');
                     return (str + " ").toLowerCase().includes(search)

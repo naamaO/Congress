@@ -21,7 +21,7 @@ export class ServerService {
   public LoginUserName: string;
   public LoginDiv: string;
   public port: string = 'http://localhost:64905';
-  //public port: string = 'http://jewish-studies.b2story.com/webApi';
+ // public port: string = 'http://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
     this.port = 'http://localhost:64905';

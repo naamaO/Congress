@@ -14,6 +14,7 @@ import { __await } from 'tslib';
   styleUrls: ['./book-details-hebrew.component.css']
 })
 export class BookDetailsHebrewComponent implements OnInit {
+  public Total1: number;
   public Quantity: number;
   public item2: shoppingCart;
 
@@ -57,12 +58,12 @@ export class BookDetailsHebrewComponent implements OnInit {
   }
   
   NavigCart() {
-    this.routers.navigateByUrl("/ShoppingCart");
+    this.routers.navigateByUrl("/ShoppingCartHebrew");
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
+ 
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
@@ -81,10 +82,10 @@ export class BookDetailsHebrewComponent implements OnInit {
   
     if (this.UserNameLogin != "") {
       this.serverService.enterItemToCart(this.item2);
-      this.changePlaying();
-       this.changePlaying();
+      // this.num= this.num+this.item2.Quantity;
+      console.log(this.num)
       this.serverService.getNumProduct().subscribe(val => this.num = val);
-
+      console.log(this.num)
 
     }
     else {
@@ -119,7 +120,7 @@ export class BookDetailsHebrewComponent implements OnInit {
        this.serverService.postdeleteQuantity(item);
 
       this.changePlaying();
-       this.changePlaying();
+      // this.changePlaying();
     }
     else{
       this.Quantity=0;
@@ -146,14 +147,13 @@ export class BookDetailsHebrewComponent implements OnInit {
   }
 
   SendToTranzila(item:shoppingCart) {
-    let total:any;
-    if((item.SallePrice!=null)||(item.SallePrice!=0)){
-      total = this.Quantity*item.SallePrice;
+    if (this.DetailsBook.SallePrice != 0) {
+      this.Total1 = this.Quantity * this.DetailsBook.SallePrice
     }
-    else{
-      total = this.Quantity*item.PriceBook;
+    else {
+      this.Total1 = this.Quantity * this.DetailsBook.Price
     }
-    this.routers.navigate(['Pay', total]);
+    this.routers.navigate(['Pay', this.Total1]);
   }
   SendToTranzilaPay() {
     this.routers.navigate(['Pay', this.Total]);

@@ -81,7 +81,7 @@
       <img style="margin: 0px 50%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue1==true" />
       <br />
       <label class="label" style="float: right;" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות היהודית</label>
-    </div>
+    </div> 
     <div class="col-md-4 floatRight ">
       <img style="margin: 0px 33%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
       <img style="margin: 0px 33%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
@@ -102,35 +102,34 @@
       <div class="co-md-10 border-buttom margin-b-30"></div>
     </div>
   </div>
-
-  <br /><br />
-  <div class="col-md-12 " style="margin:auto;text-align:right">
-    <div class="category-paragraph">
-      <div *ngIf="ShowBlue1==true" class="category-paragraph">
-        <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
-        <span class="span"><a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">.Jstor</a> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך </span><br />
-        <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא<a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank">בקישור </a></span><br /><br /><br />
-      </div>
-      <div *ngIf="ShowBlue2==true" class="category-paragraph">
-        <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
-        <span class="span">.קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי</span><br /><br /><br />
-      </div>
-      <div *ngIf="ShowBlue3==true" class="category-paragraph">
-        <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
-      </div>
-    </div>
+<br /><br /> 
+<div class="col-md-12 " style="margin:auto;text-align:right">
+  <div class="category-paragraph" >
+    <div *ngIf="ShowBlue1==true" class="category-paragraph">
+    <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
+     <span class="span"> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank"> .Jstor</a></span><br/>
+    <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא <a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank"> בקישור</a></span><br /><br /><br />
   </div>
-  <div class="col-md-12 marginAuto" style="padding:0px;">
-    <ul class="products clearfix products-4" style="padding:0px;">
-
-      <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
-        <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
-        <li>
-          <div class="container">
+   <div *ngIf="ShowBlue2==true" class="category-paragraph">
+    <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span><br />
+    <span class="span">.קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי</span><br /><br /><br />
+   </div>
+   <div *ngIf="ShowBlue3==true" class="category-paragraph">
+    <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
+   </div>
+  </div>
+</div>
+<div class="col-md-12 marginAuto"style="padding:0px;">
+  <ul class="products clearfix products-4" style="padding:0px;">
+  <div *ngIf="DB">
+    <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
+      <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
+        <li >
+        <div class="container" >
             <div class="background" style="text-align:center; align-items: center">
               <div style="margin:auto;"></div>
             </div>
-          </div>
+        </div>
           <div class="border-book featured-image content" (click)="Detais(item)"
                [style.background-image]="'url('+item.Image+')'"
                style="background-size: contain; position:relative;
@@ -180,19 +179,12 @@
                     </span>
                   </span>
                 </div>
-                <!-- <div>
-                  <span style="font-size:18px;" *ngIf="item.SallePrice==0">{{item.Price}}</span>
-                  <span style="font-size:18px;" *ngIf="item.SallePrice!=0">{{item.SallePrice}}</span>
-                  <span style="font-size:18px;text-decoration: line-through;margin-left:30px;" *ngIf="item.SallePrice!=0">{{item.Price}}</span>
-                </div> -->
+ 
                 <div class="product-buttons">
                   <div class="product-buttons-container clearfix">
-                    <!-- <div style="direction:rtl; float:right;"> -->
-                    <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
+ 
                     <button (click)="Detais(item)" class="buy-btn">קניה</button>
-                    <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
-                    <!-- <span style="cursor:pointer" (click)="Detais(item)">  פרטים </span> -->
-                    <!-- </div>-->
+
                   </div>
                 </div>
 
@@ -200,10 +192,10 @@
               </div>
             </div>
           </div>
-        </li>
-      </div>
-    </ul>
-    <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
-    <br /><br /><br />
+      </li>
+    </div>
   </div>
+  </ul>
+  <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
+  <br/><br/><br/>
 </div>

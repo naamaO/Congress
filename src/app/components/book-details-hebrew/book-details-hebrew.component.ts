@@ -28,23 +28,10 @@ export class BookDetailsHebrewComponent implements OnInit {
  
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
-    this.serverService.getNumProduct().subscribe(val => this.num = val);
-    this.serverService.getAllDBShoppingCart().subscribe((val) => {
-      this.DB = val;
-        for (var i = 0; i < this.DB.length; i++) {
-          if (this.DB[i].SallePrice == 0)
-            this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-          else
-            this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-  
-        }
-      });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-      this.serverService.getNumProduct().subscribe(val => this.num = val);
+    
   }
 
   ngOnInit() {
-    this.Quantity = 1;
 
     this.sub = this.router.params.subscribe(params => {
       this.Id = +params['Id']; // (+) converts string 'id' to a number
@@ -55,6 +42,33 @@ export class BookDetailsHebrewComponent implements OnInit {
         // alert(this.t + "uu");
       });
     });
+    this.serverService.getAllDBShoppingCart().subscribe(
+      resp => {
+        this.DB = resp;
+        for (var i = 0; i < this.DB.length; i++) {
+          if (this.DB[i].SallePrice == 0)
+            this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+          else
+            this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+  
+        }
+      },
+      error => {  
+        console.log(error)
+      });
+
+    // this.serverService.getAllDBShoppingCart().subscribe((val) => {
+    //   this.DB = val;
+    //     for (var i = 0; i < this.DB.length; i++) {
+    //       if (this.DB[i].SallePrice == 0)
+    //         this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+    //       else
+    //         this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+  
+    //     }
+    //   });
+      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+      this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
   
   NavigCart() {
@@ -81,12 +95,12 @@ export class BookDetailsHebrewComponent implements OnInit {
     this.item2.UserName = this.UserNameLogin;
   
     if (this.UserNameLogin != "") {
-      this.serverService.enterItemToCart(this.item2);
-      // this.num= this.num+this.item2.Quantity;
-      console.log(this.num)
-      this.serverService.getNumProduct().subscribe(val => this.num = val);
-      console.log(this.num)
+      this.serverService.enterItemToCart(this.item2).subscribe((events) => {
+        this.changePlaying();
+        this.changePlaying();
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
 
+        });  
     }
     else {
       this.routers.navigateByUrl("/");
@@ -106,6 +120,8 @@ export class BookDetailsHebrewComponent implements OnInit {
             this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
 
         }
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
     });
@@ -132,15 +148,12 @@ export class BookDetailsHebrewComponent implements OnInit {
     // this.changePlaying();
   }
   AddQuantity(item: shoppingCart) {
-    //alert(item.NameBook + "uu");
-
-    this.Quantity=this.Quantity+1;
-    console.log("item:",item,"this.Quantity:",this.Quantity)
+item.Quantity=this.Quantity;
     this.serverService.postAddQuantity(item)//.subscribe((events) => {
     //
     //this.router.navigateByUrl("/ShoppingCart");
     this.changePlaying();
-    // this.changePlaying(); 
+     this.changePlaying(); 
     //  alert(item.NameBook + "uu");
     //});
 

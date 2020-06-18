@@ -60,8 +60,8 @@
     <div *ngFor="let item of DB" style="position:relative; ">
       <div class="row" style="margin-bottom:2%;">
         <div class="col-md-3 floatLeft" style="padding-left: 97px;">
-          <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:5%;float:left;" />
-          <span style="position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; padding: 20px;width:80%;padding-right: 30px; text-align:left;float:left;">{{item.NameBook}} </span>
+          <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:0px;float:left;" />
+          <span style=" position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; padding: 20px;width:80%;padding-right: 30px; text-align:left;float:left;padding-top:0px;">{{item.NameBook}} </span>
         </div>
         <div class="col-md-3 floatLeft" style="padding-left: 9%;">
           <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">${{item.PriceBook}} </span>

@@ -1,231 +1,236 @@
 <div class="body">
 
-  <div style="background-color:#fff;height:158px;width:100%;">
-    <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
-      <div class="top-line">
-        <div style="z-index: 1000;top: 0;">
+      <div style="background-color:#fff;height:158px;width:100%;">
+        <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
+          <div class="top-line">
+            <div style="z-index: 1000;top: 0;">
 
-          <div style="margin-left:64%;top:60px;position:fixed;">
-            <div class="tooltipSmall">
-              <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg">{{num}}</span>
-              <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
-              <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
-              <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
-                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+              <div style="margin-left:64%;top:60px;position:fixed;"> 
+               <div class="tooltipSmall" >
+                <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" >{{num}}</span>
+                <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
+                <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
+                <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
+                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
-                    <span class="span" class="shopping-cart-title"
-                          style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
-                    , sans-serif;font-weight: bold;font-size:20px;">{{num}}books in your cart</span>
+                    <span  class="span" class="shopping-cart-title" 
+                    style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
+                    , sans-serif;font-weight: bold;font-size:20px;">{{num}} books in your cart</span>
                     <br />
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                     <br />
                   </div>
                 </div>
                 <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
-                  <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
-                    <div>
-                      <div style="display: flex;justify-content:space-around; padding-top:5%;">
-                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
-                        <span class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">${{item.Total}}</span>
-                      </div>
-                      <br />
-                      <mat-divider></mat-divider>
-                    </div>
-                  </div>
+                <div *ngFor="let item of DBShoppingCart; let i = index"  style="position:relative; ">
+                  <div >
+                    <div  style="display: flex;justify-content:space-around; padding-top:5%;">
+                  <img  class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
+                  <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
+                  <span  class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">${{item.Total}}</span>
+                </div> 
+                  <br/>
+                <mat-divider></mat-divider>
+                 </div>
                 </div>
-                <div style="margin:auto;">
+                </div>    
+                <div  style="margin:auto;">
                   <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                     <div class="row" style="float: left;width: 370px; margin-top:5px;">
-                      <div class="row">
-                        <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">Total </label>
-                        <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;margin-left: 0px;margin-right: 18px;float: right;">${{this.Total}}</label>
-                      </div>
-                      <div class="row" style="margin-top: 10px;">
-                        <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
-                        <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
+                          <div class="row" >
+                          <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">Total </label>
+                          <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;margin-left: 0px;margin-right: 18px;float: right;">${{this.Total}}</label>
+                          </div>
+                          <div class="row" style="margin-top: 10px;">
+                          <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
+                          <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
                           padding-left: 0;
                           float: right;
                           width: 155px;
                           margin-left: 212px;
                           margin-right: 31px;
-                          height: 54px;">
-                          CHECKOUT
-                        </button>
+                          height: 54px;">CHECKOUT</button>
                       </div>
-                    </div>
-                  </div>
+                        </div>
+                  </div> 
                 </div>
-              </mat-card>
-            </div>
+                </mat-card>
+              </div>
 
+            </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- <div class="top-line">
-      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
-    </div>
-  </div>-->
-  <!-- </div> -->
-  <!-- <div class="containerDivGeneric" style="margin-top: 100px;">
-    <div class="row">
-        <img src="/assets/images/books.PNG"  style="width:100%;"/>
-      </div>
+        <!-- <div class="top-line">
+          <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" style="position:fixed; top:20px;" />
+        </div> 
       </div>-->
-  <div class="col-md-12 " style="margin:auto;text-align: left;">
-    <div>
-      <span class="span">World Union  of Jewish Studies publishes a periodical and annotated editions of primary sources in Jewish studies</span><br />
-      <span class="span">in two different series </span><br />
-      <span class="span"> The Mekorot Series of the study of Jewish Culture in shetkoff The Rabbi Moshe and Amalia Rosen Foundation</span><br />
-      <span class="span">and the Eshkolot Series in cooperation with the Herzog Academic College</span>
-      <br /><br />
-      <span class="span">You can purcase the union's books.</span><br />
-      <span class="span">To purcase "Jewish Studies" you can contact to the Ministry, 02-5325841 or email jewishst@vms.huji.ac.il.</span>
-      <br /><br /><br />
-
-    </div>
-
-    <!--<div class="DivPic">-->
-    <div class="row width100" style="text-align:center">
-
-      <div class="col-md-4 floatLeft ">
-        <img style="margin-left:10%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
-
-        <img style="margin-left:10%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
-        <br /><label class="label" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">Sources of Jewish Culture</label>
-      </div>
-      <div class="col-md-4 floatLeft">
-        <img style="margin-left:50%; cursor:pointer; " src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
-        <img style="margin-left:50%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
-
-        <br />  <label class="label" style="margin-left: 49%;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">Jewish Studies</label>
-      </div>
-      <div class="col-md-4 floatLeft">
-        <img style="margin-left:72%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
-        <img style="margin-left:72%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==true" />
-        <br /> <label class="label" style="float: right;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">Eshkolot</label>
-      </div>
-      <br />
-    </div>
-    <div class="clear"></div>
-    <div class="container">
+    <!-- </div> -->
+    <!-- <div class="containerDivGeneric" style="margin-top: 100px;">
       <div class="row">
-        <div class="col-md-12 border-button margin-b-30"></div>
-
-      </div>
-    </div>
-  </div>
-  <div>
-    <br /><br />
-    <div class="col-md-12 " style="margin:auto;text-align: left;">
-      <div *ngIf="ShowBlue1==true" class="category-paragraph">
-        <span class="span">The series "Sources for the Study of Jewish Culture" is a series of critical annotated editions of a wide</span><br />
-        <span class="span">range of sources in Jewish Studies: Philosophy, Halakha, Poetry and more - many of which are published for</span><br />
-        <span class="span">the first time.It is published by the World Union of Jewish Studies and the Rabbi Moshe and Amalia</span><br />
-        <span class="span"> Rosen Foundation.The books are available in Hebrew only.</span><br /><br /><br />
-      </div>
-      <div *ngIf="ShowBlue2==true" class="category-paragraph">
-        <span class="span">Jewish Studies is the annual journal of the World Union of Jewish Studies.</span><br />
-        <span class="span"> Articles published in Jewish Studies are also available on <a href="https://drive.google.com/file/d/1TvROQ-BPMOsL-KA8aFzu7Az7uL84Pqm6/view" class="span-link" target="_blank">JStor</a>. Submission instructions can be found <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">here</a>.</span><br /><br /><br />
-      </div>
-      <div *ngIf="ShowBlue3==true" class="category-paragraph">
-        <span class="span">"Eshkolot" is a series of books published in association with Herzog College.</span><br /><br /><br />
-      </div>
-    </div>
-    <div>
-      <div class="col-md-12 marginAuto" style="padding:0px;">
-        <ul class="products clearfix products-4" style="padding:0px;">
-          <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems: DB.length} " class="col-md-4 floatLeft" style="height:670px;">
-
-            <li (click)="Details(item)">
-              <div class="container">
-                <div class="background" style="text-align:center; align-items: center">
-                  <div style="margin:auto;"></div>
+          <img src="/assets/images/books.PNG"  style="width:100%;"/>
+        </div>
+        </div>-->
+        <div class="col-md-12 " style="margin:auto;text-align: left;">
+          <div>
+            <span class="span">World Union  of Jewish Studies publishes a periodical and annotated editions of primary sources in Jewish studies</span><br />
+            <span class="span">in two different series </span><br />
+            <span class="span"> The Mekorot Series of the study of Jewish Culture in shetkoff The Rabbi Moshe and Amalia Rosen Foundation</span><br />
+            <span class="span">and the Eshkolot Series in cooperation with the Herzog Academic College</span>
+            <br /><br />
+            <span class="span">You can purcase the union's books.</span><br />
+            <span class="span">To purcase "Jewish Studies" you can contact to the Ministry, 02-5325841 or email jewishst@vms.huji.ac.il.</span>
+            <br /><br /><br />
+  
+          </div>
+  
+                <!--<div class="DivPic">-->
+                <div class="row width100" style="text-align:center">
+                  
+                  <div class="col-md-4 floatLeft ">
+                    <img style="margin-left:10%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
+  
+                    <img style="margin-left:10%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
+                    <br /><label class="label"  (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">Sources of Jewish Culture</label>
+                  </div>
+                  <div class="col-md-4 floatLeft">
+                    <img style="margin-left:50%; cursor:pointer; " src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
+                    <img style="margin-left:50%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
+  
+                  <br />  <label class="label" style="margin-left: 49%;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">Jewish Studies</label>
+                  </div>
+                  <div class="col-md-4 floatLeft">
+                    <img style="margin-left:72%; cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
+                    <img style="margin-left:72%; cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==true" />
+                   <br /> <label class="label" style="float: right;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">Eshkolot</label>
+                  </div>
+                  <br />
                 </div>
-
-                <div class="border-book featured-image content" (click)="Details(item)"
-                     [style.background-image]="'url('+item.Image+')'"
+            <div class="clear"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 border-button margin-b-30"></div>
+  
+            </div>
+          </div>
+        </div>
+        <div>
+                <br /><br /> 
+        <div class="col-md-12 " style="margin:auto;text-align: left;">
+          <div *ngIf="ShowBlue1==true" class="category-paragraph">
+            <span class="span">The series "Sources for the Study of Jewish Culture" is a series of critical annotated editions of a wide</span><br />
+            <span class="span">range of sources in Jewish Studies: Philosophy, Halakha, Poetry and more - many of which are published for</span><br />
+            <span class="span">the first time.It is published by the World Union of Jewish Studies and the Rabbi Moshe and Amalia</span><br />
+            <span class="span"> Rosen Foundation.The books are available in Hebrew only.</span><br /><br /><br />
+          </div>
+          <div *ngIf="ShowBlue2==true" class="category-paragraph">
+            <span class="span">Jewish Studies is the annual journal of the World Union of Jewish Studies.</span><br />
+            <span class="span"> Articles published in Jewish Studies are also available on <a href="https://drive.google.com/file/d/1TvROQ-BPMOsL-KA8aFzu7Az7uL84Pqm6/view" class="span-link" target="_blank">JStor</a>. Submission instructions can be found <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank">here</a>.</span><br /><br /><br />
+            </div>
+          <div *ngIf="ShowBlue3==true" class="category-paragraph">
+            <span class="span">"Eshkolot" is a series of books published in association with Herzog College.</span><br /><br /><br />
+          </div>
+        </div>
+          <div >
+            <div class="col-md-12 marginAuto" style="padding:0px;">
+              <ul class="products clearfix products-4" style="padding:0px;">
+                <div *ngIf="DB">
+                <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems: DB.length} " class="col-md-4 floatLeft" style="height:670px;" >
+  
+                  <li (click)="Details(item)">
+                    <div class="container" >
+                      <div class="background" style="text-align:center; align-items: center">
+                        <div style="margin:auto;"></div>
+                      </div>
+                      
+                      <div  class="border-book featured-image content" (click)="Details(item)"
+                      [style.background-image]="'url('+item.Image+')'"
                      style="background-size: contain; position:relative;
                       z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
                        center; display: flex;align-items: center;justify-content: center;">
-
-                  <div class="view overlay">
+  
+                        <div class="view overlay">
                     <!--  <img (click)="Detais(item)" (mouseenter)="ShowColor=true"
                          style="margin:8px; display:block; width:279px; height:387px;"
-                          color="#85a6b7" src={{item.Image}}
-                          class="attachment-shop_catalog size-shop_catalog wp-post-image im"
+                          color="#85a6b7" src={{item.Image}} 
+                          class="attachment-shop_catalog size-shop_catalog wp-post-image im" 
                           sizes="(max-width: 500px) 100vw, 500px">-->
-                    <div class="cart-loading">
-                      <i class="fusion-icon-spinner"></i>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fusion-product-content" (click)="Details(item)" style="width: 296px; margin: auto;">
-                  <div class="product-details">
-                    <div class="product-details-container" style="margin-top:20px;margin-bottom:10px; font-size:18px;">
-                      <span class="product-title" (click)="Details(item)" data-fontsize="18" data-lineheight="30">
-                        <div class="tooltipSmallC">
-                          <!-- <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;" >
-                            {{item.Name}}
-                          </a> -->
-                          <a (click)="Details(item)" style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
-                            {{item.Name}}
-                          </a>
-                          <span class="tooltiptextSmallC" style="text-align:left;padding-left:2%;height: fit-content !important;">
-                            {{item.Name}}
+                         <div class="cart-loading"> 
+                           <i class="fusion-icon-spinner"></i>
+                          </div>
+                        </div>
+                      </div>
+  
+                    <div class="fusion-product-content" (click)="Details(item)" style="width: 296px; margin: auto;">
+                      <div class="product-details">
+                        <div class="product-details-container" style="margin-top:20px;margin-bottom:10px; font-size:18px;">
+                          <span class="product-title" (click)="Details(item)" data-fontsize="18" data-lineheight="30" >
+                            <div class="tooltipSmallC" >
+                              <!-- <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;" >
+                               {{item.Name}}
+                             </a> -->
+                             <a  (click)="Details(item)" style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
+                              {{item.Name}}
+                            </a>
+                              <span class="tooltiptextSmallC" style="text-align:left;padding-left:2%;height: fit-content !important;">
+                               {{item.Name}}
+                                </span>
+                              </div>
                           </span>
                         </div>
-                      </span>
+                      </div>
+                        <!--<a class="show_details_button" >
+          {{item.Details}}
+        </a>-->
+  
+                         <div class="fusion-price-rating" style="padding-bottom:15px;padding-top: 15px;">
+  
+                           <span class="price"  style="font-size:18px">
+                            <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0">
+                             <span class="woocommerce-Price-currencySymbol">$</span> {{item.Price}}
+                             </span>
+                           </span>
+  
+                          <span class="old-price" style="font-size:18px;text-decoration: line-through;">
+                            <span 
+                             class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0" style="color: #026fa7;">
+                             <span
+                             class="woocommerce-Price-currencySymbol">$</span>{{item.Price}}
+                            </span>
+                          </span>
+  
+                          <span class="price"  style="font-size:18px">
+                            <span
+                             class="woocommerce-Price-amount amount" 
+                             *ngIf="item.SallePrice!=0">
+                             <span 
+                              class="woocommerce-Price-currencySymbol">$</span>{{item.SallePrice}}
+                            </span>
+                          </span>
+                        </div> 
+  
                     </div>
-                  </div>
-                  <!--<a class="show_details_button" >
-                    {{item.Details}}
-                  </a>-->
-
-                  <div class="fusion-price-rating" style="padding-bottom:15px;padding-top: 15px;">
-
-                    <span class="price" style="font-size:18px">
-                      <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0">
-                        <span class="woocommerce-Price-currencySymbol">$</span> {{item.Price}}
-                      </span>
-                    </span>
-
-                    <span class="old-price" style="font-size:18px;text-decoration: line-through;">
-                      <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0" style="color: #026fa7;">
-                        <span class="woocommerce-Price-currencySymbol">$</span>{{item.Price}}
-                      </span>
-                    </span>
-
-                    <span class="price" style="font-size:18px">
-                      <span class="woocommerce-Price-amount amount"
-                            *ngIf="item.SallePrice!=0">
-                        <span class="woocommerce-Price-currencySymbol">$</span>{{item.SallePrice}}
-                      </span>
-                    </span>
-                  </div>
-
+  
+                      <div class="product-buttons" (click)="Details(item)">
+                        <div class="product-buttons-container clearfix"  (click)="Details(item)">
+                          <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
+                          <button (click)="Details(item)" class="buy-btn" >BUY</button>
+                          <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
+                          <!-- <span style="cursor:pointer" (click)="Detais(item)">Details</span> -->
+                        </div>
+                      </div>
+  
+                    </div>
+                  </li>
                 </div>
-
-                <div class="product-buttons" (click)="Details(item)">
-                  <div class="product-buttons-container clearfix" (click)="Details(item)">
-                    <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
-                    <button (click)="Details(item)" class="buy-btn">BUY</button>
-                    <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
-                    <!-- <span style="cursor:pointer" (click)="Detais(item)">Details</span> -->
-                  </div>
-                </div>
-
-              </div>
-            </li>
+                 </div>
+              </ul>
+              <pagination-controls class="paginator"  previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
+              <br/><br/><br/>
+            </div>
           </div>
-        </ul>
-        <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
-        <br /><br /><br />
+        </div>
       </div>
-    </div>
-  </div>
-  </div>
+  

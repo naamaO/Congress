@@ -43,6 +43,7 @@ export class NewHebrewComponent implements OnInit {
   public DBShoppingCart: shoppingCart[];
 
   constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
+        //get list of shopping cart
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
       this.DBShoppingCart = val;
         for (var i = 0; i < this.DBShoppingCart.length; i++) {
@@ -54,8 +55,8 @@ export class NewHebrewComponent implements OnInit {
         }
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-
-    this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
+      //get list of all books
+      // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 
 
@@ -74,6 +75,14 @@ export class NewHebrewComponent implements OnInit {
 
   ngOnInit() {
 
+    this.serverService.getAllDBFromServerHebrew().subscribe(
+      resp => {
+        this.DB = resp;
+        this.DB = this.DB.filter(book => book.GroupBook == 1);
+      },
+      error => {  
+        console.log(error)
+      });
   }
   NavigCart() {
     this.router.navigateByUrl("/ShoppingCartHebrew");

@@ -60,10 +60,10 @@
 
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-form-field appearance="none" class="th-form-filter" name="filterSelectObj[0]" ngDefaultControl>
-              <label class="lable-th" style="font-size: medium;"> Lecture Name </label>
+              <label class="lable-th" style="font-size: medium;"> Lecturer Name </label>
               <select style="color:#E8E8E8;" matNativeControl name="{{filterSelectObj[0].columnProp}}" [(ngModel)]="filterSelectObj[0].modelValue"
                       (change)="filterChange(filterSelectObj[0],$event)">
-                <option style="color:#167c9f;" value="" mat-head er-cell>Lecture Name</option>
+                <option style="color:#167c9f;" value="" mat-head er-cell>Lecturer Name</option>
                 <option style="color:#167c9f;" mat-header-cell [value]="item" *ngFor="let item of filterSelectObj[0].options">{{item}}</option>
               </select>
             </mat-form-field>
@@ -182,7 +182,7 @@
       </mat-paginator>
       <!--<pagination-controls (pageChange)="p = $event;pageChanged(p)" maxSize="5"></pagination-controls>-->
     </div>
-    <div class="col-md-2"></div>
+    <!--<div class="col-md-2"></div>-->
   </div>
 </div>
 
@@ -199,7 +199,7 @@
             </div>
             <div class="modal-body">
               <div class="row marginAuto">
-                <span class="col-md-3 header-modal floatLeft bold">Lecture name</span>
+                <span class="col-md-3 header-modal floatLeft bold">Lecturer name</span>
                 <span class="col-md-3 header-modal floatLeft bold "> Lecture title [English]</span>
                 <span class="col-md-3 header-modal floatLeft bold"> Lecture title [Hebrew]</span>
                 <span class="col-md-3 header-modal floatLeft bold"> Lecture language</span>
@@ -350,7 +350,7 @@
                   <div>
 
                     <div class="row marginAuto">
-                      <span class="col-md-3 header-modal floatLeft bold">Lecture name</span>
+                      <span class="col-md-3 header-modal floatLeft bold">Lecturer name</span>
                       <span class="col-md-3 header-modal floatLeft bold"> Lecture title [English]</span>
                       <span class="col-md-3 header-modal floatLeft bold"> Lecture title [Hebrew]</span>
                       <span class="col-md-3 header-modal floatLeft bold"> Lecture language</span>

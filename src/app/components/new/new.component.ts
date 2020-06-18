@@ -50,7 +50,8 @@ export class NewComponent implements OnInit {
   public DBShoppingCart: shoppingCart[];
 
   constructor(private ngZone: NgZone,private cd: ChangeDetectorRef,public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
-    this.serverService.getAllDBFromServer().subscribe(val => this.DB = val);
+    // this.serverService.getAllDBFromServer().subscribe(val => this.DB = val);
+
     this.serverService.getNumProduct().subscribe(val => this.num = val);
     this.onResize();
     this.changeImg = false;
@@ -65,6 +66,7 @@ export class NewComponent implements OnInit {
         }
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+
   }
   @HostListener('window:resize', ['$event'])
   onResize(event?) {
@@ -83,6 +85,14 @@ export class NewComponent implements OnInit {
   }
   ngOnInit() {
    
+    this.serverService.getAllDBFromServer().subscribe(
+      resp => {
+        this.DB = resp;
+        this.DB = this.DB.filter(book => book.GroupBook == 1);
+      },
+      error => {  
+        console.log(error)
+      });
   }
   SendToTranzila() {
     this.router.navigate(['Pay', this.Total]);

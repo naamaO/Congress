@@ -53,7 +53,7 @@ export class ServerService {
   enterItemToCart(item: shoppingCart):any {
     this.LoginUserName = (this.getCookie('UserName'));
     //item.login = this.LoginUserName;
-   return this.http.post(this.port + "/api/Home/PostToCart", item).subscribe();
+   return this.http.post(this.port + "/api/Home/PostToCart", item);
   }
   postAddQuantity(item: shoppingCart) {
     this.http.post(this.port + "/api/Home/postAddQuantity", item).subscribe();

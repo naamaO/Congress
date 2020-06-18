@@ -1,10 +1,11 @@
-import { Component, OnInit,Input,OnDestroy } from '@angular/core';
+import { Component, OnInit,Input,OnDestroy, NgZone } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServerService } from '../../services/server.service';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie';
 import { shoppingCart } from 'src/classes/shoppingCart';
+import { __await } from 'tslib';
 
 @Component({
   selector: 'app-book-details',
@@ -21,8 +22,7 @@ export class BookDetailsComponent implements OnInit {
   public num: number;
   public Total: number;
   public DBShoppingCart: shoppingCart[];
-
-  constructor(public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
+  constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 1;
     this.serverService.getNumProduct().subscribe(val => this.num = val);
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
@@ -51,11 +51,33 @@ export class BookDetailsComponent implements OnInit {
   }
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
+    this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+
   } 
   SendToTranzila() {
   
     this.routers.navigate(['Pay', this.Total]);
  }
+ changePlaying() {
+  __await (1000);
+  this.ngZone.run(() => {
+    this.serverService.getAllDBShoppingCart().subscribe((val) => {
+      this.DBShoppingCart = val;
+      for (var i = 0; i < this.DBShoppingCart.length; i++) {
+        if (this.DBShoppingCart[i].SallePrice == 0)
+          this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+        else
+          this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+
+      } 
+       this.serverService.getNumProduct().subscribe(val => this.num = val);
+
+    });
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
+
+    this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+  });
+}
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -79,8 +101,15 @@ export class BookDetailsComponent implements OnInit {
 
     if (this.UserNameLogin != "") {
       this.serverService.enterItemToCart(this.item2).subscribe((events) => {
+        this.changePlaying();
+        this.changePlaying();
         this.serverService.getNumProduct().subscribe(val => this.num = val);
-      });
+
+        });  
+        this.changePlaying();
+        this.changePlaying();
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+
     }
 
     else {

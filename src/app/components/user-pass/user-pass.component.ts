@@ -97,7 +97,14 @@ if(this.Rout==1)
    this.router.navigateByUrl("/NewMemberAccount/1");
    if(this.Rout==5)
    this.router.navigateByUrl("/NewMemberAccount/5");
-
+   if(this.Rout==2)
+   this.router.navigateByUrl("/NewMemberAccount/2");
+   if(this.Rout==3)
+   this.router.navigateByUrl("/NewMemberAccount/3");
+   if(this.Rout==4)
+   this.router.navigateByUrl("/NewMemberAccount/4");
+   if(this.Rout==6)
+   this.router.navigateByUrl("/NewMemberAccount/6");
    
   }
   SendCheckUserPassword() {

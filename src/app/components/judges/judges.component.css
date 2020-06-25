@@ -16,10 +16,11 @@
   text-align:center;
 }
 .hoverEdit:hover{
-  width:50px;
-  height: 50px;
+  width:45px;
+  height: 45px;
   border-radius: 80px;
-  background-color: black;
+  background-color: lightgray; 
+  /* margin-right:30px; */
 }
 .big {
   /*height: 20%;*/

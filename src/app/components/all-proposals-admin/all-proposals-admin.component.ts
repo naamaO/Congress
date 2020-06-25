@@ -90,10 +90,13 @@ export class AllProposalsAdminComponent implements OnInit {
 
 
   selectDivision(div: string) {
+
     this.serverService.SubDivisionEnglish(div).subscribe((events) => {
 
       this.ArrSubDivision = events;
+      debugger
     });
+    debugger
   }
 
   SelectField(Field: string) {

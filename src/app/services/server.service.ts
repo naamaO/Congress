@@ -204,6 +204,11 @@ export class ServerService {
 
     return this.http.get<string>(this.port + "/api/Home/GetUserNameLogin?LoginUserName=" + this.LoginUserName);
   }
+  getUserDetails(): Observable<User> {
+    this.LoginUserName = (this.getCookie('UserName'));
+    return this.http.get<User>(this.port + "/api/Home/getUserDetails?LoginUserName=" + this.LoginUserName);
+  }
+
   getName(): Observable<Name> {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);

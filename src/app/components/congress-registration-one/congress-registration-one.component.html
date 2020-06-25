@@ -22,14 +22,15 @@
           Full Name [Hebrew]
           <div class="tooltipSmallName">
             <img src="/assets/images/TooltipIcon.png" />
-            <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">
-              Not mandatory for<br />
-              English speakers<br />
+            <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
+              If you do not know how to spell your name in Hebrew <br />
+              WUJS staff will add it on your behalf to the Congress program <br />
             </span>
           </div>
         </label>
         <label class="col-md-4 floatLeft headerGray" #email>Email</label>
       </div>
+
       <div class="row " style="margin-left:1%">
         <select class="col-md-1" style="background:content-box;" (click)="focustitle()" (mouseleave)="unfocustitle()">
           <option [value]="Division" selected>{{Title}}</option>
@@ -41,16 +42,19 @@
           <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName" style="width:45%;" />
           <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width:45%;margin-left:2%;" />
         </div>
-        <div class="col-md-3">
-          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;" />
-          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;margin-left:2%;" />
+        <div class="col-md-3" style="direction: rtl;">
+          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;margin-left:2%;" />
+          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;"/>
         </div>
         <!--</div>-->
         <div class="col-md-4 floatLeft" style="text-align:right;">
-          <input type="text" value="{{LoginUserName}}" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
+          <input type="text" value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
+
         </div>
       </div>
-      <div class="row margin-top" style="margin-left:1%">
+
+      
+      <div class="row margin-top" style="margin-left:1%;margin-top: 30px;">
         <label class="col-md-6 headerGray" #div>Division</label>
         <label class="col-md-5 floatLeft  headerGray" #subdiv>Subdivision</label>
       </div>
@@ -58,6 +62,7 @@
         <label class="col-md-6">{{Division}}</label>
         <label class="col-md-5 floatLeft">{{SubDivision}}</label>
       </div>
+      <br />
     </div>
 
     <br /><br />
@@ -82,7 +87,7 @@
           <!-- <input #testInput id="name" ngModel name="name" formControlName="TitleEnglish" type="text" class="form-control col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />-->
           <!-- <input name="firstName" ngModel pattern="[a-zA-Z ]*">-->
           <div class="col-md-6">
-            <input style="width:80%;" (focusout)="unfocusenglish()" (focus)="focusenglish()" #testInput name="firstName" ngModel pattern="[0590-05FF‏]*" type="text" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
+            <input style="width:80%;" (focusout)="unfocusenglish()" (focus)="focusenglish()" #testInput name="firstName" ngModel  [pattern]="'^[a-zA-Z \-\']$'" (change)="TitleEnglishP($event)" type="text" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
           </div>
           <div class="col-md-6">
             <input (focusout)="unfocusacademic()" (focus)="focusacademic()" #testInput type="text" style="margin-left:16%;width:80%; " *ngIf="showLikeProp==false" />
@@ -138,7 +143,7 @@
       <div class="row margin-top form-group">
 
         <div class="col-md-6">
-          <textarea (focusout)="unfocusabs()" (focus)="focusabs()" (change)="changeProp()" #testInput [(ngModel)]="Proposal" style="width:80%;height:97px;" *ngIf="showLikeProp==false"></textarea>
+          <textarea  pattern="^(?:\w+\W+){0,5}(?:\w+)" (focusout)="unfocusabs()" (focus)="focusabs()" (keyup)="changeProp(this, 250)" #testInput [(ngModel)]="Proposal" style="width:80%;height:97px;" *ngIf="showLikeProp==false"></textarea>
         </div>
         <div class="col-md-6">
           <textarea (focusout)="unfocuskey()" (focus)="focuskey()" #testInput [(ngModel)]="Keywords" style="width:80%;height:97px;margin-left:16%" *ngIf="showLikeProp==false"></textarea>
@@ -151,12 +156,48 @@
         </div>
         <br /><br />
         <div class="row margin-top form-group col-md-12">
-          <button (click)="Draft()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:20%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
-          <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
-          <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
-          <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;" (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
-          <br /><br />
-          <label *ngIf="SaveDraft">The draft saved</label>
+          <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-left:20%;" >Save draft</button>
+          <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;" >Submit</button>
+          <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;">Save draft</button>
+          <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;" >Submit</button> 
+         
+          <!-- <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft"  class="fill-btn-blue col-md-3" style="margin-left:20%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Save draft</button>
+          <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Submit</button>
+          <button (click)="Draft()" disabled *ngIf="showLikeProp==true"data-toggle="modal" data-target="#myModalraft" class="fill-btn-disabled col-md-3" style="margin-left:20%;"  (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
+          <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
+ -->
+          <br /><br /> 
+          <!-- <label *ngIf="SaveDraft">The draft saved</label> -->
+          
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="modal fade" id="myModalraft" role="dialog">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="header-WithOut-border" style="margin: inherit;">EDIT LECTURE PROPOSAL</h5>-->  
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div> 
+            <div class="modal-body">
+             <span style="font-size: 18px;">Your draft has been saved.</span> <br/>
+             <span style="font-size: 18px;"> Please make sure to submit it before the deadline.</span> 
+            </div>
+
+           <!--  <div class="modal-footer">
+              <div style="margin-left: 74%;padding-bottom:2%;">
+                <button (click)="Save()" class="fill-btn-blue" style="padding:10px" data-dismiss="modal">save</button>
+              </div> 
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  @ViewChild('title') title: ElementRef;
   public num: number;
   public ShowMessage: boolean;
   public FirstNameEnglish: string;
@@ -73,6 +74,12 @@ export class RegistrationComponent implements OnInit {
         this.Email = "";
       }
     });
+  }
+  focustitle() {
+    this.title.nativeElement.style.color = "#27b5e5";
+  }
+  unfocustitle() {
+    this.title.nativeElement.style.color = "gray";
   }
   hasLowerCase(str) {
     if (str != null) {

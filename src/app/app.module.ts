@@ -58,6 +58,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
+import { NewMemberAccountCompponent } from './components/new-member-account/new-member-account.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegistrationComponent,
     WelcomeComponent,
     UserPassComponent,
+    MembershipInformationComponent,
+    NewMemberAccountCompponent,
     CongressRegistrationOneComponent,
     CongressRegistrationSessionComponent,
     InviteMembersComponent,

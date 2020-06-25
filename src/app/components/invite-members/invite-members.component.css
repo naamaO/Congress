@@ -136,13 +136,14 @@ select {
   background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
+  outline: none;
   color: white;
   font-weight: bold;
   font-size: 19px;
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
   text-align: center;
-  width: 30%;
+  width: 25%;
 }
 
 

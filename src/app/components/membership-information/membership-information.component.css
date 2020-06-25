@@ -4,6 +4,190 @@
   margin: 0px auto;
   /* text-align: left;  */
 }
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -49%;
+  }
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptext {
+  width: 200px !important;
+  height: 150px !important;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+.tooltipSmallName {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+.tooltipSmallName .tooltiptextSmallName {
+  visibility: hidden;
+  width: 120px;
+  background-color: #27b5e5;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  /*border-radius: 6px;*/
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  /*top: -5%;*/
+}
+
+.tooltiptextSmallName:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptextSmallName {
+  width: 200px !important;
+  height: 60px !important;
+}
+
+.tooltipSmallName:hover .tooltiptextSmallName {
+  visibility: visible;
+}
+
+
+
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmall .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -49%;
+  }
+
+.tooltiptextSmall:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptextSmall {
+  width: 200px !important;
+  height: 150px !important;
+}
+
+.tooltipSmall:hover .tooltiptextSmall {
+  visibility: visible;
+}
+
+
+.tooltipSmallName {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+.tooltipSmallName .tooltiptextSmallName {
+  visibility: hidden;
+  width: 120px;
+  background-color: #27b5e5;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  /*border-radius: 6px;*/
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  /*top: -5%;*/
+}
+
+.tooltiptextSmallName:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+  color: pink;
+}
+
+.tooltiptextSmallName {
+  width: 200px !important;
+  height: 60px !important;
+}
+
+.tooltipSmallName:hover .tooltiptextSmallName {
+  visibility: visible;
+}
+
+
 .btn-send-message {
   text-align: center;
   width: 9%;
@@ -255,6 +439,25 @@ text-decoration: underline #27b5e5;
 .margin-b-15 {
   margin-bottom: 15px;
 }
+.fill-btn-white{
+  
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+background-color: white;
+padding: 10px 48px;
+border-color: #27b5e5;
+outline: none;
+color: #27b5e5;
+font-weight: normal;   
+font-size: 20px;
+border-radius: 30px;
+cursor: pointer;
+text-align: center;
+width: 176px;
+}
+
 .content-login .fill-btn-blue {
   background-color: #026fa7;
   padding: 6px 62px;
@@ -264,25 +467,8 @@ text-decoration: underline #27b5e5;
   font-weight: bold;
   font-size: 19px;
 }
-/* .mat-form-field-appearance-legacy .mat-form-field-ripple */
-.fields ::ng-deep .mat-form-field .mat-focused .mat-form-field-ripple {
-  background-color: #27b5e5 !important;
-}.fields  {
-  margin: auto 9%;
-  caret-color: #27b5e5;
-}
-.mat-input-element {
-  caret-color: #27b5e5;
-}
-.fill-btn-blue {
-  /* background-color: #026fa7;
-  padding: 10px 48px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 19px;
-  /*border-radius: 20px;
-  cursor: pointer; */  
+
+.fill-btn-blue { 
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -290,6 +476,7 @@ text-decoration: underline #27b5e5;
   background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
+  outline: none;
   color: white;
   font-weight: normal;   
   font-size: 20px;
@@ -297,14 +484,6 @@ text-decoration: underline #27b5e5;
   cursor: pointer;
   text-align: center;
   width: 176px;
-  outline: none;
-}
-input {
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  background-color: transparent;
-  border-bottom: 0.1px solid gray;
 }
 .pull-right {
   float: right;

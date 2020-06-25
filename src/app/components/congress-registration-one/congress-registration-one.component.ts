@@ -59,7 +59,6 @@ export class CongressRegistrationOneComponent implements OnInit {
   public LoginUserName: string;
   public Title: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
-
   public showLikeProp: boolean = false;
   constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
 
@@ -144,6 +143,7 @@ export class CongressRegistrationOneComponent implements OnInit {
 
   }
   selectSubDivision(subDiv: string) {
+    debugger
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
@@ -178,8 +178,21 @@ export class CongressRegistrationOneComponent implements OnInit {
   }
   selectlang(lan: string) {
   }
-  changeProp() {
-
+  TitleEnglishP(event){
+  }
+  changeProp(element, maxvalue) {
+    // var q = element.Proposal.split(/[\s]+/).length;
+    var q = element.Proposal.split(" "); 
+    
+    if(q.length > maxvalue){
+        var r = q.length - maxvalue;
+        alert("You can enter no more than "+ maxvalue+" words");
+        // alert(" you have input "+q.length+" words into the "+
+        // "text area box you just completed. It can return no more than "+
+        // maxvalue+" words to be processed. Please abbreviate "+
+        // "your text by at least "+r+" words");
+        return false;
+    }
   }
   OpenSecondProposal() {
     //this.serverService.enterSecondDraft();

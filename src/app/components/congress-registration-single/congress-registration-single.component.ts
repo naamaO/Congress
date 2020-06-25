@@ -61,6 +61,10 @@ export class CongressRegistrationSingleComponent implements OnInit {
       this.ArrDivision = events;
       this.ShowSub = true;
     });
+    //     this.serverService.DivisionEnglish().subscribe((events) => {
+    //   this.ArrDivision = events;
+    //   this.ShowSub = true;
+    // });
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
       this.LastName = events.LastName;
@@ -86,8 +90,24 @@ export class CongressRegistrationSingleComponent implements OnInit {
         this.Division = this.Division.substr(1);
       }
     });
-    ;
   }
+
+   maxlength(element, maxvalue){
+      // var q = element.Proposal.split(/[\s]+/).length;
+      var q = element.Proposal.split(" "); 
+    
+      if(q.length > maxvalue){
+          var r = q.length - maxvalue;
+          alert("You can enter no more than "+ maxvalue+" words");
+          return false;
+      }
+}
+TitleEnglishP(elemTltle){
+  debugger
+  elemTltle.console.error();
+
+
+}
   changeStyle(event: any) {
     event.target.classList.remove('fill-btn-blue')
 
@@ -118,6 +138,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
 
   }
   selectSubDivision(subDiv: string) {
+    debugger
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
@@ -172,7 +193,8 @@ export class CongressRegistrationSingleComponent implements OnInit {
   }
   unfocusenglish() {
     this.english.nativeElement.style.color = "gray";
-  } focusdiv() {
+  } 
+  focusdiv() {
     this.div.nativeElement.style.color = "#27b5e5";
   }
   unfocusdiv() {
@@ -189,37 +211,44 @@ export class CongressRegistrationSingleComponent implements OnInit {
   }
   unfocuslang() {
     this.lang.nativeElement.style.color = "gray";
-  } focussubdiv() {
+  } 
+  focussubdiv() {
     this.subdiv.nativeElement.style.color = "#27b5e5";
   }
   unfocussubdiv() {
     this.subdiv.nativeElement.style.color = "gray";
-  }  focustitle() {
+  }
+    focustitle() {
     this.title.nativeElement.style.color = "#27b5e5";
   }
   unfocustitle() {
     this.title.nativeElement.style.color = "gray";
-  } focusnameh() {
+  }
+   focusnameh() {
     this.nameh.nativeElement.style.color = "#27b5e5";
   }
   unfocusnameh() {
     this.nameh.nativeElement.style.color = "gray";
-  } focusnamee() {
+  } 
+  focusnamee() {
     this.namee.nativeElement.style.color = "#27b5e5";
   }
   unfocusnamee() {
     this.namee.nativeElement.style.color = "gray";
-  } focusemail() {
+  }
+   focusemail() {
     this.email.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
     this.email.nativeElement.style.color = "gray";
-  } focusabs() {
+  }
+   focusabs() {
     this.abs.nativeElement.style.color = "#27b5e5";
   }
   unfocusabs() {
     this.abs.nativeElement.style.color = "gray";
-  } focuskey() {
+  } 
+  focuskey() {
     this.key.nativeElement.style.color = "#27b5e5";
   }
   unfocuskey() {

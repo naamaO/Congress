@@ -1,10 +1,11 @@
 <br />
-<div class="row">
+<div class="row" style="    padding-left: 12px;
+">
   <div class="clearfix"></div>
 
-  <div class="col-md-5">
+  <div class="col-md-5" style="padding-left: 0;">
     <h3 style="color:#27b5e5;margin-top:6%;">
-      SUBMIT A SESSION
+      Submit A Session
       <div class="tooltip">
         <img src="/assets/images/TooltipIcon.png" />
         <span class="tooltiptext" style="text-align:left;padding-left:2%;">
@@ -24,9 +25,9 @@
 
     </h3>
     <br /><br />
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <label class="headerGray" #headerEnglish>
-        Session title[English]
+        Session title [English]
         <div class="tooltipSmall">
           <img src="/assets/images/TooltipIcon.png" />
           <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;height:200px!important;">
@@ -37,13 +38,13 @@
         </div>
       </label>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top"  style="padding-left: 13px;">
       <input #testInput type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" (focusout)="unfocusEnglish()" (focus)="focusEnglish()"/>
     </div>
-    <div class="colorFocus">
-      <div class="row margin-top">
+    <div class="colorFocus"  style="padding-left: 13px;">
+      <div class="row margin-top"  >
         <label class="headerGray header" id="header" name="header" #headerHebrew>
-          Session title[Hebrew]
+          Session title [Hebrew]
           <div class="tooltipSmall">
             <img src="/assets/images/TooltipIcon.png" />
             <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
@@ -58,30 +59,30 @@
         <input #testInput type="text" class="input" [(ngModel)]="SessionName" style="width:80%;" (focusout)="unfocusHebrew()" (focus)="focusHebrew()"/>
       </div>
     </div>
-    <div class="row margin-top ">
+    <div class="row margin-top " style="padding-left: 13px;">
       <label class="headerGray" #headerDivision>Division:</label>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <select (click)="focusDivision()" (mouseleave)="unfocusDivision()"  (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;">
         <option *ngFor="let Division of ArrDivision" [value]="Division">
           {{Division}}
         </option>
       </select>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <label class="headerGray" #headerSubDiv>Subdivision:</label>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <select (click)="focusSubDiv()" (mouseleave)="unfocusSubDiv()" [(ngModel)]="SubDivision" style="background:none;width:80%;">
         <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
           {{SubDivision}}
         </option>
       </select>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <label class="headerGray" #headerAbs> Session Abstract:</label>
     </div>
-    <div class="row margin-top">
+    <div class="row margin-top" style="padding-left: 13px;">
       <textarea #testInput [(ngModel)]="Proposal" style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()"></textarea>
 
     </div>
@@ -96,7 +97,7 @@
       Session participants
       <div class="tooltipSmall">
         <img src="/assets/images/TooltipIcon.png" />
-        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;font-size:small;width:300px !important; height:180px !important">
+        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;font-size: 16px; font-weight: normal;width:300px !important; height:180px !important">
           Please add the names and email addresses of all<br />
           the particlpants in your proposed session <br />
           Including yourself. preferably in the order you <br />
@@ -112,7 +113,7 @@
 
     </h4>
     <h6 style="color:#27b5e5">In the order you would like to be presented at thr congress</h6>
-    <br /><br />
+    <br />
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerTC>Title</label>
       <label class="col-md-4 margLeft3 headerGray" #headerNC>Chairperson:</label>
@@ -131,6 +132,7 @@
       </div>
       <input (focusout)="unfocusEC()" (focus)="focusEC()" #testInput type="text" [(ngModel)]="ChairmanEmail" class="margLeft3" />
     </div>
+    <br /><br />
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT1>Title</label>
       <label class="col-md-4 margLeft3 headerGray" #headerN1>Lecture Name:</label>
@@ -205,13 +207,14 @@
       </div>
       <input (focusout)="unfocusE4()" (focus)="focusE4()" #testInput type="text" [(ngModel)]="Email4" class="margLeft3" />
     </div>
+    <br/>    <br/>
   </div>
   <div class="col-md-8 margTop2" style="text-align:center;">
     <button (click)="SendInviteMember()" class="fill-btn-blue ">SEND</button>
   </div>
 
 </div>
-
+<br/>    <br/>
 
 <div class="container-fluid" *ngIf="showErrEmpty">
   <div class="row">

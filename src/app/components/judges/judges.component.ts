@@ -65,8 +65,8 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     public ArrSubDivision: string[];
     // public ShowSub: boolean;
     public ArrLanguage: string[];
-    public Division: string = "";
-    public subdivision: string = "";
+    public Division: string;
+    public subdivision: string;
     public Value: string;
     public ArrPropSession: Judges[];
     public dataSource = new MatTableDataSource<Judges>();
@@ -149,7 +149,8 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     }
     editProp(item: Judges) {
         this.itempropID = item;
-        if (item.SessionName == null) {
+        // if ((!item.SessionName )||(!item.SessionName.trim())) {
+        if (item.SessionName==null ) {
             this.serverService.getId_W_Proposals(item).subscribe((events) => {
                 this.oneProp = events;
                 this.SessionName = this.oneProp.SessionName;
@@ -164,6 +165,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
                 this.ArrPropSession = events;
                 this.SessionName = item.SessionName;
                 this.Chairman = item.Chairman;
+                this.Status = item.Status;
                 this.isShowPropArrSession = true;
             });
         }
@@ -312,120 +314,177 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     })
     this.dataSource.filter = "";
   }
-    Save() {
+  
+  onStatusChange(statusValueChecked:string){
+      debugger
+      this.oneProp.Status = statusValueChecked;
+    console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
+  }
+  onStatusPropSessionChange(propSession : Judges,statusValueChecked:string){
+    debugger
+   
+    this.ArrPropSession.forEach((prop) => {
+        if(prop.IdProposal==propSession.IdProposal){
+            prop.Status=  statusValueChecked;
+
+        }
+        });
+} 
+  
+    Save(oneProp:any) {
         this.newProp = new Judges();
         if (this.oneProp.Division == null)
             this.newProp.Division = this.Division;
         else
-            if (this.Division == "")
                 this.newProp.Division = this.oneProp.Division;
 
         if (this.oneProp.SubDivision == null)
             this.newProp.SubDivision = this.subdivision;
         else
-            if (this.subdivision == "")
                 this.newProp.SubDivision = this.oneProp.SubDivision;
 
 
         this.newProp.IdProposal = this.oneProp.IdProposal;
         this.newProp.UserName = this.oneProp.UserName;
         if (this.oneProp.TitleEnglish == null)
-            this.newProp.TitleEnglish = "";
+            this.newProp.TitleEnglish = null;
         else
             this.newProp.TitleEnglish = this.oneProp.TitleEnglish;
         if (this.oneProp.TitleHebrew == null)
-            this.newProp.TitleHebrew = "";
+            this.newProp.TitleHebrew = null;
         else
             this.newProp.TitleHebrew = this.oneProp.TitleHebrew;
         if (this.oneProp.Proposal == null)
-            this.newProp.Proposal = "";
+            this.newProp.Proposal = null;
         else
             this.newProp.Proposal = this.oneProp.Proposal;
         if (this.oneProp.Language == null)
-            this.newProp.Language = "";
+            this.newProp.Language = null;
         else
             this.newProp.Language = this.oneProp.Language;
         if (this.oneProp.Keywords == null)
-            this.newProp.Keywords = "";
+            this.newProp.Keywords = null;
         else
             this.newProp.Keywords = this.oneProp.Keywords;
         if (this.oneProp.SessionName == null)
-            this.newProp.SessionName = "";
+            this.newProp.SessionName = null;
         else
             this.newProp.SessionName = this.oneProp.SessionName;
         if (this.oneProp.Chairman == null)
-            this.newProp.Chairman = "";
+            this.newProp.Chairman = null;
         else
             this.newProp.Chairman = this.oneProp.Chairman;
         if (this.oneProp.Remarks == null)
-            this.newProp.Remarks = "";
+            this.newProp.Remarks = null;
         else
             this.newProp.Remarks = this.oneProp.Remarks;
         if (this.oneProp.Status == null)
-            this.newProp.Status = "";
+            this.newProp.Status = null;
         else
             this.newProp.Status = this.oneProp.Status;
 
         this.serverService.sendUpdateProp(this.newProp);
+
         this.isShowProp = false;
+        this.dataSource.data.forEach((prop) => {
+            if(prop.IdProposal==this.oneProp.IdProposal){
+                prop=this.oneProp
+            }
+            });
+            
+            this.serverService.getAll_W_Proposals().subscribe(val => {
+                this.over = new Array(val.length);
+                     let d=new MatTableDataSource<Judges>(val as Judges[]);
+                     this.dataSource.data = d.data;
+                      this.dataSourcFilter.data = d.data;
+                      this.data = this.dataSource.data;
+                      console.log("this.data",this.data )
+                      this.dataSource.filterPredicate = this.createFilter();
+                      this.filterSelectObj.filter((o) => {
+                          o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+                        });
+                  });
+        return;
     }
 
+    
+
     SavePropSession(PropSession) {
+        debugger
         this.newProp = new Judges();
+
         if (PropSession.Division == null)
-            this.newProp.Division = this.Division;
+            this.newProp.Division = null;
         else
-            if (this.Division == "")
                 this.newProp.Division = PropSession.Division;
 
         if (PropSession.SubDivision == null)
-            this.newProp.SubDivision = this.subdivision;
+            this.newProp.SubDivision = null;
         else
-            if (this.subdivision == "")
                 this.newProp.SubDivision = PropSession.SubDivision;
 
 
         this.newProp.IdProposal = PropSession.IdProposal;
         this.newProp.UserName = PropSession.UserName;
         if (PropSession.TitleEnglish == null)
-            this.newProp.TitleEnglish = "";
+            this.newProp.TitleEnglish = null;
         else
             this.newProp.TitleEnglish = PropSession.TitleEnglish;
         if (PropSession.TitleHebrew == null)
-            this.newProp.TitleHebrew = "";
+            this.newProp.TitleHebrew = null;
         else
             this.newProp.TitleHebrew = PropSession.TitleHebrew;
         if (PropSession.Proposal == null)
-            this.newProp.Proposal = "";
+            this.newProp.Proposal = null;
         else
             this.newProp.Proposal = PropSession.Proposal;
         if (PropSession.Language == null)
-            this.newProp.Language = "";
+            this.newProp.Language = null;
         else
             this.newProp.Language = PropSession.Language;
         if (PropSession.Keywords == null)
-            this.newProp.Keywords = "";
+            this.newProp.Keywords = null;
         else
             this.newProp.Keywords = PropSession.Keywords;
         if (PropSession.SessionName == null)
-            this.newProp.SessionName = "";
+            this.newProp.SessionName = null;
         else
             this.newProp.SessionName = PropSession.SessionName;
         if (PropSession.Chairman == null)
-            this.newProp.Chairman = "";
+            this.newProp.Chairman = null;
         else
             this.newProp.Chairman = PropSession.Chairman;
         if (PropSession.Remarks == null)
-            this.newProp.Remarks = "";
+            this.newProp.Remarks = null;
         else
             this.newProp.Remarks = PropSession.Remarks;
         if (PropSession.Status == null)
-            this.newProp.Status = "";
+            this.newProp.Status = null;
         else
             this.newProp.Status = PropSession.Status;
-
         this.serverService.sendUpdateProp(this.newProp);
+
         this.isShowPropArrSession = true;
+
+            // this.ArrPropSession.forEach((prop) => {
+            //     if(prop.IdProposal==this.newProp.IdProposal){
+            //         prop=this.newProp;
+        
+            //     }
+            //     });
+            this.serverService.getAll_W_Proposals().subscribe(val => {
+                this.over = new Array(val.length);
+                     let d=new MatTableDataSource<Judges>(val as Judges[]);
+                     this.dataSource.data = d.data;
+                      this.dataSourcFilter.data = d.data;
+                      this.data = this.dataSource.data;
+                      console.log("this.data",this.data )
+                      this.dataSource.filterPredicate = this.createFilter();
+                      this.filterSelectObj.filter((o) => {
+                          o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+                        });
+                  });
+        return;
     }
 
     selectDivision(div: string) {

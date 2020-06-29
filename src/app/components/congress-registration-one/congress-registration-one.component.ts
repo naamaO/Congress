@@ -60,8 +60,11 @@ export class CongressRegistrationOneComponent implements OnInit {
   public Title: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
-  constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+  // public jobform = new FormGroup({
+  //   firstName: new FormControl()
+  // });
 
+  constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     //__await(500);
     //  this.serverService.DivisionEnglish().subscribe((events) => {
     //  this.ArrDivision = events;
@@ -72,7 +75,7 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
 
-      if (this.SubDivision == 'Ldino') {
+      if (this.SubDivision == 'Ladino') {
         this.ArrLanguage = ['עברית','English','Ladino']
       }
       if (this.SubDivision == 'Yiddish') {
@@ -86,10 +89,13 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.Language = events.Language;
       this.Keywords = events.Keywords;
       this.SessionName = events.SessionName;
+
+      if((events.Division !=null)||(events.Division=='')){
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
       }
+    }
     });
 
     this.LoginUserName = (this.getCookie('UserName'));
@@ -143,7 +149,6 @@ export class CongressRegistrationOneComponent implements OnInit {
 
   }
   selectSubDivision(subDiv: string) {
-    debugger
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
@@ -181,6 +186,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   TitleEnglishP(event){
   }
   changeProp(element, maxvalue) {
+    if(element.Proposal!=null){
     // var q = element.Proposal.split(/[\s]+/).length;
     var q = element.Proposal.split(" "); 
     
@@ -193,6 +199,7 @@ export class CongressRegistrationOneComponent implements OnInit {
         // "your text by at least "+r+" words");
         return false;
     }
+  }
   }
   OpenSecondProposal() {
     //this.serverService.enterSecondDraft();

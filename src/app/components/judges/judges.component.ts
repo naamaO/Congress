@@ -316,12 +316,10 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
   }
   
   onStatusChange(statusValueChecked:string){
-      debugger
       this.oneProp.Status = statusValueChecked;
     console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
   }
   onStatusPropSessionChange(propSession : Judges,statusValueChecked:string){
-    debugger
    
     this.ArrPropSession.forEach((prop) => {
         if(prop.IdProposal==propSession.IdProposal){
@@ -404,13 +402,12 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
                           o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
                         });
                   });
-        return;
+                 location.reload();
     }
 
     
 
     SavePropSession(PropSession) {
-        debugger
         this.newProp = new Judges();
 
         if (PropSession.Division == null)

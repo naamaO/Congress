@@ -20,14 +20,14 @@
   </div>
   <br />
   <div class="containerDivGeneric">
-    <div class="col-md-10" style="padding-left: 0% !important;">
+    <div class="col-md-12" style="padding-left: 0% !important;">
       <div class="clearfix"></div>
         <div class="col-md-12" style="padding: 0;">
         <br />
         <div class="row margin-top" >
-          <label class="col-md-1 headerGray" #title>Title</label>
-          <label class="headerGray" style="padding-left: 268px;" #namee>First Name [English]</label>
-          <label class="headerGray" style="padding-left: 226px;" #lastnamee>Last Name [English]
+          <label class="col-md-1 color-gray" #title>Title</label>
+          <label class="headerGray color-gray" style="padding-left: 268px;" #namee>First Name [English]</label>
+          <label class="headerGray color-gray" style="padding-left: 218px;" #lastnamee>Last Name [English]
             <!-- <div class="tooltipSmallName">
               <img src="/assets/images/TooltipIcon.png" />
               <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
@@ -40,18 +40,18 @@
           <!-- <label class="col-md-4 floatLeft headerGray" #email>Email</label> -->
         </div>
         <div class="row" style="margin-left: -1px;">
-          <select  style="background:content-box;flex: 0 0 8.333333%;max-width: 8.333333%;" (click)="focustitle()" (mouseleave)="unfocustitle()">
+          <select   [(ngModel)]="Title" style="background:content-box;flex: 0 0 8.333333%;max-width: 8.333333%;" (click)="focustitle()" (mouseleave)="unfocustitle()">
             <option [value]="Title" selected>{{Title}}</option>
             <option *ngFor="let title of ArrTitle" [value]="title">
               {{title}}
             </option>
           </select>
-          <div class="col-md-6" style="padding-left: 256px;">
-            <input  style="width: 114%;" (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName"  />
+          <div class="col-md-5" style="padding-left: 256px;">
+            <input  style="width: 133%;" (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName"  />
             <!-- <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width:45%;margin-left:2%;" /> -->
           </div>
-          <div  style="padding-left: 138px;">
-           <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width: 132%" />
+          <div  style="padding-left: 143px;">
+           <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width: 153%" />
             <!-- <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;margin-left:2%;" /> -->
             <!-- <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;"/> -->
           </div>
@@ -64,7 +64,7 @@
         <div class="row" style="margin-left: -1px;">
 
         <div  style="margin-top: 30px;">
-        <label class="col-md-4 floatLeft headerGray" style="padding:0" #email>Email</label>
+        <label class="col-md-4 floatLeft color-gray" style="padding:0" #email>Email</label>
 
           <!-- <label class="col-md-6 headerGray" #div>Division</label> -->
          <!-- <label class="col-md-5 floatLeft  headerGray" #subdiv>Subdivision</label> -->
@@ -72,31 +72,31 @@
          </div>
          <div  style="margin-left:1%;">
         
-          <label class="headerGray" style="padding-left: 285px;margin-top: 30px;" #nameh>First Name [Hebrew]   </label> 
+          <label class="color-gray" style="padding-left: 294px;margin-top: 30px;" #nameh>First Name [Hebrew]   </label> 
   
             <!-- <label class="col-md-6 headerGray" #div>Division</label>
             <label class="col-md-5 floatLeft  headerGray" #subdiv>Subdivision</label> -->
      
             </div>
          <div class="row margin-top" style="margin-left:1%;margin-top: 30px;">
-            <label class="headerGray" style="padding-left: 218px;" #lastnameh>Last Name [Hebrew]</label>
+            <label class="color-gray" style="padding-left: 208px;" #lastnameh>Last Name [Hebrew]</label>
             
             <!-- <label class="col-md-6 headerGray" #div>Division</label>
               <label class="col-md-5 floatLeft  headerGray" #subdiv>Subdivision</label> -->
        
             </div>
-        <div class="row margin-top" style="width: 24%; margin-left: -1px;">
-          <input type="text" style="padding: 0;width:185%"  value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
+        <div class="row margin-top" style="width: 26%; margin-left: -1px;">
+          <input type="text" style="padding: 0;width:90%"  value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
           <!-- <label class="col-md-6">{{Division}}</label>
           <label class="col-md-5 floatLeft">{{SubDivision}}</label> -->
         </div>
 
-        <div class="col-md-6" style="direction: rtl;padding-left: 114px;">
-          <input  style="width: 71%;" (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew"  />
+        <div class="col-md-4" style="width: 0%;direction: rtl;padding-left: 61px;">
+          <input  style="width: 93%;" (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew"  />
           <!-- <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width:45%;margin-left:2%;" /> -->
         </div>
-        <div  style="direction: rtl;padding-left: 63px;">
-         <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width: 132%" />
+        <div  style="direction: rtl;padding-left: 152px;">
+         <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width: 153%" />
           <!-- <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;margin-left:2%;" /> -->
           <!-- <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;"/> -->
         </div>
@@ -106,18 +106,18 @@
       </div>   
       <div class="row" style="margin-left: -1px;">
         <div  style="margin-top: 30px;">
-        <label class="margin">Country</label>     
+        <label class="margin color-gray">Country</label>     
         </div>
-        <div  style="margin-top: 30px;padding-left: 270px; ">
-          <label class="margin">Telephone 
-           <div class="tooltipSmallName">
-                <img src="/assets/images/TooltipIcon.png" />
-                <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
-                text
-                </span>
-              </div>
-            </label> 
+        <div  style="margin-top: 30px;">
+          <label class="margin color-gray" style="margin-left: 282px;">Address</label>     
         </div>
+        <!-- <div  style="margin-top: 30px;">
+          <label class="margin color-gray" style="margin-left: 221px;">Street</label>     
+        </div>
+        <div  style="margin-top: 30px;">
+          <label class="margin color-gray" style="margin-left: 371px;">Home Number</label>     
+        </div> -->
+       
       </div>
 
       <div class="row" style="margin-left: -1px;">
@@ -127,28 +127,95 @@
         <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
         </select>
       </div>
-      <div class="row margin-top" style="width: 38%; padding-left: 122px;">
+      <div class="margin-top" style= "padding-left: 83px;">
+        <input  style="width: 220%;"  type="text" value="{{Address}}" [(ngModel)]="Address"  />
+       </div>
+      <!-- <div class="row margin-top" style=" padding-left: 154px;">
+        <input  style="width: 296%;"  type="text" value="{{Street}}" [(ngModel)]="Street"  />
+       </div>
+      <div class="row margin-top" style=" width: 298px; padding-left: 141px;">
+        <input  style="width: 296%;"  type="text" value="{{NumberHome}}" [(ngModel)]="NumberHome"  />
+       </div> -->
+      </div>
+
+      <div class="row" style="margin-left: -1px;">
+        <div  style="margin-top: 30px;">
+           <label class="margin color-gray" >Telephone 
+            <div class="tooltipSmallName">
+                 <img src="/assets/images/TooltipIcon.png" />
+                 <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
+                 text
+                 </span>
+               </div>
+             </label> 
+         </div>
+         <div  style="margin-top: 30px;">
+          <label class="margin color-gray" style="margin-left: 233px;">Id Or Passport Number</label>     
+        </div>
+       </div>
+      <div class="row" style="margin-left: -1px;">
+      <div class="row margin-top" style="width: 25%;padding-left: 12px;">
         <input  style="width: 296%;"  type="text" value="{{NumberPhone1}}" [(ngModel)]="NumberPhone1"  />
+       </div>
+       <div class="row margin-top" style=" width: 35%; padding-left: 99px;">
+        <input  style="width: 296%;" value="" type="text" value="{{PasportNumber}}" [(ngModel)]="PasportNumber"  />
        </div>
       </div>
 
       <div class="row" style="padding-top:30px;margin-left: -1px;">
-      <div class="modal-content " style="border:0;height:190px">
-        <span class="txtStyle bold">Choose your membership</span>
+      <div class="col-md-5 modal-content" style="border:0;padding-left: 0;">
+        <span class="txtStyle bold color-gray" >Choose your membership:</span>
         <br />
-        <div class="custom-control custom-radio" style="margin-bottom: 7px;">
-          <input type="radio" class="custom-control-input" id="statusJoin" name="status">
-          <label class="custom-control-label" for="statusJoin">Join Membership retiree/student
-            <div class="tooltipSmallName">
-              <img src="/assets/images/TooltipIcon.png" />
-              <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
-                Expalation about Lifetime Membership Expalation about Lifetime Membership Expalation about Lifetime Membership 
-              </span>
-            </div>
-        </label> 
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)"  id="ArrMembershipTypes[0].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[0].membershipType" >{{ArrMembershipTypes[0].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>    
+          </div>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[1].membershipType" >{{ArrMembershipTypes[1].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>    
+          </div>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[2].membershipType" >{{ArrMembershipTypes[2].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>    
+          </div>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)"id="ArrMembershipTypes[3].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[3].membershipType" >{{ArrMembershipTypes[3].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>    
+          </div>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[4].membershipType" >{{ArrMembershipTypes[4].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>    
+          </div>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input"  (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
+          <label class="custom-control-label" for="ArrMembershipTypes[5].membershipType">{{ArrMembershipTypes[5].membershipType}}</label>
+          <div class="tooltipSmall">
+            <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+            <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>    
+          </div>
         </div>
 
-        <div class="custom-control custom-radio" style="margin-bottom: 7px;">
+        <!-- <div class="custom-control custom-radio" style="margin-bottom: 7px;">
           <input type="radio" class="custom-control-input" id="statusStudent" name="status">
           <label class="custom-control-label" for="statusStudent">Students or retirees</label>
         </div>
@@ -167,26 +234,44 @@
         <div class="custom-control custom-radio" style="margin-bottom: 7px;">
           <input type="radio" class="custom-control-input" id="statusPending" name="status">
           <label class="custom-control-label" for="statusPending">Joint Membership for coupies</label>
-        </div>
+        </div> -->
 
+      </div>
+
+      <div class="col-md-7" style="padding-left: 10%;">
+        <span class="txtStyle bold color-gray">Biography</span>
+        <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
+          <label for="bio"></label>
+          <textarea [(ngModel)]="Bio" value="" class="form-control z-depth-1" id="bio" rows="3" placeholder="Write something here...">{{Bio}}</textarea>
+        </div>
       </div>
     </div>
 
 
 
+    <!-- <div class="row">
+      <div class="col-md-7">
+        <br /><br />
+        <span class="txtStyle bold">Bio</span>
+        <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
+          <label for="bio"></label>
+          <textarea [(ngModel)]="Bio" value="" class="form-control z-depth-1" id="bio" rows="3" placeholder="Write something here...">{{Bio}}</textarea>
+        </div>
+      </div>
+    </div> -->
 
     
     <div class="row" style="padding-top:80px;margin-left: -1px;">
       <div class="modal-content " style="border:0;">
-        <span class="txtStyle bold">Language or correspondence:</span>
+        <span class="txtStyle bold color-gray">Language of correspondence:</span>
         <br />
         <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" id="statusEnglish" name="status">
-          <label class="custom-control-label" for="statusEnglish">English</label>
+          <input type="radio" class="custom-control-input" (change)="onLanguageChange('English')" id="languageEnglish" name="Language">
+          <label class="custom-control-label" style="margin-bottom: 8px !important;" for="languageEnglish">English</label>
         </div>
         <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" id="statusHebrew" name="status">
-          <label class="custom-control-label" for="statusHebrew">Hebrew</label>
+          <input type="radio" class="custom-control-input" (change)="onLanguageChange('Hebrew')" id="languageHebrew" name="Language">
+          <label class="custom-control-label" for="languageHebrew">Hebrew</label>
         </div>
       </div>
     </div>

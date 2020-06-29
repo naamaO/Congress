@@ -1,5 +1,21 @@
 
 
+.custom-control-label::before{
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+  background-image: none;
+}
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: #27b5e5 !important;
+}
+
+.color-gray
+{
+  color: #a5a0a0;
+  font-size: large;
+}
 .tooltipSmallName {
   position: relative;
   display: contents;
@@ -65,7 +81,7 @@
     position: absolute;
     z-index: 1;
     left: 35%;
-    top: -25px;
+    top: -28px;
   }
 
 .tooltiptextSmall:before {
@@ -78,13 +94,12 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid #27b5e5;
   left: -8px;
-  top: 20%;
-  color: pink;
+  top: 41%;
 }
 
 .tooltiptextSmall {
   width: 200px !important;
-  height: 190px !important;
+  height: 107px !important;
 }
 
 .tooltipSmall:hover .tooltiptextSmall {
@@ -129,7 +144,6 @@
   border-right: 8px solid #27b5e5;
   left: -8px;
   top: 20%;
-  color: pink;
 }
 
 .tooltiptext {
@@ -140,13 +154,6 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
-
-
-
-
-
-
 
 select {
   width: 300px;

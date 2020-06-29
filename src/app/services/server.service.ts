@@ -87,7 +87,6 @@ export class ServerService {
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
-
   }
   DivisionEnglish(): Observable<string[]> {
     return this.http.get<string[]>(this.port + "/api/Home/GetDivisionEnglish")

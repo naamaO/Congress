@@ -1,3 +1,11 @@
+.background-welcome{
+background-image: url('src/assets/images/Welcome.gif');
+background-repeat: no-repeat;
+background-size: cover;
+height: 650px;
+width: 50%;
+}
+
 .body {
   width: 100%;
   max-width: 100%;

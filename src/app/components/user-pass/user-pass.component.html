@@ -9,32 +9,38 @@
 <!-- *ngIf="resetPassword" -->
 <div *ngIf="resetPassword" class="row center-div-wrap" >
   <div class="col-md-10" style="margin: 0 auto;">
-    <mat-label class="col-md-10" style="padding: 0;font-size: 18px;" display="flex">
+    <form [formGroup]="userDetail"  class="fields" >
+      <div class="example-full-width">
+       <div style="margin: 0 auto;padding: 0;">
+    <label class="col-md-10" style="padding: 0;font-size: 18px;" display="flex">
       Forgot your password?
-    </mat-label>
+    </label>
     <br /><br />
-  <form >
-    <mat-form-field class="example-full-width">
-      <mat-label class="col-md-10" style="padding: 0;font-size: 18px;" display="flex">
+  <div>
+  
+    <form class="example-full-width" style="width:100%;margin-right: 0;">
+      <label  style="padding: 0;font-size: 18px;color:gray;margin-left: 10px;" display="flex">
          Please enter your user name or email<br/>
          address to recive a password reset link
-      </mat-label>
-      <!-- <mat-label class="col-md-10"  display="flex">address to recive a password reset link</mat-label> -->
-      <input matInput [formControl]="emailFormControl" style="padding-top:10%" placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      </label>
+      <!-- <mat-label class="col-md-10"  display="flex">address to recive a password reset link</mat-label> placeholder="Ex. pat@example.com"-->
+      <input #email [formControl]="emailFormControl" style="padding-top:10%;width: 100%;" >
+      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="emailFormControl.hasError('required')">
         Email is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
+      </mat-error> -->
+    </form>
+  </div>
    <br /><br /><br />
   <div style="justify-content: center;">
     <button (click)="forgot()" class="fill-btn-blue" style="width:305px">RESET MY PASSWORD</button>
   </div>
-  </div>
- 
+       </div>
+     </div>
+   </form>
+</div>
 </div>
                   <!--<div class="img-map-bg-wrap">
                     <img src="/assets/images/books.PNG" class="img-map-bg">
@@ -43,7 +49,7 @@
                     <div class="col-md-10" style="margin: 0 auto;">
                       <!-- <div class="margin-b-15 bold res-white">Login</div> -->
                    
-                      <form  class="fields" >
+                      <form [formGroup]="userDetail"  class="fields" >
                         <!-- <label>User Name</label>
                         <input type="text" style="padding: 0;width:185%;"  value="{{Email}}" [(ngModel)]="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
        -->
@@ -51,28 +57,30 @@
                           <label>User Name</label>
                           <input matInput  value="">
                         </mat-form-field> -->
-                        <mat-form-field class="example-full-width">
+                        <div class="example-full-width">
                           <!-- <mat-label>User Name</mat-label>
                           <input  [formControl]="emailFormControl" [(ngModel)]="Email" placeholder="Ex. pat@example.com"> -->
                           <label color="gray">User Name</label>
-                          <input type="text" style="padding: 0;width:185%;" [formControl]="emailFormControl" value="{{Email}}" [(ngModel)]="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
-        
+                          <input  value="email" #email type="text" style="padding: 0;width:100%;" [formControl]="emailFormControl" value="{{Email}}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  (focusout)="unfocusemail()" (focus)="focusemail()" />
+<!--         
                           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                             Please enter a valid email address
                           </mat-error>
                           <mat-error *ngIf="emailFormControl.hasError('required')">
                             Email is <strong>required</strong>
-                          </mat-error>
-                        </mat-form-field>
+                          </mat-error> -->
+                        </div>
                         <br /><br />
-                        <mat-form-field class="example-full-width" >
+                        <div class="example-full-width" >
                           <label color="gray">Password</label>
-                          <input type="text" style="padding: 0;width:185%;"
+                          <input  #pass type="text" style="padding: 0;width:185%;"
                            [formControl]="passwordFormControl" value="{{password}}" 
-                           [(ngModel)]="Password" style="width:100%;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br/>
-                           <label (click)="forget()" style="cursor:pointer;color:#27b5e5;font-size: small;margin-right: 293px;">Forgot your password?</label>
-                         <label (click)="newMember()" style="cursor:pointer;color:#27b5e5;font-size: small;display: contents;float: right;" >New member?</label> 
-                  
+                           style="width:100%;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br/>
+                           <div style="width: 100%; display: flex;
+                           justify-content: space-between;">
+                           <label (click)="forget()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;">Forgot your password?</label>
+                         <label (click)="newMember()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;display: contents;float: right;" >New member?</label> 
+                        </div>
                           <!-- <mat-label>Password</mat-label>
                           <input matInput [formControl]="passwordFormControl"  [(ngModel)]="Password"  > -->
                           <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
@@ -80,7 +88,7 @@
                           </mat-error> -->
                           <!-- <mat-hint class="hint-text" (click)="forget()" >Forgot your password?</mat-hint>
                           <mat-hint class="hint-text" style="float: right;margin-left: 370px" (click)="newMember()">New member?</mat-hint>
-                      -->  </mat-form-field> 
+                      -->  </div> 
                       </form>
 
                       <!-- <div class="margin-b-15">
@@ -108,7 +116,8 @@
                     </div>
                   </div>
 </div>
-<div class="container right" style="float: right;right:0;  width: 50%;padding: 0;">
-  <div class="margin-b-15 bold res-white">Welcome</div>
+<div class="container right background-welcome" style="float: right;right:0;  width: 50%;padding: 0;">
+  <!-- <div class="margin-b-15 bold res-white">Welcome</div> -->
+
 </div>
 </div>

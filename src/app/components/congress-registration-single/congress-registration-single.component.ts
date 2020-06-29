@@ -85,11 +85,14 @@ export class CongressRegistrationSingleComponent implements OnInit {
       this.Language = events.Language;
       this.Keywords = events.Keywords;
       this.SessionName = events.SessionName;
+      if((events.Division !=null)||(events.Division=='')){
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
       }
+    }
     });
+  
   }
 
    maxlength(element, maxvalue){
@@ -103,7 +106,6 @@ export class CongressRegistrationSingleComponent implements OnInit {
       }
 }
 TitleEnglishP(elemTltle){
-  debugger
   elemTltle.console.error();
 
 
@@ -138,7 +140,7 @@ TitleEnglishP(elemTltle){
 
   }
   selectSubDivision(subDiv: string) {
-    debugger
+    
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;

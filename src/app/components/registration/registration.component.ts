@@ -81,8 +81,8 @@ export class RegistrationComponent implements OnInit {
   unfocustitle() {
     this.title.nativeElement.style.color = "gray";
   }
-  hasLowerCase(str) {
-    if (str != null) {
+  hasLowerCase(str:string) {
+    if ((str != null) || (str=='')) {
       // alert(str);
       var i = 0;
       var character = '';

@@ -3,8 +3,7 @@ import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import { UserPass } from '../../../classes/UserPass';
 import { MembershipInformation } from '../../../classes/MembershipInformation';
@@ -55,13 +54,50 @@ export class MembershipInformationComponent implements OnInit {
   showChoose:Boolean = false;
   showExpireDate:Boolean=true;
   showChooseExpire:Boolean=false;
-  constructor(public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+  public ArrMembershipTypes = [];
+  public Total: number;
 
-    this.sub = this.route.params.subscribe(params => {
+  constructor(public activatedRoute: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+
+    this.sub = this.activatedRoute.params.subscribe(params => {
       this.Rout = +params['Rout']; // (+) converts string 'id' to a number
 
     });
     this.LoginUserName = (this.getCookie('UserName'));
+    this.ArrMembershipTypes = [
+      {
+        membershipType: 'Annual Membership',
+        price : 65,
+        tooltipText:'Regular membership for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Student/Retiree Membership',
+        price : 40,
+        tooltipText:'Membership for students or retirees with no research fund for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Joint Membership',
+        price : 105,
+        tooltipText:'Membership for couples for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Joint Student/Retiree Membership',
+        price : 70,
+        tooltipText:'Membership for student or retiree couples without research fund for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Lifetime Membership',
+        price : 1300,
+        tooltipText:'Membership for life',
+        selected: null
+      }, {
+        membershipType: 'Institutional Membership',
+        price : 265,
+        tooltipText:'Membership for Institutions for one calendar year',
+        selected: null
+      }
+    ]
+
   //   this.serverService.getName().subscribe((events) => {
   //      this.FirstName = events.FirstName;
   //      this.LastName = events.LastName;
@@ -101,21 +137,54 @@ console.log("d",this.Title, this.FirstName, this.LastName,this.FirstNameHebrew, 
     }
   }
 
-  showChooseMembership2(showChooseExpire){
+  showChoose2(showChooseExpire){
     if(showChooseExpire==true){
       this.showChooseExpire=false;
+      // this.showChoose = false;
     }
     else{
       this.showChooseExpire=true;
     }
+}
+
+  onMemberTypeChange(membershipTypeChanged){
+    if(membershipTypeChanged==0) {
+        console.log("this.ArrMembershipTypes[0].price",this.ArrMembershipTypes[0].price)
+        this.Total=this.ArrMembershipTypes[0].price;
+        }
+    else if(membershipTypeChanged==1) {
+        console.log("this.ArrMembershipTypes[1].price",this.ArrMembershipTypes[1].price)
+        this.Total=this.ArrMembershipTypes[1].price;
+       }
+    else if(membershipTypeChanged==2) {
+        console.log("this.ArrMembershipTypes[2].price",this.ArrMembershipTypes[2].price)
+        this.Total=this.ArrMembershipTypes[2].price;
+        }
+    else if(membershipTypeChanged==3) {     
+        console.log("this.ArrMembershipTypes[3].price",this.ArrMembershipTypes[3].price)
+        this.Total=this.ArrMembershipTypes[3].price;
+        }
+    else if(membershipTypeChanged==4) {
+        console.log("this.ArrMembershipTypes[4].price",this.ArrMembershipTypes[4].price)
+        this.Total=this.ArrMembershipTypes[4].price;
+        }
+    else if(membershipTypeChanged==5) {
+        console.log("this.ArrMembershipTypes[5].price",this.ArrMembershipTypes[5].price)
+        this.Total=this.ArrMembershipTypes[5].price;
+        }
+      console.log("membershipTypeChanged",membershipTypeChanged)
   }
+
+  renew(){
+    this.router.navigate(['Pay', this.Total]);
+  console.log("renew")
+  }
+
   become(){
     console.log("become")
 
   }
-renuew(){
-  console.log("renuew")
-}
+
   getCookie(key: string) {
     return this.cookieService.get(key);
   }

@@ -64,10 +64,17 @@ export class NewMemberAccountCompponent implements OnInit {
   public LoginUserName: string;
   public Title: string;
   public selectedCountry: string;
+  public Address: string;
+  public ID: string;
+  public City: string;
+  public Street: string;
+  public NumberHome: string;
   public Country: string[] = ['Israel', 'USA', 'Germany', 'Switzerland'];
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public NumberPhone1: string;
   public showLikeProp: boolean = false;
+  public Bio: string;
+  public PasportNumber: number;
   public Hebrew: boolean;
   public English: boolean;
   public Password: string;
@@ -76,8 +83,43 @@ export class NewMemberAccountCompponent implements OnInit {
   public EAJS: boolean;
   public AJS: boolean;
   public Rout: number;
-
+  public ArrMembershipTypes = [];
+  public Total: number;
   constructor(public route: ActivatedRoute,private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+
+    this.ArrMembershipTypes = [
+      {
+        membershipType: 'Annual Membership',
+        price : 65,
+        tooltipText:'Regular membership for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Student/Retiree Membership',
+        price : 40,
+        tooltipText:'Membership for students or retirees with no research fund for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Joint Membership',
+        price : 105,
+        tooltipText:'Membership for couples for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Joint Student/Retiree Membership',
+        price : 70,
+        tooltipText:'Membership for student or retiree couples without research fund for one calendar year',
+        selected: null
+      }, {
+        membershipType: 'Lifetime Membership',
+        price : 1300,
+        tooltipText:'Membership for life',
+        selected: null
+      }, {
+        membershipType: 'Institutional Membership',
+        price : 265,
+        tooltipText:'Membership for Institutions for one calendar year',
+        selected: null
+      }
+    ]
 
     //__await(500);
     //  this.serverService.DivisionEnglish().subscribe((events) => {
@@ -103,10 +145,12 @@ export class NewMemberAccountCompponent implements OnInit {
     //   this.Language = events.Language;
     //   this.Keywords = events.Keywords;
     //   this.SessionName = events.SessionName;
+    //if((events.Division !=null)||(events.Division=='')){
     //   if (events.Division.charAt(0) == '0') {
     //     this.showLikeProp = true;
     //     this.Division = this.Division.substr(1);
     //   }
+    //  }
     // });
 
     // this.LoginUserName = (this.getCookie('UserName'));
@@ -119,6 +163,57 @@ export class NewMemberAccountCompponent implements OnInit {
     // });
 
   }
+
+  onMemberTypeChange(membershipTypeChanged){
+    if(membershipTypeChanged==0) {
+        console.log("this.ArrMembershipTypes[0].price",this.ArrMembershipTypes[0].price)
+        this.Total=this.ArrMembershipTypes[0].price;
+        }
+    else if(membershipTypeChanged==1) {
+        console.log("this.ArrMembershipTypes[1].price",this.ArrMembershipTypes[1].price)
+        this.Total=this.ArrMembershipTypes[1].price;
+       }
+    else if(membershipTypeChanged==2) {
+        console.log("this.ArrMembershipTypes[2].price",this.ArrMembershipTypes[2].price)
+        this.Total=this.ArrMembershipTypes[2].price;
+        }
+    else if(membershipTypeChanged==3) {     
+        console.log("this.ArrMembershipTypes[3].price",this.ArrMembershipTypes[3].price)
+        this.Total=this.ArrMembershipTypes[3].price;
+        }
+    else if(membershipTypeChanged==4) {
+        console.log("this.ArrMembershipTypes[4].price",this.ArrMembershipTypes[4].price)
+        this.Total=this.ArrMembershipTypes[4].price;
+        }
+    else if(membershipTypeChanged==5) {
+        console.log("this.ArrMembershipTypes[5].price",this.ArrMembershipTypes[5].price)
+        this.Total=this.ArrMembershipTypes[5].price;
+        }
+      console.log("membershipTypeChanged",membershipTypeChanged)
+  }
+//dothis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  onLanguageChange(Language){
+    if(Language=='English') {
+        console.log("Language",Language)
+        this.English=true;
+        }
+    else if(Language=='Hebrew') {
+        console.log("Language",Language)
+        this.Hebrew=true;
+       }
+  }
+  // renew(){
+  //   this.router.navigate(['Pay', this.Total]);
+  // console.log("renew")
+  // }
+
+  // become(){
+  //   this.router.navigate(['Pay', this.Total]);
+  //   console.log("become")
+
+  // }
+
+
   ngAfterViewInit() {
     // this.testInput.nativeElement.focus();
   }
@@ -209,8 +304,8 @@ export class NewMemberAccountCompponent implements OnInit {
     this.router.navigateByUrl("/CongressRegistrationSecondEnglish");
 
   }
-   RegistrationUser() {
-debugger
+  RegistrationUser() {
+  console.log("become")
     //check validation
     //this.hasLowerCase(this.Password);
     this.setCookie(this.Email);
@@ -223,14 +318,16 @@ debugger
     // this.user.City = this.City;
     // this.user.Street = this.Street;
     // this.user.NumberHome = this.NumberHome;
-        this.user.City = "";
-    this.user.Street = "";
-    this.user.NumberHome = "";
-    
+    //this.user.Address = this.Address;
+    this.user.City = this.City;
+    this.user.Street = this.Street;
+    this.user.NumberHome = this.NumberHome;
+    // this.user.PasportNumber =  this.PasportNumber;
+
     this.user.NumberPhone1 = this.NumberPhone1;
     // this.user.NumberPhone2 = this.NumberPhone2;
      this.user.NumberPhone2 = "";
-    this.user.selectedTitle = "Ms";
+    this.user.selectedTitle = this.Title;
 
     // this.user.selectedTitle = this.Title;
     this.user.selectedCountry = this.selectedCountry;
@@ -242,13 +339,13 @@ debugger
     // this.user.WithoutStudemt = this.WithoutStudemt;
     // this.user.EAJS = this.EAJS;
     // this.user.AJS = this.AJS;
-     this.user.Bio = "";
+     this.user.Bio = this.Bio;
     this.user.Students = true;
     this.user.WithoutStudemt =false;
     this.user.EAJS = true;
     this.user.AJS = true;
     this.user.Hebrew = this.Hebrew;
-    this.user.English = true;
+    this.user.English = this.English;
     // this.user.English = this.English;
     // this.user.Both = this.Both;
     //this.user.UserName = this.UserName;
@@ -260,18 +357,19 @@ debugger
       this.user.LastNameEnglish != null &&
       this.user.FirstNameHebrew != null &&
       this.user.LastNameHebrew != null &&
-       this.user.City != null &&
-      this.user.Street != null &&
-      this.user.NumberHome != null &&
+      // this.user.Address != null &&
+      // this.user.Street != null &&
+      // this.user.NumberHome != null &&
       this.user.NumberPhone1 != null &&
-      this.user.NumberPhone2 != null &&
+      // this.user.NumberPhone2 != null &&
       this.user.selectedTitle != null &&
       this.user.selectedCountry != null &&
-      this.user.PostCode != null &&
+     // this.user.PostCode != null &&
       this.user.Email != null &&
       this.user.Bio != null &&
-      this.user.UserName != null &&
-      this.user.Password != null
+      this.user.UserName != null 
+      //&&
+     // this.user.Password != null
     ) {
       this.serverService.Registration(this.user)
       //  if (this.Rout == 1) {
@@ -287,14 +385,17 @@ debugger
 
       // this.ShowMessage = true;
 
+ //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
+    this.router.navigate(['Pay', this.Total]);
 
     }
-    // else {
-    //   alert("All fields must be filled!");
-    // }
+    else {
+       alert("All fields must be filled!");
+     }
 
+   
   }
-  focusacademic() {
+  focusacademic() { 
     this.academic.nativeElement.style.color = "#27b5e5";
   }
   unfocusacademic() {

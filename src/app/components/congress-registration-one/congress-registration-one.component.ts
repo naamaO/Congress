@@ -70,8 +70,16 @@ export class CongressRegistrationOneComponent implements OnInit {
     //  this.ArrDivision = events;
     //  this.ShowSub = true;
     //});
-    
+    this.serverService.getName().subscribe((events) => {
+      debugger
+      this.FirstName = events.FirstName;
+      this.LastName = events.LastName;
+      this.FirstNameHebrew = events.FirstNameHebrew;
+      this.LastNameHebrew = events.LastNameHebrew;
+      this.Title = events.Title;
+    });
     this.serverService.selectDraft().subscribe((events) => {
+      debugger
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
 
@@ -91,6 +99,7 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.SessionName = events.SessionName;
 
       if((events.Division !=null)||(events.Division=='')){
+        debugger
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
@@ -98,14 +107,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     }
     });
 
-    this.LoginUserName = (this.getCookie('UserName'));
-    this.serverService.getName().subscribe((events) => {
-      this.FirstName = events.FirstName;
-      this.LastName = events.LastName;
-      this.FirstNameHebrew = events.FirstNameHebrew;
-      this.LastNameHebrew = events.LastNameHebrew;
-      this.Title = events.Title;
-    });
+
 
   }
   ngAfterViewInit() {
@@ -133,11 +135,15 @@ export class CongressRegistrationOneComponent implements OnInit {
   ngOnInit() {
     //this.angForm = new FormGroup({
     //  name: new FormControl('', Validators.pattern(/^-?(0|[1-9]\d*)?$/) )}) ‏
-    this.LoginUserName = (this.getCookie('UserName'));
-    this.serverService.getName().subscribe((events) => {
-      this.FirstName = events.FirstName;
-      this.LastName = events.LastName;
-    });
+    // this.LoginUserName = (this.getCookie('UserName'));
+    // this.serverService.getName().subscribe((events) => {
+    //   debugger
+    //   this.FirstName = events.FirstName;
+    //   this.LastName = events.LastName;
+    //   this.FirstNameHebrew = events.FirstNameHebrew;
+    //   this.LastNameHebrew = events.LastNameHebrew;
+    //   this.Title = events.Title;
+    // });
   }
   selectDivision(div: string) {
     this.serverService.SubDivisionEnglish(div).subscribe((events) => {
@@ -155,6 +161,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     });
   }
   Draft() {
+    debugger
     this.Prop = new Proposals();
     this.Prop.Keywords = this.Keywords;
 
@@ -169,6 +176,7 @@ export class CongressRegistrationOneComponent implements OnInit {
 
   }
   Save() {
+    debugger
     this.Prop = new Proposals();
     this.Prop.Keywords = this.Keywords;
 

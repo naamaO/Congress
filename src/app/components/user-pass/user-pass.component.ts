@@ -31,16 +31,17 @@ export class UserPassComponent implements OnInit {
     Validators.email,
   ]);
   public Rout: number;
-  public Password: string;
   public UserName: string;
   public item: UserPass;
-  public true: boolean = false;
   public ShowError: boolean;
   public ShowForgetPass: boolean;
   public ShowErrorEmail: boolean;
   private sub: any;
   public NumSession: number;
-  public Email: string = '';
+  public Email: string; 
+  public Password: string;
+  public true: boolean = false;
+ 
   constructor(fb: FormBuilder,public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.userDetail = fb.group({
       hideRequired: this.hideRequiredControl,
@@ -119,9 +120,10 @@ if(this.Rout==1)
    
   }
   SendCheckUserPassword() {
+    debugger
     this.item = new UserPass()
     this.setCookie(this.Email);
-    // this.item.Email = (this.getCookie('UserName'));
+     this.item.Email = (this.getCookie('UserName'));
     this.item.Password = this.Password;
     this.item.Email = this.Email;
     this.serverService.SendCheckUserPassword(this.item).subscribe((events) => {

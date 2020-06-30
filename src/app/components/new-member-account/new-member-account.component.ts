@@ -386,7 +386,8 @@ export class NewMemberAccountCompponent implements OnInit {
       // this.ShowMessage = true;
 
  //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
-    this.router.navigate(['Pay', this.Total]);
+ //this.router.navigate(['Pay', this.Total]).then(result => {  window.open(link, '_blank'); })
+     this.router.navigate(['Pay', this.Total]);
 
     }
     else {

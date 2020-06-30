@@ -49,8 +49,8 @@
                     <div class="col-md-10" style="margin: 0 auto;">
                       <!-- <div class="margin-b-15 bold res-white">Login</div> -->
                    
-                      <form [formGroup]="userDetail"  class="fields" >
-                        <!-- <label>User Name</label>
+                      <form   class="fields" >
+                        <!--[formGroup]="userDetail" <label>User Name</label>
                         <input type="text" style="padding: 0;width:185%;"  value="{{Email}}" [(ngModel)]="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
        -->
                         <!-- <mat-form-field class="example-full-width">
@@ -61,7 +61,9 @@
                           <!-- <mat-label>User Name</mat-label>
                           <input  [formControl]="emailFormControl" [(ngModel)]="Email" placeholder="Ex. pat@example.com"> -->
                           <label color="gray">User Name</label>
-                          <input  value="email" #email type="text" style="padding: 0;width:100%;" [formControl]="emailFormControl" value="{{Email}}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  (focusout)="unfocusemail()" (focus)="focusemail()" />
+                          <input   value="" #email 
+                          type="text" style="padding: 0;width:100%;" [(ngModel)]="Email"[ngModelOptions]="{standalone: true}"
+                          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  (focusout)="unfocusemail()" (focus)="focusemail()" />
 <!--         
                           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                             Please enter a valid email address
@@ -74,7 +76,7 @@
                         <div class="example-full-width" >
                           <label color="gray">Password</label>
                           <input  #pass type="text" style="padding: 0;width:185%;"
-                           [formControl]="passwordFormControl" value="{{password}}" 
+                          [(ngModel)]="Password" [ngModelOptions]="{standalone: true}" value="" 
                            style="width:100%;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br/>
                            <div style="width: 100%; display: flex;
                            justify-content: space-between;">

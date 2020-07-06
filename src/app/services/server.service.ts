@@ -87,7 +87,6 @@ export class ServerService {
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
-
   }
   DivisionEnglish(): Observable<string[]> {
     return this.http.get<string[]>(this.port + "/api/Home/GetDivisionEnglish")
@@ -143,12 +142,12 @@ export class ServerService {
   enterProposal(Prop: Proposals) {
     this.LoginUserName = (this.getCookie('UserName'));
     Prop.UserName = this.LoginUserName;
+    
     this.http.post(this.port + "/api/Home/enterProposal", Prop).subscribe();
   }
 
   selectDraft(): Observable<Proposals> {
     this.LoginUserName = (this.getCookie('UserName'));
-
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
 
   }
@@ -211,6 +210,7 @@ export class ServerService {
 
   getName(): Observable<Name> {
     this.LoginUserName = (this.getCookie('UserName'));
+    
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);
   }
   getNameHebrew(): Observable<Name> {

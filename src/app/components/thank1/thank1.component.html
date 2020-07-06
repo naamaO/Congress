@@ -9,7 +9,7 @@
       <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
         <div class="div col-md-5 marginAuto">
           <br />
-          <h4>Thank you {{Name.FirstName}}      {{Name.LastName}}</h4>
+          <h4>Thank you <label *ngIf="Name">{{Name.FirstName}}  {{Name.LastName}}</label></h4>
           <br />  <label>You and your colleagues will</label>
           <br /> <label>receive an email with a request and instructions to submit your lecture proposals.</label>
           <br /><br />

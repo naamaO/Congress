@@ -94,9 +94,8 @@ export class AllProposalsAdminComponent implements OnInit {
     this.serverService.SubDivisionEnglish(div).subscribe((events) => {
 
       this.ArrSubDivision = events;
-      debugger
+      
     });
-    debugger
   }
 
   SelectField(Field: string) {

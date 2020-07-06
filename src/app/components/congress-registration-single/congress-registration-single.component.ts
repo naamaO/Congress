@@ -70,7 +70,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
       this.LastName = events.LastName;
       this.FirstNameHebrew = events.FirstNameHebrew;
       this.LastNameHebrew = events.LastNameHebrew;
-      this.Title = events.Title;
+      this.Title = events.selectedTitle;
     })
     // this.serverService.getName().subscribe(val => this.Name = val);
     this.serverService.getNameHebrew().subscribe(val => this.NameHebrew = val);
@@ -85,11 +85,14 @@ export class CongressRegistrationSingleComponent implements OnInit {
       this.Language = events.Language;
       this.Keywords = events.Keywords;
       this.SessionName = events.SessionName;
+      if((events.Division !=null)||(events.Division=='')){
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
       }
+    }
     });
+  
   }
 
    maxlength(element, maxvalue){
@@ -103,7 +106,6 @@ export class CongressRegistrationSingleComponent implements OnInit {
       }
 }
 TitleEnglishP(elemTltle){
-  debugger
   elemTltle.console.error();
 
 
@@ -138,7 +140,7 @@ TitleEnglishP(elemTltle){
 
   }
   selectSubDivision(subDiv: string) {
-    debugger
+    
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
@@ -169,7 +171,6 @@ TitleEnglishP(elemTltle){
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.serverService.enterProposal(this.Prop);
-
   }
   selectlang(lan: string) {
   }

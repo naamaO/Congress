@@ -81,7 +81,8 @@ export class InviteMembersComponent implements OnInit {
   public aa: number;
   constructor(
     public router: Router, private serverService: ServerService, private http: HttpClient) {
-    this.serverService.DivisionEnglish().subscribe((events) => {
+   
+      this.serverService.DivisionEnglish().subscribe((events) => {
       this.ArrDivision = events;
       this.ShowSub = true;
     });
@@ -105,7 +106,12 @@ export class InviteMembersComponent implements OnInit {
       this.ArrSubDivision = events;
     });
   }
+  // selectSubDivision(subDiv: string) {
+  //   this.serverService.GetLanguageHebrew(subDiv).subscribe((events) => {
 
+  //     this.ArrSubDivision = events;
+  //   });
+  //}
   SendInviteMember() {
     this.a = new invited();
     this.b = new invited();

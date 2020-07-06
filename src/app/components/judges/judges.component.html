@@ -1,6 +1,6 @@
 <script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
 
-<div class="marginAuto col-md-8">
+<div class="marginAuto col-md-10" style="margin-top: 30px;padding: 0;">
 
   <div class=" right">
     <div class="top-line">
@@ -12,13 +12,14 @@
 
 <br />
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2"></div>
+  <div class="row" style="margin-left: 5%;">
+    <!-- <div class="col-md-2"></div> -->
     <div class="col-md-5"><br /><h5 style="color:#2eacd7">ALL LECTURE PROPOSALS</h5></div>
+    <div class="col-md-2"></div>
     <div class="col-md-1">
       <mat-form-field style="width:95%">
         <mat-label>All</mat-label>
-        <mat-select (selectionChange)="SelectValues()" [(ngModel)]="field">
+        <mat-select (selectionChange)="SelectValues(field)" [(ngModel)]="field">
           <mat-option *ngFor="let field of Fields" [value]="field">
             {{field}}
           </mat-option>
@@ -38,14 +39,13 @@
       </form>
     </div>
     <mat-icon class="mat-icon-rtl-mirror Search-icon">search</mat-icon>
-    <div class="col-md-2"></div>
   </div>
 </div>
 
 <div class="container-fluid" style="position:absolute">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+  <div class="row" style="margin-left: 5%;">
+    <!-- <div class="col-md-2"></div> -->
+    <div class="col-md-11" style="padding:0">
 
       <table mat-table [dataSource]="dataSource" matSort>
 
@@ -111,7 +111,7 @@
               </select>
             </mat-form-field>
           </th>
-          <td mat-cell *matCellDef="let element"> {{element.SessionName}} </td>
+          <td mat-cell *matCellDef="let element" style="padding-left: 10px;"> {{element.SessionName}} </td>
         </ng-container>
 
         <ng-container matColumnDef="TitleEnglish">
@@ -160,16 +160,31 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: medium;"> Review </th>
           <td mat-cell *matCellDef="let element; let i = index;">
             <!-- <img [src]="" onmouseout="this.src='/assets/images/Edit.jpg'" onmouseover="this.src='/assets/images/EditHover.jpg'" style="width: fit-content;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModalPropSession" /> -->
-           <div class="hoverEdit">
+            <!-- <button mat-button >:</button> -->
+            <!-- <div class="hoverEdit">  -->
+              <div style="cursor: pointer;" >
             <img [src]="over[i] ? '/assets/images/EditHover.jpg' : '/assets/images/Edit.jpg'"
                   (mouseover)="over[i] = true"
                   (mouseout)="over[i] = false"
-                  *ngIf="element.SessionName==null " style="width: fit-content;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModalPropSession" />
-              <img [src]="over[i] ? '/assets/images/EditHover.jpg' : '/assets/images/Edit.jpg'"
+                  *ngIf="element.SessionName==null " 
+                  style="width: fit-content;margin: 11px 20px;" 
+                  (click)="editProp(element)" 
+                  class="di2"
+                   data-toggle="modal"
+                    data-target="#myModalPropSession" />
+          <!-- </div> -->
+          <!-- <div class="hoverEdit">  -->
+             <img [src]="over[i] ? '/assets/images/EditHover.jpg' : '/assets/images/Edit.jpg'"
                   (mouseover)="over[i] = true"
                   (mouseout)="over[i] = false"
-                  *ngIf="element.SessionName " style="width: fit-content;height: 20px;" (click)="editProp(element)" class="di2" data-toggle="modal" data-target="#myModalPropArrSession" />
-           </div>
+                  *ngIf="element.SessionName" 
+                  style="width: fit-content;margin: 11px 20px;"
+                  (click)="editProp(element)"
+                   class="di2" 
+                   data-toggle="modal" 
+                   data-target="#myModalPropArrSession" />
+                  </div>
+           <!-- </div> -->
           </td>
         </ng-container>
 
@@ -189,7 +204,7 @@
 </div>
 
 <div class="container-fluid" *ngIf="isShowProp">
-  <div class="row">
+  <div class="row" >
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <div class="modal fade" id="myModalPropSession" role="dialog">
@@ -271,7 +286,7 @@
                       <span class="txtStyle bold">Comments</span>
                       <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
                         <label for="exampleFormControlTextarea6"></label>
-                        <textarea [(ngModel)]="oneProp.Remarks" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here...">{{oneProp.Remarks}}</textarea>
+                        <textarea [(ngModel)]="this.oneProp.Remarks" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here...">{{oneProp.Remarks}}</textarea>
                       </div>
 
                     </div>
@@ -280,24 +295,32 @@
                 <div class="col-md-3">
                   <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
 
-                    <div class="modal-content " style="border:0;height:190px">
+                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="this.Status">
 
                       <span class="txtStyle bold">Status</span>
 
                       <br />
-                      <div class="custom-control custom-radio">
-                        <input type="radio" [(ngModel)]="Status" value="Accepted"    (change)="onStatusChange($event.target.value)" class="custom-control-input" id="statusAccepted" name="status">
-                        <label class="custom-control-label" for="statusAccepted">Accepted</label>
+                      <div class="custom-control custom-radio"  >
+                        <input type="radio"
+                        value="Accepted" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input"
+                          id="Accepted" name="Accepted">
+                        <label class="custom-control-label"  for="Accepted">Accepted</label>
                       </div>
                       <br />
                       <div class="custom-control custom-radio">
-                        <input type="radio" [(ngModel)]="Status" value="RR"  (change)="onStatusChange($event.target.value)" class="custom-control-input" id="statusPending" name="status">
-                        <label class="custom-control-label" for="statusPending">RR</label>
+                        <input type="radio" value="RR"  
+                        (change)="onStatusChange($event.target.value)" chacked="Status=='RR' ? chacked : false " 
+                         class="custom-control-input" id="RR" name="RR">
+                        <label class="custom-control-label" for="RR">RR</label>
                       </div>
                       <br />
-                      <div class="custom-control custom-radio">
-                        <input type="radio" [(ngModel)]="Status"  value="Rejected"  (change)="onStatusChange($event.target.value)" class="custom-control-input" id="statusRejected" name="status">
-                        <label class="custom-control-label" for="statusRejected">Rejected</label>
+                      <div class="custom-control custom-radio" >
+                        <input type="radio"   value="Rejected" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="Rejected" name="Rejected">
+                        <label class="custom-control-label" for="Rejected">Rejected</label>
                       </div>
 
                     </div>

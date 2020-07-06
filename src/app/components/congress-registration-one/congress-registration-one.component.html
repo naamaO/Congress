@@ -22,9 +22,11 @@
           Full Name [Hebrew]
           <div class="tooltipSmallName">
             <img src="/assets/images/TooltipIcon.png" />
-            <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">     
+            <span class="tooltiptextSmallName" style="height: 130px !important;text-align:left;padding-left:2%;">     
               If you do not know how to spell your name in Hebrew <br />
               WUJS staff will add it on your behalf to the Congress program <br />
+              <!-- Not mandatory for<br />
+              English speakers<br /> -->
             </span>
           </div>
         </label>
@@ -32,7 +34,7 @@
       </div>
 
       <div class="row " style="margin-left:1%">
-        <select class="col-md-1" style="background:content-box;" (click)="focustitle()" (mouseleave)="unfocustitle()">
+        <select class="col-md-1" style="background:content-box;padding: 0;" (click)="focustitle()" (mouseleave)="unfocustitle()">
           <option [value]="Division" selected>{{Title}}</option>
           <option *ngFor="let tit of ArrTitle" [value]="tit">
             {{tit}}
@@ -73,7 +75,7 @@
             Lecture title [English]
             <div class="tooltip">
               <img src="/assets/images/TooltipIcon.png" />
-              <span class="tooltiptext" style="text-align:left;padding-left:2%;">
+              <span class="tooltiptext" style="text-align:left;padding-left:2%;font-size: medium;">
                 Title in English (In the Latin American Jewry Section, titles may be submitted in
                 Spanish/Portuguese,  in the Ladino subdivision the title may be submitted in Ladino)
               </span>
@@ -82,7 +84,9 @@
         </div>
         <label class="col-md-5 headerGray" #academic style="margin-left:8%;">Academic Affiliation</label>
       </div>
-      <div [formGroup]="jobform">
+
+      <div >
+      <!-- <div [formGroup]="jobform"> -->
         <div class="row margin-top form-group">
           <!-- <input #testInput id="name" ngModel name="name" formControlName="TitleEnglish" type="text" class="form-control col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />-->
           <!-- <input name="firstName" ngModel pattern="[a-zA-Z ]*">-->
@@ -100,6 +104,7 @@
           </div>
         </div>
       </div>
+      
       <div class="row margin-top">
         <div class="col-md-6">
           <label class="headerGray" #hebrew>
@@ -140,13 +145,27 @@
         <label class="col-md-6 headerGray" #abs>Abstract</label>
         <label class="col-md-5 floatLeft headerGray" #key style="margin-left:8%;">Keywords</label>
       </div>
+    </div>
       <div class="row margin-top form-group">
+                    <!-- (keyup)="changeProp(this, 250)"  -->
 
         <div class="col-md-6">
-          <textarea  pattern="^(?:\w+\W+){0,5}(?:\w+)" (focusout)="unfocusabs()" (focus)="focusabs()" (keyup)="changeProp(this, 250)" #testInput [(ngModel)]="Proposal" style="width:80%;height:97px;" *ngIf="showLikeProp==false"></textarea>
+          <textarea  class="form-control z-depth-1"
+                     pattern="^(?:\w+\W+){0,5}(?:\w+)"
+                    (focusout)="unfocusabs()" 
+                    (focus)="focusabs()" 
+                    #testInput [(ngModel)]="Proposal"
+                    style="width:80%;height:97px;border-radius: 0rem;"
+                     *ngIf="showLikeProp==false">
+          </textarea>
         </div>
         <div class="col-md-6">
-          <textarea (focusout)="unfocuskey()" (focus)="focuskey()" #testInput [(ngModel)]="Keywords" style="width:80%;height:97px;margin-left:16%" *ngIf="showLikeProp==false"></textarea>
+          <textarea class="form-control z-depth-1" 
+          (focusout)="unfocuskey()"
+           (focus)="focuskey()" 
+           #testInput [(ngModel)]="Keywords" 
+           style="width:80%;height:97px;margin-left:16%;border-radius: 0rem;" 
+           *ngIf="showLikeProp==false"></textarea>
         </div>
         <div class="col-md-6">
           <label style="width:80%" *ngIf="showLikeProp==true">{{Proposal}}</label>
@@ -157,7 +176,7 @@
         <br /><br />
         <div class="row margin-top form-group col-md-12">
           <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-left:20%;" >Save draft</button>
-          <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;" >Submit</button>
+          <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-left:3%;" >Submit</button>
           <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;">Save draft</button>
           <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;" >Submit</button> 
          
@@ -198,6 +217,35 @@
   </div>
 </div>
 
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="modal fade" id="myModalSubmit" role="dialog">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="header-WithOut-border" style="margin: inherit;">EDIT LECTURE PROPOSAL</h5>-->  
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div> 
+            <div class="modal-body">
+             <span style="font-size: 18px;">Your proposal has been submitted.</span> <br/>
+             <!-- <span style="font-size: 18px;"> Please make sure to submit it before the deadline.</span>  -->
+            </div>
+
+           <!--  <div class="modal-footer">
+              <div style="margin-left: 74%;padding-bottom:2%;">
+                <button (click)="Save()" class="fill-btn-blue" style="padding:10px" data-dismiss="modal">save</button>
+              </div> 
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
         </div>
       </div>
     </div>

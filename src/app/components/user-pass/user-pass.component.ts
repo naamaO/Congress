@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { UserPass } from '../../../classes/UserPass';
 import { CookieService } from 'angular2-cookie/core';
 @Component({
@@ -15,9 +15,13 @@ import { CookieService } from 'angular2-cookie/core';
 })
 export class UserPassComponent implements OnInit {
   @ViewChild('title') title: ElementRef;
-  @ViewChild('email') email: ElementRef;
-  @ViewChild('pass') pass: ElementRef;
-
+  @ViewChild('email') email: ElementRef =null;
+  // @ViewChild('userName') userName: ElementRef;
+  @ViewChild('pass') pass: ElementRef = null;
+  userDetail: FormGroup;
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+  
   resetPassword:boolean=false;
   passwordFormControl = new FormControl('', [
     Validators.required
@@ -27,18 +31,22 @@ export class UserPassComponent implements OnInit {
     Validators.email,
   ]);
   public Rout: number;
-  public Password: string;
   public UserName: string;
   public item: UserPass;
-  public true: boolean = false;
   public ShowError: boolean;
   public ShowForgetPass: boolean;
   public ShowErrorEmail: boolean;
   private sub: any;
   public NumSession: number;
-  public Email: string = '';
-  constructor(public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
-
+  public Email: string; 
+  public Password: string;
+  public true: boolean = false;
+ 
+  constructor(fb: FormBuilder,public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.userDetail = fb.group({
+      hideRequired: this.hideRequiredControl,
+      floatLabel: this.floatLabelControl,
+    });
     this.sub = this.route.params.subscribe(params => {
       this.Rout = +params['Rout']; // (+) converts string 'id' to a number
 
@@ -53,7 +61,11 @@ export class UserPassComponent implements OnInit {
   ngOnInit() {
   }
   forget() {
-    if(!this.resetPassword) {this.resetPassword=true;} else{ this.resetPassword=false;}
+    if(!this.resetPassword) {
+      this.resetPassword=true;
+    } else{
+       this.resetPassword=false;
+      }
 
     this.item = new UserPass()
     this.item.Email = this.Email;
@@ -97,16 +109,22 @@ if(this.Rout==1)
    this.router.navigateByUrl("/NewMemberAccount/1");
    if(this.Rout==5)
    this.router.navigateByUrl("/NewMemberAccount/5");
-
+   if(this.Rout==2)
+   this.router.navigateByUrl("/NewMemberAccount/2");
+   if(this.Rout==3)
+   this.router.navigateByUrl("/NewMemberAccount/3");
+   if(this.Rout==4)
+   this.router.navigateByUrl("/NewMemberAccount/4");
+   if(this.Rout==6)
+   this.router.navigateByUrl("/NewMemberAccount/6");
    
   }
   SendCheckUserPassword() {
     this.item = new UserPass()
     this.setCookie(this.Email);
-    // this.item.Email = (this.getCookie('UserName'));
+     this.item.Email = (this.getCookie('UserName'));
     this.item.Password = this.Password;
     this.item.Email = this.Email;
-    debugger
     this.serverService.SendCheckUserPassword(this.item).subscribe((events) => {
       this.true = events;
       if (this.true == false) {

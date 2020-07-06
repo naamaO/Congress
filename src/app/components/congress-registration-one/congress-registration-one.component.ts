@@ -28,7 +28,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   @ViewChild('namee') namee: ElementRef;
   @ViewChild('title') title: ElementRef;
   @ViewChild('key') key: ElementRef;
-
+//Add field academy to DB
   //@Input()
   userFormGroup: FormGroup;
   public angForm: FormGroup;
@@ -60,19 +60,29 @@ export class CongressRegistrationOneComponent implements OnInit {
   public Title: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
-  constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+  // public jobform = new FormGroup({
+  //   firstName: new FormControl()
+  // });
 
+  constructor(private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     //__await(500);
     //  this.serverService.DivisionEnglish().subscribe((events) => {
     //  this.ArrDivision = events;
     //  this.ShowSub = true;
     //});
-    
+    this.serverService.getName().subscribe((events) => {
+      this.FirstName = events.FirstName;
+      this.LastName = events.LastName;
+      this.FirstNameHebrew = events.FirstNameHebrew;
+      this.LastNameHebrew = events.LastNameHebrew;
+      this.Title = events.selectedTitle;
+    });
     this.serverService.selectDraft().subscribe((events) => {
+      
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
 
-      if (this.SubDivision == 'Ldino') {
+      if (this.SubDivision == 'Ladino') {
         this.ArrLanguage = ['עברית','English','Ladino']
       }
       if (this.SubDivision == 'Yiddish') {
@@ -86,20 +96,16 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.Language = events.Language;
       this.Keywords = events.Keywords;
       this.SessionName = events.SessionName;
+
+      if((events.Division !=null)||(events.Division=='')){
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
       }
+    }
     });
 
-    this.LoginUserName = (this.getCookie('UserName'));
-    this.serverService.getName().subscribe((events) => {
-      this.FirstName = events.FirstName;
-      this.LastName = events.LastName;
-      this.FirstNameHebrew = events.FirstNameHebrew;
-      this.LastNameHebrew = events.LastNameHebrew;
-      this.Title = events.Title;
-    });
+
 
   }
   ngAfterViewInit() {
@@ -127,11 +133,15 @@ export class CongressRegistrationOneComponent implements OnInit {
   ngOnInit() {
     //this.angForm = new FormGroup({
     //  name: new FormControl('', Validators.pattern(/^-?(0|[1-9]\d*)?$/) )}) ‏
-    this.LoginUserName = (this.getCookie('UserName'));
-    this.serverService.getName().subscribe((events) => {
-      this.FirstName = events.FirstName;
-      this.LastName = events.LastName;
-    });
+     this.LoginUserName = (this.getCookie('UserName'));
+    // this.serverService.getName().subscribe((events) => {
+    //   debugger
+    //   this.FirstName = events.FirstName;
+    //   this.LastName = events.LastName;
+    //   this.FirstNameHebrew = events.FirstNameHebrew;
+    //   this.LastNameHebrew = events.LastNameHebrew;
+    //   this.Title = events.Title;
+    // });
   }
   selectDivision(div: string) {
     this.serverService.SubDivisionEnglish(div).subscribe((events) => {
@@ -143,7 +153,6 @@ export class CongressRegistrationOneComponent implements OnInit {
 
   }
   selectSubDivision(subDiv: string) {
-    debugger
     this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
@@ -181,6 +190,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   TitleEnglishP(event){
   }
   changeProp(element, maxvalue) {
+    if(element.Proposal!=null){
     // var q = element.Proposal.split(/[\s]+/).length;
     var q = element.Proposal.split(" "); 
     
@@ -193,6 +203,7 @@ export class CongressRegistrationOneComponent implements OnInit {
         // "your text by at least "+r+" words");
         return false;
     }
+  }
   }
   OpenSecondProposal() {
     //this.serverService.enterSecondDraft();

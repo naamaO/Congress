@@ -5,7 +5,13 @@
   /* text-align: left;  */
 }
 
-
+.alert-img{
+background-image: url('src/assets/images/Alert.gif');
+background-repeat: no-repeat;
+height: 88px;
+width: 86px;
+margin-left: 39%;
+}
 .tooltip {
   position: relative;
   display: contents;
@@ -56,6 +62,19 @@
   display: contents;
   /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
 }
+.custom-control {
+  padding-left: 0.5rem !important;
+}
+.custom-control-label::before{
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+  background-image: none;
+}
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: #27b5e5 !important;
+}
 
   /* Tooltip text */
 .tooltipSmallName .tooltiptextSmallName {
@@ -83,7 +102,6 @@
   border-right: 8px solid #27b5e5;
   left: -8px;
   top: 20%;
-  color: pink;
 }
 
 .tooltiptextSmallName {
@@ -116,7 +134,7 @@
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    top: -49%;
+    top: -36px;
   }
 
 .tooltiptextSmall:before {
@@ -129,13 +147,12 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid #27b5e5;
   left: -8px;
-  top: 20%;
-  color: pink;
+  top: 44%;
 }
 
 .tooltiptextSmall {
   width: 200px !important;
-  height: 150px !important;
+  height: 112px !important;
 }
 
 .tooltipSmall:hover .tooltiptextSmall {
@@ -175,7 +192,6 @@
   border-right: 8px solid #27b5e5;
   left: -8px;
   top: 20%;
-  color: pink;
 }
 
 .tooltiptextSmallName {

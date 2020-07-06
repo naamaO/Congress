@@ -4,6 +4,17 @@
   margin:10px;
   text-align:center;
 }
+.di3 {
+  margin: auto 25px;
+  width: fit-content;
+  height: 20px;
+  text-align:center;
+}.di3:hover {
+  margin: auto 25px;
+  width: fit-content;
+  height: 20px;
+  text-align:center;
+}
 .di2 {
   width: 100px;
   margin: 10px;
@@ -15,11 +26,21 @@
   margin-right:20px;
   text-align:center;
 }
-.hoverEdit:hover{
-  width:50px;
-  height: 50px;
+.hoverEdit{
+  width:45px;
+  height: 45px;
   border-radius: 80px;
-  background-color: black;
+  opacity:0.4;
+  /* background-color: lightgray;  */
+  /* margin-right:30px; */
+}
+.hoverEdit:hover{
+  width:45px;
+  height: 45px;
+  border-radius: 80px;
+  opacity:0.4;
+  background-color: lightgray; 
+  /* margin-right:30px; */
 }
 .big {
   /*height: 20%;*/
@@ -215,7 +236,7 @@ margin-bottom: 0rem;
   color:green;
 }
 .bold{
-  font-weight:bold;
+  font-weight:normal;
 }
 
 /* .s-paginator { */

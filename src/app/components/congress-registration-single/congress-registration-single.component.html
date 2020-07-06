@@ -87,7 +87,15 @@
 
           <br /><br />
           <div class="row margin-top">
-            <label class="col-md-6 headerGray" #english>Lecture title [English]</label>
+            <label class="col-md-6 headerGray" #english>Lecture title [English]
+            <div class="tooltipSmall">
+              <img src="/assets/images/TooltipIcon.png" />
+              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;font-size: medium;">
+                Title in English (In the Latin American Jewry Section, titles may be submitted in
+                Spanish/Portuguese,  in the Ladino subdivision the title may be submitted in Ladino)
+              </span>
+            </div>
+          </label>
             <label class="col-md-5 headerGray" #academic style="margin-left:8%;">Academic Affiliation</label>
           </div>
           <div class="row margin-top">
@@ -101,7 +109,15 @@
             </div>
           </div>
           <div class="row margin-top">
-            <label class="col-md-6 headerGray" #hebrew>Lecture title [Hebrew ]</label>
+            <label class="col-md-6 headerGray" #hebrew>Lecture title [Hebrew ]
+            <div class="tooltip">
+              <img src="/assets/images/TooltipIcon.png" />
+            <span class="tooltiptext" style="text-align:left;padding-left:2%;font-size: medium;">
+              Title in Hebrew (In the Yiddish subdivision,
+              the title may be submitted in Yiddish with Hebrew Characters
+            </span>
+            </div>
+          </label>
             <label class="col-md-5 floatLeft headerGray" #lang style="margin-left:8%;">Lecture language</label>
           </div>
           <div class="row margin-top">
@@ -125,8 +141,8 @@
           </div>
           <div class="row margin-top">
             <div class="col-md-6">
-              <textarea (focusout)="unfocusabs()" (focus)="focusabs()" *ngIf="showLikeProp==false" [(ngModel)]="Proposal" style="width:80%;height:97px;"
-              pattern="^(?:\b\w+\b[\s\r\n]*){1,250}$" (keyup)="maxlength(this, 250)"></textarea>
+              <!-- pattern="^(?:\b\w+\b[\s\r\n]*){1,250}$" (keyup)="maxlength(this, 250)" -->
+              <textarea (focusout)="unfocusabs()" (focus)="focusabs()" *ngIf="showLikeProp==false" [(ngModel)]="Proposal" style="width:80%;height:97px;"></textarea>
               <label *ngIf="showLikeProp==true" style="width:80%;">{{Proposal}}</label>
             </div>
             <div class="col-md-6">

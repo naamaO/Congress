@@ -120,7 +120,6 @@ if(this.Rout==1)
    
   }
   SendCheckUserPassword() {
-    debugger
     this.item = new UserPass()
     this.setCookie(this.Email);
      this.item.Email = (this.getCookie('UserName'));

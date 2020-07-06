@@ -131,7 +131,6 @@ export class ServerService {
     } if (Prop.TitleHebrew == null) {
       Prop.TitleHebrew = "";
     }
-    
     this.http.post(this.port + "/api/Home/enterDraft", Prop).subscribe();
   }
   enterSecondDraft(Prop: Proposals) {

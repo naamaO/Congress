@@ -19,7 +19,7 @@
     <div class="col-md-1">
       <mat-form-field style="width:95%">
         <mat-label>All</mat-label>
-        <mat-select (selectionChange)="SelectValues()" [(ngModel)]="field">
+        <mat-select (selectionChange)="SelectValues(field)" [(ngModel)]="field">
           <mat-option *ngFor="let field of Fields" [value]="field">
             {{field}}
           </mat-option>

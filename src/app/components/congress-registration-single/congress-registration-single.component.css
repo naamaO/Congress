@@ -44,6 +44,53 @@
   visibility: visible;
 }
 
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    left: 40%;
+    top: -70%;
+  }
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+}
+
+.tooltiptext {
+  width: 200px !important;
+  height: 150px !important;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
 select {
   width: 300px;
   color: black;

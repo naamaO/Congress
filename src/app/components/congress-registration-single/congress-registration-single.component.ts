@@ -70,7 +70,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
       this.LastName = events.LastName;
       this.FirstNameHebrew = events.FirstNameHebrew;
       this.LastNameHebrew = events.LastNameHebrew;
-      this.Title = events.Title;
+      this.Title = events.selectedTitle;
     })
     // this.serverService.getName().subscribe(val => this.Name = val);
     this.serverService.getNameHebrew().subscribe(val => this.NameHebrew = val);
@@ -171,7 +171,6 @@ TitleEnglishP(elemTltle){
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.serverService.enterProposal(this.Prop);
-
   }
   selectlang(lan: string) {
   }

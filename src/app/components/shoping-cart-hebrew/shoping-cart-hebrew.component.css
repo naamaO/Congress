@@ -114,6 +114,7 @@ body {
 }
 
 .fill-btn-blue {
+  outline:none;
   background-color: #026fa7;
   padding: 10px 48px;
   border: none;
@@ -197,23 +198,33 @@ ul {
   }
   .cart-total-title{
     color:#026fa7;
-    font-family:'Open Sans', sans-serif;
-    font-weight: bold; 
+    font-family:'OpenSansBold', sans-serif;
+    font-weight: 600; 
     font-size:30px;
-
     float: right;
-    margin-right: 40px;
+    margin-right: 30px;
+    }
+    .label-cart-subtotal{
+      padding-left: 0; 
+      text-align: start;
+      float:left ;
+      color: #000000;
+      font-size:18px;
+      font-family:'OpenSansBold', sans-serif;
+      font-weight:600;
+      padding-left: 0;
     }
   .label-cart-total{
     float: right;
-    font-family:'Open Sans', sans-serif;
-    font-weight: normal; 
+    font-family:'OpenSansBold', sans-serif;
+    font-weight: 600; 
     font-size:18px;
   }
 .input-total{
   float: left;
 }
 .checkout-btn{
+  outline:none;
   background-color: #0b4e6f;
   color: white; 
   font-family:'Open Sans', sans-serif;

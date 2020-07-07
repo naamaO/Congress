@@ -4,11 +4,11 @@
   <!-- <div style="position:relative;">
     <div style="background-color:#fff;height:100%;width:100%;">
      -->
-  <div style="background-color:#fff;height:158px;width:100%;">
-    <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
+  <div style="background-color:#fff;width:100%;height: 115px;">
+    <div style="width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
-          <div style="margin-left:64%;top:60px;position:fixed;">
+          <div style="margin-left:80%;top:0px;position:fixed;">
             <div class="tooltipSmall">
               <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
               <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
@@ -16,11 +16,9 @@
               <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
-                    <span class="span" class="shopping-cart-title"
-                          style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
-                  , sans-serif;font-weight: bold;font-size:20px;">ספרים בסל{{num}}</span>
+                    <span class="span" class="shopping-cart-title cart-num-books"> ספרים בסל {{num}} </span>
                     <br />
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
                     <br />
                   </div>
                 </div>
@@ -29,8 +27,8 @@
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
                         <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
-                        <span class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">₪{{item.Total}}</span>
+                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <span class="col-md-3 cart-item-total" >₪{{item.Total}}</span>
                       </div>
                       <br />
                       <mat-divider></mat-divider>
@@ -41,17 +39,16 @@
                   <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                     <div class="row" style="float: left;width: 370px; margin-top:5px;">
-                      <div class="row">
-                        <label class="col-md-3" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px; padding-left: 39px; padding-bottom: 10px;">סה"כ </label>
-                        <label class="col-md-3 " style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px; padding-bottom: 10px;padding-left: 217px;float: right;">₪{{this.Total}}</label>
+                      <div class="row" style="width: 370px;">
+                        <label class="col-md-4 cart-total" >סה"כ </label>
+                        <label class="col-md-3 cart-total-price" >₪{{this.Total}}</label>
                       </div>
                       <div class="row" style=" margin-top: 10px;">
                         <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
                         <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
                       padding-left: 0;
                       float: right;
-                      width: 155px;
-                      margin-left: 212px;
+                      width: 333px;
                       height: 54px;">
                           תשלום
                         </button>
@@ -67,32 +64,35 @@
     </div>
   </div>
   <div class="col-md-12" style="margin:auto;text-align:left">
-    <div style="text-align: right;">
+    <!-- <div style="text-align: right;">
       <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
       <span class="span"> בשתי סדרות שונות</span><br />
       <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
       <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br /><br /><br />
+    </div> -->
+    <div>
+      <br />
     </div>
     <div class="row width100" style="text-align:center"></div>
 
     <div class="col-md-4 floatRight ">
 
-      <img style="margin: 0px 50%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
-      <img style="margin: 0px 50%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue1==true" />
+      <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logobook.PNG" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
+      <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue1==true" />
       <br />
-      <label class="label" style="float: right;" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות היהודית</label>
+      <label class="label" style="float: right;margin-top: 20px;margin-bottom: 25px;margin-right: 45px;" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות היהודית</label>
     </div> 
     <div class="col-md-4 floatRight ">
-      <img style="margin: 0px 33%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
-      <img style="margin: 0px 33%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
+      <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logobook.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
+      <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
       <br />
-      <label class="label" style="margin: 0px 20%;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">לימודי יהדות</label>
+      <label class="label" style="margin: 0px 30%;margin-top: 20px;margin-bottom: 25px;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">לימודי יהדות</label>
     </div>
     <div class="col-md-4 floatRight ">
-      <img style="margin: 0px 6%;cursor:pointer;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
-      <img style="margin: 0px 6%;cursor:pointer;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue3==true" />
+      <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logobook.PNG" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
+      <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/logoBookBlue.PNG" (click)="SelectFilter(2)" *ngIf="ShowBlue3==true" />
       <br />
-      <label class="label" style="float: left;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">אשכולות</label>
+      <label class="label" style="float: left;margin-top: 20px;margin-bottom: 25px;margin-left: 45px;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">אשכולות</label>
     </div>
   </div>
 

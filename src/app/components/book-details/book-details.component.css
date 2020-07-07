@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype");
+}
+
 body{
   max-width: 1100px;
   margin: auto;
@@ -32,6 +37,7 @@ body{
 }
 
 .checkout-btn{
+  outline:none;
   background-color: #0b4e6f;
   color: white; 
   font-family:'Open Sans', sans-serif;
@@ -50,6 +56,7 @@ body{
   font-size:18px;;
 }
 .fill-btn-blue {
+  outline:none;
   background-color: #0b4e6f;
   padding: 10px 0px;
   border: none;
@@ -60,6 +67,7 @@ body{
   cursor: pointer;
 }
 .view-cart-btn{
+  outline:none;
   background-color: #ffffff;
   outline: #0b4e6f;
   color: #0b4e6f;
@@ -121,15 +129,16 @@ img {
   border-style: none;
   vertical-align: top;
   max-width: 100%;
-  height: auto;
+  height: 588px;
+  width: 408px;
 }
 .wp-post-image{
   border: 1px solid #85a6b7;
   padding: 6px;
 }
 .price{
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
+  font-family: 'OpenSansBold', sans-serif;
+  font-weight: 600;
   font-size: 24px; 
   color:#026fa7;
 }
@@ -254,6 +263,7 @@ ul {
   }
 
   .buy-btn{
+    outline:none;
     background-color:#0b4e6f;
     color: white;
     font-family:'Open Sans', sans-serif;
@@ -276,8 +286,49 @@ ul {
       text-transform: uppercase; 
       font-size:18px;
       }  
-    
-    
+.book-name{
+  font-family: 'OpenSansBold', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color:#026fa7;
+}
+.cart-num-books{
+  color:#026fa7;
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600;
+  font-size:16px;
+  direction: rtl !important;
+}
+
+.cart-item-total{
+  color: #026fa7;
+  font-size:18px;
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600;
+}
+
+
+.cart-total-price{
+  color: #000000;
+  font-size:16px;
+  font-family:'OpenSansBolds', sans-serif;
+  font-weight:600;
+  top: 10px;
+  padding-bottom: 10px;
+  margin-left: 153px;
+  float: right;
+}
+
+.cart-total{
+  color: #000000;
+  font-size:16px;
+  font-family:'OpenSansBold', sans-serif;
+  font-weight:600;
+  float: left; 
+  top: 10px; 
+  padding-left: 39px;
+  padding-bottom: 10px;
+}
 .right-cart-number { 
   /* background: rgba(7, 181, 229, 0.80); */
   /* margin-left: 40px; */
@@ -298,6 +349,7 @@ ul {
   }
 
 .add-to-cart-btn{
+  outline:none;
   background-color:  #6190a9 ;
   color: white;
   font-family:'Open Sans', sans-serif;

@@ -1,10 +1,10 @@
 <div class="body">
 
-  <div style="background-color:#fff;height:158px;width:100%;">
-    <div style="width:100%;position:fixed;height:158px;background-color: white;z-index: 1000;top: 0;">
+  <div style="background-color:#fff;width:100%;height: 115px;">
+    <div style="width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
-          <div style="margin-left:64%;top:60px;position:fixed;">
+          <div style="margin-left:80%;top:0px;position:fixed;">
             <div class="tooltipSmall">
               <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg">{{this.num}}</span>
               <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
@@ -12,11 +12,9 @@
               <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
-                    <span class="span" class="shopping-cart-title"
-                          style="direction: rtl !important; color:#026fa7; font-family:'Open Sans'
-                    , sans-serif;font-weight: bold;font-size:20px;">{{num}}books in your cart</span>
+                    <span class="span" class="shopping-cart-title cart-num-books">{{num}} books in your cart</span>
                     <br />
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
                     <br />
                   </div>
                 </div>
@@ -25,8 +23,8 @@
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
                         <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: normal; ">{{item.NameBook}} </span>
-                        <span class="col-md-3" style="color: #026fa7;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal">${{item.Total}}</span>
+                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <span class="col-md-3 cart-item-total" >${{item.Total}}</span>
                       </div>
                       <br />
                       <mat-divider></mat-divider>
@@ -38,18 +36,15 @@
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                     <div class="row" style="float: left;width: 370px; margin-top:5px;">
                       <div class="row" style="width: 370px;">
-                        <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;float: left; top: 10px;
-                            padding-left: 39px; padding-bottom: 10px;">Total</label>
-                        <label class="col-md-4" style="color: #000000;font-size:16px;font-family:'Open Sans', sans-serif;font-weight:bold;top: 10px;
-                           padding-right: 0px; margin-left: 121px;float: right;">${{this.Total}}</label>
+                        <label class="col-md-4 cart-total">Total</label>
+                        <label class="col-md-3 cart-total-price">${{this.Total}}</label>
                       </div>
                       <div class="row" style="margin-top: 10px;">
                         <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
                         <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="    padding-right: 5px;
                           padding-left: 0;
                           float: right;
-                          width: 155px;
-                          margin-left: 212px;
+                          width: 333px;
                           height: 54px;">
                           CHECKOUT
                         </button>
@@ -68,15 +63,15 @@
     <div *ngIf="DetailsBook">
 
     <div class="col-md-12  marginAuto" style="display:flex;">
-      <div class="col-md-3">
+      <div >
         <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;">
-          <img width="468px" height="558px" src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
+          <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
         </div>
 
       </div>
       <div class="col-md-6 floatRight">
 
-        <h1 style="font-family: 'Open Sans', sans-serif;font-weight: bold; font-size: 18px; color:#026fa7;">{{DetailsBook.Name}}</h1>
+        <h1 class="book-name">{{DetailsBook.Name}}</h1>
         <!-- <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;" (click)="Quantity=Quantity-1">-</label> </span>
         <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;">{{Quantity}}</label> </span>
         <span style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;" (click)="Quantity=Quantity+1">+</label> </span>
@@ -85,17 +80,17 @@
          <span class="price" *ngIf="DetailsBook.SallePrice!=0" style=" text-decoration: line-through;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
          <span class="price" *ngIf="DetailsBook.SallePrice!=0"><span>$</span>{{DetailsBook.SallePrice}}</span>
           -->
-        <br /><br />
+        <br />
         <div class="row">
           <div style="margin-left: 15px;">
+            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;"><span>$</span>{{DetailsBook.SallePrice}}</span>
+            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
             <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>$</span>{{DetailsBook.Price}}</span>
-            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style=" text-decoration: line-through;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
-            <span class="price" *ngIf="DetailsBook.SallePrice!=0"><span>$</span>{{DetailsBook.SallePrice}}</span>
           </div>
           <div style="margin: 0; margin-left: 55px;">
-            <span style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1">-</label> </span>
-            <span style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;">{{this.Quantity}}</label> </span>
-            <span style="width:200px;text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;" (click)="Quantity=Quantity+1">+</label> </span>
+            <span style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;" (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1">-</label> </span>
+            <span style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;">{{this.Quantity}}</label> </span>
+            <span style="width:200px;text-align:center;"><label style="color: #494949;padding: 5px 10px;border: 1px solid #eaeaea;" (click)="Quantity=Quantity+1">+</label> </span>
           </div>
         </div>
         <br />

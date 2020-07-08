@@ -333,7 +333,7 @@ export class NewMemberAccountCompponent implements OnInit {
     this.user.selectedCountry = this.selectedCountry;
     // this.user.PostCode = this.PostCode;
        this.user.PostCode = "";
-    this.user.Email = this.Email;
+    this.user.Email = this.LoginUserName;
     // this.user.Bio = this.Bio;
     // this.user.Students = this.Students;
     // this.user.WithoutStudemt = this.WithoutStudemt;
@@ -351,7 +351,7 @@ export class NewMemberAccountCompponent implements OnInit {
     //this.user.UserName = this.UserName;
     //this.user.Password = this.Password;
     this.user.Both = false;
-    this.user.UserName = this.UserName;
+    this.user.UserName = this.LoginUserName;
     this.user.Password = this.Password;
     if (this.user.FirstNameEnglish != null &&
       this.user.LastNameEnglish != null &&
@@ -365,8 +365,8 @@ export class NewMemberAccountCompponent implements OnInit {
       this.user.selectedTitle != null &&
       this.user.selectedCountry != null &&
      // this.user.PostCode != null &&
-      this.user.Email != null &&
-      this.user.Bio != null &&
+      //this.user.Email != null
+       this.user.Bio != null &&
       this.user.UserName != null 
       //&&
      // this.user.Password != null

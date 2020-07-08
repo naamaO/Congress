@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { shoppingCart } from '../../../classes/shoppingCart';
 import { ChangeDetectorRef } from '@angular/core';
 import { __await } from 'tslib';
+import { CookieService } from 'angular2-cookie';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,11 +18,23 @@ import { __await } from 'tslib';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+  @ViewChild('namee') namee: ElementRef;
+  @ViewChild('usernameemail') usernameemail: ElementRef;
+  @ViewChild('address') address: ElementRef;
+  @ViewChild('country') country: ElementRef;
+  
   public DB: shoppingCart[];
   public Total: number;
   public num: number;
-
-  constructor(private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
+  public Address: string;
+  public Country: string[] = ['Israel', 'USA', 'Germany', 'Switzerland'];
+  public selectedCountry: string;
+  public UserNameLogin: string;
+  public FirstName: string;
+  public LastName: string;
+  public FirstNameHebrew: string;
+  public LastNameHebrew: string;
+  constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
     this.DB = val;
       for (var i = 0; i < this.DB.length; i++) {
@@ -59,8 +72,30 @@ export class ShoppingCartComponent implements OnInit {
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 
   }
-
+  getCookie(key: string) {
+    return this.cookieService.get(key);
+  }
   ngOnInit() {
+    this.UserNameLogin = (this.getCookie('UserName'));
+    if(this.UserNameLogin||this.UserNameLogin!=''){
+      this.serverService.getUserDetails().subscribe((events) => {
+        this.FirstName = events.FirstNameEnglish;
+        this.LastName = events.LastNameEnglish;  
+        this.FirstNameHebrew = events.FirstNameHebrew;
+        this.LastNameHebrew = events.LastNameHebrew; 
+        this.selectedCountry = events.selectedCountry;
+   console.log("user buyer:",this.FirstName, this.LastName,this.FirstNameHebrew, this.LastNameHebrew,this.selectedCountry)
+       
+      });
+    }
+    else{
+      this.FirstName = "";
+        this.LastName = "";  
+        this.FirstNameHebrew = "";
+        this.LastNameHebrew = ""; 
+        this.selectedCountry = "";
+    }
+
   }
 
   NavigCart() {
@@ -101,5 +136,29 @@ export class ShoppingCartComponent implements OnInit {
   SendToNew() {
     this.router.navigateByUrl("/new");
 
+  }
+ focusnamee() {
+    this.namee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusnamee() {
+    this.namee.nativeElement.style.color = "gray";
+  }
+  focuscountry() {
+    this.namee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocuscountry() {
+    this.namee.nativeElement.style.color = "gray";
+  } 
+  focusaddress() {
+    this.namee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusaddress() {
+    this.namee.nativeElement.style.color = "gray";
+  }
+   focususernameemail() {
+    this.namee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocususernameemail() {
+    this.namee.nativeElement.style.color = "gray";
   }
 }

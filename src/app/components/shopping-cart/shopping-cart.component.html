@@ -96,6 +96,68 @@
   </div>
 
 </div>
+
+<!-- <br /> -->
+<div>
+  <span  class="span" class="shippingAddressTitle">Shipping address</span>
+</div><br/><br />
+<div class="col-md" style="padding: 0;background-color: #f8f8f8;flex: 0 0 90%;max-width: 90%;margin-left: 60px;">
+  <br />
+  <div class="margin-top" >
+    <!-- #namee -->
+    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;">Addressee full name</label>
+      <!-- #usernaeemailemail -->
+      <label class="col-md-6 margin headerGray color-gray" style="padding-left: 23px;">Email</label>     
+  
+  </div>
+  <div class="row" style="margin-left: -1px;height: 35px;">
+    <div class="col-md-6"  style="padding-left: 36px;">
+      <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
+      <input type="text" value="{{FirstName}}" [(ngModel)]="FirstName"  
+      style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+      <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
+      <input  type="text" value="{{LastName}}" [(ngModel)]="LastName"  
+      style="width: 30%; margin-left: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+    </div>
+
+    <div class="col-md-6" >
+            <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
+    <input class="col-md" style="padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
+  
+         </div>
+
+  </div>
+
+
+  <div class="row" style="margin-left: -1px;height: 70px;">
+    <div class="col-md-6"  style="margin-top: 30px;color:gray">
+      <!-- #country -->
+    <label class="col-md-6 margin color-gray" style="padding-left: 30px;">Country</label>     
+    </div>
+    <div  class="col-md-6" style="margin-top: 30px; color:gray">
+   <!-- #address -->
+   <label class="col-md headerGray color-gray" style="padding: 0;">Address [Street + city + state + postal code]</label> 
+
+    </div>
+  </div>
+  
+  <div class="row" style="margin-left: -1px;height: 70px;">
+  <div class="col-md margin-top" style="margin-left: -1px;padding-left: 42px; ">
+    <!-- (focusout)="unfocuscountry()" (focus)="focuscountry()" -->
+    <select class="col-md"  [(ngModel)]="selectedCountry" style="padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
+      <option [value]="selectedCountry" selected>{{selectedCountry}}</option>
+      <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
+    </select>
+  </div>
+  <div class="col-md-6" >
+ <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
+ <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address" 
+ style="background-color: #f8f8f8;width:80%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+  </div>
+  <br />
+</div>   
+
+</div>
 <br /><br />
 <!--<div class="clear"></div>-->
 <div class="row">

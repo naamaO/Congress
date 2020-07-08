@@ -196,6 +196,14 @@ ul {
   .ul:hover {
     color: #27b5e5;
   }
+  .shippingAddressTitle{
+    color:#026fa7;
+    font-family:'OpenSansBold', sans-serif;
+    font-weight: 600; 
+    font-size: 18px;
+    margin-right: 56px;
+    float: right;
+    }
   .cart-total-title{
     color:#026fa7;
     font-family:'OpenSansBold', sans-serif;

@@ -53,6 +53,14 @@ body {
   font-family:'OpenSansBold', sans-serif;
   font-weight: 600; 
 }
+.shippingAddressTitle{
+  color:#026fa7;
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600; 
+  font-size: 18px;
+  margin-left: 60px;
+  
+  }
 .row {
   /*display: table;*/
   height:150px;

@@ -33,8 +33,8 @@ body {
 }
 .shopping-cart-title{
   color:#026fa7;
-  font-family:'Open Sans', sans-serif;
-  font-weight: bold; 
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600; 
   font-size:30px;
   padding-left: 82px;
 }
@@ -50,9 +50,17 @@ body {
 .table-title{
   color: #333333;
   font-size:18px;
-  font-family:'Open Sans', sans-serif;
-  font-weight: bold; 
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600; 
 }
+.shippingAddressTitle{
+  color:#026fa7;
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600; 
+  font-size: 18px;
+  margin-left: 60px;
+  
+  }
 .row {
   /*display: table;*/
   height:150px;
@@ -64,7 +72,7 @@ body {
   border-bottom: 1px solid;
   /* width: 100%; */
   margin: auto;
-  color: #d7d7d7;
+  color: #d4e0e6;
 }
 .column {
   display: table-cell;
@@ -108,6 +116,7 @@ body {
   width: 16%;
 }
 .fill-btn-blue {
+  outline:none;
   background-color: #026fa7;
   padding: 10px 48px;
   border: none;
@@ -180,25 +189,36 @@ ul {
   .ul:hover {
     color: #27b5e5;
   }
-
   .cart-total-title{
   color:#026fa7;
-  font-family:'Open Sans', sans-serif;
-  font-weight: bold; 
+  font-family:'OpenSansBold', sans-serif;
+  font-weight: 600; 
   font-size:30px;
   float: left;
   margin-left: 9px;
   }
+  .label-cart-subtotal{
+    padding-left: 0; 
+    text-align: start;
+    float:left ;
+    color: #000000;
+    font-size:18px;
+    font-family:'OpenSansBold', sans-serif;
+    font-weight:600;
+    padding-left: 0;
+
+  }
   .label-cart-total{
     float: right;
-    font-family:'Open Sans', sans-serif;
-    font-weight: normal; 
+    font-family:'OpenSansBold', sans-serif;
+    font-weight: 600; 
     font-size:18px;
   }
 .input-total{
   float: left;
 }
   .checkout-btn{
+    outline:none;
     background-color: #0b4e6f;
     color: white; 
     font-family:'Open Sans', sans-serif;

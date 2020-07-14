@@ -51,13 +51,13 @@
                 <input (focusout)="unfocusnameh()" (focus)="focusnameh ()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;" />
               </div>
               <!--</div>-->
-              <div class="col-md-4 floatLeft" style="text-align:right;">
+              <div class="col-md-5 floatLeft" style="text-align:right;">
                 <input type="text" value="{{LoginUserName}}" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
               </div>
 
               <div class="row margin-top col-md-12" style="margin-top: 30px;">
                 <label class="col-md-6 headerGray" #div>Division</label>
-                <label #subdiv class="col-md-5  headerGray" style="margin-left:7%;">Subdivision</label>
+                <label #subdiv class="col-md-4  headerGray" style="margin-left:10%;">Subdivision</label>
               </div>
               <div class="row margin-top col-md-12" >
                 <div class="col-md-6" style="padding-left: 0 !important;">
@@ -69,7 +69,7 @@
                   </select>
                   <label *ngIf="showLikeProp==true" style="width:80%"> {{Division}}</label>
                 </div>
-                <div class="col-md-6" style="text-align:right; ">
+                <div class="col-md-6" style="text-align:right;left:3%; ">
                   <select (click)="focussubdiv()" (mouseleave)="unfocussubdiv()" *ngIf="showLikeProp==false" style="width:80%;background: content-box;width:85%" #t (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision">
                     <option [value]="SubDivision" selected>{{SubDivision}}</option>
                     <option *ngFor="let SubDivision of ArrSubDivision" [value]="SubDivision">

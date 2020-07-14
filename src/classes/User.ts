@@ -23,4 +23,6 @@ export class User {
   Both: boolean;
   UserName: string;
   Password: string;
+  Address: string;
+  MemberShip: number;
 }    

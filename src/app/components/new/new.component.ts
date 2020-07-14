@@ -48,13 +48,22 @@ export class NewComponent implements OnInit {
   changeImg: boolean;
   public Total: number;
   public DBShoppingCart: shoppingCart[];
-
+  public CART = {
+    KEY: 'ShoppingCartGuest',
+    contents: []
+  }
+  public NUM = {
+    KEY: 'ShoppingCartNum',
+    num: 0
+  }
+  public TOTAL = {
+    KEY: 'ShoppingCartTotal',
+    total: 0
+  }
   constructor(private ngZone: NgZone,private cd: ChangeDetectorRef,public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
     // this.serverService.getAllDBFromServer().subscribe(val => this.DB = val);
-
-    this.serverService.getNumProduct().subscribe(val => this.num = val);
-    this.onResize();
-    this.changeImg = false;
+   //get list of shopping cart//if login
+if(this.getCookie('UserName')) {     
     this.serverService.getAllDBShoppingCart().subscribe((val) => {
       this.DBShoppingCart = val;
         for (var i = 0; i < this.DBShoppingCart.length; i++) {
@@ -66,8 +75,65 @@ export class NewComponent implements OnInit {
         }
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-
+      //get list of all books
+      // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
+    this.serverService.getNumProduct().subscribe(val => this.num = val);
+    }
+else{
+  if(!this.DBShoppingCart){
+          //check localStorage and initialize the contents of CART.contents
+          let _contents = localStorage.getItem(this.CART.KEY);
+          if(_contents){
+              this.CART.contents = JSON.parse(_contents);
+              this.DBShoppingCart= this.CART.contents;
+              if(this.DBShoppingCart.length > 0){
+              for (var i = 0; i < this.DBShoppingCart.length; i++) {
+              if (this.DBShoppingCart[i].SallePrice == 0){
+                  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+                  this.num = this.num + this.DBShoppingCart[i].Quantity;
+                  this.Total = this.Total + this.DBShoppingCart[i].Total;
+              }
+             else{
+                this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+                this.num = this.num + this.DBShoppingCart[i].Quantity;
+                this.Total = this.Total + this.DBShoppingCart[i].Total;
+              }
+            }
+          }
+          }else{
+              //dummy test data
+              this.CART.contents = [];  
+               let _cart = JSON.stringify(this.CART.contents);
+               localStorage.setItem(this.CART.KEY, _cart);
+              // CART.sync();
+              this.DBShoppingCart= this.CART.contents;  
+          }
+          let _num = localStorage.getItem(this.NUM.KEY);
+          if(parseInt(_num)>0){
+            this.NUM.num = parseInt(_num);
+            this.num = parseInt(_num);
+          }
+          else{
+            this.NUM.num = 0;         
+            let _num =  JSON.stringify(this.NUM.num);
+            localStorage.setItem(this.NUM.KEY, _num);
+            this.num = 0;
+          }
+          let _total = localStorage.getItem(this.TOTAL.KEY);
+          if(parseInt(_total)>0){
+            this.TOTAL.total = parseInt(_total);
+           this.Total = parseInt(_total);
+          }
+          else{
+            this.TOTAL.total = 0;         
+            let _total =  JSON.stringify(this.TOTAL.total);
+            localStorage.setItem(this.TOTAL.KEY, _total);
+            this.Total = 0;
+          }
+}
+ }
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event?) {
     this.screenHeight = window.innerHeight;
@@ -93,6 +159,20 @@ export class NewComponent implements OnInit {
       error => {  
         console.log(error)
       });
+      this.UserNameLogin = this.getCookie('UserName');
+      if(this.UserNameLogin){
+        console.log(this.UserNameLogin)
+      }
+      else  if(!this.UserNameLogin||this.UserNameLogin==null){
+          let  _num = localStorage.getItem(this.NUM.KEY);
+          if(_num){
+              this.NUM.num = JSON.parse(_num);
+            }
+            let  _total = localStorage.getItem(this.TOTAL.KEY);
+            if(_total){
+                this.TOTAL.total = JSON.parse(_total);
+              }
+    }
   }
   SendToTranzila() {
     this.router.navigate(['Pay', this.Total]);

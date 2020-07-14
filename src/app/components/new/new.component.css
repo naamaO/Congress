@@ -121,9 +121,33 @@ img {
 a {
   text-decoration: none;
 }
-
-.overlay:hover {
-background-color:#b0c7d4 ; 
+.hover{
+  opacity: 1;
+  width: 296px !important;
+  height: 404px !important; 
+  background-size: contain;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hover:hover{
+  background: #b0c7d4 !important; 
+}
+.overlay{
+  background-size: contain;
+  position: relative;
+  z-index: 10;
+  height: 387px;
+  width: 279px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.overlay:hover{
+  opacity: 1;
+  background: #b0c7d4 !important;
 }
 .attachment-shop_catalog:hover {
   background-color:#b0c7d4 ; 
@@ -444,7 +468,7 @@ ul {
   color: #b0c7d4 !important;
   width: 296px !important;
   height: 404px !important;
-  background: #b0c7d4 !important;
+  /* background: #b0c7d4 !important; */
 }
 
 .border-buttom {

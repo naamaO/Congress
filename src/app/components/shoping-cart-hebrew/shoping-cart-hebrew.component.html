@@ -21,7 +21,7 @@
 <div class="body">
 
   <div style="background-color:#fff;width:100%;height: 115px;">
-    <div style="width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
+    <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
           <div style="margin-left:80%;top:0px;position:fixed;"> 
@@ -126,24 +126,26 @@
   <br />
   <div class="margin-top" >
     <!-- #namee -->
-    <label class="col-md-6  headerGray color-gray" style="padding-right: 50px;">שם נמען</label>
-      <!-- #usernaeemailemail -->
-      <label class="col-md-6 margin headerGray color-gray" >אימייל</label>     
+    <label class="col-md-6  headerGray color-gray" style="padding-right: 50px;"  #nameh >שם נמען</label>
+  <!-- #address -->
+  <label class="col-md-6 headerGray color-gray" style="padding-left: 23px;"  #address >כתובת [עיר + רחוב + מספר + מיקוד]</label> 
+
   </div>
   <div class="row" style="margin-left: -1px;height: 35px;">
     <div class="col-md-6"  style="padding-right: 64px;">
       <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
-      <input type="text" value="{{FirstName}}" [(ngModel)]="FirstName"  
+      <input type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew"   #namehfirstinput 
       style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
       <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
-      <input  type="text" value="{{LastName}}" [(ngModel)]="LastName"  
+      <input  type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew"  #namehlastinput
       style="width: 30%; margin-right: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
     </div>
 
     <div class="col-md-6" >
-          <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
-    <input class="col-md" style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
-</div>
+      <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
+      <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address"  #addressinput
+      style="padding:0;direction: ltr;text-align: end; padding: 0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+     </div>
 
   </div>
 
@@ -151,27 +153,29 @@
   <div class="row" style="margin-left: -1px;height: 70px;">
     <div class="col-md-6"  style="margin-top: 30px;color:gray">
       <!-- #country -->
-    <label class="col-md-6 margin color-gray" style="padding-right: 45px;">מדינה</label>     
+    <label class="col-md-6 margin color-gray" style="padding-right: 45px;"  #country>מדינה</label>     
     </div>
+      
     <div  class="col-md-6" style="margin-top: 30px; color:gray">
-          <!-- #address -->
-    <label class="col-md headerGray color-gray" style="padding-right:0px">כתובת [עיר + רחוב + מספר + מיקוד]</label> 
- </div>
+     <!-- #usernaeemailemail -->
+     <label class="col-md-6 margin headerGray color-gray" #usernameemail >אימייל</label>        
+     </div>
   </div>
   
   <div class="row" style="margin-left: -1px;height: 70px;">
+
   <div class="col-md margin-top" style="margin-left: -1px;padding-right: 56px;">
     <!-- (focusout)="unfocuscountry()" (focus)="focuscountry()" -->
-    <select class="col-md"  [(ngModel)]="selectedCountry" style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
+    <select class="col-md"  [(ngModel)]="selectedCountry" #countryinput  style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
       <option [value]="selectedCountry" selected>{{selectedCountry}}</option>
       <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
     </select>
   </div>
-  <div class="col-md-6" >
-  <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
-  <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address" 
-  style="direction: ltr;text-align: end; padding: 0;background-color: #f8f8f8;width:80%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
- </div>
+
+ <div class="col-md-6" >
+  <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
+<input class="col-md"  #usernameemailinput style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
+</div>
   <br />
 </div>   
 
@@ -210,7 +214,7 @@
   <br />
   <div class="col-md-12" style="float: left;">
    <!-- <button (click)="SendToNew()" class=" col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left;">חזרה </button> -->
-   <button (click)="SendToTranzila()" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left; width: 145px;">תשלום</button>
+   <button (click)="checkout()" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left; width: 145px;">תשלום</button>
  </div>
  <br /><br />
 

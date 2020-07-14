@@ -1,4 +1,4 @@
-import { Component, OnInit,NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,NgZone, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -11,18 +11,24 @@ import { shoppingCart } from '../../../classes/shoppingCart';
 import { ChangeDetectorRef } from '@angular/core';
 import { __await } from 'tslib';
 import { CookieService } from 'angular2-cookie';
+import { User } from 'src/classes/User';
 @Component({
   selector: 'app-shoping-cart-hebrew',
   templateUrl: './shoping-cart-hebrew.component.html',
   styleUrls: ['./shoping-cart-hebrew.component.css']
 })
 export class ShopingCartHebrewComponent implements OnInit {
-  @ViewChild('namee') namee: ElementRef;
+  @ViewChild('nameh') nameh: ElementRef;
   @ViewChild('usernameemail') usernameemail: ElementRef;
   @ViewChild('address') address: ElementRef;
   @ViewChild('country') country: ElementRef;
-  
+  @ViewChild('namehfirstinput') namehfirstinput: ElementRef;
+  @ViewChild('namehlastinput') namehlastinput: ElementRef;
+  @ViewChild('usernameemailinput') usernameemailinput: ElementRef;
+  @ViewChild('addressinput') addressinput: ElementRef;
+  @ViewChild('countryinput') countryinput: ElementRef;
   public DB: shoppingCart[];
+  public user: User;
   public Total: number;
   public num: number;
   public Address: string;
@@ -33,28 +39,98 @@ export class ShopingCartHebrewComponent implements OnInit {
   public LastName: string;
   public FirstNameHebrew: string;
   public LastNameHebrew: string;
-
-  constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {
-    this.serverService.getAllDBShoppingCart().subscribe((val) => {
-    this.DB = val;
-      for (var i = 0; i < this.DB.length; i++) {
-        if (this.DB[i].SallePrice == 0)
-          this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-        else
-          this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-
-      }
+  public showMessage:boolean=false;
+  public CART = {
+    KEY: 'ShoppingCartGuest',
+    contents: []
+  }
+  public NUM = {
+    KEY: 'ShoppingCartNum',
+    num: 0
+  }
+  public TOTAL = {
+    KEY: 'ShoppingCartTotal',
+    total: 0
+  }
+  public currency:number = 1;
+  public lang:string = "il";
+  constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {  
+ //get list of shopping cart//if login
+if(this.getCookie('UserName')) {     
+  this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+    this.DB = resp;
+    for (var i = 0; i < this.DB.length; i++) {
+      if (this.DB[i].SallePrice == 0)
+        this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+      else
+        this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+    }
+    },
+    error => {  
+      console.log(error)
     });
     this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-    this.serverService.getNumProduct().subscribe(val => this.num = val);
-
-    //this.serverService.getAllDBShoppingCart().subscribe((events) => {
-    //  this.DB = events;
-    //  alert(this.DB.length);
-    //  alert(this.DB[0].NameBook)
-    //  alert(this.DB[1].NameBook)
-    //});
+    //get list of all books
+    // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
+  this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
+else{
+if(!this.DB){
+        //check localStorage and initialize the contents of CART.contents
+        let _contents = localStorage.getItem(this.CART.KEY);
+        if(_contents){
+            this.CART.contents = JSON.parse(_contents);
+            this.DB= this.CART.contents;
+            if(this.DB.length > 0){
+              for (var i = 0; i < this.DB.length; i++) {
+                if (this.DB[i].SallePrice == 0){
+                this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+                this.num = this.num + this.DB[i].Quantity;
+                this.Total = this.Total + this.DB[i].Total;
+              }
+              else{
+                this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+                this.num = this.num + this.DB[i].Quantity;
+                this.Total = this.Total + this.DB[i].Total;
+              }
+              }
+            }
+        }else{
+          
+            //dummy test data
+            this.CART.contents = [];     
+             let _cart = JSON.stringify(this.CART.contents);
+             localStorage.setItem(this.CART.KEY, _cart);
+            // CART.sync();
+            this.DB= this.CART.contents;  
+        }
+        let _num = localStorage.getItem(this.NUM.KEY);
+    if(parseInt(_num)>0){
+      this.NUM.num = parseInt(_num);
+      this.num = parseInt(_num);
+    }
+    else{
+      this.NUM.num = 0;         
+      let _num =  JSON.stringify(this.NUM.num);
+      localStorage.setItem(this.NUM.KEY, _num);
+      this.num = 0;
+    }
+    let _total = localStorage.getItem(this.TOTAL.KEY);
+    if(parseInt(_total)>0){
+      this.TOTAL.total = parseInt(_total);
+     this.Total = parseInt(_total);
+    }
+    else{
+      this.TOTAL.total = 0;         
+      let _total =  JSON.stringify(this.TOTAL.total);
+      localStorage.setItem(this.TOTAL.KEY, _total);
+      this.Total = 0;
+    }
+}
+
+}
+  }
+
   changePlaying() {
     __await(1000);
     this.ngZone.run(() => {
@@ -74,66 +150,360 @@ export class ShopingCartHebrewComponent implements OnInit {
 
   }
 
-  deleteQuantity(item: shoppingCart) {
-    this.serverService.postdeleteQuantity(item);//.subscribe((events) => {
-    // this.router.navigateByUrl("/ShoppingCart");
-    //location.reload()
-    this.changePlaying();
-    this.changePlaying();
-  }
+
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
+  setCookie(UaerName: string) {
+    this.cookieService.put('UserName', UaerName);
+  }
   ngOnInit() {
-    this.UserNameLogin = (this.getCookie('UserName'));
-    if(this.UserNameLogin||this.UserNameLogin!=''){
+    this.UserNameLogin = this.getCookie('UserName');
+    if(this.UserNameLogin){
       this.serverService.getUserDetails().subscribe((events) => {
         this.FirstName = events.FirstNameEnglish;
         this.LastName = events.LastNameEnglish;  
         this.FirstNameHebrew = events.FirstNameHebrew;
         this.LastNameHebrew = events.LastNameHebrew; 
         this.selectedCountry = events.selectedCountry;
-   console.log("user buyer:",this.FirstName, this.LastName,this.FirstNameHebrew, this.LastNameHebrew,this.selectedCountry)
-       
+        this.Address = events.selectedCountry;
+  // console.log("user buyer:",this.FirstName, this.LastName,this.FirstNameHebrew, this.LastNameHebrew,this.selectedCountry)    
       });
     }
-    else{
-      this.FirstName = "";
-        this.LastName = "";  
-        this.FirstNameHebrew = "";
-        this.LastNameHebrew = ""; 
-        this.selectedCountry = "";
+    else  if(!this.UserNameLogin||this.UserNameLogin==null){
+      this.FirstName = null;
+        this.LastName = null;  
+        this.FirstNameHebrew = null;
+        this.LastNameHebrew = null; 
+        this.selectedCountry = null;
+        this.Address = null;
+        let  _num = localStorage.getItem(this.NUM.KEY);
+        if(_num){
+            this.NUM.num = JSON.parse(_num);
+          }
+          let  _total = localStorage.getItem(this.TOTAL.KEY);
+          if(_total){
+              this.TOTAL.total = JSON.parse(_total);
+            }
     }
-
   }
 
+  AddQuantity(item: shoppingCart) {
+    if(this.getCookie('UserName')){
+      this.UserNameLogin = (this.getCookie('UserName'));
+      this.serverService.postAddQuantity(item)//.subscribe((events) => {
+        this.changePlaying();
+        this.changePlaying(); 
+    }
+    else{
+      this.UserNameLogin=null;
+      this.add(item)
+    }
+  }
+  RemoveQuantity(item: shoppingCart) {
+    if(this.getCookie('UserName')){
+      this.UserNameLogin = (this.getCookie('UserName'));
+    this.serverService.postRemoveQuantity(item)
+    this.changePlaying();
+    this.changePlaying();
+    }
+    else{
+     this.remove(item.Id);
+    }
+  }
+  deleteQuantity(item: shoppingCart) {
+    if(this.getCookie('UserName')){
+      this.UserNameLogin = (this.getCookie('UserName'));
+      this.serverService.postdeleteQuantity(item);
+    this.changePlaying();
+    this.changePlaying();
+  }
+  else{
+    this.UserNameLogin=null;
+    this.reduce(item.Id)
+  }
+  }
   NavigCart() {
     this.router.navigateByUrl("/ShoppingCart");
   }
-  
-  AddQuantity(item: shoppingCart) {
-    //alert(item.NameBook + "uu");
+async sync(act:string){
+  let _cart = JSON.stringify(this.CART.contents);
+  await localStorage.setItem(this.CART.KEY, _cart);
+  this.DB= this.CART.contents;
+  for (var i = 0; i < this.DB.length; i++) {
+    if (this.DB[i].SallePrice == 0){ 
+    this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+    }
+    else {
+    this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+    }
+     if(act=='inc'){
+      this.num = this.num + 1;
+      this.Total = this.Total + this.DB[i].Total;
+      }
+      else  if(act=='red'){
+        this.num = this.num - 1;
+      this.Total = this.Total -  this.DB[i].Total;
+      }
+}
+if(this.DB.length==0){
+  this.num = 0;
+}
+this.NUM.num = this.num;
+let _num =  JSON.stringify(this.NUM.num);
+localStorage.setItem(this.NUM.KEY, _num);
 
-    //
-    this.serverService.postAddQuantity(item)//.subscribe((events) => {
-    //
-    //this.router.navigateByUrl("/ShoppingCart");
-    this.changePlaying();
-    this.changePlaying(); 
-    //  alert(item.NameBook + "uu");
-    //});
-
+this.TOTAL.total = this.Total;
+let _total =  JSON.stringify(this.TOTAL.total);
+localStorage.setItem(this.TOTAL.KEY, _total);
+}
+find(id){
+  //find an item in the cart by it's id
+  let match = this.CART.contents.filter(item=>{
+      if(item.IdBook == id)
+          return true;
+  });
+  if(match && match[0])
+      return match[0];
+}
+add(item,qty=1){
+  //add a new item to the cart
+  //check that it is not in the cart already
+  if(this.find(item.IdBook)){
+      this.increase(item.IdBook, qty);
   }
-  RemoveQuantity(item: shoppingCart) {
-    this.serverService.postRemoveQuantity(item)//.subscribe((events) => {
-    // this.router.navigateByUrl("/ShoppingCart");
-    //location.reload()
-    this.changePlaying();
-    this.changePlaying();
+  else{
+    // let PRODUCTS = [];
+    //   let arr = PRODUCTS.filter(product=>{
+    //       if(product.id == id){
+    //           return true;
+    //       }
+    //   });
+      // if(arr && arr[0]){
+          let obj = {
+              Id: this.CART.contents.length,
+              UserName: null,
+              IdBook: item.IdBook,
+              NameBook: item.NameBook,
+              PriceBook: item.PriceBook,
+              ImageBook: item.ImageBook,
+              Quantity: item.Quantity,
+              SallePrice: item.SallePrice,
+              Total: item.Total
+          };
+          this.CART.contents.push(obj);
+          //update localStorage
+          this.sync('inc');
+      // }
+      // else{
+          //product id does not exist in products data
+        //  console.error('Invalid Product');
+     // }
   }
+}
+increase(id, qty){
+  //increase the quantity of an item in the cart
+  this.CART.contents = this.CART.contents.map(item=>{
+      if(item.IdBook === id)
+          item.Quantity = item.Quantity + qty;
+      return item;
+  });
+  //update localStorage
+  this.sync('inc')
+}
+reduce(id, qty=1){
+  //reduce the quantity of an item in the cart
+  this.CART.contents = this.CART.contents.map(item=>{
+    if(item.Id === id)
+    item.Quantity = item.Quantity - qty;
+      return item;
+  });
+  this.CART.contents.forEach(async item=>{
+    if(item.Id === id && item.Quantity === 0)
+    await this.remove(id);
+  });
+  //update localStorage
+  this.sync('red')
+}
+remove(id){
+  //remove an item entirely from CART.contents based on its id
+  this.CART.contents = this.CART.contents.filter(item=>{
+      if(item.Id !== id)
+          return true;
+  });
+  //update localStorage
+  this.sync('red')
+}
   SendToTranzila() {
+    this.serverService.setCurrency(this.currency);
+    this.serverService.setLang(this.lang);
+    this.serverService.setEmail(this.UserNameLogin);
+    this.serverService.setTotal(this.Total);
     this.router.navigate(['Pay', this.Total]);
   }
+  registrationGuest(){
+     //check validation
+    //this.hasLowerCase(this.Password);
+   // this.setCookie(this.Email);
+    this.user = new User();
+    this.user.FirstNameHebrew = this.FirstNameHebrew;
+    this.user.LastNameHebrew = this.LastNameHebrew
+    this.user.Address = this.Address;
+    this.user.selectedCountry = this.selectedCountry;
+    this.user.Email = this.UserNameLogin;
+    this.user.UserName = this.UserNameLogin;
+    this.user.Hebrew = true;
+    if (
+      this.user.FirstNameHebrew != null &&
+      this.user.LastNameHebrew != null &&
+      this.user.Address != null &&
+      this.user.selectedCountry != null &&
+      this.user.UserName != null &&
+      this.user.Hebrew != null
+    ) {
+      this.serverService.RegistrationNewGuest(this.user)
+      //  if (this.Rout == 1) {
+      //   this.router.navigateByUrl("/RegistrationOneEnglish");
+
+      // }
+      // if (this.Rout == 2) {
+      //   this.router.navigateByUrl("/Thank3");
+
+      // } if (this.Rout == 3) {
+      //   this.router.navigateByUrl("/new");
+      // }
+
+      // this.ShowMessage = true;
+ //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
+ //this.router.navigate(['Pay', this.Total]).then(result => {  window.open(link, '_blank'); })
+    /// this.router.navigate(['Pay', this.Total]);
+    }
+    // else {
+    //    alert("All fields must be filled!");
+    //  }
+  }
+
+  checkout(){
+    if(
+    this.FirstNameHebrew != null && 
+    this.LastNameHebrew != null &&
+    this.Address != null &&
+    this.selectedCountry != null &&
+    this.UserNameLogin != null 
+      ){
+    if(this.getCookie('UserName')){//if logined
+    this.UserNameLogin = this.getCookie('UserName');
+    this.SendToTranzila();
+    } 
+    // else{//if not logined
+    //  this.setCookie(this.UserNameLogin)
+    //  this.showMessage=true;
+    // }
+else
+    if(this.UserNameLogin || this.UserNameLogin!=''){
+       this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
+       let existUser;
+     //  existUser = true;
+         existUser = val;
+       console.log(val)
+     
+      if(existUser==1){//if not  registered
+      this.registrationGuest();
+             //add to all cart 
+             let _contents = localStorage.getItem(this.CART.KEY);
+             //  this.DB= this.CART.contents;
+              for (var i = 0; i < this.DB.length; i++) {
+               this.DB[i].UserName = this.UserNameLogin;
+               console.log( this.DB[i])
+               this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
+              //   console.log(res)
+               });
+             }
+             // this.SendToTranzila();       
+      }
+      else{//if registered and not logined
+       //add to all cart 
+       let _contents = localStorage.getItem(this.CART.KEY);
+      //  this.DB= this.CART.contents;
+       for (var i = 0; i < this.DB.length; i++) {
+        this.DB[i].UserName = this.UserNameLogin;
+        console.log( this.DB[i])
+        this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
+       //   console.log(res)
+        });
+      }
+
+    //  this.SendToTranzila();
+
+      }
+     });
+    }
+
+    this.SendToTranzila();
+    if(this.serverService.resNotifyTranzila){
+   //   console.log("this.serverService.resNotifyTranzila",this.serverService.resNotifyTranzila)
+    }
+    //if tranzila return response true
+    // if(this.serverService.resNotifyTranzila==000){}
+    for (var i = 0; i < this.DB.length; i++) {
+      this.DB[i].UserName = this.UserNameLogin;
+      console.log( this.DB[i])
+      let itemToDelete  =  this.DB[i];
+      this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
+        if(res==1){
+        //  console.log("this.DB[i]",itemToDelete)
+          this.serverService.postRemoveQuantity(itemToDelete);
+        }
+        console.log(res)
+      });
+
+    }
+  }
+  else {
+    if( !this.FirstNameHebrew || !this.LastNameHebrew){
+      this.nameh.nativeElement.style.color = "red";
+      this.namehfirstinput.nativeElement.style.borderBottom = "1px solid red";
+      this.namehlastinput.nativeElement.style.borderBottom = "1px solid red";
+    }else{
+      this.nameh.nativeElement.style.color = "gray";
+      this.namehfirstinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+      this.namehlastinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+    }
+      // if(!this.LastNameHebrew){
+      //   this.nameh.nativeElement.style.color = "red";
+      //   this.namehlastinput.nativeElement.style.borderBottom = "1px solid red";
+      // }else{
+      //   this.nameh.nativeElement.style.color = "gray";
+      //   this.namehlastinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+      // }
+     if(!this.Address){
+      this.address.nativeElement.style.color = "red";
+      this.addressinput.nativeElement.style.borderBottom = "1px solid red";
+     }else{
+      this.address.nativeElement.style.color = "gray";
+      this.addressinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+    }
+      if(!this.selectedCountry){
+       this.country.nativeElement.style.color = "red";
+       this.countryinput.nativeElement.style.borderBottom = "1px solid red";
+      }else{
+        this.country.nativeElement.style.color = "gray";
+        this.countryinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+      }
+      if(!this.UserNameLogin){
+        this.usernameemail.nativeElement.style.color = "red";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
+      }else{
+        this.usernameemail.nativeElement.style.color = "gray";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+      }
+    
+    //alert("All fields must be filled!");
+  }
+
+}
+  
+
   SendToNew() {
     this.router.navigateByUrl("/newHebrew");
 
@@ -141,27 +511,27 @@ export class ShopingCartHebrewComponent implements OnInit {
 
   
  focusnamee() {
-  this.namee.nativeElement.style.color = "#27b5e5";
+  this.nameh.nativeElement.style.color = "#27b5e5";
 }
 unfocusnamee() {
-  this.namee.nativeElement.style.color = "gray";
+  this.nameh.nativeElement.style.color = "gray";
 }
 focuscountry() {
-  this.namee.nativeElement.style.color = "#27b5e5";
+  this.nameh.nativeElement.style.color = "#27b5e5";
 }
 unfocuscountry() {
-  this.namee.nativeElement.style.color = "gray";
+  this.nameh.nativeElement.style.color = "gray";
 } 
 focusaddress() {
-  this.namee.nativeElement.style.color = "#27b5e5";
+  this.nameh.nativeElement.style.color = "#27b5e5";
 }
 unfocusaddress() {
-  this.namee.nativeElement.style.color = "gray";
+  this.nameh.nativeElement.style.color = "gray";
 }
  focususernameemail() {
-  this.namee.nativeElement.style.color = "#27b5e5";
+  this.nameh.nativeElement.style.color = "#27b5e5";
 }
 unfocususernameemail() {
-  this.namee.nativeElement.style.color = "gray";
+  this.nameh.nativeElement.style.color = "gray";
 }
 }

@@ -22,21 +22,45 @@ export class ServerService {
   public LoginDiv: string;
   public port: string = 'http://localhost:64905';
  // public port: string = 'http://jewish-studies.b2story.com/webApi';
-
+  public currency: number = 1;
+  public total: number;
+  public lang: string = 'il';
+  public email: string;
+  public resNotifyTranzila:any;
   constructor(public cookieService: CookieService, private http: HttpClient) {
     this.port = 'http://localhost:64905';
     //this.port = ' http://jewish-studies.b2story.com/webApi';
 
   }
+  ngOnInit() {
+    this.setCurrency(this.currency);
+    this.setLang(this.lang);
+    this.setEmail(this.email);
+    this.setTotal(this.total);
+  }
+  setTotal(total){
+    this.total = total;
+  }
+
+  setCurrency(currency){
+  this.currency = currency;
+  }
+
+  setLang(lang){
+    this.lang = lang;
+  }
+
+  setEmail(email){
+    this.email = email;
+  }
+
+  setNotify(resNoyify){
+    this.resNotifyTranzila = resNoyify;
+  }
 
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
-  getUserNameExists(): Observable<boolean> {
-    return this.http.get<boolean>(this.port + "/api/Home/getUserNameExists");
-
-  }
-
   getAllDBFromServer(): Observable<book[]> {
     return this.http.get<book[]>(this.port + "/api/Home/getFromDB");
   }
@@ -44,16 +68,24 @@ export class ServerService {
     return this.http.get<book[]>(this.port + "/api/Home/getFromDBHebrew");
   }
 
-  getAllDBShoppingCart(): Observable<shoppingCart[]> {
-    this.LoginUserName = (this.getCookie('UserName'));
-
+  getAllDBShoppingCart(): Observable<shoppingCart[]> {  
+    if(this.getCookie('UserName')){
+      this.LoginUserName = (this.getCookie('UserName'));
+    }
+    else{
+      this.LoginUserName=null;
+    }
     return this.http.get<shoppingCart[]>(this.port + "/api/Home/getFromDBCart?LoginUserName=" + this.LoginUserName);
-
   }
   enterItemToCart(item: shoppingCart):any {
     this.LoginUserName = (this.getCookie('UserName'));
     //item.login = this.LoginUserName;
    return this.http.post(this.port + "/api/Home/PostToCart", item);
+  }
+  AddItemToCart(item: shoppingCart):any {
+    this.LoginUserName = (this.getCookie('UserName'));
+    //item.login = this.LoginUserName;
+   return this.http.post(this.port + "/api/Home/AddToCart", item);
   }
   postAddQuantity(item: shoppingCart) {
     this.http.post(this.port + "/api/Home/postAddQuantity", item).subscribe();
@@ -82,11 +114,24 @@ export class ServerService {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }
+  RegistrationNewGuest(user: User) {
+    this.http.post(this.port + "/api/Home/RegistrationGuest", user).subscribe();
+  }
   Registration(user: User) {
     this.http.post(this.port + "/api/Home/Registration", user).subscribe();
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
+  }
+  getUserNameExists(UserName:string): Observable<any> {
+    if(this.getCookie('UserName')){
+      this.LoginUserName = (this.getCookie('UserName'));
+    }
+    else{
+      this.LoginUserName=UserName;
+    }  
+    //  return this.http.get<boolean>(this.port + "/api/Home/checkEmailFind?email="+this.LoginUserName);
+    return this.http.get<any>(this.port + "/api/Home/checkEmailFind?email="+this.LoginUserName);
   }
   DivisionEnglish(): Observable<string[]> {
     return this.http.get<string[]>(this.port + "/api/Home/GetDivisionEnglish")

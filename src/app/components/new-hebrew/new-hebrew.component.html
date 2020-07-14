@@ -5,7 +5,7 @@
     <div style="background-color:#fff;height:100%;width:100%;">
      -->
   <div style="background-color:#fff;width:100%;height: 115px;">
-    <div style="width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
+    <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
           <div style="margin-left:80%;top:0px;position:fixed;">
@@ -130,12 +130,12 @@
               <div style="margin:auto;"></div>
             </div>
         </div>
+        <div class="hover" >
           <div class="border-book featured-image content" (click)="Detais(item)"
-               [style.background-image]="'url('+item.Image+')'"
                style="background-size: contain; position:relative;
         z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
          center; display: flex;align-items: center;justify-content: center;">
-            <div class="view overlay">
+            <div class="view overlay" [style.background-image]="'url('+item.Image+')'">
               <!-- <img (click)="Detais(item)"
                          style="margin:8px; width:279px; height:387px" src={{item.Image}}
                           class="attachment-shop_catalog size-shop_catalog wp-post-image"
@@ -144,6 +144,7 @@
                 <i class="fusion-icon-spinner"></i>
               </div>
             </div>
+          </div>
           </div>
           <div class="fusion-product-content" style="width: 296px; margin: auto;">
             <div class="product-details">

@@ -36,6 +36,8 @@ import { Thank3Component } from './components/thank3/thank3.component';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
 import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { NewMemberAccountCompponent } from './components/new-member-account/new-member-account.component';
+import { notifyComponent } from './components/notify/notify.component';
+import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
 export const route: Routes = [
   {
@@ -181,7 +183,15 @@ export const route: Routes = [
     component: CongressRegistrationSingleComponent,
   },
   {
-    path: 'ResetPassSuccess',
+    path: 'notify',
+    component: notifyComponent,
+  },
+  {
+    path: 'fail',
+    component: failComponent,
+  },
+  {
+     path: 'ResetPassSuccess',
     component: ResetPassSuccessComponent,
   }
 ]

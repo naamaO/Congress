@@ -20,6 +20,11 @@ export class ServerService {
   d: object;
   public LoginUserName: string;
   public LoginDiv: string;
+  public currency: number = 1;
+  public total: number;
+  public lang: string = 'il';
+  public email: string;
+  public resNotifyTranzila:any;
   //public port: string = 'http://localhost:64905';
   public port: string = 'http://jewish-studies.b2story.com/webApi';
 
@@ -29,6 +34,29 @@ export class ServerService {
 
   }
   ngOnInit() {
+    this.setCurrency(this.currency);
+    this.setLang(this.lang);
+    this.setEmail(this.email);
+    this.setTotal(this.total);
+  }
+  setTotal(total){
+    this.total = total;
+  }
+
+  setCurrency(currency){
+  this.currency = currency;
+  }
+
+  setLang(lang){
+    this.lang = lang;
+  }
+
+  setEmail(email){
+    this.email = email;
+  }
+
+  setNotify(resNoyify){
+    this.resNotifyTranzila = resNoyify;
   }
 
   getCookie(key: string) {

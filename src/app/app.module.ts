@@ -60,6 +60,7 @@ import { CongressRegistrationSingleComponent } from './components/congress-regis
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { NewMemberAccountCompponent } from './components/new-member-account/new-member-account.component';
+import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { NewMemberAccountCompponent } from './components/new-member-account/new-
     Thank1Component,
     Thank2Component,
     Thank3Component,
-    CongressRegistrationSingleComponent
+    CongressRegistrationSingleComponent,
+    ResetPassSuccessComponent
   ],
   imports: [
     MatAutocompleteModule,

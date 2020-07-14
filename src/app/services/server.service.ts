@@ -20,12 +20,12 @@ export class ServerService {
   d: object;
   public LoginUserName: string;
   public LoginDiv: string;
-  public port: string = 'http://localhost:64905';
- // public port: string = 'http://jewish-studies.b2story.com/webApi';
+  //public port: string = 'http://localhost:64905';
+  public port: string = 'http://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
-    this.port = 'http://localhost:64905';
-    //this.port = ' http://jewish-studies.b2story.com/webApi';
+   //this.port = 'http://localhost:64905';
+   this.port = ' http://jewish-studies.b2story.com/webApi';
 
   }
 
@@ -157,8 +157,9 @@ export class ServerService {
     return this.http.get<Proposals>(this.port + "/api/Home/selectSecondDraft?LoginUserName=" + this.LoginUserName);
 
   }
-  forgetPass(item: UserPass) {
-    this.http.post(this.port + "/api/Home/forgetPass", item).subscribe();
+  forgetPass(item: string): any {
+   // alert("r")
+    return this.http.get<number>(this.port + "/api/Home/forgetPass?email=" + item);
 
   }
   getTotalPrice() {

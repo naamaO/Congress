@@ -20,42 +20,15 @@ export class ServerService {
   d: object;
   public LoginUserName: string;
   public LoginDiv: string;
-  public port: string = 'http://localhost:64905';
- // public port: string = 'http://jewish-studies.b2story.com/webApi';
-  public currency: number = 1;
-  public total: number;
-  public lang: string = 'il';
-  public email: string;
-  public resNotifyTranzila:any;
+  //public port: string = 'http://localhost:64905';
+  public port: string = 'http://jewish-studies.b2story.com/webApi';
+
   constructor(public cookieService: CookieService, private http: HttpClient) {
-    this.port = 'http://localhost:64905';
-    //this.port = ' http://jewish-studies.b2story.com/webApi';
+   //this.port = 'http://localhost:64905';
+   this.port = ' http://jewish-studies.b2story.com/webApi';
 
   }
   ngOnInit() {
-    this.setCurrency(this.currency);
-    this.setLang(this.lang);
-    this.setEmail(this.email);
-    this.setTotal(this.total);
-  }
-  setTotal(total){
-    this.total = total;
-  }
-
-  setCurrency(currency){
-  this.currency = currency;
-  }
-
-  setLang(lang){
-    this.lang = lang;
-  }
-
-  setEmail(email){
-    this.email = email;
-  }
-
-  setNotify(resNoyify){
-    this.resNotifyTranzila = resNoyify;
   }
 
   getCookie(key: string) {
@@ -202,8 +175,9 @@ export class ServerService {
     return this.http.get<Proposals>(this.port + "/api/Home/selectSecondDraft?LoginUserName=" + this.LoginUserName);
 
   }
-  forgetPass(item: UserPass) {
-    this.http.post(this.port + "/api/Home/forgetPass", item).subscribe();
+  forgetPass(item: string): any {
+   // alert("r")
+    return this.http.get<number>(this.port + "/api/Home/forgetPass?email=" + item);
 
   }
   getTotalPrice() {

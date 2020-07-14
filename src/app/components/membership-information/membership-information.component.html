@@ -1,225 +1,222 @@
+<div class="col-md-12 marginAuto" style="max-width:1190px">
 
-<div class="body">
-  <div class="container right" style="float: left;left:0; padding: 0;">
-  <div class="top-line" style="float: left;  padding: 60px !important;">
-    <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
-  </div>
-<br /><br /><br /><br />
-<br /><br />
-<!-- *ngIf="resetPassword" -->
-
-<div class="marginAuto col-md-12" style="margin: auto 60px;float:left !important;">
-
-  <!-- <div class=" right">
-    <div class="top-line">
-      <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
-    </div>
-  </div> -->
-  <h4 class="header-border" style="color:#27b5e5">Membership information</h4>
-</div>
-<br />
-<div class="containerDivGeneric" style="margin: auto 60px;font-size: 17px;">
-  <div class="col-md-10" style="padding-left: 0% !important;">
-    <div class="clearfix"></div>
-      <div class="col-md-12">
-        <h5 class="header-border" style="border-bottom: none ;color:#27b5e5;font-size: initial;" >WELCOME!</h5>
-      <div style="display: flex;">
-        <label name="Title" ngDefaultControl [(ngModel)]="Title"  >{{this.Title}}</label>
-        <div>
-        <label name="FirstName" ngDefaultControl [(ngModel)]="FirstName"  >{{this.FirstName}}</label>
-        <label name="LastName" ngDefaultControl [(ngModel)]="LastName"  >{{this.LastName}}</label>
+  <div class="body">
+    <div class="container right" style="float: left;left:0; padding: 0;">
+      <div class="top-line" style="float: left;  padding: 60px !important;">
+        <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
       </div>
-      <div>
-        <label name="FirstNameHebrew" ngDefaultControl [(ngModel)]="FirstNameHebrew"  style="margin-left: 30px;" >{{FirstNameHebrew}}</label>
-        <label name="LastNameHebrew" ngDefaultControl [(ngModel)]="LastNameHebrew"  >{{LastNameHebrew}}</label>
+      <br /><br /><br /><br />
+      <br /><br />
+      <!-- *ngIf="resetPassword" -->
+
+      <div class="marginAuto col-md-12" style="margin: auto 60px;float:left !important;">
+
+        <!-- <div class=" right">
+          <div class="top-line">
+            <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
+          </div>
+        </div> -->
+        <h4 class="header-border" style="color:#27b5e5">Membership information</h4>
       </div>
-     </div>
-     <br />
-     <br />
-     <div style="display: flex;">
-      <label style="color:#27b5e5">Type</label>
-      <div>
-        <label name="Type" ngDefaultControl >Annual Membership</label>
-        <!-- <label name="" (click)="showChooseMembership(showChoose)"  ngDefaultControl style="color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">change</label> -->
-        <!-- <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
-        <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu> -->
-      </div>
-
-     </div>
-
-<!--<div *ngIf="showChoose">
-     <div  class="row" style="padding-top:10px;margin-left: -1px;">
-      <div class="modal-content" style="border:0;">
-        <div class="col-md-5">
-         <span class="txtStyle" style="color:gray">Choose your membership:</span>
-         <div *ngFor="let membershipType of this.ArrMembershipTypes; let i=index"> 
-
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)"  id="ArrMembershipTypes[0].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[0].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[0].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 53%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>    
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[1].membershipType"style="margin-bottom:0" >{{ArrMembershipTypes[1].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 35%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>    
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" (change)="onLanguageChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[2].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[2].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 58%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>    
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)"id="ArrMembershipTypes[3].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[3].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[3].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 23%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>    
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[4].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[4].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 51%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>    
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input"  (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
-            <label class="custom-control-label" for="ArrMembershipTypes[5].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[5].membershipType}}</label>
-            <div class="tooltipSmall">
-              <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 43%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>    
-            </div>
-          </div>
-          
-         </div>
-
-       <div style="margin-top: 30px;">
-         <button (click)="renew()" class="fill-btn-white" style="border-style: solid;padding:10px; margin-right: 0;margin-left: 477px;">RENUEW</button>
-       </div>
-      </div>
-    </div>
-</div>-->
-
-<div >
-  <label style="color:#27b5e5">Joined membership</label>
-  <label name="Type" ngDefaultControl  >2020</label>
-  <!-- <div> -->
-    <!-- <label name="" ngDefaultControl style="color:#27b5e5 ;text-decoration-line: underline;">change</label> -->
-  <!-- </div> -->
-  <div>
-  <label name="year" ngDefaultControl style="color:#27b5e5" >Your membership is valid untill</label>
-  <label name="date" ngDefaultControl >December 31st 2020</label>
-</div>
-<div style="font-size: small;font-size: 14px;">
-  <label name="date" ngDefaultControl style="color:gray" >For more information, please</label>
-  <a name="date" ngDefaultControl style="color:#27b5e5;text-decoration-line: underline;cursor: pointer;" >contact us</a>
-</div>
-</div>
-
- <div *ngIf="showExpireDate"> 
-  <br/> <br/>
-   <mat-divider style="left: 0; right: 0;margin: auto; width: 125%;"></mat-divider>
-   <div style="padding-top:30px;padding-bottom:30px;">
-    <div  class="row" style="margin-left: -1px;">
-     <div class="modal-content" style="border:0;width: max-content;margin: auto 40%;">
-      <div class="alert-img" ></div>
-      <span class="txtStyle" style="color:gray;font-weight: bold;font-weight: bold;">YOUR MEMBERSHIP ACCOUNT WILL EXPIRE IN 30 DAYS</span>
       <br />
-      <label name="" (click)="showChoose2(showChooseExpire)" style="margin-left: 20%;color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">Securely renew your membership</label>
+      <div class="containerDivGeneric" style="margin: auto 60px;font-size: 17px;">
+        <div class="col-md-10" style="padding-left: 0% !important;">
+          <div class="clearfix"></div>
+          <div class="col-md-12">
+            <h5 class="header-border" style="border-bottom: none ;color:#27b5e5;font-size: initial;">WELCOME!</h5>
+            <div style="display: flex;">
+              <label name="Title" ngDefaultControl [(ngModel)]="Title">{{this.Title}}</label>
+              <div>
+                <label name="FirstName" ngDefaultControl [(ngModel)]="FirstName">{{this.FirstName}}</label>
+                <label name="LastName" ngDefaultControl [(ngModel)]="LastName">{{this.LastName}}</label>
+              </div>
+              <div>
+                <label name="FirstNameHebrew" ngDefaultControl [(ngModel)]="FirstNameHebrew" style="margin-left: 30px;">{{FirstNameHebrew}}</label>
+                <label name="LastNameHebrew" ngDefaultControl [(ngModel)]="LastNameHebrew">{{LastNameHebrew}}</label>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div style="display: flex;">
+              <label style="color:#27b5e5">Type</label>
+              <div>
+                <label name="Type" ngDefaultControl>Annual Membership</label>
+                <!-- <label name="" (click)="showChooseMembership(showChoose)"  ngDefaultControl style="color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">change</label> -->
+                <!-- <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+                </mat-menu> -->
+              </div>
+
+            </div>
+
+            <!--<div *ngIf="showChoose">
+                 <div  class="row" style="padding-top:10px;margin-left: -1px;">
+                  <div class="modal-content" style="border:0;">
+                    <div class="col-md-5">
+                     <span class="txtStyle" style="color:gray">Choose your membership:</span>
+                     <div *ngFor="let membershipType of this.ArrMembershipTypes; let i=index">
+
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)"  id="ArrMembershipTypes[0].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[0].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[0].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 53%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>
+                        </div>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[1].membershipType"style="margin-bottom:0" >{{ArrMembershipTypes[1].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 35%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>
+                        </div>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" (change)="onLanguageChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[2].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[2].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 58%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>
+                        </div>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)"id="ArrMembershipTypes[3].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[3].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[3].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 23%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>
+                        </div>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[4].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[4].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 51%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>
+                        </div>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input"  (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
+                        <label class="custom-control-label" for="ArrMembershipTypes[5].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[5].membershipType}}</label>
+                        <div class="tooltipSmall">
+                          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
+                          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 43%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>
+                        </div>
+                      </div>
+
+                     </div>
+
+                   <div style="margin-top: 30px;">
+                     <button (click)="renew()" class="fill-btn-white" style="border-style: solid;padding:10px; margin-right: 0;margin-left: 477px;">RENUEW</button>
+                   </div>
+                  </div>
+                </div>
+            </div>-->
+
+            <div>
+              <label style="color:#27b5e5">Joined membership</label>
+              <label name="Type" ngDefaultControl>2020</label>
+              <div>
+                <label name="year" ngDefaultControl style="color:#27b5e5">Your membership is valid untill</label>
+                <label name="date" ngDefaultControl>December 31st 2020</label>
+              </div>
+              <div style="font-size: small;font-size: 14px;">
+                <label name="date" ngDefaultControl style="color:gray">For more information, please</label>
+                <a name="date" ngDefaultControl style="color:#27b5e5;text-decoration-line: underline;cursor: pointer;">contact us</a>
+              </div>
+            </div>
+
+            <div *ngIf="showExpireDate">
+              <br /> <br />
+              <mat-divider style="left: 0; right: 0;margin: auto; width: 125%;"></mat-divider>
+              <div style="padding-top:30px;padding-bottom:30px;">
+                <div class="row" style="margin-left: -1px;">
+                  <div class="modal-content" style="border:0;width: max-content;margin: auto 40%;">
+                    <div class="alert-img"></div>
+                    <span class="txtStyle" style="color:gray;font-weight: bold;font-weight: bold;">YOUR MEMBERSHIP ACCOUNT WILL EXPIRE IN 30 DAYS</span>
+                    <br />
+                    <label name="" (click)="showChoose2(showChooseExpire)" style="margin-left: 20%;color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">Securely renew your membership</label>
+                  </div>
+                </div>
+
+                <div *ngIf="showChooseExpire" class="col-md-5" style="padding:0;">
+                  <span class="txtStyle" style="color:gray">Choose your membership:</span>
+
+
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)" id="ArrMembershipTypes[0].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[0].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[0].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 56%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>
+                    </div>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[1].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[1].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 39%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>
+                    </div>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[2].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[2].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 60%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>
+                    </div>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)" id="ArrMembershipTypes[3].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[3].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[3].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 28%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>
+                    </div>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[4].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[4].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 54%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>
+                    </div>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
+                    <label class="custom-control-label" for="ArrMembershipTypes[5].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[5].membershipType}}</label>
+                    <div class="tooltipSmall">
+                      <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                      <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 46%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="renew()" class="fill-btn-white" style="border-style: solid;padding:10px; margin-right: 0;margin-left: 477px;">RENEW</button>
+                  </div>
+
+                </div>
+
+              </div>
+              <mat-divider style="left: 0; right: 0;margin: auto; width: 125%;"></mat-divider>
+              <br /> <br />
+            </div>
+
+
+            <div style="padding-left:218px;padding-top:30px;">
+              <button (click)="become()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;margin-left: 230px;width: 250px;">BECOME A MEMBER</button>
+            </div>
+            <br /><br />
+          </div>
+
+        </div>
+      </div>
     </div>
-  </div>  
- 
-  <div *ngIf="showChooseExpire" class="col-md-5" style="padding:0;">
-  <span class="txtStyle" style="color:gray">Choose your membership:</span>
-
-     <!-- <div *ngFor="let membershipType of this.ArrMembershipTypes; let i=index"> -->
-
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)"  id="ArrMembershipTypes[0].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[0].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[0].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 56%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>    
-        </div>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[1].membershipType"style="margin-bottom:0" >{{ArrMembershipTypes[1].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 39%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>    
-        </div>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[2].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[2].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 60%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>    
-        </div>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)"id="ArrMembershipTypes[3].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[3].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[3].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 28%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>    
-        </div>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[4].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[4].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 54%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>    
-        </div>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input"  (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
-        <label class="custom-control-label" for="ArrMembershipTypes[5].membershipType" style="margin-bottom:0">{{ArrMembershipTypes[5].membershipType}}</label>
-        <div class="tooltipSmall">
-          <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;"/>
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 46%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>    
-        </div>
-      </div>
-
-     <!-- </div> -->
-
-  <div >
-    <button (click)="renew()" class="fill-btn-white" style="border-style: solid;padding:10px; margin-right: 0;margin-left: 477px;">RENEW</button>
   </div>
-
   </div>
-
-   </div>
-<mat-divider style="left: 0; right: 0;margin: auto; width: 125%;"></mat-divider>
-<br/> <br/>
-</div>
-
- 
- <div style="padding-left:218px;padding-top:30px;">
-  <button (click)="become()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;margin-left: 230px;width: 250px;">BECOME A MEMBER</button>
-</div>
- <br /><br />
-</div>
-
-</div>
-</div>
-</div>
-</div>
 

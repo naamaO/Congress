@@ -18,6 +18,11 @@ import { User } from 'src/classes/User';
 export class NewMemberAccountCompponent implements OnInit {
   @ViewChild("testInput") testInput;
   @ViewChild('english') english: ElementRef;
+  @ViewChild('address') address: ElementRef;
+  @ViewChild('telephone') telephone: ElementRef;
+  @ViewChild('Id') Id: ElementRef;
+  @ViewChild('lastnameh') lastnameh: ElementRef;
+  @ViewChild('lastnamee') lastnamee: ElementRef;
   @ViewChild('hebrew') hebrew: ElementRef;
   @ViewChild('abs') abs: ElementRef;
   @ViewChild('lang') lang: ElementRef;
@@ -29,6 +34,9 @@ export class NewMemberAccountCompponent implements OnInit {
   @ViewChild('namee') namee: ElementRef;
   @ViewChild('title') title: ElementRef;
   @ViewChild('key') key: ElementRef;
+  @ViewChild('coun') coun: ElementRef;
+  @ViewChild('ti') ti: ElementRef;
+  @ViewChild('biog') biog: ElementRef;
 
   //@Input()
   public user: User;
@@ -85,6 +93,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public Rout: number;
   public ArrMembershipTypes = [];
   public Total: number;
+  public membershipType: number;
   constructor(public route: ActivatedRoute,private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
 
     this.ArrMembershipTypes = [
@@ -164,7 +173,8 @@ export class NewMemberAccountCompponent implements OnInit {
 
   }
 
-  onMemberTypeChange(membershipTypeChanged){
+  onMemberTypeChange(membershipTypeChanged) {
+    this.membershipType = membershipTypeChanged;
     if(membershipTypeChanged==0) {
         console.log("this.ArrMembershipTypes[0].price",this.ArrMembershipTypes[0].price)
         this.Total=this.ArrMembershipTypes[0].price;
@@ -310,7 +320,7 @@ export class NewMemberAccountCompponent implements OnInit {
     //this.hasLowerCase(this.Password);
     this.setCookie(this.Email);
     this.user = new User();
-
+    this.user.MemberShip = this.membershipType;
     this.user.FirstNameEnglish = this.FirstName;
     this.user.LastNameEnglish = this.LastName;
     this.user.FirstNameHebrew = this.FirstNameHebrew;
@@ -367,7 +377,8 @@ export class NewMemberAccountCompponent implements OnInit {
      // this.user.PostCode != null &&
       //this.user.Email != null
        this.user.Bio != null &&
-      this.user.UserName != null 
+      this.user.UserName != null &&
+      this.user.MemberShip !=null
       //&&
      // this.user.Password != null
     ) {
@@ -424,6 +435,12 @@ export class NewMemberAccountCompponent implements OnInit {
   }
   unfocuslang() {
     this.lang.nativeElement.style.color = "gray";
+  }
+  focuslnameh() {
+    this.lastnameh.nativeElement.style.color = "#27b5e5";
+  }
+  unfocuslnameh() {
+    this.lastnameh.nativeElement.style.color = "gray";
   } focussubdiv() {
     this.subdiv.nativeElement.style.color = "#27b5e5";
   }
@@ -449,16 +466,53 @@ export class NewMemberAccountCompponent implements OnInit {
   }
   unfocusnamee() {
     this.namee.nativeElement.style.color = "gray";
-  } focusemail() {
+  } focuslnamee() {
+    this.lastnamee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocuslnamee() {
+    this.lastnamee.nativeElement.style.color = "gray";
+  }
+  focusemail() {
     this.email.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
     this.email.nativeElement.style.color = "gray";
-  }focuskey() {
+  }focusaddress() {
+    this.address.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusaddress() {
+    this.address.nativeElement.style.color = "gray";
+  }
+  focuskey() {
     this.key.nativeElement.style.color = "#27b5e5";
   }
   unfocuskey() {
     this.key.nativeElement.style.color = "gray";
+  }focustelephone() {
+    this.telephone.nativeElement.style.color = "#27b5e5";
+  }
+  unfocustelephone() {
+    this.telephone.nativeElement.style.color = "gray";
+  }focusId() {
+    this.Id.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusId() {
+    this.Id.nativeElement.style.color = "gray";
+  }focusc() {
+    this.coun.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusc() {
+    this.coun.nativeElement.style.color = "gray";
+  }focust() {
+    this.ti.nativeElement.style.color = "#27b5e5";
+  }
+  unfocust() {
+    this.ti.nativeElement.style.color = "gray";
+  }focusbiog() {
+    this.biog.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusbiog() {
+    this.biog.nativeElement.style.color = "gray";
   }
 
 

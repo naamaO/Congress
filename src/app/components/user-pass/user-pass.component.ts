@@ -30,6 +30,7 @@ export class UserPassComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
+  public showResetPassword: boolean;
   public Rout: number;
   public UserName: string;
   public item: UserPass;
@@ -41,7 +42,8 @@ export class UserPassComponent implements OnInit {
   public Email: string; 
   public Password: string;
   public true: boolean = false;
- 
+  public showWrongEmail: boolean = false;
+  public EmailToResetPassword: string;
   constructor(fb: FormBuilder,public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.userDetail = fb.group({
       hideRequired: this.hideRequiredControl,
@@ -72,7 +74,6 @@ export class UserPassComponent implements OnInit {
     if (this.Email != '') {
       this.ShowErrorEmail = false;
 
-    // this.serverService.forgetPass(this.item);
     }
     else {
       this.ShowErrorEmail = true;
@@ -138,6 +139,9 @@ if(this.Rout==1)
         if (this.Rout == 3) {
           this.router.navigateByUrl("/CongressRegistrationSingle");
         }
+        if (this.Rout == 7) {
+          this.router.navigateByUrl("/CongressRegistrationSession");
+        }
         if (this.Rout == 6) {
           this.serverService.CheckIfInDraft().subscribe((events) => {
             if (events == 0) {
@@ -180,7 +184,23 @@ if(this.Rout==1)
 
     });
 
+
+
   }
+  forgot() {
+   // alert("e");
+    var a;
+    this.serverService.forgetPass(this.EmailToResetPassword).subscribe((val) =>
+    {
+      a = val;
+      if (a == 1)
+        this.router.navigateByUrl("/ResetPassSuccess");
+      else
+        this.showWrongEmail = true;
+    });
+
+  }
+
   Support(email: string) {
 
   }

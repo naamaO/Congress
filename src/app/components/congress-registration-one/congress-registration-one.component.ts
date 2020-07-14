@@ -183,6 +183,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.serverService.enterProposal(this.Prop);
+    this.router.navigateByUrl("/Thank2");
 
   }
   selectlang(lan: string) {

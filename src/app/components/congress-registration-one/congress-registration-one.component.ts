@@ -60,6 +60,8 @@ export class CongressRegistrationOneComponent implements OnInit {
   public Title: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
+  public showErrEmpty: boolean = false;
+  public showsaveDraft: boolean = false;
   // public jobform = new FormGroup({
   //   firstName: new FormControl()
   // });
@@ -169,7 +171,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.serverService.enterDraft(this.Prop);
-    this.SaveDraft = true;
+    this.showsaveDraft = true;
 
   }
   Save() {
@@ -182,8 +184,16 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.SubDivision = this.SubDivision;
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
-    this.serverService.enterProposal(this.Prop);
-    this.router.navigateByUrl("/Thank2");
+    if (this.Keywords != null && this.Language != null && this.Division != null && this.Proposal != null &&
+      this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null) {
+      this.serverService.enterProposal(this.Prop);
+      this.router.navigateByUrl("/Thank2");
+    }
+    else {
+      this.showErrEmpty = true;
+
+    }
+   
 
   }
   selectlang(lan: string) {

@@ -14,7 +14,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import  $ from 'jquery';
-
+import { ControlValueAccessor } from '@angular/forms';
 import 'datatables.net';
 import 'datatables.net-bs4';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -147,39 +147,50 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         this.data=this.dataSource.data;
 
     }
-    editProp(item: Judges) {
-        this.itempropID = item;
-        // if ((!item.SessionName )||(!item.SessionName.trim())) {
-        if (item.SessionName==null ) {
+  editProp(item: Judges) {
+    //alert(item.SessionId)
+      this.itempropID = item;
+    if (item.SessionId == 0) {
             this.serverService.getId_W_Proposals(item).subscribe((events) => {
                 this.oneProp = events;
                 this.SessionName = this.oneProp.SessionName;
-                this.Chairman = this.oneProp.Chairman;
+              this.Chairman = this.oneProp.Chairman;
+              if (events.Remarks == null) {
+                this.oneProp.Remarks = "";
+              }
                 this.Remarks = this.oneProp.Remarks;
-                this.Status = this.oneProp.Status;
+              this.Status = this.oneProp.Status;
+              this.isShowPropArrSession = false;
+
                 this.isShowProp = true;
             });
         }
-        else {
+      else {
             this.serverService.getId_W_ProposalsSession(item).subscribe((events) => {
-                this.ArrPropSession = events;
+              this.ArrPropSession = events;
+              console.log("session",events)
                 this.SessionName = item.SessionName;
                 this.Chairman = item.Chairman;
-                this.Status = item.Status;
+              this.Status = item.Status;
+              this.isShowProp = false;
                 this.isShowPropArrSession = true;
             });
         }
     }
 
     getImgIcon(item: Judges) {
-        if (item.SessionName == null)
+      if (item.NumOfProposals==0)
             return "/assets/images/single.gif";
         else {
-            if (item.SessionName) {
-                //to do check - isGroupMissing
-                //  return "/assets/images/group_missing.gif";
-                return "/assets/images/group.gif";
-            }
+          if (item.NumOfProposals<4) {
+            return "/assets/images/group_missing.gif";
+             
+          }
+          else {
+            
+            return "/assets/images/group.gif";
+
+          }
         }
     }
 

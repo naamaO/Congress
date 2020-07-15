@@ -94,6 +94,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public ArrMembershipTypes = [];
   public Total: number;
   public membershipType: number;
+ // public Address: string;
   constructor(public route: ActivatedRoute,private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
 
     this.ArrMembershipTypes = [
@@ -325,6 +326,7 @@ export class NewMemberAccountCompponent implements OnInit {
     this.user.LastNameEnglish = this.LastName;
     this.user.FirstNameHebrew = this.FirstNameHebrew;
     this.user.LastNameHebrew = this.LastNameHebrew
+    this.user.Address = this.Address
     // this.user.City = this.City;
     // this.user.Street = this.Street;
     // this.user.NumberHome = this.NumberHome;
@@ -371,7 +373,7 @@ export class NewMemberAccountCompponent implements OnInit {
       // this.user.Street != null &&
       // this.user.NumberHome != null &&
       this.user.NumberPhone1 != null &&
-      // this.user.NumberPhone2 != null &&
+       this.user.Address != null &&
       this.user.selectedTitle != null &&
       this.user.selectedCountry != null &&
      // this.user.PostCode != null &&

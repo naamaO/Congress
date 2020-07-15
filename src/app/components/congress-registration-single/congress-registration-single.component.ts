@@ -56,6 +56,9 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public Title: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
+  public showErrEmpty: boolean = false;
+  public showsaveDraft: boolean = false;
+
   constructor(public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.DivisionEnglish().subscribe((events) => {
       this.ArrDivision = events;
@@ -90,8 +93,22 @@ export class CongressRegistrationSingleComponent implements OnInit {
         this.showLikeProp = true;
         this.Division = this.Division.substr(1);
       }
-    }
+      }
+      if (this.Division != null && this.SubDivision == null) {
+        this.serverService.SubDivisionEnglish(this.Division).subscribe((events) => {
+
+          this.ArrSubDivision = events;
+          this.setCookie(this.Division);
+        });
+      }
+      if (this.Division != null && this.SubDivision != null && this.Language == "          ") {
+        this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
+
+          this.ArrLanguage = events;
+        });
+      }
     });
+    
   
   }
 
@@ -157,7 +174,7 @@ TitleEnglishP(elemTltle){
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.serverService.enterDraft(this.Prop);
-    this.SaveDraft = true;
+    this.showsaveDraft = true;
 
   }
   Save() {
@@ -170,9 +187,17 @@ TitleEnglishP(elemTltle){
     this.Prop.SubDivision = this.SubDivision;
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
-    this.serverService.enterProposal(this.Prop);
-    this.router.navigateByUrl("/Thank2");
+    this.Prop.SessionId = null;
+    if (this.Keywords != null && this.Language != null && this.Division != null && this.Proposal != null &&
+      this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null) {
 
+      this.serverService.enterProposal(this.Prop);
+      this.router.navigateByUrl("/Thank2");
+    }
+    else {
+      this.showErrEmpty = true;
+
+    }
   }
   selectlang(lan: string) {
   }

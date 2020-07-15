@@ -35,7 +35,7 @@
               <div >
             <div  style="display: flex;justify-content:space-around; padding-top:5%;">
              <img  class="col-md-4" src={{item.ImageBook}} style="width:65px;height:92px; " />
-             <span  class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+             <span  class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
              <span  class="col-md-3 cart-item-total">${{item.Total}}</span>
             </div> 
             <br/>
@@ -48,7 +48,7 @@
               <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
               <div class="row" style="float: left;width: 370px; margin-top:5px;">
                     <div class="row" style="width: 370px;">
-                      <label class="col-md-4 cart-total">Total </label>
+                      <label class="col-md-4 cart-total">סה"כ </label>
                       <label class="col-md-3 cart-total-price">${{this.Total}}</label>
                     </div>
                      <div class="row" style="margin-top: 10px;">
@@ -89,7 +89,7 @@
         <div class="row">
         <div style="margin-left: 15px;" >
           <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;"><span>₪</span>{{DetailsBook.SallePrice}}</span>
-          <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through;margin-right:30px;text-decoration: line-through #27b5e5;font-weight: normal;"><span>₪</span>{{DetailsBook.Price}}</span>
+          <span class="old-price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through;margin-right:30px;text-decoration: line-through #27b5e5;font-weight: normal;"><span>₪</span>{{DetailsBook.Price}}</span>
           <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>₪</span>{{DetailsBook.Price}}</span>
         </div> 
         <div  style="margin: 0; margin-left: 55px;">
@@ -100,7 +100,7 @@
          </div>
         </div>
         <br />
-        <p style="text-align:right;font-size:medium;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px; color: #026fa7">{{DetailsBook.Details}}</p>
+        <p class="bookDetails">{{DetailsBook.Details}}</p>
           <button class="buy-btn" (click)="NavigCart()">קניה</button>
           <button  class="add-to-cart-btn" (click)="AddCart(DetailsBook)">הוסף לסל</button>   
           <br /><br />

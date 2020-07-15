@@ -210,6 +210,7 @@ export class BookDetailsComponent implements OnInit {
     let _cart = JSON.stringify(this.CART.contents);
     await localStorage.setItem(this.CART.KEY, _cart);
     this.DBShoppingCart= this.CART.contents;
+    if(this.DBShoppingCart.length==1){
     for (var i = 0; i < this.DBShoppingCart.length; i++) {
       if (this.DBShoppingCart[i].SallePrice == 0){
       this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
@@ -222,6 +223,18 @@ export class BookDetailsComponent implements OnInit {
       this.Total = this.Total + this.DBShoppingCart[i].Total;
     }
   }
+}else{
+  let i=  this.DBShoppingCart.length-1; 
+  if (this.DBShoppingCart[i].SallePrice == 0){
+  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+}
+else{
+  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+}
+this.num = this.num + this.DBShoppingCart[i].Quantity;
+this.Total = this.Total + this.DBShoppingCart[i].Total;
+}
+
   if(this.DBShoppingCart.length==0){
     this.num = 0;
   }
@@ -280,7 +293,7 @@ find(id){
 increase(id, qty){
     //increase the quantity of an item in the cart
     this.CART.contents = this.CART.contents.map(item=>{
-        if(item.IdBook === id)
+        if(item.Id === id)
             item.Quantity = item.Quantity + qty;
         return item;
     });

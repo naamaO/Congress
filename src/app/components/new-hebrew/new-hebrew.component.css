@@ -1,7 +1,3 @@
-@font-face {
-  font-family: 'OpenSansBold';
-  src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype");
-}
 
 body{
   max-width: 1100px;
@@ -16,7 +12,7 @@ body{
 
 .cart-num-books{
   color:#026fa7;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight: 600;
   font-size:16px;
   direction: rtl !important;
@@ -25,7 +21,7 @@ body{
 .cart-item-total{
   color: #026fa7;
   font-size:18px;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight: 600;
 }
 
@@ -33,7 +29,7 @@ body{
 .cart-total-price{
   color: #000000;
   font-size:16px;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight:600;
   top: 10px;
   padding-bottom: 10px;
@@ -44,7 +40,7 @@ body{
 .cart-total{
   color: #000000;
   font-size:16px;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight:600;
   float: left; 
   top: 10px; 
@@ -79,7 +75,7 @@ body{
 }
 
 .product-title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
   color: #026fa7;
   font-size: 18px;
   padding-top: 10px;
@@ -210,9 +206,9 @@ h3 {
   outline:none;
   background-color:#0b4e6f;
   color: white;
-  font-family:'Open Sans', sans-serif;
+  font-family:'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase;
-  font-weight: normal; 
+  /* font-weight: normal;  */
   font-size:18px;
   cursor:pointer;
   padding: 10px 0px;
@@ -224,8 +220,8 @@ h3 {
   margin-left: 75px;
 }
 .span-link{
-  font-family: 'Open Sans', sans-serif;
-  font-weight: normal;
+  font-family: 'OpenSansRegularHebrew', sans-serif;
+  /* font-weight: normal; */
   font-size:18px;
   color:#27b5e5;
   outline: none;
@@ -243,13 +239,13 @@ h3 {
 }
 .category-paragraph{
   padding-left:20px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: normal;
+  font-family: 'OpenSansRegularHebrew', sans-serif;
+  /* font-weight: normal; */
   font-size: 18px;
   color:#026fa7;
 }
 .label{
-  font-family: 'OpenSansBold', sans-serif;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
   font-weight: bold;
   font-size: 18px;
   color:#27b5e5;
@@ -287,7 +283,7 @@ ul {
 .price{
   font-size:24px;
   font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
   color: #026fa7;
   float: left;
   margin-left: 105px;
@@ -295,7 +291,7 @@ ul {
 
 .old-price{
   font-size:24px; 
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'OpenSansregularHebrew', sans-serif; 
   color: #27b5e5;
   margin-right: 95px;
   float: right;
@@ -465,7 +461,7 @@ ul {
   padding: 10px 0px;
   border: none;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 19px;
   outline:none;
   cursor: pointer;
@@ -475,9 +471,9 @@ ul {
   background-color: #ffffff;
   outline: #0b4e6f;
   color: #0b4e6f;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase;
-  font-weight: normal;
+  /* font-weight: normal; */
   font-size: 18px;
   cursor: pointer;
   padding-right: 0;
@@ -489,17 +485,17 @@ ul {
 }
 .view-cart-btn:hover{
 background-color:#0b4e6f;
-color:#ffffff;
+/* color:#ffffff;
 font-family:'Open Sans', sans-serif;
 text-transform: uppercase; 
 font-weight: normal; 
-font-size:18px;
+font-size:18px; */
 }
 .checkout-btn{
   outline:none;
   background-color: #0b4e6f;
   color: white; 
-  font-family:'Open Sans', sans-serif;
+  font-family:'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase; 
   font-weight: normal; 
   font-size:18px;
@@ -509,9 +505,9 @@ font-size:18px;
 .checkout-btn:hover{
   background-color:  #6190a9 ;
   color: white; 
-  font-family:'Open Sans', sans-serif;
+  font-family:'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase; 
-  font-weight: normal; 
+  /* font-weight: normal;  */
   font-size:18px;;
 }
 .right-cart-number { 

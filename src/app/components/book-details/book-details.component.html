@@ -23,7 +23,7 @@
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
                         <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <span class="col-md-6" style="text-align: start;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
                         <span class="col-md-3 cart-item-total" >${{item.Total}}</span>
                       </div>
                       <br />
@@ -84,7 +84,7 @@
         <div class="row">
           <div style="margin-left: 15px;">
             <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;"><span>$</span>{{DetailsBook.SallePrice}}</span>
-            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
+            <span class="old-price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
             <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>$</span>{{DetailsBook.Price}}</span>
           </div>
           <div style="margin: 0; margin-left: 55px;">

@@ -121,7 +121,7 @@ body {
   padding: 10px 48px;
   border: none;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 19px;
   /*border-radius: 20px;*/
   cursor: pointer;
@@ -221,17 +221,17 @@ ul {
     outline:none;
     background-color: #0b4e6f;
     color: white; 
-    font-family:'Open Sans', sans-serif;
+    font-family:'OpenSansRegular', sans-serif;
     text-transform: uppercase; 
-    font-weight: normal; 
+    /* font-weight: normal;  */
     font-size:18px;
   
   }
   .checkout-btn:hover{
     background-color:  #6190a9 ;
-    color: white; 
+    /* color: white; 
     font-family:'Open Sans', sans-serif;
     text-transform: uppercase; 
     font-weight: normal; 
-    font-size:18px;;
+    font-size:18px; */
   }

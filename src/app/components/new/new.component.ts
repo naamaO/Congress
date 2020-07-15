@@ -150,7 +150,7 @@ else{
       });    });
   }
   ngOnInit() {
-   
+
     this.serverService.getAllDBFromServer().subscribe(
       resp => {
         this.DB = resp;
@@ -159,6 +159,8 @@ else{
       error => {  
         console.log(error)
       });
+      console.log("this.DB",this.DB)
+
       this.UserNameLogin = this.getCookie('UserName');
       if(this.UserNameLogin){
         console.log(this.UserNameLogin)

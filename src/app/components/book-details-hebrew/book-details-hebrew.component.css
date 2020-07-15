@@ -1,7 +1,3 @@
-@font-face {
-  font-family: 'OpenSansBold';
-  src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype");
-}
 
 body{
   max-width: 1100px !important;
@@ -88,9 +84,14 @@ img {
 }
 
 .price{
-  font-family: 'OpenSansBold', sans-serif;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
   font-weight: 600;
   font-size: 24px; 
+  color:#026fa7;
+}
+.old-price{
+  font-size:24px; 
+  font-family: 'OpenSansRegular', sans-serif; 
   color:#026fa7;
 }
 a {
@@ -149,17 +150,25 @@ h3:hover {
 }
 .book-name{
   text-align:right;
-  font-family: 'OpenSansBold', sans-serif;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
   font-weight: 600;
   font-size: 18px;
   color:#026fa7;
 }
+.bookDetails{
+  text-align:right;
+  font-size:medium;
+  font-family: 'OpenSansRegularHebrew', sans-serif;
+  /* font-weight: normal;  */
+  font-size: 18px; 
+  color: #026fa7
+}
 .checkout-btn{
   background-color: #0b4e6f;
   color: white; 
-  font-family:'Open Sans', sans-serif;
+  font-family:'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase; 
-  font-weight: normal; 
+  /* font-weight: normal;  */
   font-size:18px;
   margin-right: 10px;
   margin-left: 40px;
@@ -167,12 +176,6 @@ h3:hover {
 }
 .checkout-btn:hover{
   background-color:  #6190a9 ;
-  color: white; 
-  font-family:'Open Sans', sans-serif;
-  text-transform: uppercase; 
-  font-weight: normal; 
-  font-size:18px;
-  outline:none;
 }
 .fill-btn-blue {
   background-color: #0b4e6f;
@@ -188,9 +191,9 @@ h3:hover {
   background-color: #ffffff;
   outline: #0b4e6f;
   color: #0b4e6f;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase;
-  font-weight: normal;
+  /* font-weight: normal; */
   font-size: 18px;
   cursor: pointer;
   padding-right: 0;
@@ -204,11 +207,11 @@ h3:hover {
 .view-cart-btn:hover{
 background-color:#0b4e6f;
 color:#ffffff;
-font-family:'Open Sans', sans-serif;
-text-transform: uppercase; 
-font-weight: normal; 
-font-size:18px;
-outline:none;
+/* font-family:'Open Sans', sans-serif; */
+/* text-transform: uppercase;  */
+/* font-weight: normal;  */
+/* font-size:18px; */
+/* outline:none; */
 }
 .right-cart-number { 
   /* background: rgba(7, 181, 229, 0.80); */
@@ -286,7 +289,7 @@ ul {
 .buy-btn{
 background-color:#0b4e6f;
 color: white;
-font-family:'Open Sans', sans-serif;
+font-family:'OpenSansRegularHebrew', sans-serif;
 text-transform: uppercase; 
 font-size:18px;
 cursor:pointer;
@@ -301,15 +304,11 @@ outline:none;
 }
 .buy-btn:hover{
   background-color:#6190a9;
-  color:white;
-  font-family:'Open Sans', sans-serif;
-  text-transform: uppercase; 
-  font-size:18px;
   }  
 
    .cart-num-books{
     color:#026fa7;
-    font-family:'OpenSansBold', sans-serif;
+    font-family:'OpenSansBoldHebrew', sans-serif;
     font-weight: 600;
     font-size:16px;
     direction: rtl !important;
@@ -318,7 +317,7 @@ outline:none;
   .cart-item-total{
     color: #026fa7;
     font-size:18px;
-    font-family:'OpenSansBold', sans-serif;
+    font-family:'OpenSansBoldHebrew', sans-serif;
     font-weight: 600;
   }
 
@@ -326,7 +325,7 @@ outline:none;
 .cart-total-price{
   color: #000000;
   font-size:16px;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight:600;
   top: 10px;
   padding-bottom: 10px;
@@ -337,7 +336,7 @@ outline:none;
 .cart-total{
   color: #000000;
   font-size:16px;
-  font-family:'OpenSansBold', sans-serif;
+  font-family:'OpenSansBoldHebrew', sans-serif;
   font-weight:600;
   float: left; 
   top: 10px; 
@@ -347,9 +346,9 @@ outline:none;
   .add-to-cart-btn{
     background-color:  #6190a9 ;
     color: white;
-    font-family:'Open Sans', sans-serif;
+    font-family:'OpenSansRegularHebrew', sans-serif;
     text-transform: uppercase;
-    font-weight: normal; 
+    /* font-weight: normal;  */
     font-size:18px;
     cursor:pointer;
     padding-right: 0;
@@ -365,11 +364,11 @@ outline:none;
   }
 .add-to-cart-btn:hover{
   background-color:  #0b4e6f ;
-  color:white;
+  /* color:white;
   font-family:'Open Sans', sans-serif;
   text-transform: uppercase; 
   font-weight: normal; 
-  font-size:18px;
+  font-size:18px; */
 }
 
 .tooltiptext:before {

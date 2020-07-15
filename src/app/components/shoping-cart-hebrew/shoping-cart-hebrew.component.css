@@ -17,7 +17,7 @@ body {
 .shopping-cart-title{
   color:#026fa7;
   font-family:'Open Sans', sans-serif;
-  font-weight: bold; 
+  font-weight: bold;
   font-size:30px;
   padding-left: 82px;
 }
@@ -59,7 +59,7 @@ body {
   color: #333333;
   font-size:18px;
   font-family:'Open Sans', sans-serif;
-  font-weight: bold; 
+  font-weight: bold;
 }
 .row {
   /*display: table;*/
@@ -199,7 +199,7 @@ ul {
   .shippingAddressTitle{
     color:#026fa7;
     font-family:'OpenSansBold', sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 18px;
     margin-right: 56px;
     float: right;
@@ -207,13 +207,13 @@ ul {
   .cart-total-title{
     color:#026fa7;
     font-family:'OpenSansBold', sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size:30px;
     float: right;
     margin-right: 30px;
     }
     .label-cart-subtotal{
-      padding-left: 0; 
+      padding-left: 0;
       text-align: start;
       float:left ;
       color: #000000;
@@ -225,7 +225,7 @@ ul {
   .label-cart-total{
     float: right;
     font-family:'OpenSansBold', sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size:18px;
   }
 .input-total{
@@ -234,17 +234,17 @@ ul {
 .checkout-btn{
   outline:none;
   background-color: #0b4e6f;
-  color: white; 
-  font-family:'Open Sans', sans-serif;
-  text-transform: uppercase; 
-  font-weight: normal; 
+  color: white;
+  font-family:'OpenSansRegular', sans-serif;
+  text-transform: uppercase;
+  /* font-weight: normal;  */
   font-size:18px;
 }
 .checkout-btn:hover{
   background-color:  #6190a9 ;
-  color: white; 
-  font-family:'Open Sans', sans-serif;
-  text-transform: uppercase; 
-  font-weight: normal; 
-  font-size:18px;;
+  /* color: white;
+  font-family:'OpenSans', sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size:18px; */
 }

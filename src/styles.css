@@ -179,3 +179,23 @@ select:focus {
   font-size: large;
   color: black;
 }
+@font-face {
+  font-family: 'OpenSansBold';
+  /* src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype"); */
+  src:url(src/assets/fonts/opensansbold.ttf);
+}
+@font-face {
+  font-family: 'OpenSansRegular';
+  /* src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype"); */
+  src:url(src/assets/fonts/opensansregular.ttf);
+}
+@font-face {
+  font-family: 'OpenSansBoldHebrew';
+  /* src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype"); */
+  src:url(src/assets/fonts/OpenSansHebrew-Bold.ttf);
+}
+@font-face {
+  font-family: 'OpenSansRegularHebrew';
+  /* src: url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap) format("truetype"); */
+  src:url(src/assets/fonts/OpenSansHebrew-Regular.ttf);
+}

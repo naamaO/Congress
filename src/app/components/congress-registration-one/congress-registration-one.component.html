@@ -61,8 +61,8 @@
         <label class="col-md-4 floatLeft  headerGray" style="margin-left:8%;" #subdiv>Subdivision</label>
       </div>
       <div class="row margin-top" style="margin-left:1%">
-        <label class="col-md-6">{{Division}}</label>
-        <label class="col-md-6 floatLeft" style="margin-left:3%;">{{SubDivision}}</label>
+        <label class="col-md-5">{{Division}}</label>
+        <label class="col-md-5 floatLeft" style="margin-left:16%;">{{SubDivision}}</label>
       </div>
       <br />
     </div>
@@ -174,117 +174,107 @@
           <label style="margin-left:18%;width:80%" *ngIf="showLikeProp==true">{{Keywords}}</label>
         </div>
         <br /><br />
-        <div class="row margin-top form-group col-md-12">
-          <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-left:20%;" >Save draft</button>
-          <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-left:3%;" >Submit</button>
-          <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;">Save draft</button>
-          <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;" >Submit</button> 
-         
-          <!-- <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft"  class="fill-btn-blue col-md-3" style="margin-left:20%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Save draft</button>
-          <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Submit</button>
-          <button (click)="Draft()" disabled *ngIf="showLikeProp==true"data-toggle="modal" data-target="#myModalraft" class="fill-btn-disabled col-md-3" style="margin-left:20%;"  (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
-          <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
- -->
-          <br /><br /> 
-          <!-- <label *ngIf="SaveDraft">The draft saved</label> -->
-          
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <div class="modal fade" id="myModalraft" role="dialog">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div> 
-            <div class="modal-body">
-             <span style="font-size: 18px;">Your draft has been saved.</span> <br/>
-             <span style="font-size: 18px;"> Please make sure to submit it before the deadline.</span> 
+              <div class="row margin-top form-group col-md-12">
+                <button (click)="Draft()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-left:20%;">Save draft</button>
+                <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-left:3%;">Submit</button>
+                <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;">Save draft</button>
+                <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;">Submit</button>
+
+                <!-- <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft"  class="fill-btn-blue col-md-3" style="margin-left:20%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Save draft</button>
+           <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Submit</button>
+           <button (click)="Draft()" disabled *ngIf="showLikeProp==true"data-toggle="modal" data-target="#myModalraft" class="fill-btn-disabled col-md-3" style="margin-left:20%;"  (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
+           <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
+  -->
+                <br /><br />
+
+                <div class="container-fluid" *ngIf="showsaveDraft">
+                  <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                      <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" (click)="showsaveDraft=!showsaveDraft">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                                <div class="divERR col-md-5 marginAuto">
+                                  <br />
+                                  <h4>Your draft has been saved.</h4>
+                                  <br />  <label>Please make sure to submit it before the deadline.</label>
+                                  <br /><br />
+                                </div>
+                              </div>
+
+                              <br /><br /><br /><br /><br /><br />
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                  </div>
+                </div>
+
+
+
+
+                <!--<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="modal fade" id="myModalSubmit" role="dialog">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                 <h5 class="header-WithOut-border" style="margin: inherit;">EDIT LECTURE PROPOSAL</h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+               <span style="font-size: 18px;">Your proposal has been submitted.</span> <br/>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
+      <div class="col-md-2"></div>
     </div>
-    <div class="col-md-2"></div>
   </div>
-</div>
-
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <div class="modal fade" id="myModalSubmit" role="dialog">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <!-- <h5 class="header-WithOut-border" style="margin: inherit;">EDIT LECTURE PROPOSAL</h5>-->  
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div> 
-            <div class="modal-body">
-             <span style="font-size: 18px;">Your proposal has been submitted.</span> <br/>
-            </div>
-
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-2"></div>
-  </div>
-</div>
-        </div>
-      </div>
-    </div>
-    <!--</div>-->
-    <!--<div>
-    <label style="display: inline-block;width: 120px;">Division:</label>
-    <select #t (change)="selectDivision($event.target.value)" [(ngModel)]="Division" *ngIf="SessionName==null">
-      <option [value]="Division" selected>{{Division}}</option>
-      <option *ngFor="let Division of ArrDivision" [value]="Division">
-        {{Division}}
-      </option>
-    </select>
-    <label *ngIf="SessionName!=null">{{Division}}</label>
-    <br /><br />
-    <label style="display: inline-block;width: 120px;"> Sub Division:</label>
-    <select #t (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" *ngIf="SessionName==null">
-      <option [value]="SubDivision" selected>{{SubDivision}}</option>
-      <option *ngFor="let SubDivision of ArrSubDivision" [value]="SubDivision">
-        {{SubDivision}}
-      </option>
-    </select>
-    <label *ngIf="SessionName!=null">{{SubDivision}}</label>
+      </div>-->
+                <div class="container-fluid" *ngIf="showErrEmpty">
+                  <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                      <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" (click)="showErrEmpty=!showErrEmpty">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                                <div class="divERR col-md-5 marginAuto">
+                                  <br />
+                                  <h4>ERROR</h4>
+                                  <br />  <label>You must fill in all fields!</label>
+                                  <br /><br />
+                                </div>
+                              </div>
 
-    <br /><br />
-    <label style="display: inline-block;width: 120px;">Lecture title:</label><input type="text" [(ngModel)]="TitleEnglish" style="margin-right: 10px;" />
-    <label style="display: inline-block;width: 180px;">Lecture title (Hebrew):</label><input type="text" [(ngModel)]="TitleHebrew" /><br /><br />
-    <label style="display: inline-block;width: 120px;">Proposal(250 words)</label><textarea [(ngModel)]="Proposal"></textarea><br /><br />
-    <label style="display: inline-block;width: 120px;">Language</label>
-    <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
-      <option [value]="Language" selected>{{Language}}</option>
-      <option *ngFor="let Language of ArrLanguage" [value]="Language">
-        {{Language}}
-      </option>
-    </select><br /><br />
-    <label style="display: inline-block;width: 120px;">Keywords</label><textarea [(ngModel)]="Keywords"></textarea><br /><br />
-    <input type="radio" name="one\two" value="1" (change)="showTwo=false" /><label>Lone Lecturer</label>
-    <input type="radio" name="one\two" value="2" (change)="showTwo=true" /><label>Shared lecture</label>
-    <div *ngIf="showTwo">
-      <br /><label>Enter email and name</label>
-      <br />
-      <br />
-      <label style="margin-right:20px">Email</label><input type="text" [(ngModel)]="Email2" style="margin-right:20px" />
-      <label style="margin-right:20px">Name</label><input type="text" [(ngModel)]="Name2" />
-    </div>
-    <div style="padding-left:50px;padding-top:30px;">
-      <button (click)="Draft()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">Save draft</button>
-      <button (click)="Save()" class="fill-btn-blue" style="padding:10px;width:150px;">Submit</button>
-      <br /><br />
-      <label *ngIf="SaveDraft">The draft saved</label>
-    </div>
-  </div>
-    </div>-->
-    <!--function ctrl($scope) {
-        $scope.pattern = /[\u0590-\u05FF]+/g;
-        }-->
+                              <br /><br /><br /><br /><br /><br />
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                  </div>
+                </div>

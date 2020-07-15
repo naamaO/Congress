@@ -43,6 +43,40 @@
 .tooltipSmall:hover .tooltiptextSmall {
   visibility: visible;
 }
+.divERR:after {
+  top: 100%;
+  content: " ";
+  position: absolute;
+  bottom: -10px;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}
+
+.divERR:before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px;
+  border-color: transparent transparent #27b5e5;
+  /*top: -18%*/
+}
+
+.divERR {
+  color: #27b5e5;
+  border: 1px solid #27b5e5;
+  border-left: none !important;
+  border-right: none !important;
+}
 
 
 

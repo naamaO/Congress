@@ -262,8 +262,8 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      <select style="width:70%;" class="Non-Border-select" (selectionChange)="selectDivision($event.target.value)" #selectdiv [(ngModel)]="oneProp.Division">
-                        <option *ngFor="let division of ArrDivision" [value]="division">
+                      <select style="width:70%;" class="Non-Border-select" (change)="selectDivision($event.target.value)" #selectdiv [(ngModel)]="oneProp.Division">
+                        <option *ngFor="let division of ArrDivision" [value]="division" name="division">
                           {{division}}
                         </option>
                       </select>
@@ -272,7 +272,7 @@
                     <div class="col-md-6">
 
                       <select style="width:70%;"  class="Non-Border-select" (selectionChange)="selectSubDivision($event.target.value)" [(ngModel)]="oneProp.SubDivision">
-                        <option *ngFor="let subdivision of ArrSubDivision" [value]="subdivision">
+                        <option *ngFor="let subdivision of ArrSubDivision" [value]="subdivision" name="subdivision">
                           {{subdivision}}
                         </option>
                       </select>
@@ -286,7 +286,7 @@
                       <span class="txtStyle bold">Comments</span>
                       <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
                         <label for="exampleFormControlTextarea6"></label>
-                        <textarea [(ngModel)]="this.oneProp.Remarks" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here...">{{oneProp.Remarks}}</textarea>
+                        <textarea [(ngModel)]="oneProp.Remarks" class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here...">{{oneProp.Remarks}}</textarea>
                       </div>
 
                     </div>
@@ -295,7 +295,7 @@
                 <div class="col-md-3">
                   <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
 
-                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="this.Status">
+                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" >
 
                       <span class="txtStyle bold">Status</span>
 
@@ -358,8 +358,8 @@
               <div class="row marginAuto">
                 <span class="col-md-8 header-modal floatLeft">
                   This lecture is part of pre organized session titled:
-                  <span style="color:#167c9f;">{{this.SessionName}} |</span>
-                  Chairperson: <span style="color:#167c9f;">{{this.Chairman}}</span>
+                  <span style="color:#167c9f;">{{SessionName}} |</span>
+                  Chairperson: <span style="color:#167c9f;">{{Chairman}}</span>
                 </span>
               </div>
               <br />
@@ -430,7 +430,7 @@
                       <div class="row">
 
                         <div class="col-md-6">
-                          <select style="width:70%;" class="Non-Border-select" (selectionChange)="selectDivision($event.target.value)" #selectdiv [(ngModel)]="PropSession.Division">
+                          <select style="width:70%;" class="Non-Border-select" (change)="selectDivision($event.target.value)" #selectdiv [(ngModel)]="PropSession.Division">
                             <option *ngFor="let division of ArrDivision" [value]="division">
                               {{division}}
                             </option>

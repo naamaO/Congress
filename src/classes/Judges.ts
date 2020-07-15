@@ -8,12 +8,12 @@ export class Judges {
   Proposal:         string;
   Language:         string;
   Keywords:         string;
-  SessionName: string;
-  SessionId: number;
+  SessionName:      string;
+  SessionId:        number;
   Chairman:         string;
   Status:           string;
   Remarks:          string;
   FirstNameEnglish: string;
   LastNameEnglish:  string;
- 
+  NumOfProposals:   number;
 }

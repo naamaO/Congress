@@ -21,9 +21,6 @@ export class NewHebrewComponent implements OnInit {
   public ShowBlue1: boolean = true;
   public ShowBlue2: boolean = false;
   public ShowBlue3: boolean = false;
-  public first_name: string[] = ['Hadas', 'Shira', 'Efrat'];
-  public last_name: string[] = ['ww', 'ww', 'ww'];
-  public tel: string[] = ['22', '22', '22',];
   public show: boolean;
   public showText: boolean;
   public text: string = '';
@@ -77,6 +74,8 @@ else{
           if(_contents){
               this.CART.contents = JSON.parse(_contents);
               this.DBShoppingCart= this.CART.contents;
+              console.log("this.DBShoppingCart",this.DBShoppingCart)
+
               if(this.DBShoppingCart.length > 0){
               for (var i = 0; i < this.DBShoppingCart.length; i++) {
               if (this.DBShoppingCart[i].SallePrice == 0){
@@ -85,7 +84,7 @@ else{
                   this.Total = this.Total + this.DBShoppingCart[i].Total;
               }
              else{
-                this.DBShoppingCart[i].Total = this.DB[i].SallePrice * this.DBShoppingCart[i].Quantity;
+                this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
                 this.num = this.num + this.DBShoppingCart[i].Quantity;
                 this.Total = this.Total + this.DBShoppingCart[i].Total;
               }
@@ -123,6 +122,8 @@ else{
 }
 }
 }
+console.log("this.DBShoppingCart",this.DBShoppingCart)
+
 }
   changePlaying() {
     __await(1000);
@@ -141,11 +142,15 @@ else{
     this.serverService.getAllDBFromServerHebrew().subscribe(
       resp => {
         this.DB = resp;
+        debugger
         this.DB = this.DB.filter(book => book.GroupBook == 1);
       },
       error => {  
         console.log(error)
       });
+      console.log("this.DB",this.DB)
+      console.log("this.DBShoppingCart",this.DBShoppingCart)
+
       this.UserNameLogin = this.getCookie('UserName');
       if(this.UserNameLogin){
         console.log(this.UserNameLogin)
@@ -183,7 +188,6 @@ else{
   //}
 
   add() {
-    alert(this.first_name);
     this.serverService.getAllDBFromServerHebrew().subscribe((events) => {
       console.log(events);
       this.DB = events;

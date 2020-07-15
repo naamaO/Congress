@@ -183,6 +183,7 @@ if(!this.DB){
     let _cart = JSON.stringify(this.CART.contents);
     await localStorage.setItem(this.CART.KEY, _cart);
     this.DB= this.CART.contents;
+    if(this.DB.length==1){
     for (var i = 0; i < this.DB.length; i++) {
       if (this.DB[i].SallePrice == 0){
       this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
@@ -194,6 +195,18 @@ if(!this.DB){
       this.num = this.num + this.DB[i].Quantity;
       this.Total = this.Total + this.DB[i].Total;
     }
+  }
+}
+  else{
+    let i=  this.DB.length-1; 
+    if (this.DB[i].SallePrice == 0){
+    this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+  }
+  else{
+    this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+  }
+  this.num = this.num + this.DB[i].Quantity;
+  this.Total = this.Total + this.DB[i].Total;
   }
   if(this.DB.length==0){
     this.num = 0;
@@ -253,7 +266,7 @@ find(id){
 increase(id, qty){
     //increase the quantity of an item in the cart
     this.CART.contents = this.CART.contents.map(item=>{
-        if(item.IdBook === id)
+        if(item.Id === id)
             item.Quantity = item.Quantity + qty;
         return item;
     });

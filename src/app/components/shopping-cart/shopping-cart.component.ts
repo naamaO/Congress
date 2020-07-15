@@ -33,7 +33,7 @@ export class ShoppingCartComponent implements OnInit {
   public Total: number;
   public num: number;
   public Address: string;
-  public Country: string[] = ['Israel', 'USA', 'Germany', 'Switzerland'];
+  public Country: string[] = [];
   public selectedCountry: string;
   public UserNameLogin: string;
   public FirstName: string;
@@ -55,7 +55,259 @@ export class ShoppingCartComponent implements OnInit {
   }
   public currency:number = 2;
   public lang:string = "us";
+  public itemToAddQunt1:any;
+  public itemToRedQunt1:any;
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
+  this.Country = [
+    "Afghanistan",
+    "Åland Islands",
+    "Albania",
+    "Algeria",
+    "American Samoa",
+    "Andorra",
+    "Angola",
+    "Anguilla",
+    "Antarctica",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Aruba",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas (the)",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belgium",
+    "Belize",
+    "Benin",
+    "Bermuda",
+    "Bhutan",
+    "Bolivia (Plurinational State of)",
+    "Bonaire, Sint Eustatius and Saba",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Bouvet Island",
+    "Brazil",
+    "British Indian Ocean Territory (the)",
+    "Brunei Darussalam",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Cabo Verde",
+    "Cambodia",
+    "Cameroon",
+    "Canada",
+    "Cayman Islands (the)",
+    "Central African Republic (the)",
+    "Chad",
+    "Chile",
+    "China",
+    "Christmas Island",
+    "Cocos (Keeling) Islands (the)",
+    "Colombia",
+    "Comoros (the)",
+    "Congo (the Democratic Republic of the)",
+    "Congo (the)",
+    "Cook Islands (the)",
+    "Costa Rica",
+    "Croatia",
+    "Cuba",
+    "Curaçao",
+    "Cyprus",
+    "Czechia",
+    "Côte d'Ivoire",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic (the)",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Eritrea",
+    "Estonia",
+    "Eswatini",
+    "Ethiopia",
+    "Falkland Islands (the) [Malvinas]",
+    "Faroe Islands (the)",
+    "Fiji",
+    "Finland",
+    "France",
+    "French Guiana",
+    "French Polynesia",
+    "French Southern Territories (the)",
+    "Gabon",
+    "Gambia (the)",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Gibraltar",
+    "Greece",
+    "Greenland",
+    "Grenada",
+    "Guadeloupe",
+    "Guam",
+    "Guatemala",
+    "Guernsey",
+    "Guinea",
+    "Guinea-Bissau",
+    "Guyana",
+    "Haiti",
+    "Heard Island and McDonald Islands",
+    "Holy See (the)",
+    "Honduras",
+    "Hong Kong",
+    "Hungary",
+    "Iceland",
+    "India",
+    "Indonesia",
+    "Iran (Islamic Republic of)",
+    "Iraq",
+    "Ireland",
+    "Isle of Man",
+    "Israel",
+    "Italy",
+    "Jamaica",
+    "Japan",
+    "Jersey",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kiribati",
+    "Korea (the Democratic People's Republic of)",
+    "Korea (the Republic of)",
+    "Kuwait",
+    "Kyrgyzstan",
+    "Lao People's Democratic Republic (the)",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Macao",
+    "Madagascar",
+    "Malawi",
+    "Malaysia",
+    "Maldives",
+    "Mali",
+    "Malta",
+    "Marshall Islands (the)",
+    "Martinique",
+    "Mauritania",
+    "Mauritius",
+    "Mayotte",
+    "Mexico",
+    "Micronesia (Federated States of)",
+    "Moldova (the Republic of)",
+    "Monaco",
+    "Mongolia",
+    "Montenegro",
+    "Montserrat",
+    "Morocco",
+    "Mozambique",
+    "Myanmar",
+    "Namibia",
+    "Nauru",
+    "Nepal",
+    "Netherlands (the)",
+    "New Caledonia",
+    "New Zealand",
+    "Nicaragua",
+    "Niger (the)",
+    "Nigeria",
+    "Niue",
+    "Norfolk Island",
+    "Northern Mariana Islands (the)",
+    "Norway",
+    "Oman",
+    "Pakistan",
+    "Palau",
+    "Palestine, State of",
+    "Panama",
+    "Papua New Guinea",
+    "Paraguay",
+    "Peru",
+    "Philippines (the)",
+    "Pitcairn",
+    "Poland",
+    "Portugal",
+    "Puerto Rico",
+    "Qatar",
+    "Republic of North Macedonia",
+    "Romania",
+    "Russian Federation (the)",
+    "Rwanda",
+    "Réunion",
+    "Saint Barthélemy",
+    "Saint Helena, Ascension and Tristan da Cunha",
+    "Saint Kitts and Nevis",
+    "Saint Lucia",
+    "Saint Martin (French part)",
+    "Saint Pierre and Miquelon",
+    "Saint Vincent and the Grenadines",
+    "Samoa",
+    "San Marino",
+    "Sao Tome and Principe",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Singapore",
+    "Sint Maarten (Dutch part)",
+    "Slovakia",
+    "Slovenia",
+    "Solomon Islands",
+    "Somalia",
+    "South Africa",
+    "South Georgia and the South Sandwich Islands",
+    "South Sudan",
+    "Spain",
+    "Sri Lanka",
+    "Sudan (the)",
+    "Suriname",
+    "Svalbard and Jan Mayen",
+    "Sweden",
+    "Switzerland",
+    "Syrian Arab Republic",
+    "Taiwan (Province of China)",
+    "Tajikistan",
+    "Tanzania, United Republic of",
+    "Thailand",
+    "Timor-Leste",
+    "Togo",
+    "Tokelau",
+    "Tonga",
+    "Trinidad and Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Turks and Caicos Islands (the)",
+    "Tuvalu",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates (the)",
+    "United Kingdom of Great Britain and Northern Ireland (the)",
+    "United States Minor Outlying Islands (the)",
+    "United States of America (the)",
+    "Uruguay",
+    "Uzbekistan",
+    "Vanuatu",
+    "Venezuela (Bolivarian Republic of)",
+    "Viet Nam",
+    "Virgin Islands (British)",
+    "Virgin Islands (U.S.)",
+    "Wallis and Futuna",
+    "Western Sahara",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe"];
     //get list of shopping cart//if login
 if(this.getCookie('UserName')) {     
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
@@ -229,7 +481,8 @@ if(!this.DB){
 async sync(act:string){
   let _cart = JSON.stringify(this.CART.contents);
   await localStorage.setItem(this.CART.KEY, _cart);
-  this.DB= this.CART.contents;
+  this.DB = this.CART.contents;
+  if(this.DB.length==1){
   for (var i = 0; i < this.DB.length; i++) {
     if (this.DB[i].SallePrice == 0){ 
     this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
@@ -246,6 +499,73 @@ async sync(act:string){
       this.Total = this.Total -  this.DB[i].Total;
       }
 }
+  }
+else{
+    if(act=='inc'){
+      console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
+      if(this.itemToAddQunt1){
+        //let i = this.itemToAddQunt1.Id;
+        if (this.itemToAddQunt1.SallePrice == 0){
+          let i = this.itemToAddQunt1.Id;
+        this.DB[i].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+        this.Total = this.Total + this.itemToAddQunt1.PriceBook;
+        //this.CART.contents =
+         this.CART.contents.map(item=>{
+          if(item.Id === i)
+          this.CART.contents[i].Total = this.DB[i].Total;
+        });
+        // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
+        // //this.CART.contents =
+        //  _cart.contents.map(item=>{
+        //   if(item.Id === i)
+        //   _cart.contents[i].Total = this.DB[i].Total;
+        // });
+       //  localStorage.setItem(this.CART.KEY,JSON.stringify( this.CART.contents[i]));
+      }
+        else{
+          let i = this.itemToAddQunt1.Id;
+          this.DB[i].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+          this.Total = this.Total + this.itemToAddQunt1.SallePrice;
+         // this.CART.contents = 
+          this.CART.contents.map(item=>{
+            if(item.Id === i)
+            this.CART.contents[i].Total = this.DB[i].Total;
+          });
+        }
+        this.num = this.num + 1;
+    }
+      }
+      else  {
+      if(act=='red'){
+        if(this.itemToRedQunt1){
+         // let i = this.itemToRedQunt1.Id;
+          if (this.itemToRedQunt1.SallePrice == 0){
+            let i;
+            i = this.itemToRedQunt1.Id;
+          this.DB[i].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+         //  this.CART.contents =
+          this.CART.contents.map(item=>{
+            if(item.Id === i)
+            this.CART.contents[i].Total = this.DB[i].Total;
+          });
+          }
+          else{
+            let i;
+            i = this.itemToRedQunt1.Id;
+            this.DB[i].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+            this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+            // this.CART.contents = 
+            this.CART.contents.map(item=>{
+              if(item.Id === i)
+              this.CART.contents[i].Total = this.DB[i].Total;
+            });
+          }
+          this.num = this.num - 1;
+      }
+      }
+    }
+ }
 if(this.DB.length==0){
   this.num = 0;
 }
@@ -270,7 +590,7 @@ add(item,qty=1){
   //add a new item to the cart
   //check that it is not in the cart already
   if(this.find(item.IdBook)){
-      this.increase(item.IdBook, qty);
+      this.increase(item.Id, qty);
   }
   else{
     // let PRODUCTS = [];
@@ -304,18 +624,28 @@ add(item,qty=1){
 increase(id, qty){
   //increase the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
-      if(item.IdBook === id)
+      if(item.Id === id){
           item.Quantity = item.Quantity + qty;
+          if(this.DB.length>1){
+            this.itemToAddQunt1 = item;
+            console.log("this.itemToAddQunt1",this.itemToAddQunt1)
+          }
+        }
       return item;
   });
+ 
   //update localStorage
   this.sync('inc')
 }
 reduce(id, qty=1){
   //reduce the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
-      if(item.Id === id)
+      if(item.Id === id){
           item.Quantity = item.Quantity - qty;
+          if(this.DB.length>1){
+            this.itemToRedQunt1 = item;
+          }
+        }
       return item;
   });
   this.CART.contents.forEach(async item=>{

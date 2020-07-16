@@ -160,6 +160,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
               }
                 this.Remarks = this.oneProp.Remarks;
               this.Status = this.oneProp.Status;
+              //alert("'ss"+this.Status+"'ss");
               this.isShowPropArrSession = false;
 
                 this.isShowProp = true;
@@ -340,7 +341,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         });
 } 
   
-    Save(oneProp:any) {
+  Save(oneProp: any) {
         this.newProp = new Judges();
         if (this.oneProp.Division == null)
             this.newProp.Division = this.Division;
@@ -390,8 +391,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         if (this.oneProp.Status == null)
             this.newProp.Status = null;
         else
-            this.newProp.Status = this.oneProp.Status;
-
+      this.newProp.Status = this.oneProp.Status;
         this.serverService.sendUpdateProp(this.newProp);
 
         this.isShowProp = false;

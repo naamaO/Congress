@@ -295,7 +295,7 @@
                 <div class="col-md-3">
                   <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
 
-                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" >
+                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" *ngIf="Status==='Accepted            '" >
 
                       <span class="txtStyle bold">Status</span>
 
@@ -305,21 +305,107 @@
                         value="Accepted" 
                          (change)="onStatusChange($event.target.value)" 
                          class="custom-control-input"
-                          id="Accepted" name="Accepted">
+                          id="Accepted" name="Accepted" checked>
                         <label class="custom-control-label"  for="Accepted">Accepted</label>
                       </div>
                       <br />
                       <div class="custom-control custom-radio">
                         <input type="radio" value="RR"  
-                        (change)="onStatusChange($event.target.value)" chacked="Status=='RR' ? chacked : false " 
-                         class="custom-control-input" id="RR" name="RR">
+                        (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="RR" name="RR" >
                         <label class="custom-control-label" for="RR">RR</label>
                       </div>
                       <br />
                       <div class="custom-control custom-radio" >
                         <input type="radio"   value="Rejected" 
                          (change)="onStatusChange($event.target.value)" 
-                         class="custom-control-input" id="Rejected" name="Rejected">
+                         class="custom-control-input" id="Rejected" name="Rejected" >
+                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                      </div>
+
+                    </div>
+                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" *ngIf="Status==='Rejected            '" >
+
+                      <span class="txtStyle bold">Status</span>
+
+                      <br />
+                      <div class="custom-control custom-radio"  >
+                        <input type="radio"
+                        value="Accepted" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input"
+                          id="Accepted" name="Accepted" >
+                        <label class="custom-control-label"  for="Accepted">Accepted</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio">
+                        <input type="radio" value="RR"  
+                        (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="RR" name="RR" >
+                        <label class="custom-control-label" for="RR">RR</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio" >
+                        <input type="radio"   value="Rejected" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="Rejected" name="Rejected" checked >
+                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                      </div>
+
+                    </div>
+                    <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" *ngIf="Status==='RR                  '" >
+
+                      <span class="txtStyle bold">Status</span>
+
+                      <br />
+                      <div class="custom-control custom-radio"  >
+                        <input type="radio"
+                        value="Accepted" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input"
+                          id="Accepted" name="Accepted" >
+                        <label class="custom-control-label"  for="Accepted">Accepted</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio">
+                        <input type="radio" value="RR"  
+                        (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="RR" name="RR" checked>
+                        <label class="custom-control-label" for="RR">RR</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio" >
+                        <input type="radio"   value="Rejected" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="Rejected" name="Rejected"  >
+                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                      </div>
+
+                    </div> <div class="modal-content " style="border:0;height:190px"  [(ngModel)]="Status" *ngIf="Status==='Pending             '" >
+
+                      <span class="txtStyle bold">Status</span>
+
+                      <br />
+                      <div class="custom-control custom-radio"  >
+                        <input type="radio"
+                        value="Accepted" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input"
+                          id="Accepted" name="Accepted" >
+                        <label class="custom-control-label"  for="Accepted">Accepted</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio">
+                        <input type="radio" value="RR"  
+                        (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="RR" name="RR" >
+                        <label class="custom-control-label" for="RR">RR</label>
+                      </div>
+                      <br />
+                      <div class="custom-control custom-radio" >
+                        <input type="radio"   value="Rejected" 
+                         (change)="onStatusChange($event.target.value)" 
+                         class="custom-control-input" id="Rejected" name="Rejected"  >
                         <label class="custom-control-label" for="Rejected">Rejected</label>
                       </div>
 

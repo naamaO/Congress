@@ -114,6 +114,8 @@ export class InviteMembersComponent implements OnInit {
   //   });
   //}
   SendInviteMember() {
+    this.numInvited = 0;
+    this.ArrAllInvited = [];
     this.a = new invited();
     this.b = new invited();
     this.c = new invited();
@@ -167,10 +169,10 @@ export class InviteMembersComponent implements OnInit {
     this.d.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.c);
     this.ArrAllInvited.push(this.d);
-    if (this.Email1 != null && this.FirstName1 != null && this.LastName1 != null) this.numInvited++;
-    if (this.Email2 != null && this.FirstName2 != null && this.LastName2 != null) this.numInvited++;
-    if (this.Email3 != null && this.FirstName3 != null && this.LastName3 != null) this.numInvited++;
-    if (this.Email4 != null && this.FirstName4 != null && this.LastName4 != null) this.numInvited++;
+    if (this.Email1 != null && this.FirstName1 != null && this.LastName1 != null && this.Title1!=null) this.numInvited++;
+    if (this.Email2 != null && this.FirstName2 != null && this.LastName2 != null && this.Title2 != null) this.numInvited++;
+    if (this.Email3 != null && this.FirstName3 != null && this.LastName3 != null && this.Title3 != null) this.numInvited++;
+    if (this.Email4 != null && this.FirstName4 != null && this.LastName4 != null && this.Title4 != null) this.numInvited++;
     if (this.numInvited>2 && this.Division != null && this.SubDivision != null && this.SessionNameEnglish != null) {
       this.serverService.InviteMembers(this.ArrAllInvited);
       __await(1000);

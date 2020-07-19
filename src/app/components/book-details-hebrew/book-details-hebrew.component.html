@@ -22,7 +22,7 @@
           <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
           <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
            <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
-            <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+            <div class="col-md" style="direction: rtl;margin:auto;display: flex;justify-content:space-around;">
              <div>
               <span  class="span" class="shopping-cart-title cart-num-books">{{num}} ספרים בסל</span>
               <br />
@@ -34,9 +34,9 @@
              <div *ngFor="let item of DB; let i = index"  style="position:relative; ">
               <div >
             <div  style="display: flex;justify-content:space-around; padding-top:5%;">
+              <span  class="col-md-3 cart-item-total">₪{{item.Total}}</span>
+              <span  class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
              <img  class="col-md-4" src={{item.ImageBook}} style="width:65px;height:92px; " />
-             <span  class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
-             <span  class="col-md-3 cart-item-total">${{item.Total}}</span>
             </div> 
             <br/>
              <mat-divider></mat-divider>
@@ -48,18 +48,12 @@
               <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
               <div class="row" style="float: left;width: 370px; margin-top:5px;">
                     <div class="row" style="width: 370px;">
-                      <label class="col-md-4 cart-total">סה"כ </label>
-                      <label class="col-md-3 cart-total-price">${{this.Total}}</label>
+                      <label class="col-md-4 cart-total">₪{{this.Total}}</label>
+                      <label class="col-md-3 cart-total-price">סה"כ</label>
                     </div>
                      <div class="row" style="margin-top: 10px;">
                     <!-- <button  class="view-cart-btn" style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" (click)="NavigCart()">הצג/ערוך עגלה</button>    -->
-                         <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
-                    padding-left: 0;
-                    float: right;
-                    width: 333px;
-                    height: 54px;">
-                          תשלום
-                        </button>
+                         <button  class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;padding-left: 0;float: right;width: 333px;height: 54px;">תשלום</button>
                      </div>
                </div>
              </div>
@@ -74,25 +68,16 @@
 
   <div *ngIf="DetailsBook">
    <div class="col-md-12  marginAuto" style="display:flex;">
-
-
-    <div >
-      <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;">
-        <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
-      </div>
-    </div>
-
-
-      <div class="col-md-6 floatLeft">
+      <div class="col-md-6 floatLeft" style="margin-left: 124px;direction: rtl;">
         <h1 class="book-name" >{{DetailsBook.Name}}</h1>
         <br />
         <div class="row">
-        <div style="margin-left: 15px;" >
+        <div style="margin-right: 15px;" >
           <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;"><span>₪</span>{{DetailsBook.SallePrice}}</span>
           <span class="old-price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through;margin-right:30px;text-decoration: line-through #27b5e5;font-weight: normal;"><span>₪</span>{{DetailsBook.Price}}</span>
           <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>₪</span>{{DetailsBook.Price}}</span>
         </div> 
-        <div  style="margin: 0; margin-left: 55px;">
+        <div  style="margin: 0; margin-right: 55px;">
           <!-- (click)="deleteQuantity(DetailsBook)"-->
           <span  style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;" (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1" >-</label> </span>
          <span  style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;">{{this.Quantity}}</label> </span>
@@ -104,6 +89,11 @@
           <button class="buy-btn" (click)="NavigCart()">קניה</button>
           <button  class="add-to-cart-btn" (click)="AddCart(DetailsBook)">הוסף לסל</button>   
           <br /><br />
+      </div>
+      <div >
+        <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden; max-width: 100%; height: 588px; width: 410px; float: right;">
+          <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
+        </div>
       </div>
    </div>
     

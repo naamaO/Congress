@@ -16,7 +16,7 @@
               <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
-                    <span class="span" class="shopping-cart-title cart-num-books"> ספרים בסל {{num}} </span>
+                    <span class="span" class="shopping-cart-title cart-num-books">ספרים בסל {{num}}</span>
                     <br />
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
                     <br />
@@ -26,9 +26,9 @@
                   <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
-                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
                         <span class="col-md-3 cart-item-total" >₪{{item.Total}}</span>
+                        <span class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
                       </div>
                       <br />
                       <mat-divider></mat-divider>
@@ -40,8 +40,8 @@
                     <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
                     <div class="row" style="float: left;width: 370px; margin-top:5px;">
                       <div class="row" style="width: 370px;">
-                        <label class="col-md-4 cart-total" >סה"כ </label>
-                        <label class="col-md-3 cart-total-price" >₪{{this.Total}}</label>
+                        <label class="col-md-4 cart-total" >₪{{this.Total}}</label>
+                        <label class="col-md-3 cart-total-price" >סה"כ</label>
                       </div>
                       <div class="row" style=" margin-top: 10px;">
                         <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
@@ -64,12 +64,6 @@
     </div>
   </div>
   <div class="col-md-12" style="margin:auto;text-align:left">
-    <!-- <div style="text-align: right;">
-      <span class="span"> האיגוד העולמי למדעי היהדות מפרסם מהדורות תקופתיות ומוספרות של מקורות ראשוניים במחקרים יהודיים</span><br />
-      <span class="span"> בשתי סדרות שונות</span><br />
-      <span class="span"> סדרת מקורות לחקר התרבות היהודית בקרן רבי משה ועמליה רוזן</span><br />
-      <span class="span"> וסדרת אשכולות בשיתוף המכללה האקדמית הרצוג</span><br /><br /><br />
-    </div> -->
     <div>
       <br />
     </div>
@@ -151,7 +145,7 @@
               <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
                 <span class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
                   <div class="tooltipSmallC">
-                    <a style="width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
+                    <a style="margin-right: 26px;direction: rtl;width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
                       {{item.Name}}
                     </a>
                     <span class="tooltiptextSmallC" style="text-align:right;padding-left:2%;height: fit-content !important;">

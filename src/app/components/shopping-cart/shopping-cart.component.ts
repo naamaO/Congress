@@ -57,6 +57,7 @@ export class ShoppingCartComponent implements OnInit {
   public lang:string = "us";
   public itemToAddQunt1:any;
   public itemToRedQunt1:any;
+  public emailvalidate:boolean=false;
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
   this.Country = [
     "Afghanistan",
@@ -502,7 +503,7 @@ async sync(act:string){
   }
 else{
     if(act=='inc'){
-      console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
+      // console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
       if(this.itemToAddQunt1){
         //let i = this.itemToAddQunt1.Id;
         if (this.itemToAddQunt1.SallePrice == 0){
@@ -628,7 +629,7 @@ increase(id, qty){
           item.Quantity = item.Quantity + qty;
           if(this.DB.length>1){
             this.itemToAddQunt1 = item;
-            console.log("this.itemToAddQunt1",this.itemToAddQunt1)
+            // console.log("this.itemToAddQunt1",this.itemToAddQunt1)
           }
         }
       return item;
@@ -713,6 +714,7 @@ remove(id){
     //  }
   }
   checkout(){
+    var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
     if(
     this.FirstName != null && 
     this.LastName != null &&
@@ -722,14 +724,23 @@ remove(id){
       ){
     if(this.getCookie('UserName')){//if logined
     this.UserNameLogin = this.getCookie('UserName');
-    this.SendToTranzila();
+   // this.SendToTranzila();
+    if(!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin))){
+      this.usernameemail.nativeElement.style.color = "red";
+      this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
+      return this.emailvalidate = true;
     } 
     // else{//if not logined
     //  this.setCookie(this.UserNameLogin)
     //  this.showMessage=true;
     // }
 else
-    if(this.UserNameLogin || this.UserNameLogin!=''){
+    if(this.UserNameLogin || this.UserNameLogin!='' ){
+      if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
+        this.usernameemail.nativeElement.style.color = "#dc3545";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
+        return this.emailvalidate = true;
+      } 
        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
        let existUser;
      //  existUser = true;
@@ -783,14 +794,14 @@ else
         }
         //console.log(res)
       });
-
+    }
     }
   }
   else {
     if( !this.FirstName || !this.LastName){
-      this.namee.nativeElement.style.color = "red";
-      this.nameefirstinput.nativeElement.style.borderBottom = "1px solid red";
-      this.nameelastinput.nativeElement.style.borderBottom = "1px solid red";
+      this.namee.nativeElement.style.color = "#dc3545";
+      this.nameefirstinput.nativeElement.style.borderBottom = "1px solid #dc3545";
+      this.nameelastinput.nativeElement.style.borderBottom = "1px solid #dc3545";
     }else{
       this.namee.nativeElement.style.color = "gray";
       this.nameefirstinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
@@ -804,22 +815,22 @@ else
       //   this.nameelastinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       // }
      if(!this.Address){
-      this.address.nativeElement.style.color = "red";
-      this.addressinput.nativeElement.style.borderBottom = "1px solid red";
+      this.address.nativeElement.style.color = "#dc3545";
+      this.addressinput.nativeElement.style.borderBottom = "1px solid #dc3545";
      }else{
       this.address.nativeElement.style.color = "gray";
       this.addressinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
     }
       if(!this.selectedCountry){
-       this.country.nativeElement.style.color = "red";
-       this.countryinput.nativeElement.style.borderBottom = "1px solid red";
+       this.country.nativeElement.style.color = "#dc3545";
+       this.countryinput.nativeElement.style.borderBottom = "1px solid #dc3545";
       }else{
         this.country.nativeElement.style.color = "gray";
         this.countryinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       }
       if(!this.UserNameLogin){
-        this.usernameemail.nativeElement.style.color = "red";
-        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
+        this.usernameemail.nativeElement.style.color = "#dc3545";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
       }else{
         this.usernameemail.nativeElement.style.color = "gray";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";

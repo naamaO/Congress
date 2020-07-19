@@ -54,6 +54,9 @@ export class ShopingCartHebrewComponent implements OnInit {
   }
   public currency:number = 1;
   public lang:string = "il";
+  public itemToAddQunt1:any;
+  public itemToRedQunt1:any;
+  public emailvalidate:boolean=false;
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {  
    this.Country =  [
     "Afghanistan",
@@ -480,6 +483,7 @@ async sync(act:string){
   let _cart = JSON.stringify(this.CART.contents);
   await localStorage.setItem(this.CART.KEY, _cart);
   this.DB= this.CART.contents;
+  if(this.DB.length==1){
   for (var i = 0; i < this.DB.length; i++) {
     if (this.DB[i].SallePrice == 0){ 
     this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
@@ -496,6 +500,73 @@ async sync(act:string){
       this.Total = this.Total -  this.DB[i].Total;
       }
 }
+  }
+  else{
+    if(act=='inc'){
+      // console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
+      if(this.itemToAddQunt1){
+        //let i = this.itemToAddQunt1.Id;
+        if (this.itemToAddQunt1.SallePrice == 0){
+          let i = this.itemToAddQunt1.Id;
+        this.DB[i].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+        this.Total = this.Total + this.itemToAddQunt1.PriceBook;
+        //this.CART.contents =
+         this.CART.contents.map(item=>{
+          if(item.Id === i)
+          this.CART.contents[i].Total = this.DB[i].Total;
+        });
+        // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
+        // //this.CART.contents =
+        //  _cart.contents.map(item=>{
+        //   if(item.Id === i)
+        //   _cart.contents[i].Total = this.DB[i].Total;
+        // });
+       //  localStorage.setItem(this.CART.KEY,JSON.stringify( this.CART.contents[i]));
+      }
+        else{
+          let i = this.itemToAddQunt1.Id;
+          this.DB[i].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+          this.Total = this.Total + this.itemToAddQunt1.SallePrice;
+         // this.CART.contents = 
+          this.CART.contents.map(item=>{
+            if(item.Id === i)
+            this.CART.contents[i].Total = this.DB[i].Total;
+          });
+        }
+        this.num = this.num + 1;
+    }
+      }
+      else  {
+      if(act=='red'){
+        if(this.itemToRedQunt1){
+         // let i = this.itemToRedQunt1.Id;
+          if (this.itemToRedQunt1.SallePrice == 0){
+            let i;
+            i = this.itemToRedQunt1.Id;
+          this.DB[i].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+         //  this.CART.contents =
+          this.CART.contents.map(item=>{
+            if(item.Id === i)
+            this.CART.contents[i].Total = this.DB[i].Total;
+          });
+          }
+          else{
+            let i;
+            i = this.itemToRedQunt1.Id;
+            this.DB[i].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+            this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+            // this.CART.contents = 
+            this.CART.contents.map(item=>{
+              if(item.Id === i)
+              this.CART.contents[i].Total = this.DB[i].Total;
+            });
+          }
+          this.num = this.num - 1;
+      }
+      }
+    }
+ }
 if(this.DB.length==0){
   this.num = 0;
 }
@@ -554,8 +625,13 @@ add(item,qty=1){
 increase(id, qty){
   //increase the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
-      if(item.Id === id)
+      if(item.Id === id){
           item.Quantity = item.Quantity + qty;
+          if(this.DB.length>1){
+            this.itemToAddQunt1 = item;
+            // console.log("this.itemToAddQunt1",this.itemToAddQunt1)
+          }
+  }
       return item;
   });
   //update localStorage
@@ -564,8 +640,12 @@ increase(id, qty){
 reduce(id, qty=1){
   //reduce the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
-    if(item.Id === id)
+    if(item.Id === id){
     item.Quantity = item.Quantity - qty;
+    if(this.DB.length>1){
+      this.itemToRedQunt1 = item;
+    }
+    }
       return item;
   });
   this.CART.contents.forEach(async item=>{
@@ -634,16 +714,22 @@ remove(id){
   }
 
   checkout(){
+    var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
     if(
     this.FirstNameHebrew != null && 
     this.LastNameHebrew != null &&
     this.Address != null &&
     this.selectedCountry != null &&
     this.UserNameLogin != null 
-      ){
+     ){
     if(this.getCookie('UserName')){//if logined
     this.UserNameLogin = this.getCookie('UserName');
-    this.SendToTranzila();
+   // this.SendToTranzila();
+   
+   if(!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin))){
+      this.usernameemail.nativeElement.style.color = "red";
+      this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
+      return this.emailvalidate = true;
     } 
     // else{//if not logined
     //  this.setCookie(this.UserNameLogin)
@@ -651,6 +737,11 @@ remove(id){
     // }
 else
     if(this.UserNameLogin || this.UserNameLogin!=''){
+      if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
+        this.usernameemail.nativeElement.style.color = "#dc3545";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
+        return this.emailvalidate = true;
+      } 
        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
        let existUser;
      //  existUser = true;
@@ -709,11 +800,12 @@ else
 
     }
   }
+}
   else {
     if( !this.FirstNameHebrew || !this.LastNameHebrew){
-      this.nameh.nativeElement.style.color = "red";
-      this.namehfirstinput.nativeElement.style.borderBottom = "1px solid red";
-      this.namehlastinput.nativeElement.style.borderBottom = "1px solid red";
+      this.nameh.nativeElement.style.color = "#dc3545";
+      this.namehfirstinput.nativeElement.style.borderBottom = "1px solid #dc3545";
+      this.namehlastinput.nativeElement.style.borderBottom = "1px solid #dc3545";
     }else{
       this.nameh.nativeElement.style.color = "gray";
       this.namehfirstinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
@@ -727,22 +819,22 @@ else
       //   this.namehlastinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       // }
      if(!this.Address){
-      this.address.nativeElement.style.color = "red";
-      this.addressinput.nativeElement.style.borderBottom = "1px solid red";
+      this.address.nativeElement.style.color = "#dc3545";
+      this.addressinput.nativeElement.style.borderBottom = "1px solid #dc3545";
      }else{
       this.address.nativeElement.style.color = "gray";
       this.addressinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
     }
       if(!this.selectedCountry){
-       this.country.nativeElement.style.color = "red";
-       this.countryinput.nativeElement.style.borderBottom = "1px solid red";
+       this.country.nativeElement.style.color = "#dc3545";
+       this.countryinput.nativeElement.style.borderBottom = "1px solid #dc3545";
       }else{
         this.country.nativeElement.style.color = "gray";
         this.countryinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       }
       if(!this.UserNameLogin){
-        this.usernameemail.nativeElement.style.color = "red";
-        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
+        this.usernameemail.nativeElement.style.color = "#dc3545";
+        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
       }else{
         this.usernameemail.nativeElement.style.color = "gray";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
@@ -751,7 +843,8 @@ else
     //alert("All fields must be filled!");
   }
 
-}
+
+  }
   
 
   SendToNew() {

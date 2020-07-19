@@ -174,7 +174,12 @@
 
  <div class="col-md-6" >
   <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
-<input class="col-md"  #usernameemailinput style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
+<input class="col-md"  name="UserNameLogin" ngDefaultControl #usernameemailinput style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text"
+ value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"/>
+<div *ngIf="emailvalidate" name="emailvalidate"  ngDefaultControl [(ngModel)]="emailvalidate">
+  <small class="text-danger"  >נא לספק כתובת דוא"ל חוקית</small>
+  <!-- Please provide a valid email address -->
+</div>
 </div>
   <br />
 </div>   

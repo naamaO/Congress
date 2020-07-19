@@ -148,9 +148,6 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
       error => {  
         console.log(error)
       });
-      console.log("this.DB",this.DB)
-      console.log("this.DBShoppingCart",this.DBShoppingCart)
-
       this.UserNameLogin = this.getCookie('UserName');
       if(this.UserNameLogin){
         console.log(this.UserNameLogin)

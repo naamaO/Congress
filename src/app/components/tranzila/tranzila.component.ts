@@ -23,10 +23,9 @@ export class TranzilaComponent implements OnInit {
   public src: string;
   public srcReal: SafeResourceUrl;
   public Email: string;
-  public successUrlAddress: string ='http://jewish-studies.b2story.com/success';// קישור דף הצלחה
-  public failUrlAddress: string = 'http://jewish-studies.b2story.com/fail';//קישור דף כישלון	
- // public notify_url_address: string = 'http://jewish-studies.b2story.com/notify';//קישור ל NOTIFY	
-  public notifyUrlAddress: string = 'http://jewish-studies.b2story.com/notify';//קישור ל NOTIFY	
+  public successUrlAddress: string ='http://jewish-studies.b2story.com/success.html';// קישור דף הצלחה
+  public failUrlAddress: string = 'http://jewish-studies.b2story.com/fail.html';//קישור דף כישלון	
+  public notifyUrlAddress: string = 'http://jewish-studies.b2story.com/notify.html';//קישור ל NOTIFY	
 
   constructor(public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient, private sanitizer: DomSanitizer) {
 
@@ -46,15 +45,20 @@ export class TranzilaComponent implements OnInit {
     this.srcReal = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
     // "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
     console.log("this.srcReal",this.srcReal)
+    
+    
   }
 
   ngOnInit() {
+    // this.serverService.gettranzilaresponce().subscribe((events) => {
+    //   console.log("this.srcRealevent",events)
 
-    this.sub = this.router.params.subscribe(params => {
-      this.Total = +params['Total']; // (+) converts string 'id' to a number
+    // this.sub = this.router.params.subscribe(params => {
+    //   this.Total = +params['Total']; // (+) converts string 'id' to a number
   
-    });
-    this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=1&currency=1&cred_type=1";
+    // });
+    // this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=1&currency=1&cred_type=1";
   }
+
 
 }

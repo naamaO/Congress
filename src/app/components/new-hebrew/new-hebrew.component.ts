@@ -142,7 +142,6 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
     this.serverService.getAllDBFromServerHebrew().subscribe(
       resp => {
         this.DB = resp;
-        debugger
         this.DB = this.DB.filter(book => book.GroupBook == 1);
       },
       error => {  

@@ -634,7 +634,6 @@ increase(id, qty){
         }
       return item;
   });
- 
   //update localStorage
   this.sync('inc')
 }
@@ -647,6 +646,7 @@ reduce(id, qty=1){
             this.itemToRedQunt1 = item;
           }
         }
+        
       return item;
   });
   this.CART.contents.forEach(async item=>{
@@ -722,7 +722,8 @@ remove(id){
     this.selectedCountry != null &&
     this.UserNameLogin != null 
       ){
-    if(this.getCookie('UserName')){//if logined
+        let user = this.getCookie('UserName');
+    if(user!=undefined || user!=null){//if logined
     this.UserNameLogin = this.getCookie('UserName');
    // this.SendToTranzila();
     if(!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin))){
@@ -734,8 +735,9 @@ remove(id){
     //  this.setCookie(this.UserNameLogin)
     //  this.showMessage=true;
     // }
-else
-    if(this.UserNameLogin || this.UserNameLogin!='' ){
+    }
+
+    if(this.UserNameLogin){
       if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
         this.usernameemail.nativeElement.style.color = "#dc3545";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
@@ -796,7 +798,6 @@ else
       });
     }
     }
-  }
   else {
     if( !this.FirstName || !this.LastName){
       this.namee.nativeElement.style.color = "#dc3545";

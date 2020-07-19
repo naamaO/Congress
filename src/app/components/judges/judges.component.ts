@@ -31,6 +31,9 @@ export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
   @ViewChild('SelectDiv') SelectDiv: ElementRef;
+  @ViewChild('Accepted') Accepted: ElementRef;
+  @ViewChild('RR') RR: ElementRef;
+  @ViewChild('Rejected') Rejected: ElementRef;
   //@ViewChild('edit') edit: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -160,6 +163,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
               }
                 this.Remarks = this.oneProp.Remarks;
               this.Status = this.oneProp.Status;
+              //alert("'ss"+this.Status+"'ss");
               this.isShowPropArrSession = false;
 
                 this.isShowProp = true;
@@ -327,7 +331,10 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
   }
   
   onStatusChange(statusValueChecked:string){
-      this.oneProp.Status = statusValueChecked;
+    this.oneProp.Status = statusValueChecked;
+    //if (statusValueChecked == "RR") {
+    //  this.Rejected.nativeElement.ch
+    //}
     console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
   }
   onStatusPropSessionChange(propSession : Judges,statusValueChecked:string){
@@ -340,7 +347,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         });
 } 
   
-    Save(oneProp:any) {
+  Save(oneProp: any) {
         this.newProp = new Judges();
         if (this.oneProp.Division == null)
             this.newProp.Division = this.Division;
@@ -390,8 +397,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         if (this.oneProp.Status == null)
             this.newProp.Status = null;
         else
-            this.newProp.Status = this.oneProp.Status;
-
+      this.newProp.Status = this.oneProp.Status;
         this.serverService.sendUpdateProp(this.newProp);
 
         this.isShowProp = false;

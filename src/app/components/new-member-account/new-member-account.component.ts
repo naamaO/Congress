@@ -77,7 +77,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public City: string;
   public Street: string;
   public NumberHome: string;
-  public Country: string[] = ['Israel', 'USA', 'Germany', 'Switzerland'];
+  public Country: string[] = [];
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public NumberPhone1: string;
   public showLikeProp: boolean = false;
@@ -95,8 +95,8 @@ export class NewMemberAccountCompponent implements OnInit {
   public Total: number;
   public membershipType: number;
  // public Address: string;
-  constructor(public route: ActivatedRoute,private fb: FormBuilder,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
-
+  constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.Country = serverService.Country;
     this.ArrMembershipTypes = [
       {
         membershipType: 'Annual Membership',

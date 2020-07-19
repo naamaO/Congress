@@ -721,8 +721,8 @@ remove(id){
     this.Address != null &&
     this.selectedCountry != null &&
     this.UserNameLogin != null 
-     ){
-    if(this.getCookie('UserName')){//if logined
+     ){   let user = this.getCookie('UserName');
+     if(user!=undefined || user!=null){//if logined
     this.UserNameLogin = this.getCookie('UserName');
    // this.SendToTranzila();
    
@@ -735,7 +735,7 @@ remove(id){
     //  this.setCookie(this.UserNameLogin)
     //  this.showMessage=true;
     // }
-else
+     }
     if(this.UserNameLogin || this.UserNameLogin!=''){
       if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
         this.usernameemail.nativeElement.style.color = "#dc3545";
@@ -800,7 +800,7 @@ else
 
     }
   }
-}
+
   else {
     if( !this.FirstNameHebrew || !this.LastNameHebrew){
       this.nameh.nativeElement.style.color = "#dc3545";

@@ -84,14 +84,10 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
 
-      if (this.SubDivision == 'Ladino') {
-        this.ArrLanguage = ['עברית','English','Ladino']
-      }
-      if (this.SubDivision == 'Yiddish') {
-        this.ArrLanguage = ['עברית', 'English', 'Yiddish']
-      } if (this.SubDivision == 'Latin American Jewry Section') {
-        this.ArrLanguage = ['עברית', 'English', 'Português','Español']
-      }
+      this.serverService.GetLanguageEnglishSession(this.SubDivision, this.Division).subscribe((events) => {
+
+        this.ArrLanguage = events;
+      });
       this.TitleEnglish = events.TitleEnglish;
       this.TitleHebrew = events.TitleHebrew;
       this.Proposal = events.Proposal;

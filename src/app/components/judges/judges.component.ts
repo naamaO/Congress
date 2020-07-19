@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,7 @@ import { MatPaginator,PageEvent } from '@angular/material/paginator';
 import {MatPaginatorIntl} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { FormControl } from '@angular/forms';
+import { __await } from 'tslib';
 import { map, startWith } from 'rxjs/operators';
 import  $ from 'jquery';
 import { ControlValueAccessor } from '@angular/forms';
@@ -88,7 +89,7 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
   data: any;
   public imgSrc: string = "/assets/images/Edit.jpg";
 
-    constructor(public router: Router, private serverService: ServerService,
+  constructor(private ngZone: NgZone,public router: Router, private serverService: ServerService,
          private http: HttpClient, private MatPaginatorIntl:MatPaginatorIntl) {
       //alert("rr");
  // Object to create Filter for
@@ -136,7 +137,25 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         this.dataSource.data = this.data.slice(event * this.size - this.size, event * this.size);
         console.log("this.dataSource.data",this.dataSource.data)
       }
-      
+  changePlaying() {
+    __await(1000);
+    this.ngZone.run(() => {
+
+      this.serverService.getAll_W_Proposals().subscribe(val => {
+        this.over = new Array(val.length);
+        let d = new MatTableDataSource<Judges>(val as Judges[]);
+        this.dataSource.data = d.data;
+        this.dataSourcFilter.data = d.data;
+        this.data = this.dataSource.data;
+        console.log("this.data", this.data)
+        this.dataSource.filterPredicate = this.createFilter();
+        this.filterSelectObj.filter((o) => {
+          o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+        });
+      });
+    });
+
+  } 
 
   ngAfterViewInit(): void {
  
@@ -406,20 +425,22 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
                 prop=this.oneProp
             }
             });
-            
-            this.serverService.getAll_W_Proposals().subscribe(val => {
-                this.over = new Array(val.length);
-                     let d=new MatTableDataSource<Judges>(val as Judges[]);
-                     this.dataSource.data = d.data;
-                      this.dataSourcFilter.data = d.data;
-                      this.data = this.dataSource.data;
-                      console.log("this.data",this.data )
-                      this.dataSource.filterPredicate = this.createFilter();
-                      this.filterSelectObj.filter((o) => {
-                          o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
-                        });
-                  });
-                 location.reload();
+    this.changePlaying();
+    this.changePlaying();
+    this.changePlaying();
+            //this.serverService.getAll_W_Proposals().subscribe(val => {
+            //    this.over = new Array(val.length);
+            //         let d=new MatTableDataSource<Judges>(val as Judges[]);
+            //         this.dataSource.data = d.data;
+            //          this.dataSourcFilter.data = d.data;
+            //          this.data = this.dataSource.data;
+            //          console.log("this.data",this.data )
+            //          this.dataSource.filterPredicate = this.createFilter();
+            //          this.filterSelectObj.filter((o) => {
+            //              o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+            //            });
+            //      });
+                // location.reload();
     }
 
     

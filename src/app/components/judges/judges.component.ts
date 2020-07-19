@@ -31,6 +31,9 @@ export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
   @ViewChild('SelectDiv') SelectDiv: ElementRef;
+  @ViewChild('Accepted') Accepted: ElementRef;
+  @ViewChild('RR') RR: ElementRef;
+  @ViewChild('Rejected') Rejected: ElementRef;
   //@ViewChild('edit') edit: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -328,7 +331,10 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
   }
   
   onStatusChange(statusValueChecked:string){
-      this.oneProp.Status = statusValueChecked;
+    this.oneProp.Status = statusValueChecked;
+    //if (statusValueChecked == "RR") {
+    //  this.Rejected.nativeElement.ch
+    //}
     console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
   }
   onStatusPropSessionChange(propSession : Judges,statusValueChecked:string){

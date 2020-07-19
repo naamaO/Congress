@@ -305,21 +305,21 @@
                         value="Accepted" 
                          (change)="onStatusChange($event.target.value)" 
                          class="custom-control-input"
-                          id="Accepted" name="Accepted" checked>
+                          id="Accepted" name="Accepted" checked #Accepted>
                         <label class="custom-control-label"  for="Accepted">Accepted</label>
                       </div>
                       <br />
                       <div class="custom-control custom-radio">
                         <input type="radio" value="RR"  
                         (change)="onStatusChange($event.target.value)" 
-                         class="custom-control-input" id="RR" name="RR" >
+                         class="custom-control-input" id="RR" name="RR" #RR>
                         <label class="custom-control-label" for="RR">RR</label>
                       </div>
                       <br />
                       <div class="custom-control custom-radio" >
                         <input type="radio"   value="Rejected" 
                          (change)="onStatusChange($event.target.value)" 
-                         class="custom-control-input" id="Rejected" name="Rejected" >
+                         class="custom-control-input" id="Rejected" name="Rejected" Rejected
                         <label class="custom-control-label" for="Rejected">Rejected</label>
                       </div>
 
@@ -471,7 +471,7 @@
                       <span class="col-md-3 floatLeft">{{PropSession.FirstNameEnglish}}        {{PropSession.LastNameEnglish}}  </span>
                       <span class="col-md-3 floatLeft ">{{PropSession.TitleEnglish}}</span>
                       <span class="col-md-3 floatLeft">{{PropSession.TitleHebrew}}</span>
-                      <span class="col-md-3 floatLeft">{{PropSession.Language}}</span>
+                      <span class="col-md-3 floatLeft">{{PropSession.Language}}{{PropSession.Status}}</span>
                     </div>
 
                   </div>
@@ -548,7 +548,8 @@
 
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" *ngIf="PropSession.Status==='Pending             '" >
+                      <label>Pending</label>
                       <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
 
                         <div class="modal-content " style="border:0;height:190px">
@@ -568,6 +569,88 @@
                           <br />
                           <div class="custom-control custom-radio">
                             <input type="radio" value="Rejected"  (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusRejected" name="status">
+                            <label class="custom-control-label" for="statusRejected">Rejected</label>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3" *ngIf="PropSession.Status==='Rejected            '">
+                      <label>Rejected</label>
+
+                      <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
+
+                        <div class="modal-content " style="border:0;height:190px">
+
+                          <span class="txtStyle bold">Status</span>
+
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio" value="Accepted" (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusAccepted" name="status">
+                            <label class="custom-control-label" for="statusAccepted">Accepted</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio" value="RR" (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusPending" name="status">
+                            <label class="custom-control-label" for="statusPending">RR</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio" value="Rejected" (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusRejected" name="status" checked>
+                            <label class="custom-control-label" for="statusRejected">Rejected</label>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="PropSession.Status === 'Accepted            '" >
+                    <label>accepted</label>
+                      <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
+
+                        <div class="modal-content " style="border:0;height:190px">
+
+                          <span class="txtStyle bold">Status</span>
+
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input  type="radio"  value="Accepted" (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusAccepted" name="status" checked>
+                            <label class="custom-control-label" for="statusAccepted">Accepted</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio"  value="RR"  (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusPending" name="status">
+                            <label class="custom-control-label" for="statusPending">RR</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio" value="Rejected"  (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusRejected" name="status" >
+                            <label class="custom-control-label" for="statusRejected">Rejected</label>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div><div class="col-md-3" *ngIf="PropSession.Status ==='RR                  '" >
+                    <label>rr</label>
+                      <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
+
+                        <div class="modal-content " style="border:0;height:190px">
+
+                          <span class="txtStyle bold">Status</span>
+
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio"  value="Accepted" (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusAccepted" name="status">
+                            <label class="custom-control-label" for="statusAccepted">Accepted</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio"  value="RR"  (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusPending" name="status" checked>
+                            <label class="custom-control-label" for="statusPending">RR</label>
+                          </div>
+                          <br />
+                          <div class="custom-control custom-radio">
+                            <input type="radio" value="Rejected"  (change)="onStatusPropSessionChange(PropSession,$event.target.value)" class="custom-control-input" id="statusRejected" name="status" >
                             <label class="custom-control-label" for="statusRejected">Rejected</label>
                           </div>
 

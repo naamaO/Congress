@@ -63,6 +63,7 @@ import { NewMemberAccountCompponent } from './components/new-member-account/new-
 import { notifyComponent } from './components/notify/notify.component';
 import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
+import { successComponent } from './components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { ResetPassSuccessComponent } from './components/reset-pass-success/reset
     Thank3Component,
     notifyComponent,
     failComponent,
+    successComponent,
     CongressRegistrationSingleComponent,
     ResetPassSuccessComponent
   ],

@@ -217,7 +217,7 @@ if(!this.DB){
 
   this.TOTAL.total = this.Total;
   let _total =  JSON.stringify(this.TOTAL.total);
-  localStorage.setItem(this.NUM.KEY, _total);
+  localStorage.setItem(this.TOTAL.KEY, _total);
 }
 find(id){
     //find an item in the cart by it's id

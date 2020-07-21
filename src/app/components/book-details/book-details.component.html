@@ -7,9 +7,9 @@
           <div style="margin-left:80%;top:0px;position:fixed;">
             <div class="tooltipSmall">
               <span *ngIf="num>0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg">{{this.num}}</span>
-              <img *ngIf="num>0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
-              <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
-              <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
+              <img *ngIf="num>0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" />
+              <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" />
+              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
                     <span class="span" class="shopping-cart-title cart-num-books">{{num}} books in your cart</span>
@@ -22,8 +22,8 @@
                   <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
-                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
-                        <span class="col-md-6" style="text-align: start;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
+                        <span class="col-md-5" style="text-align: left;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
                         <span class="col-md-3 cart-item-total" >${{item.Total}}</span>
                       </div>
                       <br />
@@ -62,7 +62,7 @@
     <br />  <br />  <br />  <br />  <br /> <br />  <br />
     <div *ngIf="DetailsBook">
 
-    <div class="col-md-12  marginAuto" style="display:flex;">
+    <div class="col-md-12  marginAuto" style="display:flex; padding-bottom: 50px;">
       <div >
         <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;">
           <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
@@ -95,9 +95,11 @@
         </div>
         <br />
         <p style="font-size:medium;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px; color: #026fa7">{{DetailsBook.Details}}</p>
+        <div class="row col-md" style="display: contents;"> 
         <button class="buy-btn" (click)="NavigCart()">Buy</button>
         <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
         <button class="add-to-cart-btn" (click)="AddCart(DetailsBook)">Add to cart</button>
+      </div>
         <br /><br />
       </div>
 

@@ -9,11 +9,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
 @Component({
-  selector: 'app-notify',
-  templateUrl: './notify.component.html',
-  styleUrls: ['./notify.component.css']
+  selector: 'app-success',
+  templateUrl: './success.component.html',
+  styleUrls: ['./success.component.css']
 })
-export class notifyComponent implements OnInit {
+export class successComponent implements OnInit {
   private sub: any;
   public res: any;
   constructor(public route: ActivatedRoute,public router: Router, private serverService: ServerService, private http: HttpClient) {
@@ -25,10 +25,10 @@ export class notifyComponent implements OnInit {
 //   console.log("this.res",this.res);
 //   this.serverService.setNotify(this.res);
 //    });
-
+   console.log("success page!!!!!!!!!");
   }
   ngOnInit() {
-    console.log("notify page!!")
+    console.log("success page on init!!!!!!!!!")
   }
 
 }

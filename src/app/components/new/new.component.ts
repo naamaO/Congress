@@ -159,7 +159,7 @@ else{
       error => {  
         console.log(error)
       });
-      console.log("this.DB",this.DB)
+     // console.log("this.DB",this.DB)
 
       this.UserNameLogin = this.getCookie('UserName');
       if(this.UserNameLogin){

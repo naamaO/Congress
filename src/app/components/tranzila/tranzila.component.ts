@@ -60,5 +60,4 @@ export class TranzilaComponent implements OnInit {
     // this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=1&currency=1&cred_type=1";
   }
 
-
 }

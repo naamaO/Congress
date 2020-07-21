@@ -57,257 +57,9 @@ export class ShopingCartHebrewComponent implements OnInit {
   public itemToAddQunt1:any;
   public itemToRedQunt1:any;
   public emailvalidate:boolean=false;
+  public rem:boolean = false;
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {  
-   this.Country =  [
-    "Afghanistan",
-    "Åland Islands",
-    "Albania",
-    "Algeria",
-    "American Samoa",
-    "Andorra",
-    "Angola",
-    "Anguilla",
-    "Antarctica",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Aruba",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas (the)",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bermuda",
-    "Bhutan",
-    "Bolivia (Plurinational State of)",
-    "Bonaire, Sint Eustatius and Saba",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Bouvet Island",
-    "Brazil",
-    "British Indian Ocean Territory (the)",
-    "Brunei Darussalam",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Cayman Islands (the)",
-    "Central African Republic (the)",
-    "Chad",
-    "Chile",
-    "China",
-    "Christmas Island",
-    "Cocos (Keeling) Islands (the)",
-    "Colombia",
-    "Comoros (the)",
-    "Congo (the Democratic Republic of the)",
-    "Congo (the)",
-    "Cook Islands (the)",
-    "Costa Rica",
-    "Croatia",
-    "Cuba",
-    "Curaçao",
-    "Cyprus",
-    "Czechia",
-    "Côte d'Ivoire",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic (the)",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini",
-    "Ethiopia",
-    "Falkland Islands (the) [Malvinas]",
-    "Faroe Islands (the)",
-    "Fiji",
-    "Finland",
-    "France",
-    "French Guiana",
-    "French Polynesia",
-    "French Southern Territories (the)",
-    "Gabon",
-    "Gambia (the)",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Gibraltar",
-    "Greece",
-    "Greenland",
-    "Grenada",
-    "Guadeloupe",
-    "Guam",
-    "Guatemala",
-    "Guernsey",
-    "Guinea",
-    "Guinea-Bissau",
-    "Guyana",
-    "Haiti",
-    "Heard Island and McDonald Islands",
-    "Holy See (the)",
-    "Honduras",
-    "Hong Kong",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran (Islamic Republic of)",
-    "Iraq",
-    "Ireland",
-    "Isle of Man",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jersey",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Korea (the Democratic People's Republic of)",
-    "Korea (the Republic of)",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Lao People's Democratic Republic (the)",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Macao",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands (the)",
-    "Martinique",
-    "Mauritania",
-    "Mauritius",
-    "Mayotte",
-    "Mexico",
-    "Micronesia (Federated States of)",
-    "Moldova (the Republic of)",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Montserrat",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands (the)",
-    "New Caledonia",
-    "New Zealand",
-    "Nicaragua",
-    "Niger (the)",
-    "Nigeria",
-    "Niue",
-    "Norfolk Island",
-    "Northern Mariana Islands (the)",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Palestine, State of",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines (the)",
-    "Pitcairn",
-    "Poland",
-    "Portugal",
-    "Puerto Rico",
-    "Qatar",
-    "Republic of North Macedonia",
-    "Romania",
-    "Russian Federation (the)",
-    "Rwanda",
-    "Réunion",
-    "Saint Barthélemy",
-    "Saint Helena, Ascension and Tristan da Cunha",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Martin (French part)",
-    "Saint Pierre and Miquelon",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Sint Maarten (Dutch part)",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Georgia and the South Sandwich Islands",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan (the)",
-    "Suriname",
-    "Svalbard and Jan Mayen",
-    "Sweden",
-    "Switzerland",
-    "Syrian Arab Republic",
-    "Taiwan (Province of China)",
-    "Tajikistan",
-    "Tanzania, United Republic of",
-    "Thailand",
-    "Timor-Leste",
-    "Togo",
-    "Tokelau",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Turks and Caicos Islands (the)",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates (the)",
-    "United Kingdom of Great Britain and Northern Ireland (the)",
-    "United States Minor Outlying Islands (the)",
-    "United States of America (the)",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Venezuela (Bolivarian Republic of)",
-    "Viet Nam",
-    "Virgin Islands (British)",
-    "Virgin Islands (U.S.)",
-    "Wallis and Futuna",
-    "Western Sahara",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"];
+   this.Country =  this.serverService.Country;
     //get list of shopping cart//if login
 if(this.getCookie('UserName')) {     
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
@@ -487,21 +239,119 @@ async sync(act:string){
   for (var i = 0; i < this.DB.length; i++) {
     if (this.DB[i].SallePrice == 0){ 
     this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-    }
+    this.CART.contents.map(item=>{
+      if(item.Id === i)
+      this.CART.contents[i].Total = this.DB[i].Total;
+    });
+    let _cart = JSON.stringify(this.CART.contents);
+    localStorage.setItem(this.CART.KEY, _cart);
+  }
     else {
     this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-    }
+    this.CART.contents.map(item=>{
+      if(item.Id === i)
+      this.CART.contents[i].Total = this.DB[i].Total;
+    });  
+    let _cart = JSON.stringify(this.CART.contents);
+    localStorage.setItem(this.CART.KEY, _cart);
+  }
      if(act=='inc'){
       this.num = this.num + 1;
-      this.Total = this.Total + this.DB[i].Total;
+      if (this.DB[i].SallePrice == 0){
+        this.Total = this.Total + this.DB[i].PriceBook;
+        this.CART.contents.map(item=>{
+          if(item.Id === i)
+          this.CART.contents[i].Total = this.DB[i].Total;
+        });
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+      }
+      else{
+        this.Total = this.Total + this.DB[i].SallePrice;
+        this.CART.contents.map(item=>{
+          if(item.Id === i)
+          this.CART.contents[i].Total = this.DB[i].Total;
+        });
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+      }
       }
       else  if(act=='red'){
-        this.num = this.num - 1;
-      this.Total = this.Total -  this.DB[i].Total;
-      }
-}
-  }
-  else{
+        if (this.itemToRedQunt1){
+          if(!this.rem){ 
+           this.num = this.num - 1;     
+           if (this.itemToRedQunt1.SallePrice == 0){
+               this.Total = this.Total - this.itemToRedQunt1.Total;
+             }
+             else{
+               this.Total = this.Total - this.itemToRedQunt1.Total;
+             }
+           }
+           else{//remove the item
+             if(this.itemToRedQunt1.Quantity==0){
+             this.num = this.num - this.DB[i].Quantity;
+             }
+             else{
+               this.num =  this.num - 1;
+             }
+             if (this.itemToRedQunt1.SallePrice == 0){
+              if(this.itemToRedQunt1.Quantity!=0){
+                 this.Total = this.Total -  this.DB[i].PriceBook;
+                }
+                else{
+                  this.Total = this.Total -  this.DB[i].Total;
+                }
+             }
+             else{
+              if(this.itemToRedQunt1.Quantity==0){
+                this.Total = this.Total -  this.DB[i].SallePrice;
+               }
+               else{
+                 this.Total = this.Total -  this.DB[i].Total;
+               }
+             }
+           }
+         }
+         else{
+           debugger
+           if(!this.rem){ 
+             this.num = this.num - 1;     
+             if (this.DB[i].SallePrice == 0){
+                 this.Total = this.Total -  this.DB[i].PriceBook;
+               }
+               else{
+                 this.Total = this.Total -  this.DB[i].SallePrice;
+               }
+             }
+             else{//remove the item
+               if(this.itemToRedQunt1.Quantity!=0){
+               this.num = this.num - this.DB[i].Quantity;
+               }
+               else{
+               this.num =  this.num - 1;
+               }
+               if (this.DB[i].SallePrice == 0){
+                if(this.itemToRedQunt1.Quantity==0){
+                 this.Total = this.Total -  this.DB[i].PriceBook;
+                }
+                else{
+                  this.Total = this.Total -  this.DB[i].Total;
+                }
+               }
+               else{
+                if(this.itemToRedQunt1.Quantity==0){
+                  this.Total = this.Total -  this.DB[i].SallePrice;
+                 }
+                 else{
+                   this.Total = this.Total -  this.DB[i].Total;
+                 }
+               }
+             }
+           }
+         }
+   }
+     }
+   else{
     if(act=='inc'){
       // console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
       if(this.itemToAddQunt1){
@@ -515,6 +365,9 @@ async sync(act:string){
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
         });
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+      
         // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
         // //this.CART.contents =
         //  _cart.contents.map(item=>{
@@ -532,6 +385,8 @@ async sync(act:string){
             if(item.Id === i)
             this.CART.contents[i].Total = this.DB[i].Total;
           });
+          let _cart = JSON.stringify(this.CART.contents);
+          localStorage.setItem(this.CART.KEY, _cart);
         }
         this.num = this.num + 1;
     }
@@ -543,25 +398,37 @@ async sync(act:string){
           if (this.itemToRedQunt1.SallePrice == 0){
             let i;
             i = this.itemToRedQunt1.Id;
-          this.DB[i].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
-          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
-         //  this.CART.contents =
+            if(this.DB.length>0){
+              this.DB[i].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+            }
+        this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+     //  this.CART.contents =
+        if(this.DB.length>0){
           this.CART.contents.map(item=>{
             if(item.Id === i)
             this.CART.contents[i].Total = this.DB[i].Total;
           });
+          let _cart = JSON.stringify(this.CART.contents);
+          localStorage.setItem(this.CART.KEY, _cart);
+        }
           }
           else{
             let i;
             i = this.itemToRedQunt1.Id;
+            if(this.DB.length>0){
             this.DB[i].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+          }
             this.Total = this.Total - this.itemToRedQunt1.SallePrice;
             // this.CART.contents = 
+            if(this.DB.length>0){
             this.CART.contents.map(item=>{
               if(item.Id === i)
               this.CART.contents[i].Total = this.DB[i].Total;
             });
+            let _cart = JSON.stringify(this.CART.contents);
+            localStorage.setItem(this.CART.KEY, _cart);
           }
+        }
           this.num = this.num - 1;
       }
       }
@@ -569,6 +436,7 @@ async sync(act:string){
  }
 if(this.DB.length==0){
   this.num = 0;
+  this.Total = 0;
 }
 this.NUM.num = this.num;
 let _num =  JSON.stringify(this.NUM.num);
@@ -614,6 +482,7 @@ add(item,qty=1){
           };
           this.CART.contents.push(obj);
           //update localStorage
+          this.rem = false;
           this.sync('inc');
       // }
       // else{
@@ -635,9 +504,10 @@ increase(id, qty){
       return item;
   });
   //update localStorage
+  this.rem = false;
   this.sync('inc')
 }
-reduce(id, qty=1){
+  reduce(id, qty=1){
   //reduce the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
     if(item.Id === id){
@@ -646,21 +516,34 @@ reduce(id, qty=1){
       this.itemToRedQunt1 = item;
     }
     }
+    this.rem = false;
       return item;
   });
+  
   this.CART.contents.forEach(async item=>{
-    if(item.Id === id && item.Quantity === 0)
-    await this.remove(id);
-  });
+    if(item.Id === id && item.Quantity === 0) {
+      this.rem = true;   
+       await this.remove(id);
+    }
+      });
+  
+  let _cart = JSON.stringify(this.CART.contents);
+   localStorage.setItem(this.CART.KEY, _cart);
   //update localStorage
   this.sync('red')
 }
 remove(id){
   //remove an item entirely from CART.contents based on its id
   this.CART.contents = this.CART.contents.filter(item=>{
-      if(item.Id !== id)
-          return true;
-  });
+      if(item.Id !== id){ 
+        return true;
+      }
+      else{
+        this.itemToRedQunt1 = item;
+      }
+  }); 
+  
+  this.rem = true;
   //update localStorage
   this.sync('red')
 }

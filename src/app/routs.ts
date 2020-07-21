@@ -39,6 +39,7 @@ import { NewMemberAccountCompponent } from './components/new-member-account/new-
 import { notifyComponent } from './components/notify/notify.component';
 import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
+import { successComponent } from './components/success/success.component';
 export const route: Routes = [
   {
     path: 'Welcome/:Rout',
@@ -193,5 +194,17 @@ export const route: Routes = [
   {
      path: 'ResetPassSuccess',
     component: ResetPassSuccessComponent,
-  }
+  },
+  {
+    path: 'notify.html',
+   component: notifyComponent,
+ },
+  {
+    path: 'fail.html',
+   component: failComponent,
+ },
+  {
+    path: 'success.html',
+   component: successComponent,
+ }
 ]

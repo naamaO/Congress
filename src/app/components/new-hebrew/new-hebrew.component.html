@@ -11,8 +11,8 @@
           <div style="margin-left:80%;top:0px;position:fixed;">
             <div class="tooltipSmall">
               <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
-              <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
-              <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
+              <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
+              <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
               <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">
                 <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
                   <div>
@@ -27,8 +27,8 @@
                     <div>
                       <div style="display: flex;justify-content:space-around; padding-top:5%;">
                         <span class="col-md-3 cart-item-total" >₪{{item.Total}}</span>
-                        <span class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
-                        <img class="col-md-4" src="{{item.ImageBook}}" style="width:65px;height:92px; " />
+                        <span class="col-md-5" style="text-align: right;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                        <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
                       </div>
                       <br />
                       <mat-divider></mat-divider>
@@ -129,7 +129,7 @@
                style="background-size: contain; position:relative;
         z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
          center; display: flex;align-items: center;justify-content: center;">
-            <div class="view overlay" [style.background-image]="'url('+item.Image+')'">
+            <div class="view overlay" [style.background-image]="'url('+item.Image+')'" style="background-repeat: no-repeat !important; background-size: 279px 387px;">
               <!-- <img (click)="Detais(item)"
                          style="margin:8px; width:279px; height:387px" src={{item.Image}}
                           class="attachment-shop_catalog size-shop_catalog wp-post-image"
@@ -148,7 +148,7 @@
                     <a style="margin-right: 26px;direction: rtl;width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
                       {{item.Name}}
                     </a>
-                    <span class="tooltiptextSmallC" style="width: 296px !important;bottom: 38%;left: 46%;z-index: 10;margin-left: -153px;text-align:right;padding:2%;height: fit-content !important;">
+                    <span class="tooltiptextSmallC" style="width: 296px !important;bottom: 39%;left: 46%;z-index: 1001;margin-left: -153px;text-align:right;padding:2%;height: auto !important;">
                       {{item.Name}}
                     </span>
                   </div>

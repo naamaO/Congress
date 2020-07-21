@@ -19,8 +19,8 @@
           <div style="margin-left:80%;top:0px;position:fixed;">
            <div class="tooltipSmall" >
           <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" >{{num}}</span>
-          <img *ngIf="num!=0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart_Number.png" />
-          <img *ngIf="num==0" style="width: fit-content; height: fit-content; cursor:pointer;" src="/assets/images/Cart.png" />
+          <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" />
+          <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" />
            <mat-card class="tooltiptextSmall " style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;">   
             <div class="col-md" style="direction: rtl;margin:auto;display: flex;justify-content:space-around;">
              <div>
@@ -35,8 +35,8 @@
               <div >
             <div  style="display: flex;justify-content:space-around; padding-top:5%;">
               <span  class="col-md-3 cart-item-total">₪{{item.Total}}</span>
-              <span  class="col-md-6" style="text-align: end;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
-             <img  class="col-md-4" src={{item.ImageBook}} style="width:65px;height:92px; " />
+              <span  class="col-md-5" style="text-align: right;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+             <img src={{item.ImageBook}} style="width: 75px;height: 102px; " />
             </div> 
             <br/>
              <mat-divider></mat-divider>
@@ -67,7 +67,7 @@
   </div>
 
   <div *ngIf="DetailsBook">
-   <div class="col-md-12  marginAuto" style="display:flex;">
+   <div class="col-md-12  marginAuto" style="display:flex; padding-bottom: 50px;">
       <div class="col-md-6 floatLeft" style="margin-left: 124px;direction: rtl;">
         <h1 class="book-name" >{{DetailsBook.Name}}</h1>
         <br />
@@ -86,8 +86,10 @@
         </div>
         <br />
         <p class="bookDetails">{{DetailsBook.Details}}</p>
+        <div class="row col-md" style="display: contents;">
           <button class="buy-btn" (click)="NavigCart()">קניה</button>
           <button  class="add-to-cart-btn" (click)="AddCart(DetailsBook)">הוסף לסל</button>   
+        </div>
           <br /><br />
       </div>
       <div >

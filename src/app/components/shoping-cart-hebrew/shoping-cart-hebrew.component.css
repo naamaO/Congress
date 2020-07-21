@@ -235,16 +235,11 @@ ul {
   outline:none;
   background-color: #0b4e6f;
   color: white;
-  font-family:'OpenSansRegular', sans-serif;
+  font-family:'OpenSansRegularHebrew', sans-serif;
   text-transform: uppercase;
-  /* font-weight: normal;  */
+  font-weight: normal; 
   font-size:18px;
 }
 .checkout-btn:hover{
   background-color:  #6190a9 ;
-  /* color: white;
-  font-family:'OpenSans', sans-serif;
-  text-transform: uppercase;
-  font-weight: normal;
-  font-size:18px; */
 }

@@ -54,6 +54,8 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public FirstNameHebrew: string;
   public LastNameHebrew: string;
   public Title: string;
+  public Chairman: string;
+  public ChairmanEmail: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
   public showErrEmpty: boolean = false;

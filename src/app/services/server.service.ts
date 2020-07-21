@@ -31,7 +31,7 @@ export class ServerService {
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
    this.port = 'http://localhost:64905';
-   //this.port = ' http://jewish-studies.b2story.com/webApi';
+  // this.port = ' http://jewish-studies.b2story.com/webApi';
     this.Country = [
       "Afghanistan",
       "Åland Islands",
@@ -404,6 +404,12 @@ export class ServerService {
     return this.http.get<string[]>(this.port + "/api/Home/GetLanguageEnglish?SubDiv=" + Subdiv + "&Division=" + this.LoginDiv)
 
   }
+  GetLanguageEnglishSession(Subdiv: string, Division: string): Observable<string[]> {
+    //this.LoginDiv = (this.getCookie('Division'));
+
+    return this.http.get<string[]>(this.port + "/api/Home/GetLanguageEnglishSession?SubDiv=" + Subdiv + "&Division=" + Division)
+
+  }
   GetLanguageHebrew(Subdiv: string): Observable<string[]> {
     this.LoginDiv = (this.getCookie('Division'));
     return this.http.get<string[]>(this.port + "/api/Home/GetLanguageHebrew?SubDiv=" + Subdiv + "&Division=" + this.LoginDiv)
@@ -445,6 +451,10 @@ export class ServerService {
   selectDraft(): Observable<Proposals> {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
+
+  } selectProp(): Observable<Proposals> {
+    this.LoginUserName = (this.getCookie('UserName'));
+    return this.http.get<Proposals>(this.port + "/api/Home/selectProp?LoginUserName=" + this.LoginUserName);
 
   }
   selectSecondDraft(): Observable<Proposals> {

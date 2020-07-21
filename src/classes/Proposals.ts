@@ -10,6 +10,7 @@ export class Proposals {
   Language: string;
   Keywords: string;
   Chairman: string;
+  ChairmanEmail: string;
 
   SessionName: string;
   SessionId: number;

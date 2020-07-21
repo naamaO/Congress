@@ -290,3 +290,14 @@ cursor: default;
 .pagination-controls{
   margin-top: -42px;
 }
+.custom-control-label::before {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
+}

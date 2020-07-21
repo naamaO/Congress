@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit,Component, OnInit, NgZone, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -32,9 +32,22 @@ export class JudgesComponent  implements OnInit  {
 
     @ViewChild('myModal') openModal: ElementRef;
   @ViewChild('SelectDiv') SelectDiv: ElementRef;
+  @ViewChild('Accepted1') Accepted1: ElementRef;
+  @ViewChild('Accepted2') Accepted2: ElementRef;
+  @ViewChild('Accepted3') Accepted3: ElementRef;
   @ViewChild('Accepted') Accepted: ElementRef;
+  @ViewChild('RR1') RR1: ElementRef;
+  @ViewChild('RR2') RR2: ElementRef;
+  @ViewChild('RR3') RR3: ElementRef;
   @ViewChild('RR') RR: ElementRef;
   @ViewChild('Rejected') Rejected: ElementRef;
+  @ViewChild('Rejected1') Rejected1: ElementRef;
+  @ViewChild('Rejected2') Rejected2: ElementRef;
+  @ViewChild('Rejected3') Rejected3: ElementRef;
+  @ViewChild('RejectedSession') RejectedSession: ElementRef;
+  @ViewChild('AcceptedSession') AcceptedSession: ElementRef;
+  @ViewChild('RRSession') RRSession: ElementRef;
+  @ViewChild('indexPropSession') indexPropSession: ElementRef;
   //@ViewChild('edit') edit: ElementRef;
     @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -293,7 +306,13 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     //this.SelectDiv.nativeElement.style.color = "#E8E8E8";
 
     let filterOfValue = {}
-    this.filterOfValue[filter.columnProp] = event.target.value.trim().toLowerCase()
+    this.filterOfValue[filter.columnProp] = event.target.value.trim().toLocaleLowerCase()
+    
+    //this.dataSource.filterPredicate = function (data: any, filterValue: string) {
+    //  return data.Division /** replace this with the column name you want to filter */
+    //    .trim()
+    //    .toLocaleLowerCase().indexOf([filter.modelValue].trim().toLocaleLowerCase()) >= 0;
+    //};
     this.dataSource.filter = JSON.stringify(this.filterOfValue);
     // this.SelectDiv.nativeElement.se
     //document.getElementsByClassName
@@ -349,18 +368,193 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
     this.dataSource.filter = "";
   }
   
-  onStatusChange(statusValueChecked:string){
-    this.oneProp.Status = statusValueChecked;
-    //if (statusValueChecked == "RR") {
-    //  this.Rejected.nativeElement.ch
-    //}
+  onStatusChange(statusValueChecked: string) {
+    if (this.oneProp.Status == "Accepted" || this.oneProp.Status == "Accepted            ") {
+      this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+        if (typeof this.Accepted1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }
+        if (typeof this.Accepted2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }
+        if (typeof this.Accepted3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }
+        if (typeof this.Accepted !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;}
+        
+      } if (statusValueChecked == "Accepted") {
+        if (typeof this.Rejected1 !== 'undefined') {
+
+          this.Rejected1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        } if (typeof this.Rejected2 !== 'undefined') {
+
+          this.Rejected2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        } if (typeof this.Rejected3 !== 'undefined') {
+
+          this.Rejected3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        } if (typeof this.Rejected !== 'undefined') {
+
+          this.Rejected.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }
+      }
+
+      if (statusValueChecked == "RR") {
+        if (typeof this.Rejected1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.Rejected1.nativeElement.checked = false;
+        }
+        if (typeof this.Rejected2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.Rejected2.nativeElement.checked = false;
+        } if (typeof this.Rejected3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.Rejected3.nativeElement.checked = false;
+        } if (typeof this.Rejected !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.Rejected.nativeElement.checked = false;
+        }
+      }
+    }
+
+    if (this.oneProp.Status == "Rejected" || this.oneProp.Status == "Rejected            ") {
+      this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+        if (typeof this.Accepted2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Accepted1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Accepted3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }if (typeof this.Accepted !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "Accepted") {
+        if (typeof this.Rejected2 !== 'undefined') {
+          this.Rejected2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Rejected1 !== 'undefined') {
+          this.Rejected1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Rejected3 !== 'undefined') {
+          this.Rejected3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }if (typeof this.Rejected !== 'undefined') {
+          this.Rejected.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "RR") {
+        if (typeof this.Rejected2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.Rejected2.nativeElement.checked = false;
+        } if (typeof this.Rejected1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.Rejected1.nativeElement.checked = false;
+        } if (typeof this.Rejected3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.Rejected3.nativeElement.checked = false;
+        } if (typeof this.Rejected !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.Rejected.nativeElement.checked = false;
+        }
+      }
+    } if (this.oneProp.Status == "RR                  " || this.oneProp.Status == "RR") {
+      this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+        if (typeof this.Accepted3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }if (typeof this.Accepted1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Accepted2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Accepted !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "Accepted") {
+        if (typeof this.Rejected3 !== 'undefined') {
+          this.Rejected3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }if (typeof this.Rejected1 !== 'undefined') {
+          this.Rejected1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Rejected2 !== 'undefined') {
+          this.Rejected2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Rejected !== 'undefined') {
+          this.Rejected.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "RR") {
+        if (typeof this.Rejected3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.Rejected3.nativeElement.checked = false;
+        }if (typeof this.Rejected2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.Rejected2.nativeElement.checked = false;
+        }if (typeof this.Rejected1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.Rejected1.nativeElement.checked = false;
+        }if (typeof this.Rejected !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.Rejected.nativeElement.checked = false;
+        }
+      }
+    }
+    if (this.oneProp.Status == "Pending") {
+      this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+        this.Accepted.nativeElement.checked = false;
+        this.RR.nativeElement.checked = false;
+      } if (statusValueChecked == "Accepted") {
+        this.Rejected.nativeElement.checked = false;
+        this.RR.nativeElement.checked = false;
+      } if (statusValueChecked == "RR") {
+        this.Accepted.nativeElement.checked = false;
+        this.Rejected.nativeElement.checked = false;
+      }
+}
+    
+ 
     console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
   }
-  onStatusPropSessionChange(propSession : Judges,statusValueChecked:string){
-   
+  onStatusPropSessionChangeR(PropSession) {
+    
     this.ArrPropSession.forEach((prop) => {
-        if(prop.IdProposal==propSession.IdProposal){
-            prop.Status=  statusValueChecked;
+      if (prop.IdProposal == PropSession.IdProposal){
+            prop.Status=  "Rejected            ";
+
+        }
+        });
+} onStatusPropSessionChangeRR(PropSession) {
+    
+    this.ArrPropSession.forEach((prop) => {
+      if (prop.IdProposal == PropSession.IdProposal){
+            prop.Status=  "RR                  ";
+
+        }
+        });
+} onStatusPropSessionChangeA(PropSession) {
+    
+    this.ArrPropSession.forEach((prop) => {
+      if (prop.IdProposal == PropSession.IdProposal){
+            prop.Status=  "Accepted            ";
 
         }
         });
@@ -507,18 +701,23 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         
             //     }
             //     });
-            this.serverService.getAll_W_Proposals().subscribe(val => {
-                this.over = new Array(val.length);
-                     let d=new MatTableDataSource<Judges>(val as Judges[]);
-                     this.dataSource.data = d.data;
-                      this.dataSourcFilter.data = d.data;
-                      this.data = this.dataSource.data;
-                      console.log("this.data",this.data )
-                      this.dataSource.filterPredicate = this.createFilter();
-                      this.filterSelectObj.filter((o) => {
-                          o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
-                        });
-                  });
+
+
+      this.changePlaying();
+      this.changePlaying();
+      this.changePlaying();
+            //this.serverService.getAll_W_Proposals().subscribe(val => {
+            //    this.over = new Array(val.length);
+            //         let d=new MatTableDataSource<Judges>(val as Judges[]);
+            //         this.dataSource.data = d.data;
+            //          this.dataSourcFilter.data = d.data;
+            //          this.data = this.dataSource.data;
+            //          console.log("this.data",this.data )
+            //          this.dataSource.filterPredicate = this.createFilter();
+            //          this.filterSelectObj.filter((o) => {
+            //              o.options = this.getFilterObject(this.dataSource.filteredData, o.columnProp);
+            //            });
+            //      });
         return;
     }
 
@@ -556,10 +755,23 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         if (this.field == 'All') {
             this.dataSource.data = this.dataSourcFilter.data;
         }
-    }
-
+  }
+  Accepted11(value: string): boolean {
+    if (value == "Accepted            ")
+      return true;
+    return false;
+  } RR11(value: string): boolean {
+    if (value == "RR                  ")
+      return true;
+    return false;
+  } Rejected11(value: string): boolean {
+    if (value == "Rejected            ")
+      return true;
+    return false;
+  }
     NoFilter() {
         this.serverService.getAll_W_Proposals().subscribe(val => this.PropJudges = val);
-    }
+  }
+ 
 }
 

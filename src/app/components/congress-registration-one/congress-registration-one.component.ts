@@ -58,6 +58,9 @@ export class CongressRegistrationOneComponent implements OnInit {
   public LastNameHebrew: string;
   public LoginUserName: string;
   public Title: string;
+  public SeesionId: number;
+  public Chairman: string;
+  public ChairmanEmail: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
   public showLikeProp: boolean = false;
   public showErrEmpty: boolean = false;
@@ -78,23 +81,26 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.FirstNameHebrew = events.FirstNameHebrew;
       this.LastNameHebrew = events.LastNameHebrew;
       this.Title = events.selectedTitle;
+      
     });
     this.serverService.selectDraft().subscribe((events) => {
       
       this.Division = events.Division;
       this.SubDivision = events.SubDivision;
-
-      this.serverService.GetLanguageEnglishSession(this.SubDivision, this.Division).subscribe((events) => {
-
-        this.ArrLanguage = events;
-      });
       this.TitleEnglish = events.TitleEnglish;
       this.TitleHebrew = events.TitleHebrew;
       this.Proposal = events.Proposal;
       this.Language = events.Language;
       this.Keywords = events.Keywords;
       this.SessionName = events.SessionName;
+      this.SeesionId = events.SessionId;
+      this.Chairman = events.Chairman;
+      this.ChairmanEmail = events.ChairmanEmail;
+      this.serverService.GetLanguageEnglishSession(this.SubDivision, this.Division).subscribe((events) => {
 
+        this.ArrLanguage = events;
+      });
+      
       if((events.Division !=null)||(events.Division=='')){
       if (events.Division.charAt(0) == '0') {
         this.showLikeProp = true;
@@ -166,6 +172,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.SubDivision = this.SubDivision;
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
+
     this.serverService.enterDraft(this.Prop);
     this.showsaveDraft = true;
 
@@ -180,6 +187,9 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.SubDivision = this.SubDivision;
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
+    this.Prop.SessionId = this.SeesionId;
+    this.Prop.Chairman = this.Chairman;
+    this.Prop.ChairmanEmail = this.ChairmanEmail;
     if (this.Keywords != null && this.Language != null && this.Division != null && this.Proposal != null &&
       this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null) {
       this.serverService.enterProposal(this.Prop);

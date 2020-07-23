@@ -517,17 +517,50 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
         }
       }
     }
-    if (this.oneProp.Status == "Pending") {
+    if (this.oneProp.Status == "Pending" || this.oneProp.Status == "Pending             ") {
       this.oneProp.Status = statusValueChecked;
       if (statusValueChecked == "Rejected") {
-        this.Accepted.nativeElement.checked = false;
-        this.RR.nativeElement.checked = false;
+        if (typeof this.Accepted !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }if (typeof this.Accepted1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Accepted2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Accepted3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }
       } if (statusValueChecked == "Accepted") {
-        this.Rejected.nativeElement.checked = false;
-        this.RR.nativeElement.checked = false;
+        if (typeof this.Rejected !== 'undefined') {
+          this.Rejected.nativeElement.checked = false;
+          this.RR.nativeElement.checked = false;
+        }if (typeof this.Rejected1 !== 'undefined') {
+          this.Rejected1.nativeElement.checked = false;
+          this.RR1.nativeElement.checked = false;
+        }if (typeof this.Rejected2 !== 'undefined') {
+          this.Rejected2.nativeElement.checked = false;
+          this.RR2.nativeElement.checked = false;
+        }if (typeof this.Rejected3 !== 'undefined') {
+          this.Rejected3.nativeElement.checked = false;
+          this.RR3.nativeElement.checked = false;
+        }
       } if (statusValueChecked == "RR") {
-        this.Accepted.nativeElement.checked = false;
-        this.Rejected.nativeElement.checked = false;
+        if (typeof this.Rejected !== 'undefined') {
+          this.Accepted.nativeElement.checked = false;
+          this.Rejected.nativeElement.checked = false;
+        } if (typeof this.Rejected1 !== 'undefined') {
+          this.Accepted1.nativeElement.checked = false;
+          this.Rejected1.nativeElement.checked = false;
+        } if (typeof this.Rejected2 !== 'undefined') {
+          this.Accepted2.nativeElement.checked = false;
+          this.Rejected2.nativeElement.checked = false;
+        } if (typeof this.Rejected3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.Rejected3.nativeElement.checked = false;
+        }
       }
 }
     

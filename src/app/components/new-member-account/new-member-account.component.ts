@@ -62,7 +62,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public TitleEnglish: string;
   public TitleHebrew: string;
   public Proposal: string;
-  public Language: string;
+ // public Language: string;
   public Keywords: string;
   public SessionName: string;
   public FirstName: string;
@@ -94,6 +94,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public ArrMembershipTypes = [];
   public Total: number;
   public membershipType: number;
+  public Language: string;
  // public Address: string;
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.Country = serverService.Country;
@@ -206,11 +207,11 @@ export class NewMemberAccountCompponent implements OnInit {
   onLanguageChange(Language){
     if(Language=='English') {
         console.log("Language",Language)
-        this.English=true;
+      this.Language ='English';
         }
     else if(Language=='Hebrew') {
         console.log("Language",Language)
-        this.Hebrew=true;
+      this.Language ='Hebrew';
        }
   }
   // renew(){
@@ -346,6 +347,7 @@ export class NewMemberAccountCompponent implements OnInit {
     // this.user.PostCode = this.PostCode;
        this.user.PostCode = "";
     this.user.Email = this.LoginUserName;
+    this.user.Language = this.Language;
     // this.user.Bio = this.Bio;
     // this.user.Students = this.Students;
     // this.user.WithoutStudemt = this.WithoutStudemt;
@@ -381,7 +383,7 @@ export class NewMemberAccountCompponent implements OnInit {
        this.user.Bio != null &&
       this.user.UserName != null &&
       this.user.MemberShip !=null
-      //&&
+      && this.user.Language!=null
      // this.user.Password != null
     ) {
       this.serverService.Registration(this.user)

@@ -24,5 +24,6 @@ export class User {
   UserName: string;
   Password: string;
   Address: string;
+  Language: string;
   MemberShip: number;
 }    

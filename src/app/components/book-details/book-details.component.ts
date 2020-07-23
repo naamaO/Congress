@@ -14,7 +14,7 @@ import { __await } from 'tslib';
 })
 export class BookDetailsComponent implements OnInit {
   public item2: shoppingCart;
-  public Quantity: number;
+  public Quantity: number=0;
   public UserNameLogin: string;
   public Id: number;
   private sub: any;
@@ -35,7 +35,7 @@ export class BookDetailsComponent implements OnInit {
     total: 0
   }
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
-    this.Quantity = 1;
+    this.Quantity = 0;
     //get list of shopping cart//if login
    if(this.getCookie('UserName')) {     
      this.serverService.getAllDBShoppingCart().subscribe((resp) => {
@@ -293,8 +293,8 @@ find(id){
 increase(id, qty){
     //increase the quantity of an item in the cart
     this.CART.contents = this.CART.contents.map(item=>{
-        if(item.Id === id)
-            item.Quantity = item.Quantity + qty;
+      if (item.IdBook === id)
+        item.Quantity = item.Quantity + this.Quantity;
         return item;
     });
     //update localStorage

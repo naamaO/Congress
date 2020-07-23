@@ -14,4 +14,5 @@ export class Proposals {
 
   SessionName: string;
   SessionId: number;
+  Creator: number;
 }

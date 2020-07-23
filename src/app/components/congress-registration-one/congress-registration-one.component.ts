@@ -59,6 +59,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   public LoginUserName: string;
   public Title: string;
   public SeesionId: number;
+  public Creator: number;
   public Chairman: string;
   public ChairmanEmail: string;
   public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
@@ -96,6 +97,7 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.SeesionId = events.SessionId;
       this.Chairman = events.Chairman;
       this.ChairmanEmail = events.ChairmanEmail;
+      this.Creator = events.Creator;
       this.serverService.GetLanguageEnglishSession(this.SubDivision, this.Division).subscribe((events) => {
 
         this.ArrLanguage = events;
@@ -172,7 +174,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.SubDivision = this.SubDivision;
     this.Prop.TitleEnglish = this.TitleEnglish;
     this.Prop.TitleHebrew = this.TitleHebrew;
-
+    
     this.serverService.enterDraft(this.Prop);
     this.showsaveDraft = true;
 
@@ -190,6 +192,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.SessionId = this.SeesionId;
     this.Prop.Chairman = this.Chairman;
     this.Prop.ChairmanEmail = this.ChairmanEmail;
+    this.Prop.Creator = this.Creator;
     if (this.Keywords != null && this.Language != null && this.Division != null && this.Proposal != null &&
       this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null) {
       this.serverService.enterProposal(this.Prop);

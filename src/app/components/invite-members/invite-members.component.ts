@@ -12,6 +12,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import * as $ from 'jquery';
+import { CookieService } from 'angular2-cookie/core';
+
 @Component({
   selector: 'app-invite-members',
   templateUrl: './invite-members.component.html',
@@ -73,6 +75,7 @@ export class InviteMembersComponent implements OnInit {
   public b: invited;
   public c: invited;
   public d: invited;
+  public e: invited;
   public ArrDivision: string[];
   public ArrSubDivision: string[];
   public ShowSub: boolean;
@@ -80,7 +83,7 @@ export class InviteMembersComponent implements OnInit {
   public SubDivision: string;
   public aa: number;
   public numInvited: number=0;
-  constructor(
+  constructor(public cookieService: CookieService,
     public router: Router, private serverService: ServerService, private http: HttpClient) {
    
       this.serverService.DivisionEnglish().subscribe((events) => {
@@ -89,7 +92,9 @@ export class InviteMembersComponent implements OnInit {
     });
   }
 
- 
+  getCookie(key: string) {
+    return this.cookieService.get(key);
+  }
    hideThumbnail(): boolean {
     return true;
 }
@@ -120,6 +125,8 @@ export class InviteMembersComponent implements OnInit {
     this.b = new invited();
     this.c = new invited();
     this.d = new invited();
+    this.e = new invited();
+    this.e.Email = (this.getCookie('UserName'));
     this.a.FirstName = this.FirstName1;
     this.a.LastName = this.LastName1;
     this.a.Email = this.Email1;
@@ -169,6 +176,7 @@ export class InviteMembersComponent implements OnInit {
     this.d.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.c);
     this.ArrAllInvited.push(this.d);
+    this.ArrAllInvited.push(this.e);
     if (this.Email1 != null && this.FirstName1 != null && this.LastName1 != null && this.Title1!=null) this.numInvited++;
     if (this.Email2 != null && this.FirstName2 != null && this.LastName2 != null && this.Title2 != null) this.numInvited++;
     if (this.Email3 != null && this.FirstName3 != null && this.LastName3 != null && this.Title3 != null) this.numInvited++;

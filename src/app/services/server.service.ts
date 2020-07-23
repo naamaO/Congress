@@ -28,10 +28,12 @@ export class ServerService {
   public resNotifyTranzila:any;
   public port: string = 'http://localhost:64905';
  // public port: string = 'http://jewish-studies.b2story.com/webApi';
+ // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
    this.port = 'http://localhost:64905';
-  // this.port = ' http://jewish-studies.b2story.com/webApi';
+   //this.port = ' http://jewish-studies.b2story.com/webApi';
+   //this.port = ' https://jewish-studies.b2story.com/webApi';
     this.Country = [
       "Afghanistan",
       "Åland Islands",
@@ -362,6 +364,7 @@ export class ServerService {
     return this.http.get<book>(this.port + "/api/Home/GetBookByIdHebrew?Id=" + Id)
   }
   getNumProduct(): Observable<number> {
+    alert("F");
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }

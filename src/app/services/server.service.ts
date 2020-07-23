@@ -364,7 +364,7 @@ export class ServerService {
     return this.http.get<book>(this.port + "/api/Home/GetBookByIdHebrew?Id=" + Id)
   }
   getNumProduct(): Observable<number> {
-    alert("F");
+    //alert("F");
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }

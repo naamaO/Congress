@@ -664,24 +664,24 @@ remove(id){
     }
 
     this.SendToTranzila();
-    if(this.serverService.resNotifyTranzila){
+   // if(this.serverService.resNotifyTranzila){
    //   console.log("this.serverService.resNotifyTranzila",this.serverService.resNotifyTranzila)
-    }
+   // }
     //if tranzila return response true
     // if(this.serverService.resNotifyTranzila==000){}
-    for (var i = 0; i < this.DB.length; i++) {
-      this.DB[i].UserName = this.UserNameLogin;
-      console.log( this.DB[i])
-      let itemToDelete  =  this.DB[i];
-      this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
-        if(res==1){
-        //  console.log("this.DB[i]",itemToDelete)
-          this.serverService.postRemoveQuantity(itemToDelete);
-        }
-        console.log(res)
-      });
+    // for (var i = 0; i < this.DB.length; i++) {
+    //   this.DB[i].UserName = this.UserNameLogin;
+    //   console.log( this.DB[i])
+    //   let itemToDelete  =  this.DB[i];
+    //   this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
+    //     if(res==1){
+    //     //  console.log("this.DB[i]",itemToDelete)
+    //       this.serverService.postRemoveQuantity(itemToDelete);
+    //     }
+    //     console.log(res)
+    //   });
 
-    }
+    // }
   }
 
   else {

@@ -43,7 +43,8 @@ export class TranzilaComponent implements OnInit {
     this.srcReal = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
     // "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
     console.log("this.srcReal",this.srcReal)
-
+//ichecknrun()
+//script array של 
   }
   // pay(){
   // this.serverService.getTranzila().subscribe((resp) => {

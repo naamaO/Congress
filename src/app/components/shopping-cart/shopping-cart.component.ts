@@ -643,12 +643,12 @@ remove(id){
      });
     }
     this.SendToTranzila();
-    if(this.serverService.resNotifyTranzila){
+   // if(this.serverService.resNotifyTranzila){
    //   console.log("this.serverService.resNotifyTranzila",this.serverService.resNotifyTranzila)
-    }
+   // }
     //if tranzila return response true
     // if(this.serverService.resNotifyTranzila==000){}
-    for (var i = 0; i < this.DB.length; i++) {
+   /* for (var i = 0; i < this.DB.length; i++) {
       this.DB[i].UserName = this.UserNameLogin;
       console.log( this.DB[i])
       let itemToDelete  =  this.DB[i];
@@ -659,7 +659,8 @@ remove(id){
         }
         //console.log(res)
       });
-    }
+    }*/
+
     }
   else {
     if( !this.FirstName || !this.LastName){

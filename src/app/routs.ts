@@ -204,7 +204,7 @@ export const route: Routes = [
    component: failComponent,
  },
   {
-    path: 'success/:userName/:response',
+    path: 'success',
    component: successComponent,
  }
 ]

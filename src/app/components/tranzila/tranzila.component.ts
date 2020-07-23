@@ -31,13 +31,11 @@ export class TranzilaComponent implements OnInit {
 
     this.sub = this.router.params.subscribe(params => {
       this.Total = +params['Total']; // (+) converts string 'id' to a number
-
     });
     this.Total = this.serverService.total;
     this.Currency = this.serverService.currency;
      this.Lang = this.serverService.lang;
      this.Email = this.serverService.email;
-
     console.log("currency",this.Currency,"lang",this.Lang)//email//address
     //https://direct.tranzila.com/terminalname/iframe.php?lang=il
     this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=" 
@@ -45,9 +43,13 @@ export class TranzilaComponent implements OnInit {
     this.srcReal = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
     // "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
     console.log("this.srcReal",this.srcReal)
-    
-    
+
   }
+  // pay(){
+  // this.serverService.getTranzila().subscribe((resp) => {
+  //   console.log("resp",resp)
+  // });
+//}
 
   ngOnInit() {
     // this.serverService.gettranzilaresponce().subscribe((events) => {

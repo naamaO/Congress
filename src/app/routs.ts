@@ -196,15 +196,15 @@ export const route: Routes = [
     component: ResetPassSuccessComponent,
   },
   {
-    path: 'notify.html',
+    path: 'notify/:userName/:response/:sum/:currency',
    component: notifyComponent,
- },
+  },
   {
-    path: 'fail.html',
+    path: 'fail/:userName/:response',
    component: failComponent,
  },
   {
-    path: 'success.html',
+    path: 'success/:userName/:response',
    component: successComponent,
  }
 ]

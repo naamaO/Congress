@@ -71,7 +71,6 @@ if(this.getCookie('UserName')) {
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
           else
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
-  
         }
       });
       this.serverService.getTotalPrice().subscribe(val => this.Total = val);

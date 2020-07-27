@@ -5,8 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
+import { NewProp } from '../../../classes/NewProp';
 import { CookieService } from 'angular2-cookie';
 import { Name } from 'src/classes/Name';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-congress-registration-single',
   templateUrl: './congress-registration-single.component.html',
@@ -34,6 +37,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public Email2: string;
   public Name2: string;
   public Prop: Proposals;
+  public NewProp: NewProp;
   public SaveDraft: boolean;
   public ArrDivision: string[];
   public ArrSubDivision: string[];
@@ -60,16 +64,23 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public showLikeProp: boolean = false;
   public showErrEmpty: boolean = false;
   public showsaveDraft: boolean = false;
-
-  constructor(public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+  public Rout: number;
+  private sub: any;
+  constructor(public route: ActivatedRoute,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.DivisionEnglish().subscribe((events) => {
       this.ArrDivision = events;
       this.ShowSub = true;
+    });
+    
+    this.sub = this.route.params.subscribe(params => {
+      this.Rout = +params['rout'];
+
     });
     //     this.serverService.DivisionEnglish().subscribe((events) => {
     //   this.ArrDivision = events;
     //   this.ShowSub = true;
     // });
+    if (this.Rout == 1) {
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
       this.LastName = events.LastName;
@@ -110,7 +121,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
         });
       }
     });
-    
+    }
   
   }
 
@@ -166,17 +177,41 @@ TitleEnglishP(elemTltle){
     });
   }
   Draft() {
-    this.Prop = new Proposals();
-    this.Prop.Keywords = this.Keywords;
+    alert("draft" + this.Rout);
+    if (this.Rout == 1) {
+      alert("1");
+      this.NewProp = new NewProp();
+      this.NewProp.UserName = this.LoginUserName;
+      this.NewProp.FirstNameEnglish = this.FirstName;
+      this.NewProp.LastNameEnglish = this.LastName;
+      this.NewProp.FirstNameHebrew = this.FirstNameHebrew;
+      this.NewProp.LastNameHebrew = this.LastNameHebrew;
+      this.NewProp.Title = this.Title;
+      this.NewProp.Keywords = this.Keywords;
 
-    this.Prop.Division = this.Division;
-    this.Prop.Language = this.Language;
-    this.Prop.Proposal = this.Proposal;
-    this.Prop.SubDivision = this.SubDivision;
-    this.Prop.TitleEnglish = this.TitleEnglish;
-    this.Prop.TitleHebrew = this.TitleHebrew;
-    this.serverService.enterDraft(this.Prop);
-    this.showsaveDraft = true;
+      this.NewProp.Division = this.Division;
+      this.NewProp.Language = this.Language;
+      this.NewProp.Proposal = this.Proposal;
+      this.NewProp.SubDivision = this.SubDivision;
+      this.NewProp.TitleEnglish = this.TitleEnglish;
+      this.NewProp.TitleHebrew = this.TitleHebrew;
+      this.serverService.enterNewDraft(this.NewProp);
+      this.showsaveDraft = true;
+    }
+    else {
+    this.Prop = new Proposals();
+      this.Prop.Keywords = this.Keywords;
+
+      this.Prop.Division = this.Division;
+      this.Prop.Language = this.Language;
+      this.Prop.Proposal = this.Proposal;
+      this.Prop.SubDivision = this.SubDivision;
+      this.Prop.TitleEnglish = this.TitleEnglish;
+      this.Prop.TitleHebrew = this.TitleHebrew;
+      this.serverService.enterDraft(this.Prop);
+      this.showsaveDraft = true;
+    }
+   
 
   }
   Save() {

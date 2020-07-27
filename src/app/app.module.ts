@@ -64,6 +64,7 @@ import { notifyComponent } from './components/notify/notify.component';
 import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
 import { successComponent } from './components/success/success.component';
+import { NavigatetosinglepropComponent } from './components/navigatetosingleprop/navigatetosingleprop.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { successComponent } from './components/success/success.component';
     failComponent,
     successComponent,
     CongressRegistrationSingleComponent,
-    ResetPassSuccessComponent
+    ResetPassSuccessComponent,
+    NavigatetosinglepropComponent
   ],
   imports: [
     MatAutocompleteModule,

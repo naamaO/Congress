@@ -137,7 +137,7 @@ if(this.Rout==1)
           this.router.navigateByUrl("/RegistrationOneEnglish");
         }
         if (this.Rout == 3) {
-          this.router.navigateByUrl("/CongressRegistrationSingle");
+          this.router.navigateByUrl("/CongressRegistrationSingle/2");
         }
         if (this.Rout == 7) {
           this.router.navigateByUrl("/CongressRegistrationSession");

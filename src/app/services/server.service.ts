@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { shoppingCart } from 'src/classes/shoppingCart';
 import { User } from '../../classes/User';
 import { UserPass } from 'src/classes/UserPass';
 import { Proposals } from '../../classes/Proposals';
+import { NewProp } from '../../classes/NewProp';
 import { invited } from '../../classes/invited';
 import { Judges } from '../../classes/Judges';
 import { Drafts } from 'src/classes/Drafts';
@@ -27,8 +28,8 @@ export class ServerService {
   public Country: string[] = [];
   public resNotifyTranzila:any;
   public port: string = 'http://localhost:64905';
- // public port: string = 'http://jewish-studies.b2story.com/webApi';
- // public port: string = 'https://jewish-studies.b2story.com/webApi';
+//public port: string = 'http://jewish-studies.b2story.com/webApi';
+// public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
    this.port = 'http://localhost:64905';
@@ -437,6 +438,36 @@ export class ServerService {
       Prop.TitleHebrew = "";
     }
     this.http.post(this.port + "/api/Home/enterDraft", Prop).subscribe();
+  }
+  enterNewDraft(Prop: NewProp) {
+    if (Prop.Title == null) {
+      Prop.Title = "";
+    } if (Prop.FirstNameEnglish == null) {
+      Prop.FirstNameEnglish = "";
+    } if (Prop.LastNameEnglish == null) {
+      Prop.LastNameEnglish = "";
+    } if (Prop.FirstNameHebrew == null) {
+      Prop.FirstNameHebrew = "";
+    } if (Prop.LastNameHebrew == null) {
+      Prop.LastNameHebrew = "";
+    }
+    if (Prop.Keywords == null) {
+      Prop.Keywords = "";
+    } if (Prop.Language == null) {
+      Prop.Language = "";
+    } if (Prop.Division == null) {
+      Prop.Division = "";
+    } if (Prop.SubDivision == null) {
+      Prop.SubDivision = "";
+    } if (Prop.Proposal == null) {
+      Prop.Proposal = "";
+    } if (Prop.TitleEnglish == null) {
+      Prop.TitleEnglish = "";
+    } if (Prop.TitleHebrew == null) {
+      Prop.TitleHebrew = "";
+    }
+    alert("ff")
+    this.http.post(this.port + "/api/Home/enterNewDraft", Prop).subscribe();
   }
   enterSecondDraft(Prop: Proposals) {
     this.LoginUserName = (this.getCookie('UserName'));

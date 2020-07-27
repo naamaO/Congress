@@ -9,5 +9,5 @@ export class book {
   SallePrice: number;
   GroupBook: number;
   login: string;
-
+  Available: boolean;
 }

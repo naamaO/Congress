@@ -28,7 +28,7 @@ export class successComponent implements OnInit {
   //   this.response = params['response'], 
   //   this.user = params['userName']
   //    });
-  this.user = this.serverService.email;
+  this.user = this.serverService.LoginUserName;
   this.setCookie(this.user);
 
  if(this.getCookie('UserName')){
@@ -64,6 +64,9 @@ export class successComponent implements OnInit {
 
     }
   });
+  localStorage.removeItem('CART');
+  localStorage.removeItem('NUM');
+  localStorage.removeItem('TOTAL');
   }
   }
 }

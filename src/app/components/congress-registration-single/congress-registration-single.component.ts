@@ -80,7 +80,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
     //   this.ArrDivision = events;
     //   this.ShowSub = true;
     // });
-    if (this.Rout == 1) {
+    if (this.Rout != 1) {
     this.serverService.getName().subscribe((events) => {
       this.FirstName = events.FirstName;
       this.LastName = events.LastName;
@@ -107,19 +107,26 @@ export class CongressRegistrationSingleComponent implements OnInit {
         this.Division = this.Division.substr(1);
       }
       }
-      if (this.Division != null && this.SubDivision == null) {
-        this.serverService.SubDivisionEnglish(this.Division).subscribe((events) => {
-
-          this.ArrSubDivision = events;
-          this.setCookie(this.Division);
-        });
-      }
       if (this.Division != null && this.SubDivision != null && this.Language == "          ") {
         this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
 
           this.ArrLanguage = events;
         });
       }
+      if (this.Division != null && this.SubDivision == null) {
+        this.serverService.SubDivisionEnglish(this.Division).subscribe((events) => {
+
+          this.ArrSubDivision = events;
+          if (this.Division != null && this.SubDivision != null && this.Language == "          ") {
+            this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
+
+              this.ArrLanguage = events;
+            });
+          }
+          this.setCookie(this.Division);
+        });
+      }
+      
     });
     }
   
@@ -177,9 +184,7 @@ TitleEnglishP(elemTltle){
     });
   }
   Draft() {
-    alert("draft" + this.Rout);
     if (this.Rout == 1) {
-      alert("1");
       this.NewProp = new NewProp();
       this.NewProp.UserName = this.LoginUserName;
       this.NewProp.FirstNameEnglish = this.FirstName;
@@ -226,7 +231,9 @@ TitleEnglishP(elemTltle){
     this.Prop.TitleHebrew = this.TitleHebrew;
     this.Prop.SessionId = null;
     if (this.Keywords != null && this.Language != null && this.Division != null && this.Proposal != null &&
-      this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null) {
+      this.SubDivision != null && this.TitleEnglish != null && this.TitleHebrew != null &&
+      this.Keywords != "" && this.Language != "" && this.Division != "" && this.Proposal != "" &&
+      this.SubDivision != "" && this.TitleEnglish != "" && this.TitleHebrew != "") {
 
       this.serverService.enterProposal(this.Prop);
       this.router.navigateByUrl("/Thank2");

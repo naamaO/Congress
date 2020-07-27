@@ -19,6 +19,7 @@ import { ReturnStatement } from '@angular/compiler';
 })
 export class ServerService {
   d: object;
+  public Rout: number;
   public LoginUserName: string;
   public LoginDiv: string;
   public currency: number = 1;
@@ -27,13 +28,13 @@ export class ServerService {
   public email: string;
   public Country: string[] = [];
   public resNotifyTranzila:any;
-  public port: string = 'http://localhost:64905';
-//public port: string = 'http://jewish-studies.b2story.com/webApi';
+  //public port: string = 'http://localhost:64905';
+public port: string = 'http://jewish-studies.b2story.com/webApi';
 // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
-   this.port = 'http://localhost:64905';
-   //this.port = ' http://jewish-studies.b2story.com/webApi';
+   //this.port = 'http://localhost:64905';
+   this.port = ' http://jewish-studies.b2story.com/webApi';
    //this.port = ' https://jewish-studies.b2story.com/webApi';
     this.Country = [
       "Afghanistan",
@@ -306,6 +307,8 @@ export class ServerService {
 
   setEmail(email){
     this.email = email;
+  } setRout(Rout){
+    this.Rout = Rout;
   }
 
   setNotify(resNoyify){
@@ -422,51 +425,50 @@ export class ServerService {
   enterDraft(Prop: Proposals) {
     this.LoginUserName = (this.getCookie('UserName'));
     Prop.UserName = this.LoginUserName;
-    if (Prop.Keywords == null) {
-      Prop.Keywords = "";
-    } if (Prop.Language == null) {
-      Prop.Language = "";
-    } if (Prop.Division == null) {
-      Prop.Division = "";
-    } if (Prop.SubDivision == null) {
-      Prop.SubDivision = "";
-    } if (Prop.Proposal == null) {
-      Prop.Proposal = "";
-    } if (Prop.TitleEnglish == null) {
-      Prop.TitleEnglish = "";
-    } if (Prop.TitleHebrew == null) {
-      Prop.TitleHebrew = "";
-    }
+    //if (Prop.Keywords == null) {
+    //  Prop.Keywords = "";
+    //} if (Prop.Language == null) {
+    //  Prop.Language = "";
+    //} if (Prop.Division == null) {
+    //  Prop.Division = "";
+    //} if (Prop.SubDivision == null) {
+    //  Prop.SubDivision = "";
+    //} if (Prop.Proposal == null) {
+    //  Prop.Proposal = "";
+    //} if (Prop.TitleEnglish == null) {
+    //  Prop.TitleEnglish = "";
+    //} if (Prop.TitleHebrew == null) {
+    //  Prop.TitleHebrew = "";
+    //}
     this.http.post(this.port + "/api/Home/enterDraft", Prop).subscribe();
   }
   enterNewDraft(Prop: NewProp) {
-    if (Prop.Title == null) {
-      Prop.Title = "";
-    } if (Prop.FirstNameEnglish == null) {
-      Prop.FirstNameEnglish = "";
-    } if (Prop.LastNameEnglish == null) {
-      Prop.LastNameEnglish = "";
-    } if (Prop.FirstNameHebrew == null) {
-      Prop.FirstNameHebrew = "";
-    } if (Prop.LastNameHebrew == null) {
-      Prop.LastNameHebrew = "";
-    }
-    if (Prop.Keywords == null) {
-      Prop.Keywords = "";
-    } if (Prop.Language == null) {
-      Prop.Language = "";
-    } if (Prop.Division == null) {
-      Prop.Division = "";
-    } if (Prop.SubDivision == null) {
-      Prop.SubDivision = "";
-    } if (Prop.Proposal == null) {
-      Prop.Proposal = "";
-    } if (Prop.TitleEnglish == null) {
-      Prop.TitleEnglish = "";
-    } if (Prop.TitleHebrew == null) {
-      Prop.TitleHebrew = "";
-    }
-    alert("ff")
+    //if (Prop.Title == null) {
+    //  Prop.Title = "";
+    //} if (Prop.FirstNameEnglish == null) {
+    //  Prop.FirstNameEnglish = "";
+    //} if (Prop.LastNameEnglish == null) {
+    //  Prop.LastNameEnglish = "";
+    //} if (Prop.FirstNameHebrew == null) {
+    //  Prop.FirstNameHebrew = "";
+    //} if (Prop.LastNameHebrew == null) {
+    //  Prop.LastNameHebrew = "";
+    //}
+    //if (Prop.Keywords == null) {
+    //  Prop.Keywords = "";
+    //} if (Prop.Language == null) {
+    //  Prop.Language = "";
+    //} if (Prop.Division == null) {
+    //  Prop.Division = "";
+    //} if (Prop.SubDivision == null) {
+    //  Prop.SubDivision = "";
+    //} if (Prop.Proposal == null) {
+    //  Prop.Proposal = "";
+    //} if (Prop.TitleEnglish == null) {
+    //  Prop.TitleEnglish = "";
+    //} if (Prop.TitleHebrew == null) {
+    //  Prop.TitleHebrew = "";
+    //}
     this.http.post(this.port + "/api/Home/enterNewDraft", Prop).subscribe();
   }
   enterSecondDraft(Prop: Proposals) {

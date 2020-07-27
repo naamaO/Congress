@@ -176,7 +176,7 @@ console.log("d",this.Title, this.FirstName, this.LastName,this.FirstNameHebrew, 
   }
 
   renew(){
-    this.router.navigate(['Pay', this.Total]);
+    //this.router.navigate(['Pay', this.Total]);
   console.log("renew")
   }
 

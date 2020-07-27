@@ -17,9 +17,15 @@ import { shoppingCart } from 'src/classes/shoppingCart';
 })
 export class successComponent implements OnInit {
   public sub: any;
+  public Rout: string;
   public response: any;
   public user: string; 
   public DB: shoppingCart[];
+  public RoutNum: number;
+  public USERNAME = {
+    KEY: 'UserName',
+    UserName: null
+  }
   constructor(public route: ActivatedRoute,public router: Router, private serverService: ServerService, private http: HttpClient,public cookieService: CookieService) {
    // Response=447&o_cred_type=1&lang=us&ccard=&expmonth=08&myid=111111111&email=nameEmail&cred_type=1&currency=2&ccno=1111&expyear=24&supplier=bytes2
    //&notify_url_address=http://localhost:4000/notify&sum=23&benid=4ncsvp43o7ei3j1i2g7sjh80e2&ConfirmationCode=0100000&cardtype=-&cardissuer=0&cardaquirer=1&index=7&Tempref=00002001 
@@ -28,10 +34,19 @@ export class successComponent implements OnInit {
   //   this.response = params['response'], 
   //   this.user = params['userName']
   //    });
-  this.user = this.serverService.LoginUserName;
+    this.Rout = this.getCookie('RoutTranzilaSuccessJewishStudies');
+    this.RoutNum = +this.Rout; 
+    this.user = this.serverService.LoginUserName;
+    if (this.getCookie('UserName') ) {
+      this.user = this.getCookie('UserName');
+    }
+    else {
+      let _username = localStorage.getItem(this.USERNAME.KEY);
+      this.user = _username;
+    }
   this.setCookie(this.user);
 
- if(this.getCookie('UserName')){
+    if (this.getCookie('UserName') && (this.RoutNum == 2)){
   this.addToCart();
  }
 

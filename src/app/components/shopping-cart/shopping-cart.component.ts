@@ -53,6 +53,10 @@ export class ShoppingCartComponent implements OnInit {
     KEY: 'ShoppingCartTotal',
     total: 0
   }
+  public USERNAME = {
+    KEY: 'UserName',
+    UserName: null
+  }
   public currency:number = 2;
   public lang:string = "us";
   public itemToAddQunt1:any;
@@ -532,13 +536,16 @@ remove(id){
   this.rem = true;
   //update localStorage
 //  this.sync('red')
-}
+  } setCookieRout(Rout: number) {
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+  }
   SendToTranzila() {
     this.serverService.setCurrency(this.currency);
     this.serverService.setLang(this.lang);
     this.serverService.setEmail(this.UserNameLogin);
     this.serverService.setTotal(this.Total);
-    this.router.navigate(['Pay', this.Total]);
+    this.setCookieRout(2);
+    this.router.navigate(['Pay']);
   }
   registrationGuest(){
      //check validation
@@ -612,7 +619,10 @@ remove(id){
         this.usernameemail.nativeElement.style.color = "#dc3545";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
         return this.emailvalidate = true;
-      } 
+      }
+      this.USERNAME.UserName = this.UserNameLogin;
+      let _username = this.USERNAME.UserName;
+      localStorage.setItem(this.USERNAME.KEY, _username);
        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
        let existUser;
      //  existUser = true;

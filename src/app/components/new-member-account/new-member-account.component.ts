@@ -42,7 +42,8 @@ export class NewMemberAccountCompponent implements OnInit {
   public user: User;
   // public FirstNameEnglish: string;
   // public LastNameEnglish: string;
-
+  public currency: number = 2;
+  public langg: string = "us";
   userFormGroup: FormGroup;
   public angForm: FormGroup;
   pattern: string | RegExp
@@ -248,6 +249,9 @@ export class NewMemberAccountCompponent implements OnInit {
     //alert("hh");
     this.cookieService.put('UserName', UaerName);
   }
+  setCookieRout(Rout: number) {
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+  }
 
   ngOnInit() {
     this.Email = this.getCookie('UserName');
@@ -402,7 +406,7 @@ export class NewMemberAccountCompponent implements OnInit {
 
  //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
  //this.router.navigate(['Pay', this.Total]).then(result => {  window.open(link, '_blank'); })
-     this.router.navigate(['Pay', this.Total]);
+      this.SendToTranzila();
 
     }
     else {
@@ -410,6 +414,14 @@ export class NewMemberAccountCompponent implements OnInit {
      }
 
    
+  }
+  SendToTranzila() {
+    this.serverService.setCurrency(this.currency);
+    this.serverService.setLang(this.langg);
+    this.serverService.setEmail(this.LoginUserName);
+    this.serverService.setTotal(this.Total);
+    this.setCookieRout(1);
+    this.router.navigate(['Pay']);
   }
   focusacademic() { 
     this.academic.nativeElement.style.color = "#27b5e5";

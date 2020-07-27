@@ -165,7 +165,7 @@ export const route: Routes = [
     component: CongressRegistrationSecondEnglishComponent,
   },
   {
-    path: 'Pay/:Total',
+    path: 'Pay',
     component: TranzilaComponent,
   },
   {

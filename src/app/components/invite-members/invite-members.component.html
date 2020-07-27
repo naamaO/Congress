@@ -25,7 +25,7 @@
 
     </h3>
     <br /><br />
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <label class="headerGray" #headerEnglish>
         Session title [English]
         <div class="tooltipSmall">
@@ -38,11 +38,11 @@
         </div>
       </label>
     </div>
-    <div class="row margin-top"  style="padding-left: 13px;">
+    <div class="row margin-top6"  style="padding-left: 13px;">
       <input #testInput type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" (focusout)="unfocusEnglish()" (focus)="focusEnglish()"/>
     </div>
     <div class="colorFocus"  style="padding-left: 13px;">
-      <div class="row margin-top"  >
+      <div class="row margin-top6"  >
         <label class="headerGray header" id="header" name="header" #headerHebrew>
           Session title [Hebrew]
           <div class="tooltipSmall">
@@ -55,34 +55,34 @@
 
         </label>
       </div>
-      <div class="row margin-top">
+      <div class="row margin-top6">
         <input #testInput type="text" class="input" [(ngModel)]="SessionName" style="width:80%;" (focusout)="unfocusHebrew()" (focus)="focusHebrew()"/>
       </div>
     </div>
-    <div class="row margin-top " style="padding-left: 13px;">
+    <div class="row margin-top6 " style="padding-left: 13px;">
       <label class="headerGray" #headerDivision>Division:</label>
     </div>
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <select (click)="focusDivision()" (mouseleave)="unfocusDivision()"  (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;">
         <option *ngFor="let Division of ArrDivision" [value]="Division">
           {{Division}}
         </option>
       </select>
     </div>
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <label class="headerGray" #headerSubDiv>Subdivision:</label>
     </div>
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <select (click)="focusSubDiv()" (mouseleave)="unfocusSubDiv()" [(ngModel)]="SubDivision" style="background:none;width:80%;">
         <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
           {{SubDivision}}
         </option>
       </select>
     </div>
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <label class="headerGray" #headerAbs> Session Abstract:</label>
     </div>
-    <div class="row margin-top" style="padding-left: 13px;">
+    <div class="row margin-top6" style="padding-left: 13px;">
       <textarea #testInput style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()"></textarea>
 
     </div>
@@ -92,7 +92,7 @@
   <!--<div class="clearfix"></div>
   <div class="clear"></div>-->
 
-  <div class="col-md-7 backGray floatLeft ddiv" id="Back" style="margin-top:10%;" >
+  <div class="col-md-7 backGray floatLeft ddiv" id="Back" style="margin-top:10%;">
     <br />
     <h4 style="color:#27b5e5">
       Session participants
@@ -105,23 +105,28 @@
           would like their papers to be presented at the congress <br />
           All particlpants will receive notification<br />
           by email that you submitted them as part of this<br />
-           session<br />
+          session<br />
           The lecturers will receive instructions and a<br />
           like to submit their individual lecture proposals
         </span>
       </div>
 
 
+
+
     </h4>
+
+
     <h6 style="color:#27b5e5">In the order you would like to be presented at the congress</h6>
+    <h6 style="color:#27b5e5">Please mark the button next to your name. This will identify you as the person who submits the session.</h6>
     <br />
     <div class="row margTop2">
-      <label class="col-md-1 headerGray" #headerTC>Title</label>
+      <label class="col-md-1 headerGray" #headerTC style="left: 0.8rem ">Title</label>
       <label class="col-md-4 margLeft3 headerGray" #headerNC>Chairperson:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerEC>Email:</label>
     </div>
     <div class="row ">
-      <select [(ngModel)]="TitleChair" style="background:content-box;" (click)="focusTC()" (mouseleave)="unfocusTC()" >
+      <select [(ngModel)]="TitleChair" style="background:content-box;left: 0.8rem " (click)="focusTC()" (mouseleave)="unfocusTC()">
         <option value="Prof"> Prof </option>
         <option value="Dr"> Dr</option>
         <option value="Mr"> Mr  </option>
@@ -134,37 +139,56 @@
       <input (focusout)="unfocusEC()" (focus)="focusEC()" #testInput type="text" [(ngModel)]="ChairmanEmail" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-1 headerGray" #headerT1>Title</label>
+      <label class="col-md-1 headerGray" #headerT1 style="left: 0.8rem ">Title</label>
+
       <label class="col-md-4 margLeft3 headerGray" #headerN1>Lecture Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE1>Email:</label>
     </div>
-    <div class="row">
-      <select [(ngModel)]="Title1" style="background:content-box;" (click)="focusT1()" (mouseleave)="unfocusT1()" >
-        <option value="Prof"> Prof </option>
-        <option value="Dr"> Dr</option>
-        <option value="Mr"> Mr  </option>
-        <option value="Ms"> Ms </option>
-      </select>
-      <div class="col-md-5">
-        <input  (focusout)="unfocusN1()" (focus)="focusN1()"style="width:45%;" #testInput type="text" [(ngModel)]="FirstName1" class="margLeft3" />
-        <input (focusout)="unfocusN1()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName1" class="margLeft3" />
-      </div>
-      <input (focusout)="unfocusE1()" (focus)="focusE1()" #testInput type="text" [(ngModel)]="Email1" class="margLeft3" />
-    </div>
-    <div class="row margTop2">
-      <label class="col-md-1 headerGray" #headerT2>Title</label>
-      <label class="col-md-4 margLeft3 headerGray" #headerN2>Lecture Name:</label>
-      <label class="col-md-4 margLeft7 headerGray" #headerE2>Email:</label>
-    </div>
-    <div class="row" >
-      <div  >
-        <select [(ngModel)]="Title2" style="background:content-box;" (click)="focusT2()" (mouseleave)="unfocusT2()" >
+    <div>
+      <!--<div class="col-md-0.2">
+        <div class="custom-control custom-radio " style="width:100%;">
+          <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)" id="ArrMembershipTypes[0].membershipType" name="memberType">
+          <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[0].membershipType">{{ArrMembershipTypes[0].membershipType}}</label>
+        </div>
+      </div>-->
+      <div class="row">
+        <div class="custom-control custom-radio " style="width:100%;" (click)="onMe(1)">
+          <input type="radio" class="custom-control-input" (change)="onMe(1)" id="1" name="1" #me1>
+          <label style="float:left;" class="custom-control-label" ></label>
+        </div>
+        <!--<div>-->
+        <select [(ngModel)]="Title1" style="background:content-box;" (click)="focusT1()" (mouseleave)="unfocusT1()">
           <option value="Prof"> Prof </option>
           <option value="Dr"> Dr</option>
           <option value="Mr"> Mr  </option>
           <option value="Ms"> Ms </option>
         </select>
+
+        <div class="col-md-5">
+          <input (focusout)="unfocusN1()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName1" class="margLeft3" />
+          <input (focusout)="unfocusN1()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName1" class="margLeft3" />
+        </div>
+        <input (focusout)="unfocusE1()" (focus)="focusE1()" #testInput type="text" [(ngModel)]="Email1" class="margLeft3" />
+      <!--</div>-->
       </div>
+    </div>
+    <div class="row margTop2">
+      <label class="col-md-1 headerGray" #headerT2 style="left: 0.8rem ">Title</label>
+      <label class="col-md-4 margLeft3 headerGray" #headerN2>Lecture Name:</label>
+      <label class="col-md-4 margLeft7 headerGray" #headerE2>Email:</label>
+    </div>
+    <div class="row">
+      <div class="custom-control custom-radio " style="width:100%;" (click)="onMe(2)">
+        <input type="radio" class="custom-control-input" (change)="onMe(2)" id="2" name="2" #me2>
+        <label style="float:left;" class="custom-control-label"></label>
+      </div>
+
+      <select [(ngModel)]="Title2" style="background:content-box;" (click)="focusT2()" (mouseleave)="unfocusT2()">
+        <option value="Prof"> Prof </option>
+        <option value="Dr"> Dr</option>
+        <option value="Mr"> Mr  </option>
+        <option value="Ms"> Ms </option>
+      </select>
       <div class="col-md-5">
         <input (focusout)="unfocusN2()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName2" class="margLeft3" />
         <input (focusout)="unfocusN2()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName2" class="margLeft3" />
@@ -172,48 +196,58 @@
       <input (focusout)="unfocusE2()" (focus)="focusE2()" #testInput type="text" [(ngModel)]="Email2" class="margLeft3" />
     </div>
     <div class="row margTop2">
-      <label class="col-md-1 headerGray" #headerT3>Title</label>
+      <label class="col-md-1 headerGray" #headerT3 style="left: 0.8rem ">Title</label>
       <label class="col-md-4 margLeft3 headerGray" #headerN3>Lecture Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE3>Email:</label>
     </div>
     <div class="row">
-      <select [(ngModel)]="Title3" style="background:content-box;" (click)="focusT3()" (mouseleave)="unfocusT3()" >
-        <option value="Prof"> Prof </option>
-        <option value="Dr"> Dr</option>
-        <option value="Mr"> Mr  </option> 
-        <option value="Ms"> Ms </option>
-      </select>
-      <div class="col-md-5">
-        <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName3" class="margLeft3" />
-        <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName3" class="margLeft3" />
+        <div class="custom-control custom-radio " style="width:100%;"(click)="onMe(3)" >
+          <input type="radio" class="custom-control-input" (change)="onMe(3)" id="3" name="3" #me3>
+          <label style="float:left;" class="custom-control-label"></label>
+        </div>
+        <select [(ngModel)]="Title3" style="background:content-box;" (click)="focusT3()" (mouseleave)="unfocusT3()">
+          <option value="Prof"> Prof </option>
+          <option value="Dr"> Dr</option>
+          <option value="Mr"> Mr  </option>
+          <option value="Ms"> Ms </option>
+        </select>
+
+        <div class="col-md-5">
+          <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName3" class="margLeft3" />
+          <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName3" class="margLeft3" />
+        </div>
+        <input (focusout)="unfocusE3()" (focus)="focusE3()" #testInput type="text" [(ngModel)]="Email3" class="margLeft3" />
       </div>
-      <input (focusout)="unfocusE3()" (focus)="focusE3()" #testInput type="text" [(ngModel)]="Email3" class="margLeft3" />
-    </div>
     <div class="row margTop2">
-      <label class="col-md-1 headerGray" #headerT4>Title</label>
+      <label class="col-md-1 headerGray" #headerT4 style="left: 0.8rem ">Title</label>
       <label class="col-md-4 margLeft3 headerGray " #headerN4>Lecture Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE4>Email:</label>
     </div>
     <div class="row ">
-      <select [(ngModel)]="Title4" style="background:content-box;" (click)="focusT4()" (mouseleave)="unfocusT4()" >
+      <div class="custom-control custom-radio " style="width:100%;"(click)="onMe(4)">
+        <input type="radio" class="custom-control-input" (click)="onMe(4)" id="4" name="4" value="4" #me4>
+        <label style="float:left;" class="custom-control-label"></label>
+      </div>
+      <select [(ngModel)]="Title4" style="background:content-box;" (click)="focusT4()" (mouseleave)="unfocusT4()">
         <option value="Prof"> Prof </option>
         <option value="Dr4"> Dr</option>
         <option value="Mr4"> Mr  </option>
         <option value="Ms4"> Ms </option>
       </select>
+
       <div class="col-md-5">
         <input (focusout)="unfocusN4()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName4" class="margLeft3" />
         <input (focusout)="unfocusN4()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName4" class="margLeft3" />
       </div>
       <input (focusout)="unfocusE4()" (focus)="focusE4()" #testInput type="text" [(ngModel)]="Email4" class="margLeft3" />
     </div>
-    <br/>    <br/>
+    <br />    <br />
   </div>
-  <div class="col-md-8 margTop2" style="text-align:center;">
-    <button (click)="SendInviteMember()" class="fill-btn-blue ">SEND</button>
-  </div>
+        <div class="col-md-8 margTop2" style="text-align:center;">
+          <button (click)="SendInviteMember()" class="fill-btn-blue ">SEND</button>
+        </div>
 
-</div>
+      </div>
 <br/>    <br/>
 
 <div class="container-fluid" *ngIf="showErrEmpty">

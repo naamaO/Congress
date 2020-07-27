@@ -42,6 +42,10 @@ export class InviteMembersComponent implements OnInit {
   @ViewChild('headerE3') headerE3: ElementRef;
   @ViewChild('headerE4') headerE4: ElementRef;
   @ViewChild('headerEC') headerEC: ElementRef;
+  @ViewChild('me1') me1: ElementRef;
+  @ViewChild('me2') me2: ElementRef;
+  @ViewChild('me3') me3: ElementRef;
+  @ViewChild('me4') me4: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -70,6 +74,7 @@ export class InviteMembersComponent implements OnInit {
   public ChairmanEmail: string;
   public SessionName: string;
   public SessionNameEnglish: string;
+ 
   public ArrAllInvited: invited[] = [];
   public a: invited;
   public b: invited;
@@ -82,6 +87,7 @@ export class InviteMembersComponent implements OnInit {
   public Division: string;
   public SubDivision: string;
   public aa: number;
+  public me: number=0;
   public numInvited: number=0;
   constructor(public cookieService: CookieService,
     public router: Router, private serverService: ServerService, private http: HttpClient) {
@@ -118,6 +124,34 @@ export class InviteMembersComponent implements OnInit {
   //     this.ArrSubDivision = events;
   //   });
   //}
+  onMe(num: number) {
+    if (num == 1) {
+    this.me = 1;
+      this.me1.nativeElement.checked = true;
+      this.me2.nativeElement.checked = false;
+      this.me3.nativeElement.checked = false;
+      this.me4.nativeElement.checked = false;
+    } if (num == 2) {
+      this.me = 2;
+      this.me2.nativeElement.checked = true;
+      this.me1.nativeElement.checked = false;
+      this.me3.nativeElement.checked = false;
+      this.me4.nativeElement.checked = false;
+    } if (num == 3) {
+      this.me = 3;
+      this.me3.nativeElement.checked = true;
+      this.me2.nativeElement.checked = false;
+      this.me1.nativeElement.checked = false;
+      this.me4.nativeElement.checked = false;
+    } if (num == 4) {
+      this.me = 4;
+      this.me4.nativeElement.checked = true;
+      this.me2.nativeElement.checked = false;
+      this.me3.nativeElement.checked = false;
+      this.me1.nativeElement.checked = false;
+    }
+    
+  }
   SendInviteMember() {
     this.numInvited = 0;
     this.ArrAllInvited = [];
@@ -126,7 +160,26 @@ export class InviteMembersComponent implements OnInit {
     this.c = new invited();
     this.d = new invited();
     this.e = new invited();
-    this.e.Email = (this.getCookie('UserName'));
+    if (this.me == 1) {
+      this.e.Email = this.Email1
+      this.e.FirstName = this.FirstName1;
+      this.e.LastName = this.LastName1;
+      this.e.Title = this.Title1;
+    } if (this.me == 2) {
+      this.e.Email = this.Email2; this.e.FirstName = this.FirstName2;
+      this.e.LastName = this.LastName2;
+      this.e.Title = this.Title2;
+    } if (this.me == 3) {
+      this.e.Email = this.Email3;
+      this.e.FirstName = this.FirstName3;
+      this.e.LastName = this.LastName3;
+      this.e.Title = this.Title3;
+    } if (this.me == 4) {
+      this.e.Email = this.Email4;
+      this.e.FirstName = this.FirstName4;
+      this.e.LastName = this.LastName4;
+      this.e.Title = this.Title4;
+    }
     this.a.FirstName = this.FirstName1;
     this.a.LastName = this.LastName1;
     this.a.Email = this.Email1;
@@ -181,7 +234,7 @@ export class InviteMembersComponent implements OnInit {
     if (this.Email2 != null && this.FirstName2 != null && this.LastName2 != null && this.Title2 != null) this.numInvited++;
     if (this.Email3 != null && this.FirstName3 != null && this.LastName3 != null && this.Title3 != null) this.numInvited++;
     if (this.Email4 != null && this.FirstName4 != null && this.LastName4 != null && this.Title4 != null) this.numInvited++;
-    if (this.numInvited>2 && this.Division != null && this.SubDivision != null && this.SessionNameEnglish != null) {
+    if (this.numInvited>2 && this.me!=0 && this.Division != null && this.SubDivision != null && this.SessionNameEnglish != null) {
       this.serverService.InviteMembers(this.ArrAllInvited);
       __await(1000);
 

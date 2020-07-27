@@ -40,6 +40,7 @@ import { notifyComponent } from './components/notify/notify.component';
 import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
 import { successComponent } from './components/success/success.component';
+import { NavigatetosinglepropComponent } from './components/navigatetosingleprop/navigatetosingleprop.component';
 export const route: Routes = [
   {
     path: 'Welcome/:Rout',
@@ -180,7 +181,7 @@ export const route: Routes = [
     component: Thank3Component,
   },
   {
-    path: 'CongressRegistrationSingle',
+    path: 'CongressRegistrationSingle/:rout',
     component: CongressRegistrationSingleComponent,
   },
   {
@@ -206,5 +207,9 @@ export const route: Routes = [
   {
     path: 'success',
    component: successComponent,
+ },
+  {
+    path: 'Navigat',
+    component: NavigatetosinglepropComponent,
  }
 ]

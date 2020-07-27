@@ -107,6 +107,8 @@
 }
 .margin-top {
   margin-top: 3%;
+}.margin-top6 {
+  margin-top: 6%;
 }
 
 i.request-card-hidden {
@@ -162,7 +164,21 @@ select {
 
 
 
+.custom-control-label::before {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
 
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
+}
+.custom-control-input:checked {
+  background-color: #27b5e5 !important;
+}
 
 .colorFocusCode {
   color: #27b5e5;

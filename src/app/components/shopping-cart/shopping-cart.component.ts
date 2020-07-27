@@ -216,6 +216,7 @@ if(!this.DB){
     }
     else{
      this.remove(item.Id);
+     this.sync('red')
     }
   }
   deleteQuantity(item: shoppingCart) {
@@ -282,7 +283,9 @@ async sync(act:string){
       else  if(act=='red'){
         if (this.itemToRedQunt1){
        if(!this.rem){ 
-        this.num = this.num - 1;     
+        // if(this.DB[i].Id==this.itemToRedQunt1.Id){
+        this.num = this.num - 1; 
+        // }  
         if (this.itemToRedQunt1.SallePrice == 0){
             this.Total = this.Total -  this.DB[i].PriceBook;
           }
@@ -291,22 +294,24 @@ async sync(act:string){
           }
         }
         else{//remove the item
+          //if(this.DB[i].Id==this.itemToRedQunt1.Id){
           if(this.itemToRedQunt1.Quantity!=0){
           this.num = this.num - this.DB[i].Quantity;
           }
           else{
             this.num =  this.num - 1;
           }
-          if (this.itemToRedQunt1.SallePrice == 0){
-            this.Total = this.Total -  this.DB[i].Total;
-          }
-          else{
-            this.Total = this.Total -  this.DB[i].Total;
-          }
+      //  }
+         // if (this.itemToRedQunt1.SallePrice == 0){
+          //  this.Total = this.Total -  this.DB[i].Total;
+          this.Total = this.Total - this.itemToRedQunt1.Total; 
+         // }
+         // else{
+         //   this.Total = this.Total -  this.DB[i].Total;
+        //}
         }
       }
       else{
-        debugger
         if(!this.rem){ 
           this.num = this.num - 1;     
           if (this.DB[i].SallePrice == 0){
@@ -526,7 +531,7 @@ remove(id){
   });
   this.rem = true;
   //update localStorage
-  this.sync('red')
+//  this.sync('red')
 }
   SendToTranzila() {
     this.serverService.setCurrency(this.currency);
@@ -585,8 +590,10 @@ remove(id){
     this.selectedCountry != null &&
     this.UserNameLogin != null 
       ){
+        debugger
         let user = this.getCookie('UserName');
     if(user!=undefined || user!=null){//if logined
+
     this.UserNameLogin = this.getCookie('UserName');
    // this.SendToTranzila();
     if(!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin))){
@@ -626,20 +633,20 @@ remove(id){
              }
            //   this.SendToTranzila();       
       }
-      else{//if registered and not logined
+      //else{//if registered and not logined
        //add to all cart 
-       let _contents = localStorage.getItem(this.CART.KEY);
+      // let _contents = localStorage.getItem(this.CART.KEY);
       //  this.DB= this.CART.contents;
-       for (var i = 0; i < this.DB.length; i++) {
-        this.DB[i].UserName = this.UserNameLogin;
-        // console.log( this.DB[i])
-        this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
-          // console.log(res)
-        });
-      }
+      //  for (var i = 0; i < this.DB.length; i++) {
+      //   this.DB[i].UserName = this.UserNameLogin;
+      //   // console.log( this.DB[i])
+      //   this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
+      //     // console.log(res)
+      //   });
+      // }
 
   //    this.SendToTranzila();
-      }
+      //}
      });
     }
     this.SendToTranzila();

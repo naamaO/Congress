@@ -214,6 +214,7 @@ if(!this.DB){
     }
     else{
      this.remove(item.Id);
+     this.sync('red')
     }
   }
   deleteQuantity(item: shoppingCart) {
@@ -294,26 +295,26 @@ async sync(act:string){
              else{
                this.num =  this.num - 1;
              }
-             if (this.itemToRedQunt1.SallePrice == 0){
-              if(this.itemToRedQunt1.Quantity!=0){
-                 this.Total = this.Total -  this.DB[i].PriceBook;
-                }
-                else{
-                  this.Total = this.Total -  this.DB[i].Total;
-                }
-             }
-             else{
-              if(this.itemToRedQunt1.Quantity==0){
-                this.Total = this.Total -  this.DB[i].SallePrice;
-               }
-               else{
-                 this.Total = this.Total -  this.DB[i].Total;
-               }
-             }
-           }
+            //  if (this.itemToRedQunt1.SallePrice == 0){
+            //   if(this.itemToRedQunt1.Quantity!=0){
+            //      this.Total = this.Total -  this.DB[i].PriceBook;
+            //     }
+            //     else{
+            //       this.Total = this.Total -  this.DB[i].Total;
+            //     }
+            //  }
+            //  else{
+            //   if(this.itemToRedQunt1.Quantity==0){
+            //     this.Total = this.Total -  this.DB[i].SallePrice;
+            //    }
+            //    else{
+            //      this.Total = this.Total -  this.DB[i].Total;
+            //    }
+            //  }
+            this.Total = this.Total - this.itemToRedQunt1.Total; 
+          }
          }
          else{
-           debugger
            if(!this.rem){ 
              this.num = this.num - 1;     
              if (this.DB[i].SallePrice == 0){
@@ -545,7 +546,7 @@ remove(id){
   
   this.rem = true;
   //update localStorage
-  this.sync('red')
+ // this.sync('red')
 }
   SendToTranzila() {
     this.serverService.setCurrency(this.currency);
@@ -645,21 +646,21 @@ remove(id){
              }
              // this.SendToTranzila();       
       }
-      else{//if registered and not logined
+   //   else{//if registered and not logined
        //add to all cart 
-       let _contents = localStorage.getItem(this.CART.KEY);
+      // let _contents = localStorage.getItem(this.CART.KEY);
       //  this.DB= this.CART.contents;
-       for (var i = 0; i < this.DB.length; i++) {
-        this.DB[i].UserName = this.UserNameLogin;
-        console.log( this.DB[i])
-        this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
-       //   console.log(res)
-        });
-      }
+      //  for (var i = 0; i < this.DB.length; i++) {
+      //   this.DB[i].UserName = this.UserNameLogin;
+      //   console.log( this.DB[i])
+      //   this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
+      //  //   console.log(res)
+      //   });
+      // }
 
     //  this.SendToTranzila();
 
-      }
+//      }
      });
     }
 

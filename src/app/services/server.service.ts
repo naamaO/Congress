@@ -28,7 +28,7 @@ export class ServerService {
   public email: string;
   public Country: string[] = [];
   public resNotifyTranzila:any;
-  //public port: string = 'http://localhost:64905';
+//  public port: string = 'http://localhost:64905';
 public port: string = 'http://jewish-studies.b2story.com/webApi';
 // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
@@ -407,7 +407,7 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
   }
   GetLanguageEnglish(Subdiv: string): Observable<string[]> {
     this.LoginDiv = (this.getCookie('Division'));
-
+    Subdiv = (this.getCookie('SubDivision'));
     return this.http.get<string[]>(this.port + "/api/Home/GetLanguageEnglish?SubDiv=" + Subdiv + "&Division=" + this.LoginDiv)
 
   }

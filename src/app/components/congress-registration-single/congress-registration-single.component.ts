@@ -94,7 +94,9 @@ export class CongressRegistrationSingleComponent implements OnInit {
 
     this.serverService.selectDraft().subscribe((events) => {
       this.Division = events.Division;
+      this.setCookie(this.Division);
       this.SubDivision = events.SubDivision;
+      this.setCookieSub(this.SubDivision);
       this.TitleEnglish = events.TitleEnglish;
       this.TitleHebrew = events.TitleHebrew;
       this.Proposal = events.Proposal;
@@ -107,7 +109,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
         this.Division = this.Division.substr(1);
       }
       }
-      if (this.Division != null && this.SubDivision != null && this.Language == "          ") {
+      if (this.Division != null && this.SubDivision != null && this.Language == null) {
         this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
 
           this.ArrLanguage = events;
@@ -117,7 +119,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
         this.serverService.SubDivisionEnglish(this.Division).subscribe((events) => {
 
           this.ArrSubDivision = events;
-          if (this.Division != null && this.SubDivision != null && this.Language == "          ") {
+          if (this.Division != null && this.SubDivision != null && this.Language == null) {
             this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
 
               this.ArrLanguage = events;
@@ -161,6 +163,9 @@ TitleEnglishP(elemTltle){
   }
   setCookie(Div: string) {
     this.cookieService.put('Division', Div);
+  }
+  setCookieSub(Div: string) {
+    this.cookieService.put('SubDivision', Div);
   }
   getCookie(key: string) {
     return this.cookieService.get(key);

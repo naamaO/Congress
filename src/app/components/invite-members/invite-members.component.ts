@@ -125,6 +125,7 @@ export class InviteMembersComponent implements OnInit {
   //   });
   //}
   onMe(num: number) {
+
     if (num == 1) {
     this.me = 1;
       this.me1.nativeElement.checked = true;
@@ -180,6 +181,7 @@ export class InviteMembersComponent implements OnInit {
       this.e.LastName = this.LastName4;
       this.e.Title = this.Title4;
     }
+    this.a.TitleChair = this.TitleChair;
     this.a.FirstName = this.FirstName1;
     this.a.LastName = this.LastName1;
     this.a.Email = this.Email1;
@@ -193,6 +195,7 @@ export class InviteMembersComponent implements OnInit {
     this.a.Division = this.Division;
     this.a.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.a);
+    this.b.TitleChair = this.TitleChair;
     this.b.Title = this.Title2;
     this.b.FirstName = this.FirstName2;
     this.b.LastName = this.LastName2;
@@ -205,6 +208,7 @@ export class InviteMembersComponent implements OnInit {
     this.b.Division = this.Division;
     this.b.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.b);
+    this.c.TitleChair = this.TitleChair;
     this.c.FirstName = this.FirstName3;
     this.c.LastName = this.LastName3;
     this.c.Email = this.Email3;
@@ -226,6 +230,7 @@ export class InviteMembersComponent implements OnInit {
     this.d.ChairmanEmail = this.ChairmanEmail;
     this.d.Division = this.Division;
     this.d.Title = this.Title4;
+    this.d.TitleChair = this.TitleChair;
     this.d.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.c);
     this.ArrAllInvited.push(this.d);

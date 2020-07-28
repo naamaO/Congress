@@ -54,7 +54,7 @@ import {
     MatButtonModule, MatCheckboxModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatExpansionModule,
   MatSortModule, MatTableModule, MatIconModule, MatSelectModule, MatDatepickerModule, NativeDateModule, MAT_DATE_FORMATS, MatPaginatorIntl
 } from '@angular/material';
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+// import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -122,7 +122,7 @@ import { NavigatetosinglepropComponent } from './components/navigatetosingleprop
     MatFormFieldModule,
     MatDividerModule,
     MatCardModule,
-    NgxMatSelectSearchModule,
+    // NgxMatSelectSearchModule,
     MatIconModule,
     MatInputModule,
     MatTableModule,

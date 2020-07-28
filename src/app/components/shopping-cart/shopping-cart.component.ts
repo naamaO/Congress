@@ -349,8 +349,11 @@ else{
       if(this.itemToAddQunt1){
         //let i = this.itemToAddQunt1.Id;
         if (this.itemToAddQunt1.SallePrice == 0){
-          let i = this.itemToAddQunt1.Id;
-        this.DB[i].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+          let d = this.itemToAddQunt1.Id;
+          this.DB.map(item=>{
+            if(item.Id === d)
+            this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+          });
         this.Total = this.Total + this.itemToAddQunt1.PriceBook;
         //this.CART.contents =
          this.CART.contents.map(item=>{
@@ -368,8 +371,11 @@ else{
        //  localStorage.setItem(this.CART.KEY,JSON.stringify( this.CART.contents[i]));
       }
         else{
-          let i = this.itemToAddQunt1.Id;
-          this.DB[i].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+          let d = this.itemToAddQunt1.Id;
+          this.DB.map(item=>{
+            if(item.Id === d)
+            this.DB[d].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+          });
           this.Total = this.Total + this.itemToAddQunt1.SallePrice;
          // this.CART.contents = 
           this.CART.contents.map(item=>{
@@ -386,41 +392,66 @@ else{
       if(act=='red'){
         if(this.itemToRedQunt1){
          // let i = this.itemToRedQunt1.Id;
+         if(!this.rem){
           if (this.itemToRedQunt1.SallePrice == 0){
-            let i;
-            i = this.itemToRedQunt1.Id;
+            let c;
+            c = this.itemToRedQunt1.Id;
             if(this.DB.length>0){
-               this.DB[i].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
-             }
+              this.DB.map(item=>{
+                if(item.Id === c)
+                this.DB[c].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+              });             }
          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
          //  this.CART.contents =
          if(this.DB.length>0){
           this.CART.contents.map(item=>{
-            if(item.Id === i)
-            this.CART.contents[i].Total = this.DB[i].Total;
+            let id = this.itemToRedQunt1.Id
+            if(item.Id === id)
+            this.CART.contents[id].Total = this.DB[id].Total;
           });
           let _cart = JSON.stringify(this.CART.contents);
           localStorage.setItem(this.CART.KEY, _cart);
         }
           }
           else{
-            let i;
-            i = this.itemToRedQunt1.Id;
+            let c;
+            c = this.itemToRedQunt1.Id;
             if(this.DB.length>0){
-            this.DB[i].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+              this.DB.map(item=>{
+                if(item.Id === c)
+                this.DB[c].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+              });
             }
             this.Total = this.Total - this.itemToRedQunt1.SallePrice;
             // this.CART.contents = 
             if(this.DB.length>0){
             this.CART.contents.map(item=>{
-              if(item.Id === i)
-              this.CART.contents[i].Total = this.DB[i].Total;
+              let id;
+              id = this.itemToRedQunt1.Id;
+              if(item.Id === id)
+              this.CART.contents[id].Total = this.DB[id].Total;
             });
             let _cart = JSON.stringify(this.CART.contents);
             localStorage.setItem(this.CART.KEY, _cart);
           }
           }
           this.num = this.num - 1;
+      }
+      else{//this.rem ==true;
+        if (this.itemToRedQunt1.Quantity!=0){
+          this.Total = this.Total - this.itemToRedQunt1.Total;
+        this.num = this.num - this.itemToRedQunt1.Quantity;
+    }
+    else{
+      if (this.itemToRedQunt1.SallePrice == 0){
+        this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+      }
+      else{
+        this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+    }
+      this.num = this.num - 1;
+    }
+      }
       }
       }
     }
@@ -597,7 +628,6 @@ remove(id){
     this.selectedCountry != null &&
     this.UserNameLogin != null 
       ){
-        debugger
         let user = this.getCookie('UserName');
     if(user!=undefined || user!=null){//if logined
 

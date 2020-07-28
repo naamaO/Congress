@@ -3,6 +3,7 @@ export class invited {
   FirstName: string;
   LastName: string;
   Email: string;
+  TitleChair: string;
   FirstNameChair: string;
   LastNameChair: string;
   ChairmanEmail: string;

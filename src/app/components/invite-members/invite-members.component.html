@@ -5,21 +5,21 @@
 
   <div class="col-md-5" style="padding-left: 0;">
     <h3 style="color:#27b5e5;margin-top:6%;">
-      Submit A Session
+      Submit a Session
       <div class="tooltip">
         <img src="/assets/images/TooltipIcon.png" />
         <span class="tooltiptext" style="text-align:left;padding-left:2%;">
-          1. A session title in English and Hebrew(if possible)<br />
+          1. A session title in English and Hebrew (if possible)<br />
           2. A session abstract (up to 250 words)<br />
-          3. Complete names and email addressof all
-          session particlpants including the lectures
+          3. Complete the  names and email addresses of all
+          session participants including the lecturers
           and the session chairperson.<br />
-          4. A session consist of four lectures or three
+          4. A session consists of four lectures or three
           lectures and response, in addition to a session
-          cahir. If you cannot find four particlpants and
-          a chair , you may apply with three lectures on the
-          candition that the Academic committee may add
-          a fours lectures to the session
+          chair. If you cannot find four particlpants and
+          a chair, you may apply with three lectures on the
+          condition that the academic committee may add
+          a fourth lecture to the session.
         </span>
       </div>
 
@@ -98,16 +98,15 @@
       Session participants
       <div class="tooltipSmall">
         <img src="/assets/images/TooltipIcon.png" />
-        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;font-size: 16px; font-weight: normal;width:300px !important; height:313px !important">
+        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;width:400px !important; height:200px !important;font-size: 0.975rem;">
           Please add the names and email addresses of all<br />
-          the particlpants in your proposed session <br />
-          Including yourself. preferably in the order you <br />
-          would like their papers to be presented at the congress <br />
-          All particlpants will receive notification<br />
-          by email that you submitted them as part of this<br />
-          session<br />
+          the particlpants in your proposed session, <br />
+          including yourself, preferably in the order you <br />
+          would like their papers to be presented at the congress. <br />
+          All participants will receive notification<br />
+          by email that you submitted their names as part of this session.<br />
           The lecturers will receive instructions and a<br />
-          like to submit their individual lecture proposals
+          link to submit their individual lecture proposals.
         </span>
       </div>
 
@@ -122,10 +121,14 @@
     <br />
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerTC style="left: 0.8rem ">Title</label>
-      <label class="col-md-4 margLeft3 headerGray" #headerNC>Chairperson:</label>
+      <label class="col-md-4 margLeft3 headerGray" #headerNC style="margin-left: 4%;">Chairperson:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerEC>Email:</label>
     </div>
     <div class="row ">
+      <div class="custom-control custom-radio " (click)="onMe(4)" style="visibility: hidden;">
+        <input type="radio" class="custom-control-input" (click)="onMe(4)" id="4" name="4" value="4">
+        <label style="float:left;" class="custom-control-label"></label>
+      </div>
       <select [(ngModel)]="TitleChair" style="background:content-box;left: 0.8rem " (click)="focusTC()" (mouseleave)="unfocusTC()">
         <option value="Prof"> Prof </option>
         <option value="Dr"> Dr</option>
@@ -141,7 +144,7 @@
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT1 style="left: 0.8rem ">Title</label>
 
-      <label class="col-md-4 margLeft3 headerGray" #headerN1>Lecture Name:</label>
+      <label class="col-md-4 margLeft3 headerGray" #headerN1 style="margin-left: 4%;">Lecturer Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE1>Email:</label>
     </div>
     <div>
@@ -152,7 +155,7 @@
         </div>
       </div>-->
       <div class="row">
-        <div class="custom-control custom-radio " style="width:100%;" (click)="onMe(1)">
+        <div class="custom-control custom-radio " (click)="onMe(1)">
           <input type="radio" class="custom-control-input" (change)="onMe(1)" id="1" name="1" #me1>
           <label style="float:left;" class="custom-control-label" ></label>
         </div>
@@ -174,11 +177,11 @@
     </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT2 style="left: 0.8rem ">Title</label>
-      <label class="col-md-4 margLeft3 headerGray" #headerN2>Lecture Name:</label>
+      <label class="col-md-4 margLeft3 headerGray" #headerN2 style="margin-left: 4%;">Lecturer Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE2>Email:</label>
     </div>
     <div class="row">
-      <div class="custom-control custom-radio " style="width:100%;" (click)="onMe(2)">
+      <div class="custom-control custom-radio "  (click)="onMe(2)">
         <input type="radio" class="custom-control-input" (change)="onMe(2)" id="2" name="2" #me2>
         <label style="float:left;" class="custom-control-label"></label>
       </div>
@@ -197,11 +200,11 @@
     </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT3 style="left: 0.8rem ">Title</label>
-      <label class="col-md-4 margLeft3 headerGray" #headerN3>Lecture Name:</label>
+      <label class="col-md-4 margLeft3 headerGray" #headerN3 style="margin-left: 4%;">Lecturer Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE3>Email:</label>
     </div>
     <div class="row">
-        <div class="custom-control custom-radio " style="width:100%;"(click)="onMe(3)" >
+        <div class="custom-control custom-radio " (click)="onMe(3)" >
           <input type="radio" class="custom-control-input" (change)="onMe(3)" id="3" name="3" #me3>
           <label style="float:left;" class="custom-control-label"></label>
         </div>
@@ -220,12 +223,12 @@
       </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT4 style="left: 0.8rem ">Title</label>
-      <label class="col-md-4 margLeft3 headerGray " #headerN4>Lecture Name:</label>
+      <label class="col-md-4 margLeft3 headerGray " #headerN4 style="margin-left: 4%;">Lecturer Name:</label>
       <label class="col-md-4 margLeft7 headerGray" #headerE4>Email:</label>
     </div>
     <div class="row ">
-      <div class="custom-control custom-radio " style="width:100%;"(click)="onMe(4)">
-        <input type="radio" class="custom-control-input" (click)="onMe(4)" id="4" name="4" value="4" #me4>
+      <div class="custom-control custom-radio " (click)="onMe(4)">
+        <input type="radio" class="custom-control-input" (change)="onMe(4)" id="4" name="4" #me4>
         <label style="float:left;" class="custom-control-label"></label>
       </div>
       <select [(ngModel)]="Title4" style="background:content-box;" (click)="focusT4()" (mouseleave)="unfocusT4()">

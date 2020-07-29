@@ -623,14 +623,15 @@ remove(id){
     this.user.selectedCountry = this.selectedCountry;
     this.user.Email = this.UserNameLogin;
     this.user.UserName = this.UserNameLogin;
-    this.user.Hebrew = true;
+    this.user.Language = 'Hebrew';
+
     if (
       this.user.FirstNameHebrew != null &&
       this.user.LastNameHebrew != null &&
       this.user.Address != null &&
       this.user.selectedCountry != null &&
       this.user.UserName != null &&
-      this.user.Hebrew != null
+      this.user.Language != null
     ) {
       this.serverService.RegistrationNewGuest(this.user)
       //  if (this.Rout == 1) {

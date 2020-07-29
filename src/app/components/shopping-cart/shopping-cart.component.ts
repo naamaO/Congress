@@ -608,14 +608,14 @@ remove(id){
     this.user.selectedCountry = this.selectedCountry;
     this.user.Email = this.UserNameLogin;
     this.user.UserName = this.UserNameLogin;
-    this.user.English = true;
+    this.user.Language = 'English';
     if (
       this.user.FirstNameEnglish != null &&
       this.user.LastNameEnglish != null &&
        this.user.Address != null &&
       this.user.selectedCountry != null &&
       this.user.UserName != null &&
-      this.user.English != null
+      this.user.Language != null
 
     ) {
       this.serverService.RegistrationNewGuest(this.user)

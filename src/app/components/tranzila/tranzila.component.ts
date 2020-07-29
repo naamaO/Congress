@@ -75,9 +75,9 @@ export class TranzilaComponent implements OnInit {
        this.jsonPurchaseData = encodeURIComponent(this.jsonPurchaseData);
     //https://direct.tranzila.com/terminalname/iframe.php?lang=il
     this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=" 
-    + this.Total + "&currency=" + this.Currency +"&u71=1" + "&json_purchase_data=" + this.jsonPurchaseData + "&lang=" + this.Lang + "&email=" + this.Email + "&cred_type=1";
+    + this.Total + "&currency=" + this.Currency + "&lang=" + this.Lang + "&email=" + this.Email + "&cred_type=1";
     this.srcReal = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
-    // "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
+    // +"&u71=1" + "&json_purchase_data=" + this.jsonPurchaseData "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
     console.log("this.srcReal",this.srcReal)
 //ichecknrun()
 //script array של 

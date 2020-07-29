@@ -74,7 +74,7 @@ export class InviteMembersComponent implements OnInit {
   public ChairmanEmail: string;
   public SessionName: string;
   public SessionNameEnglish: string;
- 
+  public ABS: string;
   public ArrAllInvited: invited[] = [];
   public a: invited;
   public b: invited;
@@ -179,7 +179,8 @@ export class InviteMembersComponent implements OnInit {
       this.e.LastName = this.LastName1;
       this.e.Title = this.Title1;
     } if (this.me == 2) {
-      this.e.Email = this.Email2; this.e.FirstName = this.FirstName2;
+      this.e.Email = this.Email2;
+      this.e.FirstName = this.FirstName2;
       this.e.LastName = this.LastName2;
       this.e.Title = this.Title2;
     } if (this.me == 3) {
@@ -198,6 +199,7 @@ export class InviteMembersComponent implements OnInit {
     this.a.LastName = this.LastName1;
     this.a.Email = this.Email1;
     //alert(this.SessionName);
+    this.a.ABS = this.ABS;
     this.a.Title = this.Title1;
     this.a.SessionName = this.SessionName;
     this.a.SessionNameEnglish = this.SessionNameEnglish;
@@ -207,6 +209,7 @@ export class InviteMembersComponent implements OnInit {
     this.a.Division = this.Division;
     this.a.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.a);
+    this.b.ABS = this.ABS;
     this.b.TitleChair = this.TitleChair;
     this.b.Title = this.Title2;
     this.b.FirstName = this.FirstName2;
@@ -220,6 +223,7 @@ export class InviteMembersComponent implements OnInit {
     this.b.Division = this.Division;
     this.b.SubDivision = this.SubDivision;
     this.ArrAllInvited.push(this.b);
+    this.c.ABS = this.ABS;
     this.c.TitleChair = this.TitleChair;
     this.c.FirstName = this.FirstName3;
     this.c.LastName = this.LastName3;
@@ -231,6 +235,7 @@ export class InviteMembersComponent implements OnInit {
     this.c.LastNameChair = this.LastNameChair;
     this.c.ChairmanEmail = this.ChairmanEmail;
     this.c.Division = this.Division;
+    this.d.ABS = this.ABS;
     this.c.SubDivision = this.SubDivision;
     this.d.FirstName = this.FirstName4;
     this.d.LastName = this.LastName4;

@@ -28,8 +28,8 @@ export class ServerService {
   public email: string;
   public Country: string[] = [];
   public resNotifyTranzila:any;
-//  public port: string = 'http://localhost:64905';
-public port: string = 'http://jewish-studies.b2story.com/webApi';
+  //public port: string = 'http://localhost:64905';
+ public port: string = 'http://jewish-studies.b2story.com/webApi';
 // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
@@ -368,7 +368,6 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
     return this.http.get<book>(this.port + "/api/Home/GetBookByIdHebrew?Id=" + Id)
   }
   getNumProduct(): Observable<number> {
-    //alert("F");
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }
@@ -486,8 +485,7 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
   }
 
   selectDraft(): Observable<Proposals> {
-    console.log("from selectdraft: 1" + this.getCookie('UserName') + "1");
-    console.log("from selectdraft: length:" + this.getCookie('UserName').length);
+
 
 
     this.LoginUserName = (this.getCookie('UserName'));
@@ -518,6 +516,7 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
   InviteMembers(arr: invited[]) {
     this.LoginUserName = (this.getCookie('UserName'));
     this.http.post(this.port + "/api/Home/InviteMembers?arrInvited=", arr).subscribe();
+    
 
   }
   getAll_W_Proposals(): Observable<Judges[]> {

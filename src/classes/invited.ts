@@ -11,4 +11,5 @@ export class invited {
   SessionNameEnglish: string;
   Division: string;
   SubDivision: string;
+  ABS: string;
 }

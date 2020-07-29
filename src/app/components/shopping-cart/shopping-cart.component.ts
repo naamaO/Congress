@@ -567,14 +567,33 @@ remove(id){
   this.rem = true;
   //update localStorage
 //  this.sync('red')
-  } setCookieRout(Rout: number) {
+  } 
+
+  setCookieRout(Rout: number) {
     this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
   }
+  setCookieLang(lang: string) {
+    this.cookieService.put('Lang', lang);
+  }
+  setCookieTotal(total: number) {
+    this.cookieService.put('Total', total.toString());
+  }
+  setCookieCurrency(currency: number) {
+    this.cookieService.put('Currency', currency.toString());
+  }
   SendToTranzila() {
-    this.serverService.setCurrency(this.currency);
-    this.serverService.setLang(this.lang);
+    this.CART.contents = this.DB;
+    let _cart = JSON.stringify(this.CART.contents);
+    localStorage.setItem(this.CART.KEY, _cart);
+   // this.setCookieCart(this.DB);
+    this.setCookieCurrency(this.currency);
+    this.setCookieLang(this.lang);
+    this.setCookieTotal(this.Total);
+  //  this.serverService.setCurrency(this.currency);
+   // this.serverService.setLang(this.lang);
+   this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
     this.serverService.setEmail(this.UserNameLogin);
-    this.serverService.setTotal(this.Total);
+   // this.serverService.setTotal(this.Total);
     this.setCookieRout(2);
     this.router.navigate(['Pay']);
   }
@@ -620,6 +639,10 @@ remove(id){
     //  }
   }
   checkout(){
+    if(this.DB.length==0){
+      alert('the cart is empty please choose a book');
+    }
+    else{
     var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
     if(
     this.FirstName != null && 
@@ -749,7 +772,7 @@ remove(id){
       }
    // alert("All fields must be filled!");
   }
-
+    }
 }
   SendToNew() {
     this.router.navigateByUrl("/new");

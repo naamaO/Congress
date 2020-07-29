@@ -32,3 +32,15 @@
   border-left: none !important;
   border-right: none !important;
 }
+
+.textEn{
+  text-align: left;
+  font-size: 14px;
+  font-family: 'OpenSansRegular';
+}
+
+.contactLink{
+  color:#27b5e5 !important;
+  text-decoration-line: underline !important;
+  cursor: pointer !important;
+}

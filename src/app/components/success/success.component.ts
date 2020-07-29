@@ -52,7 +52,7 @@ export class successComponent implements OnInit {
 
   }
   ngOnInit() {
-    console.log("success page on init! this.user",this.user)
+  //  console.log("success page on init! this.user",this.user)
   }
   setCookie(UaerName: string) {
     this.cookieService.put('UserName', UaerName);
@@ -67,14 +67,14 @@ export class successComponent implements OnInit {
         this.DB = val;
      for (var i = 0; i < this.DB.length; i++) {
       this.DB[i].UserName = this.user;
-      console.log( this.DB[i])
+     // console.log( this.DB[i])
       let itemToDelete  =  this.DB[i];
       this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
         if(res==1){
-          console.log("this.DB[i]",itemToDelete)
+        //  console.log("this.DB[i]",itemToDelete)
           this.serverService.postRemoveQuantity(itemToDelete);
         }
-        console.log(res)
+      //  console.log(res)
       });
 
     }
@@ -82,6 +82,11 @@ export class successComponent implements OnInit {
   localStorage.removeItem('CART');
   localStorage.removeItem('NUM');
   localStorage.removeItem('TOTAL');
+  
+  this.cookieService.remove('Total');
+  this.cookieService.remove('Currency');
+  this.cookieService.remove('Lang');
+  this.cookieService.remove('RoutTranzilaSuccessJewishStudies');
   }
   }
 }

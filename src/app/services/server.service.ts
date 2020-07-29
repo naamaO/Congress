@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,11 +23,20 @@ export class ServerService {
   public LoginUserName: string;
   public LoginDiv: string;
   public currency: number = 1;
-  public total: number;
+  public total: any;
   public lang: string = 'il';
   public email: string;
   public Country: string[] = [];
+  public jsonPurchaseData: Array<any>= [];
   public resNotifyTranzila:any;
+  public CART = {
+    KEY: 'ShoppingCartGuest',
+    contents: []
+  }
+  public CARTMEMBERSHIP = {
+    KEY: 'ShoppingCart',
+    contents: []
+  }
 //  public port: string = 'http://localhost:64905';
 public port: string = 'http://jewish-studies.b2story.com/webApi';
 // public port: string = 'https://jewish-studies.b2story.com/webApi';
@@ -288,26 +297,40 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
       "Zimbabwe"];
   }
   ngOnInit() {
-    this.setCurrency(this.currency);
-    this.setLang(this.lang);
+  //  this.setCurrency(this.currency);
+  //  this.setLang(this.lang);
     this.setEmail(this.email);
-    this.setTotal(this.total);
-  }
-  setTotal(total){
-    this.total = total;
+  //  this.setTotal();
   }
 
-  setCurrency(currency){
-  this.currency = currency;
+  setjsonPurchaseData2(){
+  console.log( localStorage.getItem(this.CART.KEY));
+   return  localStorage.getItem(this.CART.KEY);
+  }
+  setjsonPurchaseData1(){
+    console.log( localStorage.getItem(this.CARTMEMBERSHIP.KEY));
+     return  localStorage.getItem(this.CARTMEMBERSHIP.KEY);
+    }
+  setTotal(){
+    this.total = JSON.parse(this.getCookie('Total'));
+    return this.total;
   }
 
-  setLang(lang){
-    this.lang = lang;
+  setCurrency(){
+  this.currency = JSON.parse(this.getCookie('Currency'));
+  return this.currency;
+  }
+
+  setLang(){
+    this.lang = this.getCookie('Lang');
+    return this.lang;
   }
 
   setEmail(email){
     this.email = email;
-  } setRout(Rout){
+  } 
+  
+  setRout(Rout){
     this.Rout = Rout;
   }
 
@@ -379,7 +402,6 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
     this.http.post(this.port + "/api/Home/Registration", user).subscribe();
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
-    console.log("check user name in service  " + this.getCookie('UserName'));
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
   }
   getUserNameExists(UserName:string): Observable<any> {
@@ -486,10 +508,6 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
   }
 
   selectDraft(): Observable<Proposals> {
-    console.log("from selectdraft: 1" + this.getCookie('UserName') + "1");
-    console.log("from selectdraft: length:" + this.getCookie('UserName').length);
-
-
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
 
@@ -562,7 +580,6 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);
   }
   getNameHebrew(): Observable<Name> {
-    console.log("from name: " + this.getCookie('UserName'));
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Name>(this.port + "/api/Home/getNameHebrew?LoginUserName=" + this.LoginUserName);
   }

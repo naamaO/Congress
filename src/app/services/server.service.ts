@@ -29,7 +29,6 @@ export class ServerService {
   public Country: string[] = [];
   public jsonPurchaseData: Array<any>= [];
   public resNotifyTranzila:any;
-  
   public CART = {
     KEY: 'ShoppingCartGuest',
     contents: []

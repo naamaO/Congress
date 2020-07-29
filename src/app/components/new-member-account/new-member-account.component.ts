@@ -182,20 +182,6 @@ export class NewMemberAccountCompponent implements OnInit {
   }
 
 
-  SendToTranzila() {
-    let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
-    localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
-    this.setCookieCurrency(this.currency);
-    this.setCookieLang(this.langg);
-    this.setCookieTotal(this.Total);
-    // this.serverService.setCurrency(this.currency);
-    //this.serverService.setLang(this.langg);
-    this.LoginUserName = this.getCookie('UserName');
-    this.serverService.setEmail(this.LoginUserName);
-    // this.serverService.setTotal(this.Total);
-    this.setCookieRout(1);
-    this.router.navigate(['Pay']); 
-  } 
 
   setCookieLang(lang: string) {
     this.cookieService.put('Lang', lang);
@@ -206,7 +192,34 @@ export class NewMemberAccountCompponent implements OnInit {
   setCookieCurrency(currency: number) {
     this.cookieService.put('Currency', currency.toString());
   }
-
+  //SendToTranzila() {
+  //  //let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
+  //  //localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
+  //  //this.setCookieCurrency(this.currency);
+  //  //this.setCookieLang(this.langg);
+  //  //this.setCookieTotal(this.Total);
+  //  //// this.serverService.setCurrency(this.currency);
+  //  ////this.serverService.setLang(this.langg);
+  //  //this.LoginUserName = this.getCookie('UserName');
+  //  //this.serverService.setEmail(this.LoginUserName);
+  //  //// this.serverService.setTotal(this.Total);
+  //  //this.setCookieRout(1);
+  //  //this.router.navigate(['Pay']);
+  //} ‏
+  SendToTranzila() {
+       let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
+    localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
+    this.setCookieCurrency(this.currency);
+    this.setCookieLang(this.langg);
+    this.setCookieTotal(this.Total);
+    // this.serverService.setCurrency(this.currency);
+    //this.serverService.setLang(this.langg);
+    this.LoginUserName = this.getCookie('UserName');
+    this.serverService.setEmail(this.LoginUserName);
+    // this.serverService.setTotal(this.Total);
+    this.setCookieRout(1);
+    this.router.navigate(['Pay']);
+  }
 
   onMemberTypeChange(membershipTypeChanged) {
     this.CARTMEMBERSHIP.contents = [];

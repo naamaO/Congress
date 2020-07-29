@@ -95,8 +95,12 @@ export class CongressRegistrationSingleComponent implements OnInit {
     this.serverService.selectDraft().subscribe((events) => {
       this.Division = events.Division;
       this.setCookie(this.Division);
+      console.log("division: " + this.Division);
       this.SubDivision = events.SubDivision;
       this.setCookieSub(this.SubDivision);
+      console.log("SubDivision: " + this.SubDivision);
+      console.log("rout: " + this.Rout);
+
       this.TitleEnglish = events.TitleEnglish;
       this.TitleHebrew = events.TitleHebrew;
       this.Proposal = events.Proposal;

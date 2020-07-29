@@ -379,6 +379,7 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
     this.http.post(this.port + "/api/Home/Registration", user).subscribe();
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
+    console.log("check user name in service  " + this.getCookie('UserName'));
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
   }
   getUserNameExists(UserName:string): Observable<any> {
@@ -485,6 +486,10 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
   }
 
   selectDraft(): Observable<Proposals> {
+    console.log("from selectdraft: 1" + this.getCookie('UserName') + "1");
+    console.log("from selectdraft: length:" + this.getCookie('UserName').length);
+
+
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
 
@@ -557,6 +562,7 @@ public port: string = 'http://jewish-studies.b2story.com/webApi';
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);
   }
   getNameHebrew(): Observable<Name> {
+    console.log("from name: " + this.getCookie('UserName'));
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Name>(this.port + "/api/Home/getNameHebrew?LoginUserName=" + this.LoginUserName);
   }

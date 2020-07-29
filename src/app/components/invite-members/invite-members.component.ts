@@ -124,6 +124,18 @@ export class InviteMembersComponent implements OnInit {
   //     this.ArrSubDivision = events;
   //   });
   //}
+   maxlength(element, maxvalue) {
+  var q = element.value.split(/[\s]+/).length;
+  if (q > maxvalue) {
+    var r = q - maxvalue;
+    alert("Sorry, you have input " + q + " words into the " +
+      "text area box you just completed. It can return no more than " +
+      maxvalue + " words to be processed. Please abbreviate " +
+      "your text by at least " + r + " words");
+    return false;
+  }
+}
+
   onMe(num: number) {
 
     if (num == 1) {

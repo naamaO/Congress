@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,13 +23,22 @@ export class ServerService {
   public LoginUserName: string;
   public LoginDiv: string;
   public currency: number = 1;
-  public total: number;
+  public total: any;
   public lang: string = 'il';
   public email: string;
   public Country: string[] = [];
+  public jsonPurchaseData: Array<any>= [];
   public resNotifyTranzila:any;
-  //public port: string = 'http://localhost:64905';
- public port: string = 'http://jewish-studies.b2story.com/webApi';
+  public CART = {
+    KEY: 'ShoppingCartGuest',
+    contents: []
+  }
+  public CARTMEMBERSHIP = {
+    KEY: 'ShoppingCart',
+    contents: []
+  }
+//  public port: string = 'http://localhost:64905';
+public port: string = 'http://jewish-studies.b2story.com/webApi';
 // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
@@ -288,26 +297,40 @@ export class ServerService {
       "Zimbabwe"];
   }
   ngOnInit() {
-    this.setCurrency(this.currency);
-    this.setLang(this.lang);
+  //  this.setCurrency(this.currency);
+  //  this.setLang(this.lang);
     this.setEmail(this.email);
-    this.setTotal(this.total);
-  }
-  setTotal(total){
-    this.total = total;
+  //  this.setTotal();
   }
 
-  setCurrency(currency){
-  this.currency = currency;
+  setjsonPurchaseData2(){
+  console.log( localStorage.getItem(this.CART.KEY));
+   return  localStorage.getItem(this.CART.KEY);
+  }
+  setjsonPurchaseData1(){
+    console.log( localStorage.getItem(this.CARTMEMBERSHIP.KEY));
+     return  localStorage.getItem(this.CARTMEMBERSHIP.KEY);
+    }
+  setTotal(){
+    this.total = JSON.parse(this.getCookie('Total'));
+    return this.total;
   }
 
-  setLang(lang){
-    this.lang = lang;
+  setCurrency(){
+  this.currency = JSON.parse(this.getCookie('Currency'));
+  return this.currency;
+  }
+
+  setLang(){
+    this.lang = this.getCookie('Lang');
+    return this.lang;
   }
 
   setEmail(email){
     this.email = email;
-  } setRout(Rout){
+  } 
+  
+  setRout(Rout){
     this.Rout = Rout;
   }
 
@@ -368,6 +391,7 @@ export class ServerService {
     return this.http.get<book>(this.port + "/api/Home/GetBookByIdHebrew?Id=" + Id)
   }
   getNumProduct(): Observable<number> {
+    //alert("F");
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }
@@ -378,7 +402,6 @@ export class ServerService {
     this.http.post(this.port + "/api/Home/Registration", user).subscribe();
   }
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
-    console.log("check user name in service  " + this.getCookie('UserName'));
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
   }
   getUserNameExists(UserName:string): Observable<any> {
@@ -485,9 +508,6 @@ export class ServerService {
   }
 
   selectDraft(): Observable<Proposals> {
-
-
-
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
 
@@ -516,7 +536,6 @@ export class ServerService {
   InviteMembers(arr: invited[]) {
     this.LoginUserName = (this.getCookie('UserName'));
     this.http.post(this.port + "/api/Home/InviteMembers?arrInvited=", arr).subscribe();
-    
 
   }
   getAll_W_Proposals(): Observable<Judges[]> {
@@ -561,7 +580,6 @@ export class ServerService {
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);
   }
   getNameHebrew(): Observable<Name> {
-    console.log("from name: " + this.getCookie('UserName'));
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Name>(this.port + "/api/Home/getNameHebrew?LoginUserName=" + this.LoginUserName);
   }

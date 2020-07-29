@@ -101,6 +101,7 @@ export class NewMemberAccountCompponent implements OnInit {
     contents: []
   };
   // public Address: string;
+  
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.Country = serverService.Country;
     this.ArrMembershipTypes = [

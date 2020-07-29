@@ -96,7 +96,11 @@ export class NewMemberAccountCompponent implements OnInit {
   public Total: number;
   public membershipType: number;
   public Language: string;
- // public Address: string;
+  public CARTMEMBERSHIP = {
+    KEY: 'ShoppingCart',
+    contents: []
+  }‏
+  // public Address: string;
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.Country = serverService.Country;
     this.ArrMembershipTypes = [
@@ -176,32 +180,74 @@ export class NewMemberAccountCompponent implements OnInit {
 
   }
 
+
+
+  setCookieLang(lang: string) {
+    this.cookieService.put('Lang', lang);
+  }
+  setCookieTotal(total: number) {
+    this.cookieService.put('Total', total.toString());
+  }
+  setCookieCurrency(currency: number) {
+    this.cookieService.put('Currency', currency.toString());
+  }
+  SendToTranzila() {
+    let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
+    localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
+    this.setCookieCurrency(this.currency);
+    this.setCookieLang(this.langg);
+    this.setCookieTotal(this.Total);
+    // this.serverService.setCurrency(this.currency);
+    //this.serverService.setLang(this.langg);
+    this.LoginUserName = this.getCookie('UserName');
+    this.serverService.setEmail(this.LoginUserName);
+    // this.serverService.setTotal(this.Total);
+    this.setCookieRout(1);
+    this.router.navigate(['Pay']);
+  } ‏
+
+
   onMemberTypeChange(membershipTypeChanged) {
+    this.CARTMEMBERSHIP.contents = [];
+    let obj;
     this.membershipType = membershipTypeChanged;
-    if(membershipTypeChanged==0) {
+    if (membershipTypeChanged == 0) {
+      obj = { product_name: this.ArrMembershipTypes[0].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[0].price }
         console.log("this.ArrMembershipTypes[0].price",this.ArrMembershipTypes[0].price)
         this.Total=this.ArrMembershipTypes[0].price;
         }
-    else if(membershipTypeChanged==1) {
+    else if (membershipTypeChanged == 1) {
+      obj = { product_name: this.ArrMembershipTypes[1].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[1].price }
+
         console.log("this.ArrMembershipTypes[1].price",this.ArrMembershipTypes[1].price)
         this.Total=this.ArrMembershipTypes[1].price;
        }
-    else if(membershipTypeChanged==2) {
+    else if (membershipTypeChanged == 2) {
+      obj = { product_name: this.ArrMembershipTypes[2].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[2].price }
+
         console.log("this.ArrMembershipTypes[2].price",this.ArrMembershipTypes[2].price)
         this.Total=this.ArrMembershipTypes[2].price;
         }
-    else if(membershipTypeChanged==3) {     
+    else if (membershipTypeChanged == 3) {
+      obj = { product_name: this.ArrMembershipTypes[3].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[3].price }
+
         console.log("this.ArrMembershipTypes[3].price",this.ArrMembershipTypes[3].price)
         this.Total=this.ArrMembershipTypes[3].price;
         }
-    else if(membershipTypeChanged==4) {
+    else if (membershipTypeChanged == 4) {
+      obj = { product_name: this.ArrMembershipTypes[4].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[4].price }
+
         console.log("this.ArrMembershipTypes[4].price",this.ArrMembershipTypes[4].price)
         this.Total=this.ArrMembershipTypes[4].price;
         }
-    else if(membershipTypeChanged==5) {
+    else if (membershipTypeChanged == 5) {
+      obj = { product_name: this.ArrMembershipTypes[5].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[5].price }
+
         console.log("this.ArrMembershipTypes[5].price",this.ArrMembershipTypes[5].price)
         this.Total=this.ArrMembershipTypes[5].price;
-        }
+    }
+    this.CARTMEMBERSHIP.contents[0] = obj;
+
       console.log("membershipTypeChanged",membershipTypeChanged)
   }
 //dothis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -415,14 +461,14 @@ export class NewMemberAccountCompponent implements OnInit {
 
    
   }
-  SendToTranzila() {
-    this.serverService.setCurrency(this.currency);
-    this.serverService.setLang(this.langg);
-    this.serverService.setEmail(this.LoginUserName);
-    this.serverService.setTotal(this.Total);
-    this.setCookieRout(1);
-    this.router.navigate(['Pay']);
-  }
+  //SendToTranzila() {
+  //  this.serverService.setCurrency(this.currency);
+  //  this.serverService.setLang(this.langg);
+  //  this.serverService.setEmail(this.LoginUserName);
+  //  this.serverService.setTotal(this.Total);
+  //  this.setCookieRout(1);
+  //  this.router.navigate(['Pay']);
+  //}
   focusacademic() { 
     this.academic.nativeElement.style.color = "#27b5e5";
   }

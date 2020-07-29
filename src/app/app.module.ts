@@ -38,6 +38,9 @@ import { BookDetailsHebrewComponent } from './components/book-details-hebrew/boo
 import { TranzilaComponent } from './components/tranzila/tranzila.component';
 import { DraftsComponent } from './components/drafts/drafts.component';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieOptions } from 'angular2-cookie';
+
+//import { CookieService, CookieOptions } from 'ngx-cookie';
 import { CongressRegistrationSecondEnglishComponent } from './components/congress-registration-second-english/congress-registration-second-english.component';
 import { CongressRegistrationSecondHebrewComponent } from './components/congress-registration-second-hebrew/congress-registration-second-hebrew.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -150,7 +153,9 @@ import { NavigatetosinglepropComponent } from './components/navigatetosingleprop
   //  //MatButtonModule,
   //  //MatCheckboxModule, MatSelect, MatOption, MatFormField
   ],
-  providers: [ServerService, CookieService,MatPaginatorIntl],
+  providers: [ServerService, CookieService, MatPaginatorIntl,
+    { provide: CookieOptions, useValue: {} },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -55,6 +55,7 @@ export class UserPassComponent implements OnInit {
     });
   }
   setCookie(UaerName: string) {
+    console.log("username cookies: " + UaerName)
     this.cookieService.put('UserName', UaerName);
   }
   getCookie(key: string) {

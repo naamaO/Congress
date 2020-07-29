@@ -99,7 +99,7 @@ export class NewMemberAccountCompponent implements OnInit {
   public CARTMEMBERSHIP = {
     KEY: 'ShoppingCart',
     contents: []
-  }‏
+  };
   // public Address: string;
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.Country = serverService.Country;
@@ -181,16 +181,6 @@ export class NewMemberAccountCompponent implements OnInit {
   }
 
 
-
-  setCookieLang(lang: string) {
-    this.cookieService.put('Lang', lang);
-  }
-  setCookieTotal(total: number) {
-    this.cookieService.put('Total', total.toString());
-  }
-  setCookieCurrency(currency: number) {
-    this.cookieService.put('Currency', currency.toString());
-  }
   SendToTranzila() {
     let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
     localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
@@ -203,8 +193,18 @@ export class NewMemberAccountCompponent implements OnInit {
     this.serverService.setEmail(this.LoginUserName);
     // this.serverService.setTotal(this.Total);
     this.setCookieRout(1);
-    this.router.navigate(['Pay']);
-  } ‏
+    this.router.navigate(['Pay']); 
+  } 
+
+  setCookieLang(lang: string) {
+    this.cookieService.put('Lang', lang);
+  }
+  setCookieTotal(total: number) {
+    this.cookieService.put('Total', total.toString());
+  }
+  setCookieCurrency(currency: number) {
+    this.cookieService.put('Currency', currency.toString());
+  }
 
 
   onMemberTypeChange(membershipTypeChanged) {

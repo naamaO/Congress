@@ -213,7 +213,7 @@
                         <div class="product-buttons-container clearfix"  (click)="Details(item)">
                           <!-- <img class="icon-cart" src="/assets/images/icon-cart.png" /> -->
                           <button *ngIf="item.Available"(click)="Details(item)" class="buy-btn" >BUY</button>
-                          <button *ngIf="!item.Available" style="background-color:#e9e9e4;padding: 10px 0px;" (click)="Details(item)" class="buy-btn">NO INVENTORY</button>
+                          <button *ngIf="!item.Available" style="background-color:#e9e9e4;color: #0b4e6f;padding: 10px 0px;" (click)="Details(item)" class="buy-btn">OUT OF STOCK</button>
                           <!-- <img class="icon-details" src="/assets/images/icon-details2.png" /> -->
                           <!-- <span style="cursor:pointer" (click)="Detais(item)">Details</span> -->
                         </div>

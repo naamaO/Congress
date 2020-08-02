@@ -53,8 +53,9 @@ export class TranzilaComponent implements OnInit {
     if(this.Rout==2){
     arrayPurchaseData = JSON.parse(this.serverService.setjsonPurchaseData2());
     arrayPurchaseData.map(item => {
+      item.price = parseInt(item.Total);
       item.Quantity = parseInt(item.Quantity);
-      item.Quantity = parseInt(item.Total);
+      item.NameBook = item.NameBook.replace(/[^a-zA-Z0-9 ]/g, '');
       item.NameBook = item.NameBook.trimEnd();
      let temObj = {product_name:item.NameBook,product_quantity:item.Quantity,product_price:item.Total}
      this.jsonPurchaseData.push(temObj);
@@ -75,7 +76,7 @@ export class TranzilaComponent implements OnInit {
        this.jsonPurchaseData = encodeURIComponent(this.jsonPurchaseData);
     //https://direct.tranzila.com/terminalname/iframe.php?lang=il
     this.src = "https://direct.tranzila.com/bytes2/iframenew.php?sum=" 
-    + this.Total + "&currency=" + this.Currency + "&lang=" + this.Lang + "&email=" + this.Email + "&cred_type=1";
+    + this.Total + "&currency=" + this.Currency + "&lang=" + this.Lang +"&u71=1" + "&json_purchase_data="+ this.jsonPurchaseData +"&email=" + this.Email + "&cred_type=1" ;
     this.srcReal = this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
     // +"&u71=1" + "&json_purchase_data=" + this.jsonPurchaseData "&notify_url_address=" + this.notifyUrlAddress + + "&success_url_address=" + this.successUrlAddress + "&fail_url_address=" + this.failUrlAddress +
     console.log("this.srcReal",this.srcReal)

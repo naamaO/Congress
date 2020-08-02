@@ -15,6 +15,7 @@ import { __await } from 'tslib';
 export class BookDetailsComponent implements OnInit {
   public item2: shoppingCart;
   public Quantity: number=0;
+  public MQuantity: number=0;
   public UserNameLogin: string;
   public Id: number;
   private sub: any;
@@ -34,6 +35,8 @@ export class BookDetailsComponent implements OnInit {
     KEY: 'ShoppingCartTotal',
     total: 0
   }
+  public enterItemToCart:boolean = true;
+
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 0;
     //get list of shopping cart//if login
@@ -46,6 +49,11 @@ export class BookDetailsComponent implements OnInit {
          else
            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
        }
+       this.DBShoppingCart.filter(product=>{
+        if(product.IdBook == this.Id){
+          this.Quantity = product.Quantity;
+        }
+      });
        },
        error => {  
          console.log(error)
@@ -129,6 +137,13 @@ export class BookDetailsComponent implements OnInit {
               this.TOTAL.total = JSON.parse(_total);
             }
   }
+  if(this.DBShoppingCart){
+      this.DBShoppingCart.filter(product=>{
+          if(product.IdBook == this.Id){
+            this.Quantity = product.Quantity;
+          }
+      });
+    }
   }
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
@@ -140,11 +155,10 @@ export class BookDetailsComponent implements OnInit {
     this.routers.navigate(['Pay', this.Total]);
  }
  AddQuantity(item: shoppingCart) {
-  item.Quantity=this.Quantity;
       this.serverService.postAddQuantity(item);
       this.changePlaying();
        this.changePlaying(); 
-    }
+}
  changePlaying() {
   __await (1000);
   this.ngZone.run(() => {
@@ -191,12 +205,19 @@ export class BookDetailsComponent implements OnInit {
     this.item2.UserName = this.UserNameLogin;
   
     if ((this.UserNameLogin!=null) && (this.UserNameLogin != "")) {
+      this.DBShoppingCart.filter(product=>{
+        if(product.IdBook == this.Id){
+         this.AddQuantity(product);
+         this.enterItemToCart = false;
+        }
+    });
+    if(this.enterItemToCart){
       this.serverService.enterItemToCart(this.item2).subscribe((events) => {
         this.changePlaying();
         this.changePlaying();
-        this.serverService.getNumProduct().subscribe(val => this.num = val);
-
+        this.serverService.getNumProduct().subscribe(val => this.num = val);  
         });  
+      }
     }
     else {
 
@@ -214,25 +235,84 @@ export class BookDetailsComponent implements OnInit {
     for (var i = 0; i < this.DBShoppingCart.length; i++) {
       if (this.DBShoppingCart[i].SallePrice == 0){
       this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
-      this.num = this.num + this.DBShoppingCart[i].Quantity;
-      this.Total = this.Total + this.DBShoppingCart[i].Total;
+        this.CART.contents.map(item=>{
+          if(item.Id === i)
+          this.CART.contents[i].Total = this.DBShoppingCart[i].Total;
+        });  
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+      if(this.MQuantity>0){
+        this.num = this.num + this.MQuantity;
+       }
+      else{
+        this.num = this.num + this.DBShoppingCart[i].Quantity;
+       }
+       if(this.MQuantity>0){
+        this.Total = this.Total + (this.DBShoppingCart[i].PriceBook * this.MQuantity);
+       }
+      else{
+        this.Total = this.Total + this.DBShoppingCart[i].Total;
+      }
     }
     else{
       this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
-      this.num = this.num + this.DBShoppingCart[i].Quantity;
-      this.Total = this.Total + this.DBShoppingCart[i].Total;
+      this.CART.contents.map(item=>{
+        if(item.Id === i)
+        this.CART.contents[i].Total = this.DBShoppingCart[i].Total;
+      });  
+      let _cart = JSON.stringify(this.CART.contents);
+      localStorage.setItem(this.CART.KEY, _cart);
+        if(this.MQuantity>0){
+        this.num = this.num + this.MQuantity;
+       }
+      else{
+        this.num = this.num + this.DBShoppingCart[i].Quantity;
+       }
+       if(this.MQuantity>0){
+        this.Total = this.Total + (this.DBShoppingCart[i].SallePrice * this.MQuantity);
+       }
+       else{
+        this.Total = this.Total + this.DBShoppingCart[i].Total;
+      }
     }
   }
-}else{
-  let i=  this.DBShoppingCart.length-1; 
-  if (this.DBShoppingCart[i].SallePrice == 0){
-  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
 }
 else{
+  let i = this.DBShoppingCart.length-1; 
+  if (this.DBShoppingCart[i].SallePrice == 0){
+  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
+  }
+  else{
   this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
-}
-this.num = this.num + this.DBShoppingCart[i].Quantity;
-this.Total = this.Total + this.DBShoppingCart[i].Total;
+  }
+  this.CART.contents.map(item=>{
+    if(item.Id === i)
+    this.CART.contents[i].Total = this.DBShoppingCart[i].Total;
+  });
+  let _cart = JSON.stringify(this.CART.contents);
+  localStorage.setItem(this.CART.KEY, _cart);
+   if(this.MQuantity>0){
+    this.num = this.num + this.MQuantity;
+   }
+   else{
+    this.num = this.num + this.DBShoppingCart[i].Quantity;
+   }
+   if (this.DBShoppingCart[i].SallePrice == 0){
+   if(this.MQuantity>0){
+    this.Total = this.Total + (this.DBShoppingCart[i].PriceBook * this.MQuantity);
+   }
+   else{
+    this.Total = this.Total + this.DBShoppingCart[i].Total;
+  }
+  }
+ else{
+  if(this.MQuantity>0){
+    this.Total = this.Total + (this.DBShoppingCart[i].SallePrice * this.MQuantity);
+   }
+   else{
+    this.Total = this.Total + this.DBShoppingCart[i].Total;
+  }
+ }
 }
 
   if(this.DBShoppingCart.length==0){
@@ -294,7 +374,13 @@ increase(id, qty){
     //increase the quantity of an item in the cart
     this.CART.contents = this.CART.contents.map(item=>{
       if (item.IdBook === id)
+      if(item.Quantity>0){
+        this.MQuantity = this.Quantity - item.Quantity;
+        item.Quantity = item.Quantity + (this.Quantity - item.Quantity);
+      }
+      else{
         item.Quantity = item.Quantity + this.Quantity;
+      }
         return item;
     });
     //update localStorage

@@ -15,7 +15,8 @@ import { __await } from 'tslib';
 })
 export class BookDetailsHebrewComponent implements OnInit {
   public Total1: number;
-  public Quantity: number;
+  public Quantity: number =0;
+  public MQuantity: number=0;
   public item2: shoppingCart;
   public UserNameLogin: string;
   public Id: number;
@@ -36,6 +37,8 @@ export class BookDetailsHebrewComponent implements OnInit {
     KEY: 'ShoppingCartTotal',
     total: 0
   }
+  public enterItemToCart:boolean = true;
+
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 0;
  //get list of shopping cart//if login
@@ -48,6 +51,11 @@ if(this.getCookie('UserName')) {
       else
         this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
     }
+    this.DB.filter(product=>{
+      if(product.IdBook == this.Id){
+        this.Quantity = product.Quantity;
+      }
+  });
     },
     error => {  
       console.log(error)
@@ -132,7 +140,14 @@ if(!this.DB){
               this.TOTAL.total = JSON.parse(_total);
             }
   }
+  if(this.DB){
+  this.DB.filter(product=>{
+    if(product.IdBook == this.Id){
+      this.Quantity = product.Quantity;
     }
+    });
+  }
+}
   
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCartHebrew");
@@ -164,12 +179,19 @@ if(!this.DB){
     this.item2.UserName = this.UserNameLogin;
   
     if ((this.UserNameLogin!=null) && (this.UserNameLogin != "")) {
-      this.serverService.enterItemToCart(this.item2).subscribe((events) => {
-        this.changePlaying();
-        this.changePlaying();
-        this.serverService.getNumProduct().subscribe(val => this.num = val);
-
-        });  
+      this.DB.filter(product=>{
+        if(product.IdBook == this.Id){
+         this.AddQuantity(product);
+         this.enterItemToCart = false;
+        }
+        });
+        if(this.enterItemToCart){
+          this.serverService.enterItemToCart(this.item2).subscribe((events) => {
+            this.changePlaying();
+            this.changePlaying();
+            this.serverService.getNumProduct().subscribe(val => this.num = val);
+            });  
+          }
     }
     else {
 
@@ -187,27 +209,85 @@ if(!this.DB){
     for (var i = 0; i < this.DB.length; i++) {
       if (this.DB[i].SallePrice == 0){
       this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+      this.CART.contents.map(item=>{
+        if(item.Id === i)
+        this.CART.contents[i].Total = this.DB[i].Total;
+      });  
+      let _cart = JSON.stringify(this.CART.contents);
+      localStorage.setItem(this.CART.KEY, _cart);
+    if(this.MQuantity>0){
+      this.num = this.num + this.MQuantity;
+     }
+    else{
       this.num = this.num + this.DB[i].Quantity;
+     }
+     if(this.MQuantity>0){
+      this.Total = this.Total + (this.DB[i].PriceBook * this.MQuantity);
+     }
+    else{
       this.Total = this.Total + this.DB[i].Total;
+    }
     }
     else{
       this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-      this.num = this.num + this.DB[i].Quantity;
-      this.Total = this.Total + this.DB[i].Total;
+      this.CART.contents.map(item=>{
+        if(item.Id === i)
+        this.CART.contents[i].Total = this.DB[i].Total;
+      });  
+      let _cart = JSON.stringify(this.CART.contents);
+      localStorage.setItem(this.CART.KEY, _cart);
+        if(this.MQuantity>0){
+        this.num = this.num + this.MQuantity;
+       }
+      else{
+        this.num = this.num + this.DB[i].Quantity;
+       }
+       if(this.MQuantity>0){
+        this.Total = this.Total + (this.DB[i].SallePrice * this.MQuantity);
+       }
+       else{
+        this.Total = this.Total + this.DB[i].Total;
+      }
     }
   }
 }
   else{
-    let i=  this.DB.length-1; 
+    let i = this.DB.length-1; 
     if (this.DB[i].SallePrice == 0){
     this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
   }
   else{
     this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
   }
+this.CART.contents.map(item=>{
+  if(item.Id === i)
+  this.CART.contents[i].Total = this.DB[i].Total;
+});
+let _cart = JSON.stringify(this.CART.contents);
+localStorage.setItem(this.CART.KEY, _cart);
+ if(this.MQuantity>0){
+  this.num = this.num + this.MQuantity;
+ }
+ else{
   this.num = this.num + this.DB[i].Quantity;
+ }
+ if (this.DB[i].SallePrice == 0){
+ if(this.MQuantity>0){
+  this.Total = this.Total + (this.DB[i].PriceBook * this.MQuantity);
+ }
+ else{
   this.Total = this.Total + this.DB[i].Total;
   }
+  }
+ else{
+    if(this.MQuantity>0){
+      this.Total = this.Total + (this.DB[i].SallePrice * this.MQuantity);
+     }
+     else{
+      this.Total = this.Total + this.DB[i].Total;
+    }
+  }
+}
   if(this.DB.length==0){
     this.num = 0;
   }
@@ -267,8 +347,14 @@ increase(id, qty){
     //increase the quantity of an item in the cart
     this.CART.contents = this.CART.contents.map(item=>{
       if (item.IdBook === id)
+      if(item.Quantity>0){
+        this.MQuantity = this.Quantity - item.Quantity;
+        item.Quantity = item.Quantity + (this.Quantity - item.Quantity);
+      }
+      else{
         item.Quantity = item.Quantity + this.Quantity;
-        return item;
+      }
+      return item;
     });
     //update localStorage
     this.sync()
@@ -336,13 +422,9 @@ remove(id){
     // this.changePlaying();
   }
   AddQuantity(item: shoppingCart) {
-item.Quantity=this.Quantity;
-    this.serverService.postAddQuantity(item)//.subscribe((events) => {
-    //this.router.navigateByUrl("/ShoppingCart");
+    this.serverService.postAddQuantity(item);
     this.changePlaying();
      this.changePlaying(); 
-    //});
-
   }
 
   SendToTranzila(item:shoppingCart) {

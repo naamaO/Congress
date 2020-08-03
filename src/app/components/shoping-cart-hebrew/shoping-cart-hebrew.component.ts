@@ -607,7 +607,7 @@ remove(id){
     //this.serverService.setCurrency(this.currency);
     //this.serverService.setLang(this.lang);
     this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
-    this.serverService.setEmail(this.UserNameLogin);
+    this.serverService.setEmail();
    // this.serverService.setTotal(this.Total);
     this.setCookieRout(2);
     this.router.navigate(['Pay']);
@@ -695,7 +695,7 @@ remove(id){
        let existUser;
      //  existUser = true;
          existUser = val;
-       console.log(val)
+      // console.log(val)
      
       if(existUser==1){//if not  registered
       this.registrationGuest();

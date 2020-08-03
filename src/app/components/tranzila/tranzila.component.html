@@ -1,5 +1,13 @@
 <div style="margin-left:40%;margin-top:10%;">
-  <form >
-    <iframe [src]="srcReal" width="370" height="555" style="border:none;" ></iframe>
+  <form target="tranzilla-form" #paymentForm method="POST" action="" hidden="true">
+    <input type="hidden" name="sum" />
+    <input type="hidden" name="currency" />
+    <input type="hidden" name="lang" />
+    <input type="hidden" name="u71" value="1" />
+    <input type="hidden" name="json_purchase_data" />
+    <input type="hidden" name="cred_type" value="1" />
+    <input type="hidden" name="email" />
   </form>
+
+  <iframe name="tranzilla-form" width="370" height="555" style="border:none;"></iframe>
 </div>

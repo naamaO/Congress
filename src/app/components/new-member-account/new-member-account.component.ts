@@ -101,7 +101,7 @@ export class NewMemberAccountCompponent implements OnInit {
     contents: []
   };
   // public Address: string;
-  
+
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.Country = serverService.Country;
     this.ArrMembershipTypes = [
@@ -215,7 +215,7 @@ export class NewMemberAccountCompponent implements OnInit {
     // this.serverService.setCurrency(this.currency);
     //this.serverService.setLang(this.langg);
     this.LoginUserName = this.getCookie('UserName');
-    this.serverService.setEmail(this.LoginUserName);
+    this.serverService.setEmail();
     // this.serverService.setTotal(this.Total);
     this.setCookieRout(1);
     this.router.navigate(['Pay']);

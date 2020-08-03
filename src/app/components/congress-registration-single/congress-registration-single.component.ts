@@ -31,7 +31,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
 
   public Name: Name;
   public NameHebrew: Name;
-
+  public errMoreThen250: boolean;
   public Show2Proposals: boolean;
   public showTwo: boolean;
   public Email2: string;
@@ -137,17 +137,16 @@ export class CongressRegistrationSingleComponent implements OnInit {
     }
   
   }
+  maxlength(element, maxvalue) {
+    var q = element.split(/[\s]+/).length;
+    if (q > maxvalue) {
+      var r = q - maxvalue;
+      this.errMoreThen250 = true;
+      return false;
+    }
+  }
 
-   maxlength(element, maxvalue){
-      // var q = element.Proposal.split(/[\s]+/).length;
-      var q = element.Proposal.split(" "); 
-    
-      if(q.length > maxvalue){
-          var r = q.length - maxvalue;
-          alert("You can enter no more than "+ maxvalue+" words");
-          return false;
-      }
-}
+  
 TitleEnglishP(elemTltle){
   elemTltle.console.error();
 

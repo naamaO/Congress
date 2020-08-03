@@ -32,6 +32,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   //@Input()
   userFormGroup: FormGroup;
   public angForm: FormGroup;
+  public errMoreThen250: boolean;
   pattern: string | RegExp
   public Show2Proposals: boolean;
   public showTwo: boolean;
@@ -208,6 +209,14 @@ export class CongressRegistrationOneComponent implements OnInit {
   selectlang(lan: string) {
   }
   TitleEnglishP(event){
+  }
+  maxlength(element, maxvalue) {
+    var q = element.split(/[\s]+/).length;
+    if (q > maxvalue) {
+      var r = q - maxvalue;
+      this.errMoreThen250 = true;
+      return false;
+    }
   }
   changeProp(element, maxvalue) {
     if(element.Proposal!=null){

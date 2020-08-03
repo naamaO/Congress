@@ -46,9 +46,10 @@ export class InviteMembersComponent implements OnInit {
   @ViewChild('me2') me2: ElementRef;
   @ViewChild('me3') me3: ElementRef;
   @ViewChild('me4') me4: ElementRef;
+  @ViewChild('mechair') mechair: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  public errMoreThen250: boolean;
   public myControl = new FormControl();
   public isShowPropArrSession: boolean;
   public showErrEmpty: boolean;
@@ -125,13 +126,10 @@ export class InviteMembersComponent implements OnInit {
   //   });
   //}
    maxlength(element, maxvalue) {
-  var q = element.value.split(/[\s]+/).length;
+  var q = element.split(/[\s]+/).length;
   if (q > maxvalue) {
     var r = q - maxvalue;
-    alert("Sorry, you have input " + q + " words into the " +
-      "text area box you just completed. It can return no more than " +
-      maxvalue + " words to be processed. Please abbreviate " +
-      "your text by at least " + r + " words");
+    this.errMoreThen250 = true;
     return false;
   }
 }
@@ -144,26 +142,39 @@ export class InviteMembersComponent implements OnInit {
       this.me2.nativeElement.checked = false;
       this.me3.nativeElement.checked = false;
       this.me4.nativeElement.checked = false;
+      this.mechair.nativeElement.checked = false;
     } if (num == 2) {
       this.me = 2;
       this.me2.nativeElement.checked = true;
       this.me1.nativeElement.checked = false;
       this.me3.nativeElement.checked = false;
       this.me4.nativeElement.checked = false;
+      this.mechair.nativeElement.checked = false;
     } if (num == 3) {
       this.me = 3;
       this.me3.nativeElement.checked = true;
       this.me2.nativeElement.checked = false;
       this.me1.nativeElement.checked = false;
       this.me4.nativeElement.checked = false;
+      this.mechair.nativeElement.checked = false;
     } if (num == 4) {
       this.me = 4;
       this.me4.nativeElement.checked = true;
       this.me2.nativeElement.checked = false;
       this.me3.nativeElement.checked = false;
       this.me1.nativeElement.checked = false;
+      this.mechair.nativeElement.checked = false;
     }
-    
+    if (num == 5) {
+      this.me = 5;
+      this.me4.nativeElement.checked = false;
+      this.me2.nativeElement.checked = false;
+      this.me3.nativeElement.checked = false;
+      this.me1.nativeElement.checked = false;
+      this.mechair.nativeElement.checked = true;}
+  }
+  changeABS() {
+
   }
   SendInviteMember() {
     this.numInvited = 0;
@@ -193,6 +204,12 @@ export class InviteMembersComponent implements OnInit {
       this.e.FirstName = this.FirstName4;
       this.e.LastName = this.LastName4;
       this.e.Title = this.Title4;
+    }
+    if (this.me == 5) {
+      this.e.Email = this.ChairmanEmail;
+      this.e.FirstName = this.FirstNameChair;
+      this.e.LastName = this.LastNameChair;
+      this.e.Title = this.TitleChair;
     }
     this.a.TitleChair = this.TitleChair;
     this.a.FirstName = this.FirstName1;

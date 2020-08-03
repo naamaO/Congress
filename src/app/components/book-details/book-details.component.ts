@@ -125,7 +125,7 @@ export class BookDetailsComponent implements OnInit {
 
     this.UserNameLogin = this.getCookie('UserName');
     if(this.UserNameLogin){
-      console.log(this.UserNameLogin)
+      //console.log(this.UserNameLogin)
     }
     else  if(!this.UserNameLogin||this.UserNameLogin==null){
         let  _num = localStorage.getItem(this.NUM.KEY);

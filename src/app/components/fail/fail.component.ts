@@ -24,7 +24,7 @@ export class failComponent implements OnInit {
        });
   }
   ngOnInit() {
-    console.log("fail page on init!")
+    //console.log("fail page on init!")
   }
 
 }

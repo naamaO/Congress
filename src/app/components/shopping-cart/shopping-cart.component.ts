@@ -592,7 +592,7 @@ remove(id){
   //  this.serverService.setCurrency(this.currency);
    // this.serverService.setLang(this.lang);
    this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
-    this.serverService.setEmail(this.UserNameLogin);
+    this.serverService.setEmail();
    // this.serverService.setTotal(this.Total);
     this.setCookieRout(2);
     this.router.navigate(['Pay']);

@@ -44,6 +44,7 @@ export class NewMemberAccountCompponent implements OnInit {
   // public LastNameEnglish: string;
   public currency: number = 2;
   public langg: string = "us";
+  public ilang: string = "ENG";
   userFormGroup: FormGroup;
   public angForm: FormGroup;
   pattern: string | RegExp
@@ -181,7 +182,9 @@ export class NewMemberAccountCompponent implements OnInit {
 
   }
 
-
+  setCookieIlang(ilang: string) {
+    this.cookieService.put('ilang', ilang);
+  }
 
   setCookieLang(lang: string) {
     this.cookieService.put('Lang', lang);
@@ -191,6 +194,12 @@ export class NewMemberAccountCompponent implements OnInit {
   }
   setCookieCurrency(currency: number) {
     this.cookieService.put('Currency', currency.toString());
+  }
+  setCookieAddress(address: string) {
+    this.cookieService.put('address', address);
+  }
+  setCookieContact(contact: string) {
+    this.cookieService.put('contact', contact);
   }
   //SendToTranzila() {
   //  //let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
@@ -211,12 +220,26 @@ export class NewMemberAccountCompponent implements OnInit {
     localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.langg);
+    this.setCookieIlang(this.ilang);
     this.setCookieTotal(this.Total);
-    // this.serverService.setCurrency(this.currency);
-    //this.serverService.setLang(this.langg);
+    let address:any;
+    let country:any
+    country = this.selectedCountry;
+    let detailsAddress:any;
+    detailsAddress = this.Address
+    address = country.trimEnd() + " " + detailsAddress.trimRight();
+    this.setCookieAddress(address)
     this.LoginUserName = this.getCookie('UserName');
+    this.serverService.getName(this.LoginUserName).subscribe((val) => {
+      let first:any;
+      let last:any
+      first = val.FirstName;
+      last = val.LastName;
+      let contactName:any;
+      contactName = first.trimEnd() + " " + last.trimEnd();  
+      this.setCookieContact(contactName);  
+    });
     this.serverService.setEmail();
-    // this.serverService.setTotal(this.Total);
     this.setCookieRout(1);
     this.router.navigate(['Pay']);
   }

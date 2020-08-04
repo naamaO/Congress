@@ -28,6 +28,20 @@ export class ShoppingCartComponent implements OnInit {
   @ViewChild('usernameemailinput') usernameemailinput: ElementRef;
   @ViewChild('addressinput') addressinput: ElementRef;
   @ViewChild('countryinput') countryinput: ElementRef;
+
+  @ViewChild('namee2') namee2: ElementRef;
+  @ViewChild('usernameemail2') usernameemail2: ElementRef;
+  @ViewChild('address2') address2: ElementRef;
+  @ViewChild('country2') country2: ElementRef;
+  @ViewChild('nameefirstinput2') nameefirstinput2: ElementRef;
+  @ViewChild('nameelastinput2') nameelastinput2: ElementRef;
+  @ViewChild('usernameemailinput2') usernameemailinput2: ElementRef;
+  @ViewChild('addressinput2') addressinput2: ElementRef;
+  @ViewChild('countryinput2') countryinput2: ElementRef;
+
+  @ViewChild('yes') yes: ElementRef;
+  @ViewChild('no') no: ElementRef;
+
   public DB: shoppingCart[];
   public user: User;
   public Total: number;
@@ -40,6 +54,13 @@ export class ShoppingCartComponent implements OnInit {
   public LastName: string;
   public FirstNameHebrew: string;
   public LastNameHebrew: string;
+  public isYourAddress: string;
+
+  public FirstName2: string;
+  public LastName2: string;
+  public Address2: string;
+  public selectedCountry2: string;
+  public Country2: string[] = [];
 
   public CART = {
     KEY: 'ShoppingCartGuest',
@@ -59,12 +80,15 @@ export class ShoppingCartComponent implements OnInit {
   }
   public currency:number = 2;
   public lang:string = "us";
+  public ilang:string = "ENG";
   public itemToAddQunt1:any;
   public itemToRedQunt1:any;
   public emailvalidate:boolean = false;
   public rem:boolean = false
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
     this.Country =  this.serverService.Country;
+    this.Country2 =  this.serverService.Country;
+
     //get list of shopping cart//if login
 if(this.getCookie('UserName')) {     
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
@@ -581,6 +605,24 @@ remove(id){
   setCookieCurrency(currency: number) {
     this.cookieService.put('Currency', currency.toString());
   }
+  setCookieIlang(ilang: string) {
+    this.cookieService.put('ilang', ilang);
+  }
+  setCookieAddress(address: string) {
+    this.cookieService.put('address', address);
+  }
+  setCookieAddress2(address2: string) {
+    this.cookieService.put('address2', address2);
+  }
+  setCookieContact(contact: string) {
+    this.cookieService.put('contact', contact);
+  }
+  setCookieContact2(contact2: string) {
+    this.cookieService.put('contact2', contact2);
+  }
+  setCookieIsYourAddress(isYourAddress: string) {
+    this.cookieService.put('isYourAddress', isYourAddress);
+  }
   SendToTranzila() {
     this.CART.contents = this.DB;
     let _cart = JSON.stringify(this.CART.contents);
@@ -588,12 +630,26 @@ remove(id){
    // this.setCookieCart(this.DB);
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.lang);
+    this.setCookieIlang(this.ilang);
     this.setCookieTotal(this.Total);
-  //  this.serverService.setCurrency(this.currency);
-   // this.serverService.setLang(this.lang);
+    let address:any;
+    let country:any
+    country = this.selectedCountry;
+    let detailsAddress:any;
+    detailsAddress = this.Address
+    address = country.trimEnd() + " " + detailsAddress.trimEnd();
+    this.setCookieAddress(address);
    this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
+   this.serverService.getName(this.UserNameLogin).subscribe((val) => {
+    let first:any;
+    let last:any
+    first = val.FirstName;
+    last = val.LastName;
+    let contactName:any;
+    contactName = first.trimEnd() + " " + last.trimEnd();  
+    this.setCookieContact(contactName);  
+  });
     this.serverService.setEmail();
-   // this.serverService.setTotal(this.Total);
     this.setCookieRout(2);
     this.router.navigate(['Pay']);
   }
@@ -644,14 +700,72 @@ remove(id){
     }
     else{
     var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
+   if(this.isYourAddress=='no'){
+     if(
+          this.FirstName2 == null || 
+          this.LastName2 == null ||
+          this.Address2 == null ||
+          this.selectedCountry2 == null 
+     ){
+        if( !this.FirstName2 || !this.LastName2){
+          this.namee2.nativeElement.style.color = "#dc3545";
+          this.nameefirstinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+          this.nameelastinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+        }else{
+          this.namee2.nativeElement.style.color = "gray";
+          this.nameefirstinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+          this.nameelastinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+        }
+          // if(!this.LastName2){
+          //   this.namee2.nativeElement.style.color = "red";
+          //   this.nameelastinput2.nativeElement.style.borderBottom = "1px solid red";
+          // }else{
+          //   this.namee2.nativeElement.style.color = "gray";
+          //   this.nameelastinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+          // }
+         if(!this.Address2){
+          this.address2.nativeElement.style.color = "#dc3545";
+          this.addressinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+         }else{
+          this.address2.nativeElement.style.color = "gray";
+          this.addressinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+        }
+          if(!this.selectedCountry2){
+           this.country2.nativeElement.style.color = "#dc3545";
+           this.countryinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+          }else{
+            this.country2.nativeElement.style.color = "gray";
+            this.countryinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+          }
+          return
+     }
+     else{
+      this.setCookieIsYourAddress(this.isYourAddress);
+      let address2:any;
+      let country2:any
+      country2 = this.selectedCountry2;
+      let detailsAddress2:any;
+      detailsAddress2 = this.Address2
+      address2 = country2.trimEnd() + " " + detailsAddress2.trimEnd();
+      this.setCookieAddress2(address2);
+      let first2:any;
+      let last2:any
+      first2 = this.FirstName2;
+      last2 = this.LastName2;
+      let contactName2:any;
+      contactName2 = first2.trimEnd() + " " + last2.trimEnd();  
+      this.setCookieContact2(contactName2);  
+     }
+   }
     if(
-    this.FirstName != null && 
-    this.LastName != null &&
-    this.Address != null &&
-    this.selectedCountry != null &&
-    this.UserNameLogin != null 
+      this.FirstName != null && 
+      this.LastName != null &&
+      this.Address != null &&
+      this.selectedCountry != null &&
+      this.UserNameLogin != null 
       ){
         let user = this.getCookie('UserName');
+        this.setCookieIsYourAddress(this.isYourAddress);
     if(user!=undefined || user!=null){//if logined
 
     this.UserNameLogin = this.getCookie('UserName');
@@ -678,7 +792,6 @@ remove(id){
       localStorage.setItem(this.USERNAME.KEY, _username);
        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
        let existUser;
-     //  existUser = true;
          existUser = val;
       // console.log(val)
      
@@ -694,42 +807,12 @@ remove(id){
                 //  console.log(res)
                });
              }
-           //   this.SendToTranzila();       
       }
-      //else{//if registered and not logined
-       //add to all cart 
-      // let _contents = localStorage.getItem(this.CART.KEY);
-      //  this.DB= this.CART.contents;
-      //  for (var i = 0; i < this.DB.length; i++) {
-      //   this.DB[i].UserName = this.UserNameLogin;
-      //   // console.log( this.DB[i])
-      //   this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
-      //     // console.log(res)
-      //   });
-      // }
-
-  //    this.SendToTranzila();
-      //}
+ 
      });
     }
     this.SendToTranzila();
-   // if(this.serverService.resNotifyTranzila){
-   //   console.log("this.serverService.resNotifyTranzila",this.serverService.resNotifyTranzila)
-   // }
-    //if tranzila return response true
-    // if(this.serverService.resNotifyTranzila==000){}
-   /* for (var i = 0; i < this.DB.length; i++) {
-      this.DB[i].UserName = this.UserNameLogin;
-      console.log( this.DB[i])
-      let itemToDelete  =  this.DB[i];
-      this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
-        if(res==1){
-        //  console.log("this.DB[i]",itemToDelete)
-         this.serverService.postRemoveQuantity(itemToDelete);
-        }
-        //console.log(res)
-      });
-    }*/
+
 
     }
   else {
@@ -770,10 +853,23 @@ remove(id){
         this.usernameemail.nativeElement.style.color = "gray";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       }
-   // alert("All fields must be filled!");
   }
     }
 }
+
+onChangeShippingAddress(isYourAddress){
+  if(isYourAddress=='yes') {
+    console.log("isYourAddress",isYourAddress)
+  this.isYourAddress ='yes';
+  this.no.nativeElement.checked = false;
+    }
+else if(isYourAddress=='no') {
+    console.log("isYourAddress",isYourAddress)
+  this.isYourAddress ='no';
+  this.yes.nativeElement.checked = false;
+   }
+}
+
   SendToNew() {
     this.router.navigateByUrl("/new");
 
@@ -802,4 +898,30 @@ remove(id){
   unfocususernameemail() {
     this.namee.nativeElement.style.color = "gray";
   }
+
+  
+ focusnamee2() {
+  this.namee2.nativeElement.style.color = "#27b5e5";
+}
+unfocusnamee2() {
+  this.namee2.nativeElement.style.color = "gray";
+}
+focuscountry2() {
+  this.namee2.nativeElement.style.color = "#27b5e5";
+}
+unfocuscountry2() {
+  this.namee2.nativeElement.style.color = "gray";
+} 
+focusaddress2() {
+  this.namee2.nativeElement.style.color = "#27b5e5";
+}
+unfocusaddress2() {
+  this.namee2.nativeElement.style.color = "gray";
+}
+ focususernameemail2() {
+  this.namee2.nativeElement.style.color = "#27b5e5";
+}
+unfocususernameemail2() {
+  this.namee2.nativeElement.style.color = "gray";
+}
 }

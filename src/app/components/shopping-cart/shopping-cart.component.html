@@ -96,20 +96,68 @@
   </div>
 
 </div>
-
 <br/><br />
+<div class="row">
+  <div class="col-md-8" style="float: right;margin-right: 0px;margin-left: 30%;margin-bottom: 5%;">
+   <div class="col-md-8" style="margin:auto;margin-right: 0;"> 
+        <span class="span" class="cart-total-title" >Cart totals</span>
+        <br /><br />
+        <div class="container">
+          <div class="row" style="height: 0.01px;">
+            <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 15%;"></div>
+          </div>
+        </div>
+    <div class="col-md-12 input-total" style="padding: 12px;">
+    <label class="col-md-3 label-cart-subtotal">Subtotal: </label>
+    <label  class="col-md-1 label-cart-total" style="color:black">${{this.Total}}</label>
+    <br /><br />
+    <div class="container">
+      <div class="row" style="height: 0.01px;">
+        <!-- flex: 0 0 86.666667%; max-width: 86.666667%; -->
+        <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 16%;"></div>
+      </div>
+    </div>
+    <br />
+    <label class="col-md-3  label-cart-subtotal">Total: </label>
+    <label class="col-md-1 label-cart-total" style="color:#026fa7">${{this.Total}}</label>
+    </div>
+    <br /><br />
+    <div class="container">
+      <div class="row" style="height: 0.01px;">
+        <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 14%;"></div>
+      </div>
+    </div> 
+    <br />
+   <div class="col-md-12" style="float: right !important;flex: 0 0 90%;max-width: 90%;padding: 0;">
+     <button data-toggle="collapse" data-target="#shippingForm" class="fill-btn-blue checkout-btn" style="padding-right: 10px;padding-left: 10px;float: right;">CHECKOUT</button> 
+    <br /><br />
+  </div>
+  
+   </div> 
+   
+  </div>
+  </div>
+<br /><br /><br/><br />
+<div id="shippingForm" class="collapse">
+  <br/>
+<div class="container">
+  <div class="row" style="margin: auto;height: 0.01px;">
+    <div class="col-md-11 border-buttom margin-b-30" style="margin-left: 4%;"></div>
+  </div>
+</div>  
+<br/>
 <div>
-  <span  class="span" class="shippingAddressTitle">Shipping address</span>
-</div><br/><br />
+  <span  class="span" class="shippingAddressTitle">Billing address</span>
+</div>
+<br/>
 <div class="col-md" style="padding: 0;background-color: #f8f8f8;flex: 0 0 90%;max-width: 90%;margin-left: 60px;">
   <br />
   <div class="margin-top" >
     <!-- #namee -->
-    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;" #namee>Addressee full name</label>
+    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;" #namee>full name</label>
    
-   <!-- #address -->
-   <label class="col-md-6 headerGray color-gray" style="padding: 23px;" #address>Address [Street + city + state + postal code]</label> 
-  
+   <!-- #usernaeemailemail -->
+   <label class="col-md-6 margin headerGray color-gray" style="padding-left: 20px;" #usernameemail>Email</label>     
   </div>
   <div class="row" style="margin-left: -1px;height: 35px;">
     <div class="col-md-6"  style="padding-left: 36px;">
@@ -122,23 +170,23 @@
     </div>
 
     <div class="col-md-6" >
-       <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
-     <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address" #addressinput
-     style="padding:0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
-      </div>
-
+     <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
+  <input class="col-md" name="UserNameLogin" ngDefaultControl #usernameemailinput style="padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
+  <div *ngIf="emailvalidate" name="emailvalidate"  ngDefaultControl [(ngModel)]="emailvalidate">
+    <small class="text-danger">Please provide a valid email address</small>
   </div>
-
+  </div>
+</div> 
 
   <div class="row" style="margin-left: -1px;height: 70px;">
     <div class="col-md-6"  style="margin-top: 30px;color:gray">
       <!-- #country -->
     <label class="col-md-6 margin color-gray" style="padding-left: 30px;" #country>Country</label>     
     </div>
-    <div  class="col-md-6" style="margin-top: 30px; color:gray">
-     <!-- #usernaeemailemail -->
-     <label class="col-md-6 margin headerGray color-gray" style="padding: 0;" #usernameemail>Email</label>     
-    </div>
+    <div  class="col-md-6" style="color:gray">
+         <!-- #address -->
+   <label class="col-md headerGray color-gray" style="padding: 23px;padding-left: 0;" #address>Address [Street + city + state + postal code]</label> 
+   </div>
   </div>
   
   <div class="row" style="margin-left: -1px;height: 70px;">
@@ -150,57 +198,111 @@
     </select>
   </div>
   <div class="col-md-6" >
+       <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
+       <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address" #addressinput
+       style="padding:0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+  </div>
+</div>
+  <br />
+  
+</div>
+<br/>
+
+<div id="is" style="flex: 0 0 90%;max-width: 90%;margin-left: 60px;">
+<div  style="width: 100%; display: flex;justify-content: left;">
+<label>Is this your shipping address?</label>
+
+<div  style="width: 20%; display: flex;justify-content: left;padding-left: 10px;">
+<div class="custom-control custom-radio" style="padding-left: 45px;" >
+  <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('yes')" id="yes" name="isYourAddressYes" #yes>
+  <label class="custom-control-label" style="margin-bottom: 8px !important;" for="yes">yes</label>
+</div>
+<div class="custom-control custom-radio" style="padding-left: 45px;" >
+  <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('no')" id="no" name="isYourAddressNo" #no>
+  <label class="custom-control-label" style="margin-bottom: 8px !important;" for="no">no</label>
+</div>
+</div>
+
+</div>
+
+<div *ngIf="isYourAddress=='yes'" >
+    <span  class="span" class="shippingAddressTitle" style="margin-left: 0;">Shipping address</span>
+    <br />
+    <label style="margin-bottom: 8px !important;" >{{this.selectedCountry}} {{this.Address}} </label>
+</div>
+
+<div *ngIf="isYourAddress=='no'">
+  <span  class="span" class="shippingAddressTitle" style="margin-left: 0;">Shipping address</span> 
+  <br/> <br/>
+<div class="col-md" style="padding: 0;background-color: #f8f8f8;flex: 0 0 100%;max-width: 100%;">
+  <br />
+  <div class="margin-top" >
+    <!-- #namee2 -->
+    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;" #namee2>full name</label>
+   
+      <!-- #country2 -->
+      <label class="col-md-6 margin color-gray" style="padding-left: 30px;color: gray;" #country2>Country</label>     
+  </div>
+  <div class="row" style="margin-left: -1px;height: 35px;">
+    <div class="col-md-6"  style="padding-left: 36px;">
+      <!-- (focusout)="unfocusnamee2()" (focus)="focusnamee2()" -->
+      <input type="text" value="{{FirstName2}}" [(ngModel)]="FirstName2"    #nameefirstinput2
+      style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+      <!-- (focusout)="unfocusnamee2()" (focus)="focusnamee2()" -->
+      <input  type="text" value="{{LastName2}}" [(ngModel)]="LastName2"     #nameelastinput2
+      style="width: 30%; margin-left: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+    </div>
+
+    <div class="col-md-6" >
+      <!-- (focusout)="unfocuscountry2()" (focus)="focuscountry2()" -->
+      <select class="col-md"  [(ngModel)]="selectedCountry2" #countryinput2 style="padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
+        <option [value]="selectedCountry2" selected>{{selectedCountry2}}</option>
+        <option *ngFor="let c of Country2" [ngValue]="c">{{c}}</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <div class="row" style="margin-left: -1px;height: 70px;">
+    <div class="col-md-6"  style="margin-top: 15px;color:gray">
+         <!-- #address2 -->
+   <label class="col-md headerGray color-gray" style="padding: 23px;" #address2>Address [Street + city + state + postal code]</label> 
+   </div>
+      <!-- <div  class="col-md-6" style="margin-top: 30px; color:gray"> -->
+     <!-- #usernaeemailemail -->
+     <!-- <label class="col-md-6 margin headerGray color-gray" style="padding: 0;" #usernameemail>Email</label>     
+    </div> -->
+  </div>
+  
+  <div class="row" style="margin-left: -1px;height: 70px;">
+  <div class="col-md margin-top" style="margin-left: -1px;padding-left: 42px; ">
+       <!-- (focusout)="unfocusaddress2()" (focus)="focusaddress2()" -->
+       <input class="col-md-10" type="text" value="{{Address2}}" [(ngModel)]="Address2" #addressinput2
+       style="padding:0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+  </div>
+  <!-- <div class="col-md-6" > -->
      <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
-  <input class="col-md" name="UserNameLogin" ngDefaultControl #usernameemailinput style="padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
+  <!-- <input class="col-md" name="UserNameLogin" ngDefaultControl #usernameemailinput style="padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text" value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"  />
   <div *ngIf="emailvalidate" name="emailvalidate"  ngDefaultControl [(ngModel)]="emailvalidate">
     <small class="text-danger">Please provide a valid email address</small>
   </div>
-</div>
+</div> -->
   <br />
 </div>   
 
 </div>
-<br /><br />
-<!--<div class="clear"></div>-->
-<div class="row">
-<div class="col-md-8" style="float: right;margin-right: 0px;margin-left: 30%;margin-bottom: 5%;">
- <div class="col-md-8" style="margin:auto;margin-right: 0;"> 
-      <span class="span" class="cart-total-title" >Cart totals</span>
-      <br /><br />
-      <div class="container">
-        <div class="row" style="height: 0.01px;">
-          <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 15%;"></div>
-        </div>
-      </div>
-  <div class="col-md-12 input-total" style="padding: 12px;">
-  <label class="col-md-3 label-cart-subtotal">Subtotal: </label>
-  <label  class="col-md-1 label-cart-total" style="color:black">${{this.Total}}</label>
-  <br /><br />
-  <div class="container">
-    <div class="row" style="height: 0.01px;">
-      <!-- flex: 0 0 86.666667%; max-width: 86.666667%; -->
-      <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 16%;"></div>
-    </div>
-  </div>
-  <br />
-  <label class="col-md-3  label-cart-subtotal">Total: </label>
-  <label class="col-md-1 label-cart-total" style="color:#026fa7">${{this.Total}}</label>
-  </div>
-  <br /><br />
-  <div class="container">
-    <div class="row" style="height: 0.01px;">
-      <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 14%;"></div>
-    </div>
-  </div> 
-  <br />
- <div class="col-md-12 " style="float: left; padding-bottom: 50px;">
-  <!-- <button (click)="SendToNew()" class=" col-md-3 fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left;">Back </button> -->
-  <button (click)="checkout()" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: right;width: 145px;">CHECKOUT</button>
-  <br /><br />
 </div>
-
- </div> 
- 
+</div>
+<div class="container" *ngIf="isYourAddress=='yes'">
+  <div class="row" style="margin: auto;height: 0.01px;">
+    <div class="col-md-11 border-buttom margin-b-30" style="margin-left: 4%;"></div>
+  </div>
+</div>  
+<br/>
+<div class="col-md-12 " style="float: right;flex: 0 0 90%;max-width: 90%;margin-right: 33px;">
+ <button (click)="checkout()" class="fill-btn-blue checkout-btn" style="padding-right: 10px;padding-left: 10px; float: right;">CHECKOUT and PAYMENT</button>
+ <br /><br />
 </div>
 </div>
 <div class="clear"></div>

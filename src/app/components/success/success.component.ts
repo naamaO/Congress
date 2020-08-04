@@ -80,12 +80,18 @@ export class successComponent implements OnInit {
     }
   });
   localStorage.removeItem('CART');
+  localStorage.removeItem('CARTMEMBERSHIP');
   localStorage.removeItem('NUM');
   localStorage.removeItem('TOTAL');
-  
+ // this.cookieService.remove('UserName');-Remains in cookies
   this.cookieService.remove('Total');
   this.cookieService.remove('Currency');
   this.cookieService.remove('Lang');
+  this.cookieService.remove('ilang');
+  this.cookieService.remove('contact');
+  this.cookieService.remove('address');
+  this.cookieService.remove('contact2');
+  this.cookieService.remove('address2');
   this.cookieService.remove('RoutTranzilaSuccessJewishStudies');
   }
   }

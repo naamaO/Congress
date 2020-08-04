@@ -58,6 +58,7 @@ export class ShopingCartHebrewComponent implements OnInit {
   }
   public currency:number = 1;
   public lang:string = "il";
+  public ilang:string = "HEB";
   public itemToAddQunt1:any;
   public itemToRedQunt1:any;
   public emailvalidate:boolean=false;
@@ -596,19 +597,41 @@ remove(id){
   setCookieLang(lang: string) {
     this.cookieService.put('Lang', lang);
   }
-  
+  setCookieIlang(ilang: string) {
+    this.cookieService.put('ilang', ilang);
+  }
+  setCookieAddress(address: string) {
+    this.cookieService.put('address', address);
+  }
+  setCookieContact(contact: string) {
+    this.cookieService.put('contact', contact);
+  }
   SendToTranzila() {
     this.CART.contents = this.DB;
     let _cart = JSON.stringify(this.CART.contents);
     localStorage.setItem(this.CART.KEY, _cart);  
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.lang);
+    this.setCookieIlang(this.ilang);
     this.setCookieTotal(this.Total);
-    //this.serverService.setCurrency(this.currency);
-    //this.serverService.setLang(this.lang);
+    let address:any;
+    let country:any
+    country = this.selectedCountry;
+    let detailsAddress:any;
+    detailsAddress = this.Address
+    address = country.trimEnd() + " " + detailsAddress.trimRight();
+    this.setCookieAddress(address);
     this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
+    this.serverService.getNameHebrew(this.UserNameLogin).subscribe((val) => {
+      let first:any;
+      let last:any
+      first = val.FirstNameHebrew;
+      last = val.LastNameHebrew;
+      let contactName:any;
+      contactName = first.trimEnd() + " " + last.trimEnd();  
+      this.setCookieContact(contactName);  
+    });
     this.serverService.setEmail();
-   // this.serverService.setTotal(this.Total);
     this.setCookieRout(2);
     this.router.navigate(['Pay']);
   }

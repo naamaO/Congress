@@ -25,10 +25,17 @@ export class ServerService {
   public currency: number = 1;
   public total: any;
   public lang: string = 'il';
+  public ilang: string = 'HEB';
   public email: string;
+  public contactName: any;
+  public address: string;
   public Country: string[] = [];
   public jsonPurchaseData: Array<any> = [];
   public resNotifyTranzila: any;
+  public isYourAddress:string;
+  public address2:string;
+  public contactName2:string;
+  
   public CART = {
     KEY: 'ShoppingCartGuest',
     contents: []
@@ -301,10 +308,6 @@ export class ServerService {
       "Zimbabwe"];
   }
   ngOnInit() {
-    //  this.setCurrency(this.currency);
-    //  this.setLang(this.lang);
-    //this.setEmail(this.email);
-    //  this.setTotal();
   }
 
   setjsonPurchaseData2() {
@@ -330,6 +333,10 @@ export class ServerService {
     return this.lang;
   }
 
+  setIlang() {
+    this.ilang = this.getCookie('ilang');
+    return this.ilang;
+  }
   setEmail() {
     if(localStorage.getItem(this.USERNAME.KEY)){
       this.email = localStorage.getItem(this.USERNAME.KEY);
@@ -342,6 +349,26 @@ export class ServerService {
     return this.email;
   }
 
+  setContact() {
+  this.contactName = this.getCookie('contact');
+  return this.contactName;
+  }
+  setContact2() {
+    this.contactName2 = this.getCookie('contact2');
+    return this.contactName2;
+    }
+  getIsYourAddress() {
+    this.isYourAddress = this.getCookie('isYourAddress');
+    return this.isYourAddress;
+  }
+  setAddress() {
+    this.address = this.getCookie('address');
+    return this.address;
+  }
+  setAddress2() {
+    this.address2 = this.getCookie('address2');
+    return this.address2;
+  }
   setRout(Rout) {
     this.Rout = Rout;
   }
@@ -523,7 +550,8 @@ export class ServerService {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectDraft?LoginUserName=" + this.LoginUserName);
 
-  } selectProp(): Observable<Proposals> {
+  } 
+  selectProp(): Observable<Proposals> {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<Proposals>(this.port + "/api/Home/selectProp?LoginUserName=" + this.LoginUserName);
 
@@ -586,13 +614,22 @@ export class ServerService {
     return this.http.get<User>(this.port + "/api/Home/getUserDetails?LoginUserName=" + this.LoginUserName);
   }
 
-  getName(): Observable<Name> {
-    this.LoginUserName = (this.getCookie('UserName'));
-
+  getName(userName?:string): Observable<Name> {
+    if(userName){
+      this.LoginUserName = userName;
+    }
+    else{
+      this.LoginUserName = (this.getCookie('UserName'));
+    }
     return this.http.get<Name>(this.port + "/api/Home/getName?LoginUserName=" + this.LoginUserName);
   }
-  getNameHebrew(): Observable<Name> {
-    this.LoginUserName = (this.getCookie('UserName'));
+  getNameHebrew(userName?:string): Observable<Name> {
+    if(userName){
+      this.LoginUserName = userName;
+    }
+    else{
+      this.LoginUserName = (this.getCookie('UserName'));
+    }
     return this.http.get<Name>(this.port + "/api/Home/getNameHebrew?LoginUserName=" + this.LoginUserName);
   }
   CheckIfInSession(): Observable<number> {

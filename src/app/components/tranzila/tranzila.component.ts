@@ -26,9 +26,10 @@ export class TranzilaComponent implements OnInit {
   public src: string;
   public srcReal: SafeResourceUrl;
   public Rout: number;
-  public successUrlAddress: string = 'http://jewish-studies.b2story.com/success.html';// קישור דף הצלחה
+  public successUrlAddress: string = '  http://jewish-studies.b2story.com/success.html';// קישור דף הצלחה
   public failUrlAddress: string = 'http://jewish-studies.b2story.com/fail.html';//קישור דף כישלון	
   public notifyUrlAddress: string = 'http://jewish-studies.b2story.com/notify.html';//קישור ל NOTIFY	
+  public contactName: any;
 
   constructor(public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient, private sanitizer: DomSanitizer, public cookieService: CookieService) {
     this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
@@ -56,19 +57,32 @@ export class TranzilaComponent implements OnInit {
 
 
 
+  
+  ngOnInit() {
+ }
+ 
   ngAfterViewInit() {
-
      const form = this.paymentForm.nativeElement;
     form.action = "https://direct.tranzila.com/bytes2/iframenew.php";
     form['currency'].value = this.serverService.setCurrency().toString();
     form['sum'].value = this.serverService.setTotal();
     form['lang'].value = this.serverService.setLang();
+    form['Ilang'].value = this.serverService.setIlang();
     form['email'].value = this.serverService.setEmail();
+    form['contact'].value = this.serverService.setContact();
+    form['address'].value = this.serverService.setAddress();
+    let isYourAddress = this.serverService.getIsYourAddress();
+    console.log("isYourAddress",isYourAddress)
+    if(isYourAddress =='no'){
+      form['Addresse_name'].value = this.serverService.setContact2();
+      form['Shipping_address'].value = this.serverService.setAddress2();
+    }
+    else if(isYourAddress =='yes'){
+      form['Addresse_name'].value = this.serverService.setContact();
+      form['Shipping_address'].value = this.serverService.setAddress();
+    }
     form['json_purchase_data'].value = encodeURIComponent(JSON.stringify(this.purchaseData));
     form.submit();
   }
-
-  ngOnInit() {
- }
 
 }

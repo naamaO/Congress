@@ -222,7 +222,7 @@ ul {
     background-color: #0b4e6f;
     color: white; 
     font-family:'OpenSansRegular', sans-serif;
-    text-transform: uppercase; 
+    /* text-transform: uppercase;  */
     /* font-weight: normal;  */
     font-size:18px;
   
@@ -235,3 +235,10 @@ ul {
     font-weight: normal; 
     font-size:18px; */
   }
+  
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  /* background-image: none; */
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
+}

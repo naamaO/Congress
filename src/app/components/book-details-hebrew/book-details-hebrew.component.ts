@@ -22,9 +22,13 @@ export class BookDetailsHebrewComponent implements OnInit {
   public Id: number;
   private sub: any;
   public DetailsBook: book;
-  public Total: number;
+  public Total: number = 0;
+  public TotalAfterDiscount:number = 0;
+  public FirstNameHebrew: string;
+  public LastNameHebrew: string;
   public num: number;
   public DB: shoppingCart[];
+  public IsMemberShip:boolean=false;
   public CART = {
     KEY: 'ShoppingCartGuest',
     contents: []
@@ -42,7 +46,8 @@ export class BookDetailsHebrewComponent implements OnInit {
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
     this.Quantity = 0;
  //get list of shopping cart//if login
-if(this.getCookie('UserName')) {     
+if(this.getCookie('UserName')) { 
+ 
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
     this.DB = resp;
     for (var i = 0; i < this.DB.length; i++) {
@@ -60,8 +65,24 @@ if(this.getCookie('UserName')) {
     error => {  
       console.log(error)
     });
-    this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-    //get list of all books
+    this.serverService.getTotalPrice().subscribe((val) => {
+      this.Total = val
+      this.UserNameLogin = this.getCookie('UserName');  
+      if(this.UserNameLogin){
+      this.serverService.getUserDetails().subscribe((events) => {
+        this.FirstNameHebrew = events.FirstNameHebrew;
+        this.LastNameHebrew = events.LastNameHebrew; 
+        if(events.MemberShip >-1)
+        this.IsMemberShip = true;
+        if(this.IsMemberShip){
+          this.serverService.setTotal();
+        if(this.Total>0){
+        this.getDiscountTotal(this.Total);
+        }
+        }
+      })
+    }
+    });    //get list of all books
     // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
   this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
@@ -139,6 +160,7 @@ if(!this.DB){
           if(_total){
               this.TOTAL.total = JSON.parse(_total);
             }
+            this.IsMemberShip = true;
   }
   if(this.DB){
   this.DB.filter(product=>{
@@ -397,7 +419,14 @@ remove(id){
         this.serverService.getNumProduct().subscribe(val => this.num = val);
 
       });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+      this.serverService.getTotalPrice().subscribe((val) => {
+        this.Total = val
+        if(this.IsMemberShip){
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
+        }
+      });
     });
     this.serverService.getNumProduct().subscribe(val => this.num = val);
   }
@@ -441,6 +470,21 @@ remove(id){
   }
   SendToNew() {
     this.routers.navigateByUrl("/newHebrew");
-
+  }
+  SendToSignIn(){
+     this.routers.navigateByUrl("/UserPass/22");
+  }
+  getDiscountTotal(Total){
+    let discount = Total * ( 20 / 100);
+     this.TotalAfterDiscount =  Total - discount;
+}
+  isSignIn(){
+    this.UserNameLogin = this.getCookie('UserName'); 
+    if(this.UserNameLogin!=undefined){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

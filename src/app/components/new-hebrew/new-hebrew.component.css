@@ -479,7 +479,13 @@ ul {
   outline:none;
   cursor: pointer;
 }
-
+.book-name{
+  text-align:right;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color:#026fa7;
+}
 .view-cart-btn{
   background-color: #ffffff;
   outline: #0b4e6f;

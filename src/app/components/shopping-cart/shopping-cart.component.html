@@ -18,6 +18,10 @@
     <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
       <div class="top-line">
         <div style="z-index: 1000;top: 0;">
+          <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">Log into your member's account or sign up and get a 20% discount</span>
+          <span class="book-name" *ngIf="isSignIn() && IsMemberShip" style="float: left;cursor: pointer;padding: 15px;" >Welcome {{FirstName}} {{LastName}}, you have just received a 20% member discount</span>
+          <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()" >Welcome {{FirstName}} {{LastName}}, Sign up for membership and get a 20% discount</span>
+
           <div style="margin-left:65%;top:0px;position:fixed;"> 
             <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
             <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
@@ -108,8 +112,8 @@
           </div>
         </div>
     <div class="col-md-12 input-total" style="padding: 12px;">
-    <label class="col-md-3 label-cart-subtotal">Subtotal: </label>
-    <label  class="col-md-1 label-cart-total" style="color:black">${{this.Total}}</label>
+    <label class="col-md-3 label-cart-subtotal">Total: </label>
+    <label  class="col-md-3 label-cart-total" style="color:black;text-align: right;">${{this.Total}}</label>
     <br /><br />
     <div class="container">
       <div class="row" style="height: 0.01px;">
@@ -118,9 +122,11 @@
       </div>
     </div>
     <br />
-    <label class="col-md-3  label-cart-subtotal">Total: </label>
-    <label class="col-md-1 label-cart-total" style="color:#026fa7">${{this.Total}}</label>
-    </div>
+    <label class="col-md-6 label-cart-subtotal" *ngIf="!IsMemberShip" style="color:#c0bfbf">After MemberShip Discount: 20%</label>
+    <label class="col-md-3 label-cart-total" *ngIf="!IsMemberShip" style="color:#c0bfbf;text-align: right;">$0</label>
+    <label class="col-md-6 label-cart-subtotal" *ngIf="IsMemberShip">After MemberShip Discount: 20% </label>
+    <label  class="col-md-3 label-cart-total"  *ngIf="IsMemberShip" style="color:black;text-align: right;">${{this.TotalAfterDiscount}}</label>
+  </div>
     <br /><br />
     <div class="container">
       <div class="row" style="height: 0.01px;">
@@ -131,12 +137,11 @@
    <div class="col-md-12" style="float: right !important;flex: 0 0 90%;max-width: 90%;padding: 0;">
      <button data-toggle="collapse" data-target="#shippingForm" class="fill-btn-blue checkout-btn" style="padding-right: 10px;padding-left: 10px;float: right;">CHECKOUT</button> 
     <br /><br />
+  </div> 
+   </div>  
+  </div>
   </div>
   
-   </div> 
-   
-  </div>
-  </div>
 <br /><br /><br/><br />
 <div id="shippingForm" class="collapse">
   <br/>
@@ -238,7 +243,7 @@
   <br />
   <div class="margin-top" >
     <!-- #namee2 -->
-    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;" #namee2>full name</label>
+    <label class="col-md-6  headerGray color-gray" style="padding-left: 38px;" #namee2>Full name</label>
    
       <!-- #country2 -->
       <label class="col-md-6 margin color-gray" style="padding-left: 30px;color: gray;" #country2>Country</label>     

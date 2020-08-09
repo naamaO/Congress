@@ -236,10 +236,21 @@ ul {
   background-color: #0b4e6f;
   color: white;
   font-family:'OpenSansRegularHebrew', sans-serif;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: normal; 
   font-size:18px;
 }
 .checkout-btn:hover{
   background-color:  #6190a9 ;
+}
+.book-name{
+  text-align:right;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color:#026fa7;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
 }

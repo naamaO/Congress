@@ -46,7 +46,11 @@ export class NewComponent implements OnInit {
   //playing: boolean = false;
   p: number = 1;
   changeImg: boolean;
-  public Total: number;
+  public Total: number = 0;
+  public TotalAfterDiscount:number = 0;
+  public FirstName: string;
+  public LastName: string;
+  public IsMemberShip:boolean = false;
   public DBShoppingCart: shoppingCart[];
   public CART = {
     KEY: 'ShoppingCartGuest',
@@ -73,7 +77,24 @@ if(this.getCookie('UserName')) {
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
         }
       });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+      this.serverService.getTotalPrice().subscribe((val) => {
+        this.Total = val
+        this.UserNameLogin = this.getCookie('UserName');  
+        if(this.UserNameLogin){
+        this.serverService.getUserDetails().subscribe((events) => {
+          this.FirstName = events.FirstNameEnglish;
+          this.LastName = events.LastNameEnglish; 
+          if(events.MemberShip >-1)
+          this.IsMemberShip = true;
+          if(this.IsMemberShip){
+            this.serverService.setTotal();
+          if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
+          }
+        })
+      }
+      });
       //get list of all books
       // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
@@ -91,11 +112,17 @@ else{
                   this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
                   this.num = this.num + this.DBShoppingCart[i].Quantity;
                   this.Total = this.Total + this.DBShoppingCart[i].Total;
+                  if(this.Total>0){
+                    this.getDiscountTotal(this.Total);
+                    }
               }
              else{
                 this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
                 this.num = this.num + this.DBShoppingCart[i].Quantity;
                 this.Total = this.Total + this.DBShoppingCart[i].Total;
+                if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
               }
             }
           }
@@ -122,12 +149,18 @@ else{
           if(parseInt(_total)>0){
             this.TOTAL.total = parseInt(_total);
            this.Total = parseInt(_total);
+           if(this.Total>0){
+            this.getDiscountTotal(this.Total);
+            }
           }
           else{
             this.TOTAL.total = 0;         
             let _total =  JSON.stringify(this.TOTAL.total);
             localStorage.setItem(this.TOTAL.KEY, _total);
             this.Total = 0;
+            if(this.Total==0){
+              this.TotalAfterDiscount = 0;
+              }
           }
 }
  }
@@ -148,6 +181,7 @@ else{
         this.cd.detectChanges();
       });    });
   }
+  
   ngOnInit() {
 
     this.serverService.getAllDBFromServer().subscribe(
@@ -173,11 +207,16 @@ else{
             if(_total){
                 this.TOTAL.total = JSON.parse(_total);
               }
+              this.IsMemberShip = false;
     }
   }
+  
   SendToTranzila() {
     this.router.navigate(['Pay', this.Total]);
  }
+ SendToSignIn(){
+  this.router.navigateByUrl("/UserPass/2");
+}
   NavigCart() {
     this.router.navigateByUrl("/ShoppingCart");
 
@@ -209,6 +248,11 @@ else{
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
+  getDiscountTotal(Total){
+    let discount = Total * ( 20 / 100);
+     this.TotalAfterDiscount =  Total - discount;
+}
+
   AddCart(item: book) {
     // this.cart.push(item);
     //alert(item.Name);
@@ -252,6 +296,15 @@ else{
     this.router.navigate(['BookDetails', item.Id]);
     //  // alert(this.t + "uu");
     //});
+  }
+  isSignIn(){
+    this.UserNameLogin = this.getCookie('UserName'); 
+    if(this.UserNameLogin!=undefined){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
   SelectFilter(Group: number) {
     this.serverService.getAllDBFromServer().subscribe((val) => {

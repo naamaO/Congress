@@ -4,7 +4,10 @@
         <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
           <div class="top-line">
             <div style="z-index: 1000;top: 0;">
-
+              <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">Log into your member's account or sign up and get a 20% discount</span>
+              <span class="book-name" *ngIf="isSignIn() && IsMemberShip" style="float: left;cursor: pointer;padding: 15px;" >Welcome {{FirstName}} {{LastName}}, you have just received a 20% member discount</span>
+              <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()" >Welcome {{FirstName}} {{LastName}}, Sign up for membership and get a 20% discount</span>
+            
               <div style="margin-left:65%;top:0px;position:fixed;"> 
                <div class="tooltipSmall" >
                 <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" >{{num}}</span>
@@ -136,18 +139,20 @@
                 <div *ngIf="DB">
                 <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems: DB.length} " class="col-md-4 floatLeft" style="height:670px;" >
   
-                  <li (click)="Details(item)">
+                  <li (click)="Details(item)" style="cursor: pointer;">
                     <div class="container" >
+
                       <div class="background" style="text-align:center; align-items: center">
                         <div style="margin:auto;"></div>
                       </div>
                       <div class="hover" >
+                        <!-- <div class="text">{{item.Name}}</div> -->
                       <div  class="border-book featured-image content" (click)="Details(item)"
                       style="background-size: contain; position:relative;
                       z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
                        center; display: flex;align-items: center;justify-content: center;">
-  
-                        <div class="view overlay"  [style.background-image]="'url('+item.Image+')'" style="background-repeat: no-repeat !important; background-size: 279px 387px;">
+                        <!-- <div class="text">{{item.Name}}</div> -->
+                      <div class="view overlay"  [style.background-image]="'url('+item.Image+')'" style="background-repeat: no-repeat !important; background-size: 279px 387px;">
                     <!--  <img (click)="Detais(item)" (mouseenter)="ShowColor=true"
                          style="margin:8px; display:block; width:279px; height:387px;"
                           color="#85a6b7" src={{item.Image}} 
@@ -156,6 +161,7 @@
                          <div class="cart-loading"> 
                            <i class="fusion-icon-spinner"></i>
                           </div>
+                          <!-- <div class="text">Hello World</div> -->
                         </div>
                       </div>
                     </div>

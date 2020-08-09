@@ -21,7 +21,11 @@ export class BookDetailsComponent implements OnInit {
   private sub: any;
   public DetailsBook: book;
   public num: number;
-  public Total: number;
+  public Total: number = 0;
+  public TotalAfterDiscount:number = 0;
+  public FirstName: string;
+  public LastName: string;
+  public IsMemberShip:boolean=false;
   public DBShoppingCart: shoppingCart[];
   public CART = {
     KEY: 'ShoppingCartGuest',
@@ -58,7 +62,24 @@ export class BookDetailsComponent implements OnInit {
        error => {  
          console.log(error)
        });
-       this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+       this.serverService.getTotalPrice().subscribe((val) => {
+        this.Total = val
+        this.UserNameLogin = this.getCookie('UserName');  
+        if(this.UserNameLogin){
+        this.serverService.getUserDetails().subscribe((events) => {
+          this.FirstName = events.FirstNameEnglish;
+          this.LastName = events.LastNameEnglish; 
+          if(events.MemberShip >-1)
+          this.IsMemberShip = true;
+          if(this.IsMemberShip){
+            this.serverService.setTotal();
+          if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
+          }
+        })
+      }
+      });  
        //get list of all books
      this.serverService.getNumProduct().subscribe(val => this.num = val);
      }
@@ -74,11 +95,17 @@ export class BookDetailsComponent implements OnInit {
                   this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
                   this.num = this.num + this.DBShoppingCart[i].Quantity;
                   this.Total = this.Total + this.DBShoppingCart[i].Total;
+                  if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
                 }
                 else{
                   this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
                   this.num = this.num + this.DBShoppingCart[i].Quantity;
                   this.Total = this.Total + this.DBShoppingCart[i].Total;
+                  if(this.Total>0){
+                    this.getDiscountTotal(this.Total);
+                    }
                 }
                 }
            }else{
@@ -104,12 +131,18 @@ export class BookDetailsComponent implements OnInit {
        if(parseInt(_total)>0){
          this.TOTAL.total = parseInt(_total);
         this.Total = parseInt(_total);
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
        }
        else{
          this.TOTAL.total = 0;         
          let _total =  JSON.stringify(this.TOTAL.total);
          localStorage.setItem(this.TOTAL.KEY, _total);
          this.Total = 0;
+         if(this.Total==0){
+          this.TotalAfterDiscount = 0;
+          }
        }
    }
    }
@@ -136,6 +169,7 @@ export class BookDetailsComponent implements OnInit {
           if(_total){
               this.TOTAL.total = JSON.parse(_total);
             }
+            this.IsMemberShip = false;
   }
   if(this.DBShoppingCart){
       this.DBShoppingCart.filter(product=>{
@@ -147,11 +181,8 @@ export class BookDetailsComponent implements OnInit {
   }
   NavigCart() {
     this.routers.navigateByUrl("/ShoppingCart");
-    this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-
   } 
   SendToTranzila() {
-  
     this.routers.navigate(['Pay', this.Total]);
  }
  AddQuantity(item: shoppingCart) {
@@ -177,6 +208,11 @@ export class BookDetailsComponent implements OnInit {
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 
     this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+    if(this.IsMemberShip){
+      if(this.Total>0){
+        this.getDiscountTotal(this.Total);
+        }
+      }
   });
 }
   ngOnDestroy() {
@@ -249,9 +285,15 @@ export class BookDetailsComponent implements OnInit {
        }
        if(this.MQuantity>0){
         this.Total = this.Total + (this.DBShoppingCart[i].PriceBook * this.MQuantity);
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
        }
       else{
         this.Total = this.Total + this.DBShoppingCart[i].Total;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
       }
     }
     else{
@@ -270,9 +312,15 @@ export class BookDetailsComponent implements OnInit {
        }
        if(this.MQuantity>0){
         this.Total = this.Total + (this.DBShoppingCart[i].SallePrice * this.MQuantity);
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
        }
        else{
         this.Total = this.Total + this.DBShoppingCart[i].Total;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
       }
     }
   }
@@ -300,17 +348,29 @@ else{
    if (this.DBShoppingCart[i].SallePrice == 0){
    if(this.MQuantity>0){
     this.Total = this.Total + (this.DBShoppingCart[i].PriceBook * this.MQuantity);
+    if(this.Total>0){
+      this.getDiscountTotal(this.Total);
+      }
    }
    else{
     this.Total = this.Total + this.DBShoppingCart[i].Total;
+    if(this.Total>0){
+      this.getDiscountTotal(this.Total);
+      }
   }
   }
  else{
   if(this.MQuantity>0){
     this.Total = this.Total + (this.DBShoppingCart[i].SallePrice * this.MQuantity);
+    if(this.Total>0){
+      this.getDiscountTotal(this.Total);
+      }
    }
    else{
     this.Total = this.Total + this.DBShoppingCart[i].Total;
+    if(this.Total>0){
+      this.getDiscountTotal(this.Total);
+      }
   }
  }
 }
@@ -408,5 +468,21 @@ remove(id){
     });
     //update localStorage
     this.sync()
+}
+getDiscountTotal(Total){
+  let discount = Total * ( 20 / 100);
+   this.TotalAfterDiscount =  Total - discount;
+}
+SendToSignIn(){
+  this.routers.navigateByUrl("/UserPass/2");
+}
+isSignIn(){
+  this.UserNameLogin = this.getCookie('UserName'); 
+  if(this.UserNameLogin!=undefined){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 }

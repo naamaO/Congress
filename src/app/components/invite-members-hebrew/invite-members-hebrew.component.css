@@ -1,9 +1,9 @@
 .center {
   width: 60%;
-  height: 60%;
+  /*height: 60%;*/
   margin: auto;
   top: 100px;
-  left: 400px;
+  left: 15%;
   position: fixed;
   /* background: white; */
   background-color: #ffffffc2;
@@ -12,15 +12,228 @@
   font-size: large;
 }
 
+
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmall .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    /*top: -5%;*/
+  }
+
+.tooltiptextSmall:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #27b5e5;
+  right: -8px;
+  top: 5%;
+  color: pink;
+}
+
+.tooltiptextSmall {
+  width: 200px !important;
+  height: 130px !important;
+}
+
+.tooltipSmall:hover .tooltiptextSmall {
+  visibility: visible;
+}
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -5%;
+  }
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #27b5e5;
+  right: -8px;
+  top: 40%;
+  color: pink;
+}
+
+.tooltiptext {
+  width: 400px !important;
+  height: 200px !important;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.margin-top {
+  margin-top: 3%;
+}
+
+.margin-top6 {
+  margin-top: 6%;
+}
+
+i.request-card-hidden {
+  opacity: 0;
+}
+
+input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent;
+  border-bottom: 0.1px solid gray;
+}
+
+select {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.backGray {
+  padding-left: 3%;
+  background-color: #f3f2f2;
+  margin-top: 4%;
+}
+
 .fill-btn-blue {
-  background-color: #026fa7;
+  background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
+  outline: none;
   color: white;
   font-weight: bold;
   font-size: 19px;
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
   text-align: center;
-  width: 100px;
+  width: 20%;
+}
+
+
+/*.ddiv:before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  left: 100%;
+  top: 50%;
+  border: 20px solid transparent;
+  border-right: 20px solid #f3f2f2;
+}*/
+.ddiv:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-left: 20px solid #f3f2f2;
+  /*border-color: transparent transparent transparent #CAD5E0;
+  border-style: solid;
+  border-width: 10px;*/
+}
+
+
+
+
+
+.custom-control-label::before {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
+}
+
+.custom-control-input:checked {
+  background-color: #27b5e5 !important;
+}
+
+.colorFocusCode {
+  color: #27b5e5;
+}
+
+.divERR:after {
+  top: 100%;
+  content: " ";
+  position: absolute;
+  bottom: -10px;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}
+
+.divERR:before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  right: 50%;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px;
+  border-color: transparent transparent #27b5e5;
+  /*top: -18%*/
+}
+
+.divERR {
+  color: #27b5e5;
+  border: 1px solid #27b5e5;
+  border-left: none !important;
+  border-right: none !important;
 }

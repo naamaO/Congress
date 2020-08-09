@@ -447,9 +447,13 @@
                   <span style="color:#167c9f;">{{SessionName}} |</span>
                   Chairperson: <span style="color:#167c9f;">{{Chairman}}</span>
                 </span>
-              </div>
-              <br />
+                <br />
 
+              </div>
+              <br /><span class="header-modal" style="color:#27b5e5"> Another lecturers in this session:</span>
+              <div *ngFor="let name of names; let ii=index">
+                <span style="color:#27b5e5">{{ii+1}}-</span><span>{{name}}</span><br />
+              </div>
               <mat-accordion multi="true">
                 <mat-expansion-panel *ngFor="let PropSession of this.ArrPropSession; let i=index">
                   <mat-expansion-panel-header>
@@ -546,75 +550,182 @@
                                     </div>
                                   </div>
 
-                                </div>
+                                </div>                                      <label>{{PropSession.Status}}</label>
+
+                                <!--<div class="col-md-3">
+                                  <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
+
+                                    <div class="modal-content " style="border:0;height:190px" [(ngModel)]="Status" *ngIf="PropSession.Status==='Accepted            '">
+
+                                      <span class="txtStyle bold">Status</span>
+
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio"
+                                               value="Accepted"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input"
+                                               id="Accepted" name="Accepted" checked #Accepteds1>
+                                        <label class="custom-control-label" for="Accepted">Accepted</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="RR"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="RR" name="RR" #RRs1>
+                                        <label class="custom-control-label" for="RR">RR</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="Rejected"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="Rejected" name="Rejected" #Rejecteds1>
+                                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                                      </div>
+
+                                    </div>
+                                    <div class="modal-content " style="border:0;height:190px" [(ngModel)]="Status" *ngIf="PropSession.Status==='Rejected            '">
+
+                                      <span class="txtStyle bold">Status</span>
+
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio"
+                                               value="Accepted"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input"
+                                               id="Accepted" name="Accepted" #Accepteds2>
+                                        <label class="custom-control-label" for="Accepted">Accepted</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="RR"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="RR" name="RR" #RRs2>
+                                        <label class="custom-control-label" for="RR">RR</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="Rejected"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="Rejected" name="Rejected" checked #Rejecteds2>
+                                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                                      </div>
+
+                                    </div>
+                                    <div class="modal-content " style="border:0;height:190px" [(ngModel)]="Status" *ngIf="PropSession.Status==='RR                  '">
+
+                                      <span class="txtStyle bold">Status</span>
+
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio"
+                                               value="Accepted"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input"
+                                               id="Accepted" name="Accepted" #Accepteds3>
+                                        <label class="custom-control-label" for="Accepted">Accepted</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="RR"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="RR" name="RR" checked #RRs3>
+                                        <label class="custom-control-label" for="RR">RR</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="Rejected"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="Rejected" name="Rejected" #Rejecteds3>
+                                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                                      </div>
+
+                                    </div> <div class="modal-content " style="border:0;height:190px" *ngIf="PropSession.Status==='Pending             '">
+
+                                      <span class="txtStyle bold">Status</span>
+
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio"
+                                               value="Accepted"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input"
+                                               id="Accepted" name="Accepted" #Accepteds>
+                                        <label class="custom-control-label" for="Accepted">Accepted</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="RR"
+                                               (change)="onStatusChange($event.target.value,PropSession)"
+                                               class="custom-control-input" id="RR" name="RR" #RRs>
+                                        <label class="custom-control-label" for="RR">RR</label>
+                                      </div>
+                                      <br />
+                                      <div class="custom-control custom-radio">
+                                        <input type="radio" value="Rejected"
+                                               (change)="onStatusChanges($event.target.value,PropSession)"
+                                               class="custom-control-input" id="Rejected" name="Rejected" #Rejecteds>
+                                        <label class="custom-control-label" for="Rejected">Rejected</label>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>-->
+
                                 <div class="col-md-3">
                                   <div class="shadow p-3 mb-5 bg-white rounded" style="width:90%">
                                     <div class="modal-content " style="border:0;height:190px">
                                       <span class="txtStyle bold">Status</span>
                                       <label>{{PropSession.Status}}</label>
-                                      <!--<label id="indexPropSession" name="indexPropSession" #indexPropSession>{{i+1}}</label>-->
-
                                       <br />
-                                      <div class="custom-control custom-radio" (click)="onStatusPropSessionChangeA(PropSession)" >
-                                        <!--<input type="button" value="Accepted" 
-                                             
-                                              (click)="onStatusPropSessionChangeA(PropSession)"
-                                               class="custom-control-input" id="statusAccepted" name="status" #AcceptedSession>-->
-                                        <!--<button (click)="onStatusPropSessionChangeA(PropSession)" ></button>-->
-
-                                        <label class="custom-control-label" for="statusAccepted">Accepted</label>
+                                      <div class="custom-control custom-radio" (change)="onStatusPropSessionChangeA(PropSession)"
+                                               (click)="onStatusPropSessionChangeA(PropSession)">
+                                        <input type="radio" value="Accepted"
+                                               (change)="onStatusPropSessionChangeA(PropSession)"
+                                               (click)="onStatusPropSessionChangeA(PropSession)"
+                                               #Accepteds name="Accepteds" id="Accepteds"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label" for="Accepted">Accepted</label>
                                       </div>
-        <br />
-        <div class="custom-control custom-radio"  (click)="onStatusPropSessionChangeRR(PropSession)">
-          <!--<input type="button" value="RR" 
-           (click)="onStatusPropSessionChangeRR(PropSession)"
-                 class="custom-control-input" id="statusPending" name="status" #RRSession>-->
-          <!--<button (click)="onStatusPropSessionChangeRR(PropSession)" ></button>-->
+                                      <!--<div class="custom-control custom-radio" (click)="onStatusPropSessionChangeA(PropSession)" #Accepteds name="Accepteds" id="Accepteds">
 
 
-          <label class="custom-control-label" for="statusPending">RR</label>
-        </div>
-        <br />
-        <div class="custom-control custom-radio" (click)="onStatusPropSessionChangeR(PropSession)">
-          <!--<input type="button" value="Rejected"
-                 (click)="onStatusPropSessionChangeR(PropSession)"
-                 class="custom-control-input" id="statusRejected" name="status" #RejectedSession>-->
-          <!--<button (click)="onStatusPropSessionChangeR(PropSession)" ></button>-->
+  -->
+                                      <br />
+                                      <div class="custom-control custom-radio"(change)="onStatusPropSessionChangeRR(PropSession)"
+                                               (click)="onStatusPropSessionChangeRR(PropSession)">
 
-          <label class="custom-control-label" for="statusRejected">Rejected</label>
-        </div>
-                                    </div>
-                                  </div>
-                                </div>                         
+                                        <input type="radio" value="RR"
+                                               (change)="onStatusPropSessionChangeRR(PropSession)"
+                                               (click)="onStatusPropSessionChangeRR(PropSession)"
+                                               #RRs name="RRs" id="RRs"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label" for="RR">RR</label>
+                                      </div>
+                                        <!--<div class="custom-control custom-radio" (click)="onStatusPropSessionChangeRR(PropSession)" #RRs name="RRs" id="RRs">
+
+  </div>-->
+                                        <br />
+                                        <div class="custom-control custom-radio" (change)="onStatusPropSessionChangeR(PropSession)"
+                                                  (click)="onStatusPropSessionChangeR(PropSession)">
+
+                                          <input type="radio" value="Rejected"
+                                                 (change)="onStatusPropSessionChangeR(PropSession)"
+                                                  (click)="onStatusPropSessionChangeR(PropSession)"
+                                                 #Rejecteds name="Rejecteds" id="Rejecteds"
+                                                 class="custom-control-input">
+                                          <label class="custom-control-label" for="Rejected">Rejected</label>
+                                        </div>
+                                          <!--<div class="custom-control custom-radio" (click)="onStatusPropSessionChangeR(PropSession)" #Rejecteds name="Rejecteds" id="Rejecteds">
+
+    </div>-->
+                                        </div>
+                                      </div>
+                                </div>
 
                                 <div style="margin-left: 85%;padding-bottom:2%;">
-                                  <!--<div class="custom-control custom-radio">
-    <button></button>
-    <input type="radio" value="Accepted" [(ngModel)]=PropSession.Status
-           [checked]="PropSession.Status==='Accepted            '"
-           (click)="SavePropSession(PropSession)"
-           class="custom-control-input" id="statusAccepted" name="status" #AcceptedSession>
-    <button (click)="SavePropSession(PropSession)">save</button>
-
-    <label class="custom-control-label" for="statusAccepted">Accepted</label>
-  </div>
-  <br />
-  <div class="custom-control custom-radio">
-    <input type="radio" value="RR" [(ngModel)]=PropSession.Status
-           [checked]="PropSession.Status==='RR                  '"
-           (click)="SavePropSession(PropSession)"
-           class="custom-control-input" id="statusPending" name="status" #RRSession>
-
-    <label class="custom-control-label" for="statusPending">RR</label>
-  </div>
-  <br />
-  <div class="custom-control custom-radio">
-    <input type="radio" value="Rejected" [(ngModel)]=PropSession.Status
-           [checked]="PropSession.Status==='Rejected            '"
-           (click)="SavePropSession(PropSession)"
-           class="custom-control-input" id="statusRejected" name="status" #RejectedSession>
-    <label class="custom-control-label" for="statusRejected">Rejected</label>
-  </div>-->
+                
                                   <button (click)="SavePropSession(PropSession)" class="fill-btn-blue" style="padding:10px" data-dismiss="modal">save</button>
                                 </div>
                               </div>

@@ -49,6 +49,7 @@ export class InviteMembersComponent implements OnInit {
   @ViewChild('mechair') mechair: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public RadioEmptyError: string;
   public errMoreThen250: boolean;
   public myControl = new FormControl();
   public isShowPropArrSession: boolean;
@@ -281,7 +282,11 @@ export class InviteMembersComponent implements OnInit {
     }
 
     else {
+      this.RadioEmptyError = "";
       this.hideThumbnail();
+      if (this.me == null || this.me==0 ) {
+        this.RadioEmptyError = "Please mark the button next to your name. This will identify you as the person who submits the session.";
+      }
      // this.openDialog();
      // alert("e");
       //this.isShowPropArrSession = true;
@@ -297,6 +302,7 @@ export class InviteMembersComponent implements OnInit {
     this.headerAbs.nativeElement.style.color = "#27b5e5";
   }
   unfocusAbs() {
+   this.maxlength(this.ABS, 250);
     this.headerAbs.nativeElement.style.color = "gray";
   }
   focusEnglish() {

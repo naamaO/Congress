@@ -37,7 +37,7 @@
 
 .tooltiptextSmall {
   width: 200px !important;
-  height: 60px !important;
+  height: 100px !important;
 }
 
 .tooltipSmall:hover .tooltiptextSmall {

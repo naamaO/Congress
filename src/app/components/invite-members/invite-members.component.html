@@ -80,7 +80,7 @@
       </select>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <label class="headerGray" #headerAbs> Session Abstract:</label>
+      <label class="headerGray" #headerAbs> Session Abstract (up tp 250 words): </label>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
       <textarea (keypress)="maxlength(ABS,250)" #testInput style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()" id="box_id" [(ngModel)]="ABS"></textarea>
@@ -268,8 +268,9 @@
               <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
                 <div class="divERR col-md-5 marginAuto">
                   <br />
-                  <h4>ERROR</h4>
-                  <br />  <label>You must fill in all fields!</label>
+                 <!-- <h4>ERROR</h4>-->
+                  <br />  <label *ngIf="!RadioEmptyError">You must fill in all fields!</label>
+                          <label *ngIf="RadioEmptyError">{{RadioEmptyError}}</label>
                   <br /><br />
                 </div>
               </div>

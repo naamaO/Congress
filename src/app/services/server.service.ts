@@ -48,13 +48,13 @@ export class ServerService {
     KEY: 'UserName',
     UserName: null
   }
-  public port: string = 'http://localhost:64905';
-  //public port: string = 'http://jewish-studies.b2story.com/webApi';
+ // public port: string = 'http://localhost:64905';
+ public port: string = 'http://jewish-studies.b2story.com/webApi';
   // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
-    this.port = 'http://localhost:64905';
-    // this.port = ' http://jewish-studies.b2story.com/webApi';
+   // this.port = 'http://localhost:64905';
+     this.port = ' http://jewish-studies.b2story.com/webApi';
     //this.port = ' https://jewish-studies.b2story.com/webApi';
     this.Country = [
       "Afghanistan",
@@ -478,6 +478,11 @@ export class ServerService {
 
     return this.http.get<string[]>(this.port + "/api/Home/GetLanguageEnglishSession?SubDiv=" + Subdiv + "&Division=" + Division)
 
+  }  GetLanguageHebrewSession(Subdiv: string, Division: string): Observable<string[]> {
+    //this.LoginDiv = (this.getCookie('Division'));
+
+    return this.http.get<string[]>(this.port + "/api/Home/GetLanguageHebrewSession?SubDiv=" + Subdiv + "&Division=" + Division)
+
   }
   GetLanguageHebrew(Subdiv: string): Observable<string[]> {
     this.LoginDiv = (this.getCookie('Division'));
@@ -639,5 +644,8 @@ export class ServerService {
   CheckIfInDraft(): Observable<number> {
     this.LoginUserName = (this.getCookie('UserName'));
     return this.http.get<number>(this.port + "/api/Home/CheckIfInDraft?LoginUserName=" + this.LoginUserName);
+  }
+  getNameOfDraftsGroup(num: number): Observable<string[]> {
+    return this.http.get<string[]>(this.port + "/api/Home/getNameOfDraftsGroup?SessionId=" + num);
   }
 }

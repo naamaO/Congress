@@ -1,70 +1,315 @@
-
-  <!--<div class="centerHebrew" style="width:60%; height:80%;margin:auto;    ">-->
-<div style="margin-left: 65%;">
-  <!--<button (click)="Show2Proposals=!Show2Proposals">הגשת הצעת הרצאה נוספת</button>-->
+<!--<div class="center" style="width:50%; height:80%;margin:auto;">-->
+<!--<div style="margin-right: 65%;">
+  <button (click)="Show2Proposals=!Show2Proposals">Submitting another lecture proposal</button>
   <div *ngIf="Show2Proposals">
-    <label style="color:red;margin-right: 50px;">ההגשה מותרת אך ורק למרצים מתת חטיבת:</label><br />
-    <label style="cursor:pointer;" (click)="OpenSecondProposal()"> להמשך לחץ כאן</label>
+    <label style="color:red;">     Submission is permitted only to sub-divisional lecturers:</label><br />
+    <label style="cursor:pointer;" (click)="OpenSecondProposal()"> For more click here</label>
   </div>
-</div>
-<div>
-    <br /><br />
-  <div >
-    <div >
-      <select (change)="selectDivision($event.target.value)" [(ngModel)]="Division" *ngIf="SessionName==null">
-        <option [value]="Division" selected>{{Division}}</option>
+</div>-->
+<br />
+<div class="containerDivGeneric" style="direction: rtl;">
+  <div class="col-md-10" style="padding-left: 0% !important;">
+    <div class="clearfix"></div>
 
-        <option *ngFor="let Division of ArrDivision" [value]="Division">
-          {{Division}}
-        </option>
-      </select>
-      <label style="margin-left: 20px;display: inline-block;width: 80px;text-align:right;margin-right: 170px;">חטיבה</label>
-      <label *ngIf="SessionName!=null" style="margin-right: 10px;margin-left: 300px;">{{Division}}</label>
-      <br /><br />
-      <select (change)="selectSubDivision($event.target.value)" [(ngModel)]="SubDivision" *ngIf="SessionName==null">
-        <option [value]="SubDivision" selected>{{SubDivision}}</option>
-        <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
-          {{SubDivision}}
-        </option>
-      </select>
-      <label style="margin-left: 20px;display: inline-block;width: 80px;text-align:right;margin-right: 170px;"> תת חטיבה</label>
+    <h3 style="color:#27b5e5;margin-top:3%;text-align:right;">Proposal for a lecture in the pre-organized session titled: {{SessionName}}</h3>
+    <div class="backGray col-md-12">
+      <br />
+      <h6 style="color: #27b5e5;margin-left:2%;text-align:right;">הפרטים שלי</h6><br />
+      <div class="row margin-top" style="margin-left:1%">
+        <label class="col-md-1 headerGray" #title>תואר</label>
+        <label class="col-md-3 headerGray" #namee style="text-align: right;right: 2%;">שם מלא [אנגלית]</label>
+        <label class="col-md-3 headerGray" #nameh style="text-align: right;right: 2%;">
+          שם מלא [עברית]
+          <div class="tooltipSmallName">
+            <img src="/assets/images/TooltipIcon.png" />
+            <span class="tooltiptextSmallName" style="height: 130px !important;text-align:left;padding-left:2%;">
+              If you do not know how to spell your name in Hebrew <br />
+              WUJS staff will add it on your behalf to the Congress program <br />
+              <!-- Not mandatory for<br />
+              English speakers<br /> -->
+            </span>
+          </div>
+        </label>
+        <label class="col-md-4 floatLeft headerGray" #email style="    text-align: right;">אימייל</label>
+      </div>
 
-      <label *ngIf="SessionName!=null" style="margin-right: 10px;margin-left: 300px;">{{SubDivision}}</label>
-      <br /><br />
+      <div class="row " style="margin-left:1%">
+        <select class="col-md-1" style="background:content-box;padding: 0;right:2%;direction:ltr;" (click)="focustitle()" (mouseleave)="unfocustitle()">
+          <option [value]="Division" selected>{{Title}}</option>
+          <option *ngFor="let tit of ArrTitle" [value]="tit">
+            {{tit}}
+          </option>
+        </select>
+        <div class="col-md-3">
+          <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName" style="width:45%;" />
+          <input (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width:45%;margin-right:2%;" />
+        </div>
+        <div class="col-md-3" style="direction: rtl;">
+          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" style="width:45%;margin-left:2%;" />
+          <input (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width:45%;" />
+        </div>
+        <!--</div>-->
+        <div class="col-md-5 floatLeft" style="text-align:right;">
+          <input type="text" value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:100%;" (focusout)="unfocusemail()" (focus)="focusemail()" />
+
+        </div>
+      </div>
+
+
+      <div class="row margin-top" style="margin-left:1%;margin-top: 30px;">
+        <label class="col-md-6 headerGray" #div style="text-align: right;right: 2%;">חטיבה</label>
+        <label class="col-md-4 floatLeft  headerGray" style="margin-left:8%;text-align: right;" #subdiv>תת חטיבה</label>
+      </div>
+      <div class="row margin-top" style="margin-left:1%">
+        <label class="col-md-5" style="text-align: right;right: 2%;">{{Division}}</label>
+        <label class="col-md-5 floatLeft" style="margin-left:16%;text-align: right;">{{SubDivision}}</label>
+      </div>
+      <br />
     </div>
-            <input type="text" [(ngModel)]="TitleEnglish" style="margin-right: 10px;margin-left: 480px;" /> <label style="margin-left: 20px;display: inline-block;width: 120px;">כותרת הרצאה</label><br /><br />
-            <input type="text" [(ngModel)]="TitleHebrew" style="margin-right: 10px;margin-left: 480px;" /> <label style="margin-left: 20px;display: inline-block;width: 120px;">כותרת הרצאה</label><br /><br />
-            <!--<input type="text" [(ngModel)]="TitleHebrew" style="margin-right: 10px;margin-left: 100px;"/>-->
-            <!--<label style="display: inline-block;width: 180px;margin-left: 20px;" class="la">כותרת הרצאה:</label><br /><br />-->
-            <textarea [(ngModel)]="Proposal"></textarea><label style="display: inline-block;padding-left:30px;">הצעה (250 מילים)</label><br /><br />
-            <select #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
-              <option [value]="Language" selected>{{Language}}</option>
-              <option *ngFor="let lang of ArrLanguage" [value]="lang">
-                {{lang}}
-              </option>
-            </select>
-            <label style="display: inline-block;padding-left:30px;">שפה</label>
-            <br /><br />
-            <textarea [(ngModel)]="Keywords"></textarea><label style="display: inline-block;padding-left:30px;">מילות מפתח:</label><br /><br />
-            <div style="float:right;direction:rtl;margin-right:15%;">
-              <input type="radio" name="one\two" value="1" (change)="showTwo=false" /><label>מרצה בודד</label>
-              <input type="radio" name="one\two" value="2" (change)="showTwo=true" /><label>הרצאה משותפת</label>
-              <div *ngIf="showTwo" style="margin-bottom:30px;">
-                <br /><label>הכנס שם ואימייל</label>
-                <br />
-                <br />
-                <label style="margin-left:20px">אימייל</label><input type="text" [(ngModel)]="Email2" style="margin-left:20px" />
-                <label style="margin-left:20px">שם</label><input type="text" [(ngModel)]="Name2" />
+
+    <br /><br />
+    <div class="col-md-12" style="text-align:right;">
+      <div class="row margin-top">
+        <div class="col-md-6">
+          <label class="headerGray" #english>
+            כותרת הרצאה [אנגלית]
+            <div class="tooltip">
+              <img src="/assets/images/TooltipIcon.png" />
+              <span class="tooltiptext" style="text-align:left;padding-left:2%;font-size: medium;">
+                Title in English (In the Latin American Jewry Section, titles may be submitted in
+                Spanish/Portuguese,  in the Ladino subdivision the title may be submitted in Ladino)
+              </span>
+            </div>
+          </label>
+        </div>
+        <label class="col-md-5 headerGray" #academic style="margin-left:8%;">
+          שיוך אקדמי
+        </label>
+      </div>
+
+      <div>
+        <!-- <div [formGroup]="jobform"> -->
+        <div class="row margin-top form-group">
+          <!-- <input #testInput id="name" ngModel name="name" formControlName="TitleEnglish" type="text" class="form-control col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />-->
+          <!-- <input name="firstName" ngModel pattern="[a-zA-Z ]*">-->
+          <div class="col-md-6">
+            <input style="width:80%;" (focusout)="unfocusenglish()" (focus)="focusenglish()" #testInput name="firstName" ngModel [pattern]="'^[a-zA-Z \-\']$'" (change)="TitleEnglishP($event)" type="text" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
+          </div>
+          <div class="col-md-6">
+            <input (focusout)="unfocusacademic()" (focus)="focusacademic()" #testInput type="text" style="margin-left:16%;width:80%; " *ngIf="showLikeProp==false" />
+          </div>
+          <div class="col-md-6">
+            <label style="width:80%;" *ngIf="showLikeProp==true">{{TitleEnglish}}</label>
+          </div>
+          <div class="col-md-6">
+            <label style="width:80%;margin-left:18%"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row margin-top">
+        <div class="col-md-6">
+          <label class="headerGray" #hebrew>
+            כותרת הרצאה [עברית]
+
+            <div class="tooltipSmall ">
+              <img src="/assets/images/TooltipIcon.png" />
+              <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;">
+                Title in Hebrew (In the Yiddish subdivision,
+                the title may be submitted in Yiddish with Hebrew Characters
+              </span>
+            </div>
+          </label>
+        </div>
+        <label class="col-md-5 floatLeft  headerGray" #lang style="margin-left:8%;">שפת הרצאה</label>
+      </div>
+      <div class="row margin-top form-group">
+        <div class="col-md-6">
+          <input style="width:80%" (focusout)="unfocushebrew()" (focus)="focushebrew()" #testInput type="text" ng-pattern="pattern" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
+        </div>
+        <div class="col-md-6">
+          <select style="width:80%; margin-left:16%;direction:ltr;" (click)="focuslang()" (mouseleave)="unfocuslang()" *ngIf="showLikeProp==false" #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
+            <option [value]="Language" selected>{{Language}}</option>
+            <option *ngFor="let Language of ArrLanguage" [value]="Language">
+              {{Language}}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label style="width:80%;" *ngIf="showLikeProp==true">{{TitleHebrew}}</label>
+        </div>
+        <div class="col-md-6">
+          <label *ngIf="showLikeProp==true" style="margin-left:18%;width:80%;">{{Language}}</label>
+        </div>
+      </div>
+
+      <div class="row margin-top">
+        <label class="col-md-6 headerGray" #abs>תקציר (עד 250 מילים):</label>
+        <label class="col-md-5 floatLeft headerGray" #key style="margin-left:8%;">מילות מפתח</label>
+      </div>
+    </div>
+    <div class="row margin-top form-group">
+      <div class="col-md-6">
+        <textarea (keypress)="maxlength(Proposal,250)" class="form-control z-depth-1"
+                  pattern="^(?:\w+\W+){0,5}(?:\w+)"
+                  (focusout)="unfocusabs()"
+                  (focus)="focusabs()"
+                  #testInput [(ngModel)]="Proposal"
+                  style="width:80%;height:97px;border-radius: 0rem;"
+                  *ngIf="showLikeProp==false">
+          </textarea>
+      </div>
+      <div class="col-md-6">
+        <textarea class="form-control z-depth-1"
+                  (focusout)="unfocuskey()"
+                  (focus)="focuskey()"
+                  #testInput [(ngModel)]="Keywords"
+                  style="width:80%;height:97px;margin-left:16%;border-radius: 0rem;"
+                  *ngIf="showLikeProp==false"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label style="width:80%" *ngIf="showLikeProp==true">{{Proposal}}</label>
+      </div>
+      <div class="col-md-6">
+        <label style="margin-left:18%;width:80%" *ngIf="showLikeProp==true">{{Keywords}}</label>
+      </div>
+      <br /><br />
+      <div class="row margin-top form-group col-md-12">
+        <button (click)="Draft()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-right:20%;">שמור טיוטה</button>
+        <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-right:3%;">שלח</button>
+        <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-right:20%;">שמור טיוטה</button>
+        <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-right:3%;">שלח</button>
+
+        <!-- <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft"  class="fill-btn-blue col-md-3" style="margin-left:20%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Save draft</button>
+                 <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Submit</button>
+                 <button (click)="Draft()" disabled *ngIf="showLikeProp==true"data-toggle="modal" data-target="#myModalraft" class="fill-btn-disabled col-md-3" style="margin-left:20%;"  (mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Save draft</button>
+                 <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)">Submit</button>
+        -->
+        <br /><br />
+
+        <div class="container-fluid" *ngIf="showsaveDraft">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="showsaveDraft=!showsaveDraft">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                        <div class="divERR col-md-5 marginAuto">
+                          <br />
+                          <h4>Your draft has been saved.</h4>
+                          <br />  <label>Please make sure to submit it before the deadline.</label>
+                          <br />   <label>You will receive an email with your login details.</label>
+                          <br /> <label>With those you can return to this page and edit your draft before submission.</label>
+                          <br /><br />
+                        </div>
+                      </div>
+
+                      <br /><br /><br /><br /><br /><br />
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </div>
-            <br /><br />
-            <div style="padding-left:50px;padding-top:30px;margin-left:300px">
-              <button (click)="Draft()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;width:150px;">שמירה כטיוטה</button>
-              <button (click)="Save()" class="fill-btn-blue" style="padding:10px;width:150px;">שלח</button>
-              <br /><br />
-              <label *ngIf="SaveDraft">הטיוטה נשמרה</label>
-
-            </div>
+            <div class="col-md-2"></div>
           </div>
-  </div>
+        </div>
 
+        <div class="container-fluid" *ngIf="errMoreThen250">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="errMoreThen250=!errMoreThen250">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                        <div class="divERR col-md-5 marginAuto">
+                          <br />
+                          <h4>ERROR</h4>
+                          <br />  <label>
+                            Sorry, you have input more than 250  words into the <br />
+                            text area box you just completed. It can return no more than 250  words to be processed.<br />
+                          </label>
+                          <br /><br />
+                        </div>
+                      </div>
+
+                      <br /><br /><br /><br /><br /><br />
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+
+
+        <!--<div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div class="modal fade" id="myModalSubmit" role="dialog">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                       <h5 class="header-WithOut-border" style="margin: inherit;">EDIT LECTURE PROPOSAL</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                     <span style="font-size: 18px;">Your proposal has been submitted.</span> <br/>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+                </div>
+              </div>
+            </div>-->
+        <div class="container-fluid" *ngIf="showErrEmpty">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 14%!important;
+    left: 22%!important;width:50% !important">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" (click)="showErrEmpty=!showErrEmpty">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                        <div class="divERR col-md-5 marginAuto">
+                          <br />
+                          <h4>ERROR</h4>
+                          <br />  <label>You must fill in all fields!</label>
+                          <br /><br />
+                        </div>
+                      </div>
+
+                      <br /><br /><br /><br /><br /><br />
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>

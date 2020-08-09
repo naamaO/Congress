@@ -44,6 +44,18 @@ export class JudgesComponent  implements OnInit  {
   @ViewChild('Rejected1') Rejected1: ElementRef;
   @ViewChild('Rejected2') Rejected2: ElementRef;
   @ViewChild('Rejected3') Rejected3: ElementRef;
+  @ViewChild('Accepteds1') Accepteds1: ElementRef;
+  @ViewChild('Accepteds2') Accepteds2: ElementRef;
+  @ViewChild('Accepteds3') Accepteds3: ElementRef;
+  @ViewChild('Accepteds') Accepteds: ElementRef;
+  @ViewChild('RRs1') RRs1: ElementRef;
+  @ViewChild('RRs2') RRs2: ElementRef;
+  @ViewChild('RRs3') RRs3: ElementRef;
+  @ViewChild('RRs') RRs: ElementRef;
+  @ViewChild('Rejecteds') Rejecteds: ElementRef;
+  @ViewChild('Rejecteds1') Rejecteds1: ElementRef;
+  @ViewChild('Rejecteds2') Rejecteds2: ElementRef;
+  @ViewChild('Rejecteds3') Rejecteds3: ElementRef;
   @ViewChild('RejectedSession') RejectedSession: ElementRef;
   @ViewChild('AcceptedSession') AcceptedSession: ElementRef;
   @ViewChild('RRSession') RRSession: ElementRef;
@@ -53,6 +65,7 @@ export class JudgesComponent  implements OnInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public Dark: boolean = false;
   over: boolean[];
+  public names: string[];
     public myControl = new FormControl();
     public options: string[] = ['One', 'Two', 'Three'];
     public filteredOptions: Observable<string[]>;
@@ -208,6 +221,9 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
                 this.SessionName = item.SessionName;
                 this.Chairman = item.Chairman;
               this.Status = item.Status;
+              this.serverService.getNameOfDraftsGroup(item.SessionId).subscribe((eventss) => {
+                this.names = eventss;
+              });
               this.isShowProp = false;
                 this.isShowPropArrSession = true;
             });
@@ -567,24 +583,324 @@ public displayedColumns: string[] = ['Icon','UserName', 'Division', 'SubDivision
  
     console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
   }
-  onStatusPropSessionChangeR(PropSession) {
+  onStatusChanges(statusValueChecked: string, PropSession) {
+    if (PropSession.Status == "Accepted" || PropSession.Status == "Accepted            ") {
+      //this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Rejected            ";
+
+          }
+        });
+        if (typeof this.Accepteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }
+        if (typeof this.Accepteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }
+        if (typeof this.Accepteds3 !== 'undefined') {
+          this.Accepted3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }
+        if (typeof this.Accepteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;}
+        
+      } if (statusValueChecked == "Accepted") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Accepted            ";
+
+          }
+        });
+        if (typeof this.Rejecteds1 !== 'undefined') {
+
+          this.Rejected1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        } if (typeof this.Rejecteds2 !== 'undefined') {
+
+          this.Rejecteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        } if (typeof this.Rejecteds3 !== 'undefined') {
+
+          this.Rejecteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        } if (typeof this.Rejecteds !== 'undefined') {
+
+          this.Rejecteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }
+      }
+
+      if (statusValueChecked == "RR") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "RR                  ";
+
+          }
+        });
+        if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.Rejecteds1.nativeElement.checked = false;
+        }
+        if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.Rejecteds2.nativeElement.checked = false;
+        } if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.Rejecteds3.nativeElement.checked = false;
+        } if (typeof this.Rejecteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.Rejecteds.nativeElement.checked = false;
+        }
+      }
+    }
+
+    if (PropSession.Status == "Rejected" || PropSession.Status == "Rejected            ") {
+      //this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Rejected            ";
+
+          }
+        });
+        if (typeof this.Accepteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Accepteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Accepteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }if (typeof this.Accepteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "Accepted") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Accepted            ";
+
+          }
+        });
+        if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Rejecteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Rejecteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Rejecteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }if (typeof this.Rejecteds !== 'undefined') {
+          this.Rejecteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "RR") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "RR                  ";
+
+          }
+        });
+        if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.Rejecteds2.nativeElement.checked = false;
+        } if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.Rejecteds1.nativeElement.checked = false;
+        } if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.Rejecteds3.nativeElement.checked = false;
+        } if (typeof this.Rejecteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.Rejecteds.nativeElement.checked = false;
+        }
+      }
+    } if (PropSession.Status == "RR                  " || PropSession.Status == "RR") {
+      //this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Rejected            ";
+
+          }
+        });
+        if (typeof this.Accepteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }if (typeof this.Accepteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Accepteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Accepteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "Accepted") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Accepted            ";
+
+          }
+        });
+        if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Rejecteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Rejecteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Rejecteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Rejecteds !== 'undefined') {
+          this.Rejecteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "RR") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "RR                  ";
+
+          }
+        });
+        if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.Rejecteds3.nativeElement.checked = false;
+        }if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.Rejecteds2.nativeElement.checked = false;
+        }if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.Rejecteds1.nativeElement.checked = false;
+        }if (typeof this.Rejecteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.Rejecteds.nativeElement.checked = false;
+        }
+      }
+    }
+    if (PropSession.Status == "Pending" || PropSession.Status == "Pending             ") {
+      //this.oneProp.Status = statusValueChecked;
+      if (statusValueChecked == "Rejected") {
+
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Rejected            ";
+
+          }
+        });
+        if (typeof this.Accepteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }if (typeof this.Accepteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Accepteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Accepteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "Accepted") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "Accepted            ";
+
+          }
+        });
+        if (typeof this.Rejecteds !== 'undefined') {
+          this.Rejecteds.nativeElement.checked = false;
+          this.RRs.nativeElement.checked = false;
+        }if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Rejecteds1.nativeElement.checked = false;
+          this.RRs1.nativeElement.checked = false;
+        }if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Rejecteds2.nativeElement.checked = false;
+          this.RRs2.nativeElement.checked = false;
+        }if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Rejecteds3.nativeElement.checked = false;
+          this.RRs3.nativeElement.checked = false;
+        }
+      } if (statusValueChecked == "RR") {
+        this.ArrPropSession.forEach((prop) => {
+          if (prop.IdProposal == PropSession.IdProposal) {
+            prop.Status = "RR                  ";
+
+          }
+        });
+        if (typeof this.Rejecteds !== 'undefined') {
+          this.Accepteds.nativeElement.checked = false;
+          this.Rejecteds.nativeElement.checked = false;
+        } if (typeof this.Rejecteds1 !== 'undefined') {
+          this.Accepteds1.nativeElement.checked = false;
+          this.Rejecteds1.nativeElement.checked = false;
+        } if (typeof this.Rejecteds2 !== 'undefined') {
+          this.Accepteds2.nativeElement.checked = false;
+          this.Rejecteds2.nativeElement.checked = false;
+        } if (typeof this.Rejecteds3 !== 'undefined') {
+          this.Accepteds3.nativeElement.checked = false;
+          this.Rejecteds3.nativeElement.checked = false;
+        }
+      }
+}
     
+ 
+    console.log(" this.oneProp.Status Value is : ",this.oneProp.Status );
+  }
+  onStatusPropSessionChangeR(PropSession) {
+    const ele = document.getElementById("Accepteds") as HTMLInputElement
+    ele.checked = false;
+    const ele2 = document.getElementById("RRs") as HTMLInputElement
+    ele2.checked = false;
+    const ele3 = document.getElementById("Rejecteds") as HTMLInputElement
+    ele3.checked = true;
+    this.Accepteds.nativeElement.checked = false;
+    this.RRs.nativeElement.checked = false;
+    this.Rejecteds.nativeElement.checked = true;
+
     this.ArrPropSession.forEach((prop) => {
       if (prop.IdProposal == PropSession.IdProposal){
             prop.Status=  "Rejected            ";
 
         }
         });
-} onStatusPropSessionChangeRR(PropSession) {
-    
+  } onStatusPropSessionChangeRR(PropSession) {
+    const ele = document.getElementById("Accepteds") as HTMLInputElement
+    ele.checked = false;
+    const ele2 = document.getElementById("RRs") as HTMLInputElement
+    ele2.checked = true;
+    const ele3 = document.getElementById("Rejecteds") as HTMLInputElement
+    ele3.checked = false;
+  this.Accepteds.nativeElement.checked = false;
+  this.RRs.nativeElement.checked = true;
+  this.Rejecteds.nativeElement.checked = false;
     this.ArrPropSession.forEach((prop) => {
       if (prop.IdProposal == PropSession.IdProposal){
             prop.Status=  "RR                  ";
 
         }
         });
-} onStatusPropSessionChangeA(PropSession) {
-    
+  } onStatusPropSessionChangeA(PropSession) {
+    const ele = document.getElementById("Accepteds") as HTMLInputElement
+    ele.checked = true;
+    const ele2 = document.getElementById("RRs") as HTMLInputElement
+    ele2.checked = false;
+    const ele3 = document.getElementById("Rejecteds") as HTMLInputElement
+    ele3.checked = false;
+
+  this.Accepteds.nativeElement.checked = true;
+  this.RRs.nativeElement.checked = false;
+  this.Rejecteds.nativeElement.checked = false;
     this.ArrPropSession.forEach((prop) => {
       if (prop.IdProposal == PropSession.IdProposal){
             prop.Status=  "Accepted            ";

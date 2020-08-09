@@ -9,13 +9,13 @@ import { NewProp } from '../../../classes/NewProp';
 import { CookieService } from 'angular2-cookie';
 import { Name } from 'src/classes/Name';
 import { ActivatedRoute } from '@angular/router';
-
 @Component({
-  selector: 'app-congress-registration-single',
-  templateUrl: './congress-registration-single.component.html',
-  styleUrls: ['./congress-registration-single.component.css']
+  selector: 'app-congress-registration-single-hebrew',
+  templateUrl: './congress-registration-single-hebrew.component.html',
+  styleUrls: ['./congress-registration-single-hebrew.component.css']
 })
-export class CongressRegistrationSingleComponent implements OnInit {
+export class CongressRegistrationSingleHebrewComponent implements OnInit {
+
   @ViewChild('english') english: ElementRef;
   @ViewChild('hebrew') hebrew: ElementRef;
   @ViewChild('abs') abs: ElementRef;
@@ -66,12 +66,12 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public showsaveDraft: boolean = false;
   public Rout: number;
   private sub: any;
-  constructor(public route: ActivatedRoute,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
-    this.serverService.DivisionEnglish().subscribe((events) => {
+  constructor(public route: ActivatedRoute, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.serverService.DivisionHebrew().subscribe((events) => {
       this.ArrDivision = events;
       this.ShowSub = true;
     });
-    
+
     this.sub = this.route.params.subscribe(params => {
       this.Rout = +params['rout'];
 
@@ -81,63 +81,61 @@ export class CongressRegistrationSingleComponent implements OnInit {
     //   this.ShowSub = true;
     // });
     if (this.Rout != 1) {
-    this.serverService.getName().subscribe((events) => {
-      this.FirstName = events.FirstName;
-      this.LastName = events.LastName;
-      this.FirstNameHebrew = events.FirstNameHebrew;
-      this.LastNameHebrew = events.LastNameHebrew;
-      this.Title = events.selectedTitle;
-    })
-    // this.serverService.getName().subscribe(val => this.Name = val);
-    this.serverService.getNameHebrew().subscribe(val => this.NameHebrew = val);
-    this.LoginUserName = (this.getCookie('UserName'));
+      this.serverService.getName().subscribe((events) => {
+        this.FirstName = events.FirstName;
+        this.LastName = events.LastName;
+        this.FirstNameHebrew = events.FirstNameHebrew;
+        this.LastNameHebrew = events.LastNameHebrew;
+        this.Title = events.selectedTitle;
+      })
+      // this.serverService.getName().subscribe(val => this.Name = val);
+      this.serverService.getNameHebrew().subscribe(val => this.NameHebrew = val);
+      this.LoginUserName = (this.getCookie('UserName'));
 
-    this.serverService.selectDraft().subscribe((events) => {
-      this.Division = events.Division;
-      this.setCookie(this.Division);
-      console.log("division: " + this.Division);
-      this.SubDivision = events.SubDivision;
-      this.setCookieSub(this.SubDivision);
-      console.log("SubDivision: " + this.SubDivision);
-      console.log("rout: " + this.Rout);
+      this.serverService.selectDraft().subscribe((events) => {
+        this.Division = events.Division;
+        this.setCookie(this.Division);
+        console.log("division: " + this.Division);
+        this.SubDivision = events.SubDivision;
+        this.setCookieSub(this.SubDivision);
+        console.log("SubDivision: " + this.SubDivision);
+        console.log("rout: " + this.Rout);
 
-      this.TitleEnglish = events.TitleEnglish;
-      this.TitleHebrew = events.TitleHebrew;
-      this.Proposal = events.Proposal;
-      this.Language = events.Language;
-      this.Keywords = events.Keywords;
-      this.SessionName = events.SessionName;
-      if((events.Division !=null)||(events.Division=='')){
-      if (events.Division.charAt(0) == '0') {
-        this.showLikeProp = true;
-        this.Division = this.Division.substr(1);
-      }
-      }
-      if (this.Division != null && this.SubDivision != null && this.Language == null) {
-        this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
-
-          this.ArrLanguage = events;
-        });
-      }
-      if (this.Division != null && this.SubDivision == null) {
-        this.serverService.SubDivisionEnglish(this.Division).subscribe((events) => {
-
-          this.ArrSubDivision = events;
-          if (this.Division != null && this.SubDivision != null && this.Language == null) {
-            this.setCookieSub(this.SubDivision);
-
-            this.serverService.GetLanguageEnglish(this.SubDivision).subscribe((events) => {
-
-              this.ArrLanguage = events;
-            });
+        this.TitleEnglish = events.TitleEnglish;
+        this.TitleHebrew = events.TitleHebrew;
+        this.Proposal = events.Proposal;
+        this.Language = events.Language;
+        this.Keywords = events.Keywords;
+        this.SessionName = events.SessionName;
+        if ((events.Division != null) || (events.Division == '')) {
+          if (events.Division.charAt(0) == '0') {
+            this.showLikeProp = true;
+            this.Division = this.Division.substr(1);
           }
-          this.setCookie(this.Division);
-        });
-      }
-      
-    });
+        }
+        if (this.Division != null && this.SubDivision != null && this.Language == null) {
+          this.serverService.GetLanguageHebrew(this.SubDivision).subscribe((events) => {
+
+            this.ArrLanguage = events;
+          });
+        }
+        if (this.Division != null && this.SubDivision == null) {
+          this.serverService.SubDivisionHebrew(this.Division).subscribe((events) => {
+
+            this.ArrSubDivision = events;
+            if (this.Division != null && this.SubDivision != null && this.Language == null) {
+              this.serverService.GetLanguageHebrew(this.SubDivision).subscribe((events) => {
+
+                this.ArrLanguage = events;
+              });
+            }
+            this.setCookie(this.Division);
+          });
+        }
+
+      });
     }
-  
+
   }
   maxlength(element, maxvalue) {
     var q = element.split(/[\s]+/).length;
@@ -148,12 +146,12 @@ export class CongressRegistrationSingleComponent implements OnInit {
     }
   }
 
-  
-TitleEnglishP(elemTltle){
-  elemTltle.console.error();
+
+  TitleEnglishP(elemTltle) {
+    elemTltle.console.error();
 
 
-}
+  }
   changeStyle(event: any) {
     event.target.classList.remove('fill-btn-blue')
 
@@ -178,7 +176,7 @@ TitleEnglishP(elemTltle){
   ngOnInit() {
   }
   selectDivision(div: string) {
-    this.serverService.SubDivisionEnglish(div).subscribe((events) => {
+    this.serverService.SubDivisionHebrew(div).subscribe((events) => {
 
       this.ArrSubDivision = events;
       this.setCookie(div);
@@ -187,9 +185,8 @@ TitleEnglishP(elemTltle){
 
   }
   selectSubDivision(subDiv: string) {
-    //alert(subDiv);
-    this.setCookieSub(subDiv);
-    this.serverService.GetLanguageEnglish(subDiv).subscribe((events) => {
+
+    this.serverService.GetLanguageHebrew(subDiv).subscribe((events) => {
 
       this.ArrLanguage = events;
     });
@@ -215,7 +212,7 @@ TitleEnglishP(elemTltle){
       this.showsaveDraft = true;
     }
     else {
-    this.Prop = new Proposals();
+      this.Prop = new Proposals();
       this.Prop.Keywords = this.Keywords;
 
       this.Prop.Division = this.Division;
@@ -227,7 +224,7 @@ TitleEnglishP(elemTltle){
       this.serverService.enterDraft(this.Prop);
       this.showsaveDraft = true;
     }
-   
+
 
   }
   Save() {
@@ -276,7 +273,7 @@ TitleEnglishP(elemTltle){
   }
   unfocusenglish() {
     this.english.nativeElement.style.color = "gray";
-  } 
+  }
   focusdiv() {
     this.div.nativeElement.style.color = "#27b5e5";
   }
@@ -294,45 +291,43 @@ TitleEnglishP(elemTltle){
   }
   unfocuslang() {
     this.lang.nativeElement.style.color = "gray";
-  } 
+  }
   focussubdiv() {
     this.subdiv.nativeElement.style.color = "#27b5e5";
   }
   unfocussubdiv() {
     this.subdiv.nativeElement.style.color = "gray";
   }
-    focustitle() {
+  focustitle() {
     this.title.nativeElement.style.color = "#27b5e5";
   }
   unfocustitle() {
     this.title.nativeElement.style.color = "gray";
   }
-   focusnameh() {
+  focusnameh() {
     this.nameh.nativeElement.style.color = "#27b5e5";
   }
   unfocusnameh() {
     this.nameh.nativeElement.style.color = "gray";
-  } 
+  }
   focusnamee() {
     this.namee.nativeElement.style.color = "#27b5e5";
   }
   unfocusnamee() {
     this.namee.nativeElement.style.color = "gray";
   }
-   focusemail() {
+  focusemail() {
     this.email.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
     this.email.nativeElement.style.color = "gray";
   }
-   focusabs() {
+  focusabs() {
     this.abs.nativeElement.style.color = "#27b5e5";
   }
   unfocusabs() {
-    this.maxlength(this.Proposal, 250);
-
     this.abs.nativeElement.style.color = "gray";
-  } 
+  }
   focuskey() {
     this.key.nativeElement.style.color = "#27b5e5";
   }

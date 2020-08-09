@@ -22,6 +22,11 @@
 }
 .margLeft3 {
   margin-left: 3%;
+}.margRight3 {
+  margin-right: 3%;
+}
+.margRight7 {
+  margin-right: 7%;
 }
 .clear {
   clear: both;
@@ -41,6 +46,8 @@
 
 .margLeft9 {
   margin-left: 9%;
+}.margRight9 {
+  margin-right: 9%;
 }
 
 .header-border {
@@ -53,6 +60,9 @@
 }
 
 .marginLeft15 {
+  margin-left: 15%;
+}
+.marginRight15 {
   margin-left: 15%;
 }
 

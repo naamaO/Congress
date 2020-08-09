@@ -41,6 +41,8 @@ import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
 import { successComponent } from './components/success/success.component';
 import { NavigatetosinglepropComponent } from './components/navigatetosingleprop/navigatetosingleprop.component';
+import { CongressRegistrationSingleHebrewComponent } from './components/congress-registration-single-hebrew/congress-registration-single-hebrew.component';
+import { NavigatetosinglepropHerbewComponent } from './components/navigatetosingleprop-herbew/navigatetosingleprop-herbew.component';
 export const route: Routes = [
   {
     path: 'Welcome/:Rout',
@@ -183,6 +185,9 @@ export const route: Routes = [
   {
     path: 'CongressRegistrationSingle/:rout',
     component: CongressRegistrationSingleComponent,
+  }, {
+    path: 'CongressRegistrationSingleHebrew/:rout',
+    component: CongressRegistrationSingleHebrewComponent,
   },
   {
     path: 'notify',
@@ -211,5 +216,9 @@ export const route: Routes = [
   {
     path: 'Navigat',
     component: NavigatetosinglepropComponent,
+ },
+  {
+    path: 'NavigatHebrew',
+    component: NavigatetosinglepropHerbewComponent,
  }
 ]

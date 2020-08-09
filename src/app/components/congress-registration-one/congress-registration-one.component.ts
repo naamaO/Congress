@@ -276,6 +276,7 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.abs.nativeElement.style.color = "#27b5e5";
   }
   unfocusabs() {
+    this.maxlength(this.Proposal, 250);
     this.abs.nativeElement.style.color = "gray";
   } focustitle() {
     this.title.nativeElement.style.color = "#27b5e5";

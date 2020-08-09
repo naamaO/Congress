@@ -36,7 +36,11 @@ export class NewHebrewComponent implements OnInit {
   public num: number;
   public item2: shoppingCart;
   public p: number = 1;
-  public Total: number;
+  public FirstNameHebrew: string;
+  public LastNameHebrew: string;
+  public Total: number = 0;
+  public TotalAfterDiscount:number = 0;
+  public IsMemberShip:boolean=false;
   public DBShoppingCart: shoppingCart[];
   public CART = {
     KEY: 'ShoppingCartGuest',
@@ -62,8 +66,24 @@ if(this.getCookie('UserName')) {
             this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
         }
       });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
-      //get list of all books
+      this.serverService.getTotalPrice().subscribe((val) => {
+        this.Total = val
+        this.UserNameLogin = this.getCookie('UserName');  
+        if(this.UserNameLogin){
+        this.serverService.getUserDetails().subscribe((events) => {
+          this.FirstNameHebrew = events.FirstNameHebrew;
+          this.LastNameHebrew = events.LastNameHebrew; 
+          if(events.MemberShip >-1)
+          this.IsMemberShip = true;
+          if(this.IsMemberShip){
+            this.serverService.setTotal();
+          if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
+          }
+        })
+      }
+      });      //get list of all books
       // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
     this.serverService.getNumProduct().subscribe(val => this.num = val);
     }
@@ -160,6 +180,8 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
             if(_total){
                 this.TOTAL.total = JSON.parse(_total);
               }
+              this.IsMemberShip = false;
+
     }
   }
   NavigCart() {
@@ -224,11 +246,29 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
     this.changePlaying();
 
   } 
+  getDiscountTotal(Total){
+    let discount = Total * ( 20 / 100);
+     this.TotalAfterDiscount =  Total - discount;
+}
+
    SendToCart() {
     this.router.navigateByUrl("/ShoppingCartHebrew");
   }
   SendToTranzila() {
      this.router.navigate(['Pay', this.Total]);
+  }
+  SendToSignIn(){
+    this.router.navigateByUrl("/UserPass/2");
+  }
+  
+  isSignIn(){
+    this.UserNameLogin = this.getCookie('UserName'); 
+    if(this.UserNameLogin!=undefined){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
   Detais(item: book) {
     // this.ShowDetails = !this.ShowDetails;

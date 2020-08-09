@@ -26,4 +26,5 @@ export class User {
   Address: string;
   Language: string;
   MemberShip: number;
+Title:string;
 }    

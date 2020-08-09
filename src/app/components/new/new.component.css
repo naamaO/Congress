@@ -9,6 +9,29 @@ body{
   text-align: center; 
 }
 
+.text {
+  color: #026fa7;   
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+    background-size: contain;
+    /* position: relative; */
+    height: 404px;
+    width: 296px;
+    /* color: #85a6b7; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text:hover { 
+  z-index: 12;
+}
 .cart-num-books{
   color:#026fa7;
   font-family:'OpenSansBold', sans-serif;
@@ -559,7 +582,13 @@ font-size:18px;
   display:flex;
   margin-left:10%;
 }
-
+.book-name{
+  text-align:right;
+  font-family: 'OpenSansBoldHebrew', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color:#026fa7;
+}
 
 .price{
   font-size:24px;

@@ -235,10 +235,14 @@ ul {
     font-weight: normal; 
     font-size:18px; */
   }
-  
-.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
-  /* background-image: none; */
-}
+  .book-name{
+    text-align:right;
+    font-family: 'OpenSansBoldHebrew', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color:#026fa7;
+  }
+
 .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #27b5e5 !important;
 }

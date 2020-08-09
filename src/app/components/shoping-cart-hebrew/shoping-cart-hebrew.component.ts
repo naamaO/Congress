@@ -27,9 +27,24 @@ export class ShopingCartHebrewComponent implements OnInit {
   @ViewChild('usernameemailinput') usernameemailinput: ElementRef;
   @ViewChild('addressinput') addressinput: ElementRef;
   @ViewChild('countryinput') countryinput: ElementRef;
+
+  @ViewChild('nameh2') nameh2: ElementRef;
+  @ViewChild('usernameemail2') usernameemail2: ElementRef;
+  @ViewChild('address2') address2: ElementRef;
+  @ViewChild('country2') country2: ElementRef;
+  @ViewChild('namehfirstinput2') namehfirstinput2: ElementRef;
+  @ViewChild('namehlastinput2') namehlastinput2: ElementRef;
+  @ViewChild('usernamehmailinput2') usernamehmailinput2: ElementRef;
+  @ViewChild('addressinput2') addressinput2: ElementRef;
+  @ViewChild('countryinput2') countryinput2: ElementRef;
+
+  @ViewChild('yes') yes: ElementRef;
+  @ViewChild('no') no: ElementRef;
+
   public DB: shoppingCart[];
   public user: User;
-  public Total: number;
+  public Total: number = 0;
+  public TotalAfterDiscount:number = 0;
   public num: number;
   public Address: string;
   public Country: string[] = [];
@@ -39,7 +54,16 @@ export class ShopingCartHebrewComponent implements OnInit {
   public LastName: string;
   public FirstNameHebrew: string;
   public LastNameHebrew: string;
+
+  public FirstNameHebrew2: string;
+  public LastNameHebrew2: string;
+  public Address2: string;
+  public selectedCountry2: string;
+  public Country2: string[] = [];
+
   public showMessage:boolean=false;
+  public isYourAddress: string;
+  public IsMemberShip:boolean=false;
   public CART = {
     KEY: 'ShoppingCartGuest',
     contents: []
@@ -63,8 +87,11 @@ export class ShopingCartHebrewComponent implements OnInit {
   public itemToRedQunt1:any;
   public emailvalidate:boolean=false;
   public rem:boolean = false;
+
   constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {  
    this.Country =  this.serverService.Country;
+   this.Country2 =  this.serverService.Country;
+
     //get list of shopping cart//if login
 if(this.getCookie('UserName')) {     
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
@@ -79,7 +106,23 @@ if(this.getCookie('UserName')) {
     error => {  
       console.log(error)
     });
-    this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+    this.serverService.getTotalPrice().subscribe((val) => {
+      this.Total = val
+      this.UserNameLogin = this.getCookie('UserName');  
+      if(this.UserNameLogin){
+      this.serverService.getUserDetails().subscribe((events) => {
+        if(events.MemberShip >-1)
+        this.IsMemberShip = true;
+        if(this.IsMemberShip){
+          this.serverService.setTotal();
+        if(this.Total>0){
+        this.getDiscountTotal(this.Total);
+        }
+        }
+      })
+    }
+    });
+
     //get list of all books
     // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
   this.serverService.getNumProduct().subscribe(val => this.num = val);
@@ -97,11 +140,17 @@ if(!this.DB){
                 this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
                 this.num = this.num + this.DB[i].Quantity;
                 this.Total = this.Total + this.DB[i].Total;
+                if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
               }
               else{
                 this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
                 this.num = this.num + this.DB[i].Quantity;
                 this.Total = this.Total + this.DB[i].Total;
+                if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
               }
               }
             }
@@ -129,12 +178,16 @@ if(!this.DB){
     if(parseInt(_total)>0){
       this.TOTAL.total = parseInt(_total);
      this.Total = parseInt(_total);
+     if(this.Total>0){
+      this.getDiscountTotal(this.Total);
+      }
     }
     else{
       this.TOTAL.total = 0;         
       let _total =  JSON.stringify(this.TOTAL.total);
       localStorage.setItem(this.TOTAL.KEY, _total);
       this.Total = 0;
+      this.TotalAfterDiscount = 0;
     }
 }
 
@@ -154,7 +207,17 @@ if(!this.DB){
 
         }
       });
-      this.serverService.getTotalPrice().subscribe(val => this.Total = val);
+      this.serverService.getTotalPrice().subscribe((val) => {
+        this.Total = val
+        if(this.IsMemberShip){
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
+        }
+      });
+        if(this.Total>0){
+        this.getDiscountTotal(this.Total);
+        }
     });
     this.serverService.getNumProduct().subscribe(val => this.num = val);
 
@@ -195,6 +258,7 @@ if(!this.DB){
           if(_total){
               this.TOTAL.total = JSON.parse(_total);
             }
+            this.IsMemberShip=false;
     }
   }
 
@@ -265,6 +329,9 @@ async sync(act:string){
       this.num = this.num + 1;
       if (this.DB[i].SallePrice == 0){
         this.Total = this.Total + this.DB[i].PriceBook;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
         this.CART.contents.map(item=>{
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
@@ -274,6 +341,9 @@ async sync(act:string){
       }
       else{
         this.Total = this.Total + this.DB[i].SallePrice;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
         this.CART.contents.map(item=>{
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
@@ -288,9 +358,15 @@ async sync(act:string){
            this.num = this.num - 1;     
            if (this.itemToRedQunt1.SallePrice == 0){
                this.Total = this.Total - this.itemToRedQunt1.Total;
+               if(this.Total>0){
+                this.getDiscountTotal(this.Total);
+                }
              }
              else{
                this.Total = this.Total - this.itemToRedQunt1.Total;
+               if(this.Total>0){
+                this.getDiscountTotal(this.Total);
+                }
              }
            }
            else{//remove the item
@@ -300,23 +376,10 @@ async sync(act:string){
              else{
                this.num =  this.num - 1;
              }
-            //  if (this.itemToRedQunt1.SallePrice == 0){
-            //   if(this.itemToRedQunt1.Quantity!=0){
-            //      this.Total = this.Total -  this.DB[i].PriceBook;
-            //     }
-            //     else{
-            //       this.Total = this.Total -  this.DB[i].Total;
-            //     }
-            //  }
-            //  else{
-            //   if(this.itemToRedQunt1.Quantity==0){
-            //     this.Total = this.Total -  this.DB[i].SallePrice;
-            //    }
-            //    else{
-            //      this.Total = this.Total -  this.DB[i].Total;
-            //    }
-            //  }
             this.Total = this.Total - this.itemToRedQunt1.Total; 
+            if(this.Total>0){
+              this.getDiscountTotal(this.Total);
+              }
           }
          }
          else{
@@ -324,9 +387,15 @@ async sync(act:string){
              this.num = this.num - 1;     
              if (this.DB[i].SallePrice == 0){
                  this.Total = this.Total -  this.DB[i].PriceBook;
+                 if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
                }
                else{
                  this.Total = this.Total -  this.DB[i].SallePrice;
+                 if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
                }
              }
              else{//remove the item
@@ -339,17 +408,29 @@ async sync(act:string){
                if (this.DB[i].SallePrice == 0){
                 if(this.itemToRedQunt1.Quantity==0){
                  this.Total = this.Total -  this.DB[i].PriceBook;
+                 if(this.Total>0){
+                  this.getDiscountTotal(this.Total);
+                  }
                 }
                 else{
                   this.Total = this.Total -  this.DB[i].Total;
+                  if(this.Total>0){
+                    this.getDiscountTotal(this.Total);
+                    }
                 }
                }
                else{
                 if(this.itemToRedQunt1.Quantity==0){
                   this.Total = this.Total -  this.DB[i].SallePrice;
+                  if(this.Total>0){
+                    this.getDiscountTotal(this.Total);
+                    }
                  }
                  else{
                    this.Total = this.Total -  this.DB[i].Total;
+                   if(this.Total>0){
+                    this.getDiscountTotal(this.Total);
+                    }
                  }
                }
              }
@@ -369,6 +450,9 @@ async sync(act:string){
             this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
           });
           this.Total = this.Total + this.itemToAddQunt1.PriceBook;
+          if(this.Total>0){
+            this.getDiscountTotal(this.Total);
+            }
         //this.CART.contents =
          this.CART.contents.map(item=>{
           if(item.Id === i)
@@ -392,6 +476,9 @@ async sync(act:string){
             this.DB[d].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
           });
          this.Total = this.Total + this.itemToAddQunt1.SallePrice;
+         if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
          // this.CART.contents = 
           this.CART.contents.map(item=>{
             if(item.Id === i)
@@ -420,6 +507,9 @@ async sync(act:string){
            // }
           }
             this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+            if(this.Total>0){
+              this.getDiscountTotal(this.Total);
+              }
         if(this.DB.length>0){
           this.CART.contents.map(item=>{
             let id = this.itemToRedQunt1.Id
@@ -440,6 +530,9 @@ async sync(act:string){
               });
             }
             this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+            if(this.Total>0){
+              this.getDiscountTotal(this.Total);
+              }
             if(this.DB.length>0){
             this.CART.contents.map(item=>{
               let id;
@@ -456,14 +549,23 @@ async sync(act:string){
       else{//this.rem ==true;
         if (this.itemToRedQunt1.Quantity!=0){
           this.Total = this.Total - this.itemToRedQunt1.Total;
+          if(this.Total>0){
+            this.getDiscountTotal(this.Total);
+            }
         this.num = this.num - this.itemToRedQunt1.Quantity;
     }
     else{
       if (this.itemToRedQunt1.SallePrice == 0){
         this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
       }
       else{
         this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+        if(this.Total>0){
+          this.getDiscountTotal(this.Total);
+          }
     }
       this.num = this.num - 1;
     }
@@ -475,6 +577,7 @@ async sync(act:string){
 if(this.DB.length==0){
   this.num = 0;
   this.Total = 0;
+  this.TotalAfterDiscount = 0;
 }
 this.NUM.num = this.num;
 let _num =  JSON.stringify(this.NUM.num);
@@ -606,6 +709,15 @@ remove(id){
   setCookieContact(contact: string) {
     this.cookieService.put('contact', contact);
   }
+  setCookieAddress2(address2: string) {
+    this.cookieService.put('address2', address2);
+  }
+  setCookieContact2(contact2: string) {
+    this.cookieService.put('contact2', contact2);
+  }
+  setCookieIsYourAddress(isYourAddress: string) {
+    this.cookieService.put('isYourAddress', isYourAddress);
+  }
   SendToTranzila() {
     this.CART.contents = this.DB;
     let _cart = JSON.stringify(this.CART.contents);
@@ -613,6 +725,12 @@ remove(id){
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.lang);
     this.setCookieIlang(this.ilang);
+    if(this.TotalAfterDiscount>0){
+      this.setCookieTotal(this.TotalAfterDiscount);
+    }
+    else{
+      this.setCookieTotal(this.Total);
+    }
     this.setCookieTotal(this.Total);
     let address:any;
     let country:any
@@ -621,7 +739,7 @@ remove(id){
     detailsAddress = this.Address
     address = country.trimEnd() + " " + detailsAddress.trimRight();
     this.setCookieAddress(address);
-    this.UserNameLogin =  localStorage.getItem(this.USERNAME.KEY);
+    this.UserNameLogin = localStorage.getItem(this.USERNAME.KEY);
     this.serverService.getNameHebrew(this.UserNameLogin).subscribe((val) => {
       let first:any;
       let last:any
@@ -684,13 +802,73 @@ remove(id){
     }
     else{
     var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
+    
+    if(this.isYourAddress=='no'){
+      if(
+           this.FirstNameHebrew2 == null || 
+           this.LastNameHebrew2 == null ||
+           this.Address2 == null ||
+           this.selectedCountry2 == null 
+      ){
+         if( !this.FirstNameHebrew2 || !this.LastNameHebrew2){
+           this.nameh2.nativeElement.style.color = "#dc3545";
+           this.namehfirstinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+           this.namehlastinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+         }else{
+           this.nameh2.nativeElement.style.color = "gray";
+           this.namehfirstinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+           this.namehlastinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+         }
+           // if(!this.LastName2){
+           //   this.namee2.nativeElement.style.color = "red";
+           //   this.nameelastinput2.nativeElement.style.borderBottom = "1px solid red";
+           // }else{
+           //   this.namee2.nativeElement.style.color = "gray";
+           //   this.nameelastinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+           // }
+          if(!this.Address2){
+           this.address2.nativeElement.style.color = "#dc3545";
+           this.addressinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+          }else{
+           this.address2.nativeElement.style.color = "gray";
+           this.addressinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+         }
+           if(!this.selectedCountry2){
+            this.country2.nativeElement.style.color = "#dc3545";
+            this.countryinput2.nativeElement.style.borderBottom = "1px solid #dc3545";
+           }else{
+             this.country2.nativeElement.style.color = "gray";
+             this.countryinput2.nativeElement.style.borderBottom = "1px solid #c0bfbf";
+           }
+           return
+      }
+      else{
+       this.setCookieIsYourAddress(this.isYourAddress);
+       let address2:any;
+       let country2:any
+       country2 = this.selectedCountry2;
+       let detailsAddress2:any;
+       detailsAddress2 = this.Address2
+       address2 = country2.trimEnd() + " " + detailsAddress2.trimEnd();
+       this.setCookieAddress2(address2);
+       let first2:any;
+       let last2:any
+       first2 = this.FirstNameHebrew2;
+       last2 = this.LastNameHebrew2;
+       let contactName2:any;
+       contactName2 = first2.trimEnd() + " " + last2.trimEnd();  
+       this.setCookieContact2(contactName2);  
+      }
+    }
     if(
     this.FirstNameHebrew != null && 
     this.LastNameHebrew != null &&
     this.Address != null &&
     this.selectedCountry != null &&
     this.UserNameLogin != null 
-     ){   let user = this.getCookie('UserName');
+     ){  
+        let user = this.getCookie('UserName');
+        this.setCookieIsYourAddress(this.isYourAddress);
      if(user!=undefined || user!=null){//if logined
     this.UserNameLogin = this.getCookie('UserName');
    // this.SendToTranzila();
@@ -716,7 +894,6 @@ remove(id){
       localStorage.setItem(this.USERNAME.KEY, _username);
        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
        let existUser;
-     //  existUser = true;
          existUser = val;
       // console.log(val)
      
@@ -732,45 +909,10 @@ remove(id){
               //   console.log(res)
                });
              }
-             // this.SendToTranzila();       
       }
-   //   else{//if registered and not logined
-       //add to all cart 
-      // let _contents = localStorage.getItem(this.CART.KEY);
-      //  this.DB= this.CART.contents;
-      //  for (var i = 0; i < this.DB.length; i++) {
-      //   this.DB[i].UserName = this.UserNameLogin;
-      //   console.log( this.DB[i])
-      //   this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
-      //  //   console.log(res)
-      //   });
-      // }
-
-    //  this.SendToTranzila();
-
-//      }
      });
     }
-
-    this.SendToTranzila();
-   // if(this.serverService.resNotifyTranzila){
-   //   console.log("this.serverService.resNotifyTranzila",this.serverService.resNotifyTranzila)
-   // }
-    //if tranzila return response true
-    // if(this.serverService.resNotifyTranzila==000){}
-    // for (var i = 0; i < this.DB.length; i++) {
-    //   this.DB[i].UserName = this.UserNameLogin;
-    //   console.log( this.DB[i])
-    //   let itemToDelete  =  this.DB[i];
-    //   this.serverService.AddItemToCart(this.DB[i]).subscribe((res) => {
-    //     if(res==1){
-    //     //  console.log("this.DB[i]",itemToDelete)
-    //       this.serverService.postRemoveQuantity(itemToDelete);
-    //     }
-    //     console.log(res)
-    //   });
-
-    // }
+    this.SendToTranzila();  
   }
 
   else {
@@ -812,19 +954,79 @@ remove(id){
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       }
     
-    //alert("All fields must be filled!");
   }
 }
 
   }
   
+  onChangeShippingAddress(isYourAddress){
+    if(isYourAddress=='yes') {
+    this.isYourAddress ='yes';
+    const ele = document.getElementById("no") as HTMLInputElement
+    ele.checked = false;
+    const ele2 = document.getElementById("yes") as HTMLInputElement
+    ele2.checked = true;
+    this.no.nativeElement.checked = false;
+    this.yes.nativeElement.checked = true;
+      }
+  else if(isYourAddress=='no') {
+    this.isYourAddress ='no';
+    const ele = document.getElementById("yes") as HTMLInputElement
+    ele.checked = false;
+    const ele2 = document.getElementById("no") as HTMLInputElement
+    ele2.checked = true;
+    this.yes.nativeElement.checked = false;
+    this.no.nativeElement.checked = true;
+     }
+  }
+
+  getDiscountTotal(Total){
+    let discount = Total * ( 20 / 100);
+     this.TotalAfterDiscount =  Total - discount;
+}
+
 
   SendToNew() {
     this.router.navigateByUrl("/newHebrew");
 
   }
+  SendToSignIn(){
+    this.router.navigateByUrl("/UserPass/2");
+  }
+  isSignIn(){
+    this.UserNameLogin = this.getCookie('UserName'); 
+    if(this.UserNameLogin!=undefined){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  focusnamee2() {
+    this.nameh2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusnamee2() {
+    this.nameh2.nativeElement.style.color = "gray";
+  }
+  focuscountry2() {
+    this.nameh2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocuscountry2() {
+    this.nameh2.nativeElement.style.color = "gray";
+  } 
+  focusaddress2() {
+    this.nameh2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusaddress2() {
+    this.nameh2.nativeElement.style.color = "gray";
+  }
+   focususernameemail2() {
+    this.nameh2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocususernameemail2() {
+    this.nameh2.nativeElement.style.color = "gray";
+  }
 
-  
  focusnamee() {
   this.nameh.nativeElement.style.color = "#27b5e5";
 }

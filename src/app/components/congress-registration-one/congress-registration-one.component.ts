@@ -28,8 +28,15 @@ export class CongressRegistrationOneComponent implements OnInit {
   @ViewChild('namee') namee: ElementRef;
   @ViewChild('title') title: ElementRef;
   @ViewChild('key') key: ElementRef;
+  @ViewChild('titenglishinput') titenglishinput: ElementRef;
+  @ViewChild('academicinput') academicinput: ElementRef;
+  @ViewChild('tithebinput') tithebinput: ElementRef;
+  @ViewChild('proptext') proptext: ElementRef;
+  @ViewChild('keytext') keytext: ElementRef;
+  @ViewChild('langselect') langselect: ElementRef;
 //Add field academy to DB
   //@Input()
+  public NumWords: number = 0;
   userFormGroup: FormGroup;
   public angForm: FormGroup;
   public errMoreThen250: boolean;
@@ -200,7 +207,24 @@ export class CongressRegistrationOneComponent implements OnInit {
       this.router.navigateByUrl("/Thank2");
     }
     else {
-      this.showErrEmpty = true;
+      if (this.Keywords == null) {
+        this.key.nativeElement.style.color = "red";
+        document.getElementById("keytext").classList.add("allbordercolorRed");
+      } if (this.TitleEnglish == null) {
+        this.english.nativeElement.style.color = "red";
+        document.getElementById("titenglishinput").classList.add("bordercolorRed");
+      } if (this.TitleHebrew == null) {
+        this.hebrew.nativeElement.style.color = "red";
+        document.getElementById("tithebinput").classList.add("bordercolorRed");
+      } if (this.Proposal == null) {
+        this.abs.nativeElement.style.color = "red";
+        document.getElementById("proptext").classList.add("allbordercolorRed");
+      } if (this.Language == null) {
+        this.lang.nativeElement.style.color = "red";
+        document.getElementById("langselect").classList.add("bordercolorRed");
+      }
+
+      //this.showErrEmpty = true;
 
     }
    
@@ -212,6 +236,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   }
   maxlength(element, maxvalue) {
     var q = element.split(/[\s]+/).length;
+    this.NumWords = q;
     if (q > maxvalue) {
       var r = q - maxvalue;
       this.errMoreThen250 = true;
@@ -249,6 +274,10 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.english.nativeElement.style.color = "#27b5e5";
   }
   unfocusenglish() {
+    if (this.TitleEnglish != null && this.TitleEnglish != "" && this.TitleEnglish != undefined) {
+      document.getElementById("titenglishinput").classList.remove("bordercolorRed");
+      this.english.nativeElement.style.color = "gray";
+    }
     this.english.nativeElement.style.color = "gray";
   } focusdiv() {
     this.div.nativeElement.style.color = "#27b5e5";
@@ -260,12 +289,20 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.hebrew.nativeElement.style.color = "#27b5e5";
   }
   unfocushebrew() {
+    if (this.TitleHebrew != null && this.TitleHebrew != "" && this.TitleHebrew != undefined) {
+      document.getElementById("tithebinput").classList.remove("bordercolorRed");
+      this.hebrew.nativeElement.style.color = "gray";
+    }
     this.hebrew.nativeElement.style.color = "gray";
   }
   focuslang() {
     this.lang.nativeElement.style.color = "#27b5e5";
   }
   unfocuslang() {
+    if (this.Language != null && this.Language != "" && this.Language != undefined) {
+      document.getElementById("langselect").classList.remove("bordercolorRed");
+      this.lang.nativeElement.style.color = "gray";
+    }
     this.lang.nativeElement.style.color = "gray";
   } focussubdiv() {
     this.subdiv.nativeElement.style.color = "#27b5e5";
@@ -277,6 +314,11 @@ export class CongressRegistrationOneComponent implements OnInit {
   }
   unfocusabs() {
     this.maxlength(this.Proposal, 250);
+
+    if (this.abs != null && this.abs != undefined) {
+      document.getElementById("proptext").classList.remove("allbordercolorRed");
+      this.abs.nativeElement.style.color = "gray";
+    }
     this.abs.nativeElement.style.color = "gray";
   } focustitle() {
     this.title.nativeElement.style.color = "#27b5e5";
@@ -302,6 +344,10 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.key.nativeElement.style.color = "#27b5e5";
   }
   unfocuskey() {
+    if (this.Keywords != null && this.Keywords != undefined) {
+      document.getElementById("keytext").classList.remove("allbordercolorRed");
+      this.key.nativeElement.style.color = "gray";
+    }
     this.key.nativeElement.style.color = "gray";
   }
 

@@ -80,7 +80,7 @@
       </select>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <label class="headerGray" #headerAbs> Session Abstract (up tp 250 words): </label>
+      <label class="headerGray" #headerAbs> Session Abstract (up tp 250 words): {{NumWords}}</label>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
       <textarea (keypress)="maxlength(ABS,250)" #testInput style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()" id="box_id" [(ngModel)]="ABS"></textarea>

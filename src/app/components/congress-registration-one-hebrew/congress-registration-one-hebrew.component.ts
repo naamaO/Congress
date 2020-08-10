@@ -31,6 +31,7 @@ export class CongressRegistrationOneHebrewComponent implements OnInit {
   @ViewChild('key') key: ElementRef;
   //Add field academy to DB
   //@Input()
+  public NumWords: number = 0;
   userFormGroup: FormGroup;
   public angForm: FormGroup;
   public errMoreThen250: boolean;
@@ -213,6 +214,7 @@ export class CongressRegistrationOneHebrewComponent implements OnInit {
   }
   maxlength(element, maxvalue) {
     var q = element.split(/[\s]+/).length;
+    this.NumWords = q;
     if (q > maxvalue) {
       var r = q - maxvalue;
       this.errMoreThen250 = true;

@@ -80,11 +80,11 @@
         </div>
         <div class="col-md-2 floatLeft" style="padding-left: 5%;">
 
-          <span style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold">${{item.Total}}</span>
+          <span style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold;padding: 0;">${{item.Total}}</span>
           <!--<span class="col-md-2 margin-t-9 ng-binding padd" style="padding: 20px;padding-left: 30px;padding-right: 30px;width:200px;text-align:center;"><button (click)="AddQuantity(item)">Add Quantity</button></span>-->
         </div>
         <div class="col-md-1 floatLeft" style="flex: 0 0 0.333333%; max-width: 0.333333%;">
-          <div style="cursor:pointer;position:absolute;right:10%;top:0;" (click)="RemoveQuantity(item)">
+          <div style="cursor:pointer;position:absolute;right:60%;top:0;" (click)="RemoveQuantity(item)">
             <span>X</span>
           </div>
        </div>
@@ -131,7 +131,7 @@
     <span class="discount" *ngIf="!isSignIn()" style="cursor: pointer;text-decoration:underline;" (click)="SendToSignIn()">Sign into your account or sign up for membership</span>
     <!-- <span class="book-name" *ngIf="isSignIn() && IsMemberShip" style="float: left;cursor: pointer;" >Welcome {{FirstName}} {{LastName}}, you have just received a 20% member discount</span> -->
     <!-- <span class="discount" *ngIf="isSignIn() && IsMemberShip" >You have just received a 20% member discount</span> -->
-    sign into your account or sign up for membership
+    <!-- sign into your account or sign up for membership -->
     <!-- <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;" (click)="SendToSignIn()" >Welcome {{FirstName}} {{LastName}}, Sign up for membership and get a 20% discount</span> -->
     <span class="discount" *ngIf="isSignIn() && !IsMemberShip" style="cursor: pointer;text-decoration:underline;" (click)="SendToSignIn()" >Sign up for membership</span>
 

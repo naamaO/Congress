@@ -70,15 +70,15 @@
 
     <div *ngFor="let item of DB" style="position:relative; ">
       <div class="row" style="margin-bottom:2%;display:block">
-        <div class="col-md-3 floatRight" style="margin-right: 96px; " >
+        <div class="col-md-4 floatRight" style="margin-right: 96px; " >
           <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:0px; margin-right: 47px;float: right;" />
-          <span style=" position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold;text-align: right;float: left;padding-right: 330px;padding-top: 0px;width: 450px;">{{item.NameBook}} </span>
+          <span style=" position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold;text-align: right;float: left;direction: ltr;padding-right: 114px;padding-top: 0px; width: 82%;">{{item.NameBook}} </span>
         </div>
-        <div class="col-md-3 floatRight" style="text-align:center;">
+        <div class="col-md-2 floatRight" style="text-align:center;">
 
-          <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold">₪{{item.PriceBook}} </span>
+          <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold;margin-left: 47%;">₪{{item.PriceBook}} </span>
 
-          <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold">₪{{item.SallePrice}} </span>
+          <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold;margin-left: 47%;">₪{{item.SallePrice}} </span>
         </div>
         <div class="col-md-3 floatRight" style="text-align:center;padding-left: 163px;padding-right: 0;">
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid #eaeaea;padding: 5px 12px;" (click)="deleteQuantity(item)">-</label> </span>

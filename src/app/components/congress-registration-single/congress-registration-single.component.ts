@@ -24,11 +24,23 @@ export class CongressRegistrationSingleComponent implements OnInit {
   @ViewChild('subdiv') subdiv: ElementRef;
   @ViewChild('academic') academic: ElementRef;
   @ViewChild('email') email: ElementRef;
+  @ViewChild('emailLabel') emailLabel: ElementRef;
   @ViewChild('nameh') nameh: ElementRef;
   @ViewChild('namee') namee: ElementRef;
   @ViewChild('title') title: ElementRef;
   @ViewChild('key') key: ElementRef;
-
+  @ViewChild('titleselect') titleselect: ElementRef;
+  @ViewChild('lastnameinput') lastnameinput: ElementRef;
+  @ViewChild('firstnameinput') firstnameinput: ElementRef;
+  @ViewChild('divisionselect') divisionselect: ElementRef;
+  @ViewChild('subdivisionselect') subdivisionselect: ElementRef;
+  @ViewChild('titenglishinput') titenglishinput: ElementRef;
+  @ViewChild('academicinput') academicinput: ElementRef;
+  @ViewChild('tithebinput') tithebinput: ElementRef;
+  @ViewChild('proptext') proptext: ElementRef;
+  @ViewChild('keytext') keytext: ElementRef;
+  @ViewChild('langselect') langselect: ElementRef;
+  public NumWords: number = 0;
   public Name: Name;
   public NameHebrew: Name;
   public errMoreThen250: boolean;
@@ -141,6 +153,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
   }
   maxlength(element, maxvalue) {
     var q = element.split(/[\s]+/).length;
+    this.NumWords = q;
     if (q > maxvalue) {
       var r = q - maxvalue;
       this.errMoreThen250 = true;
@@ -211,8 +224,16 @@ TitleEnglishP(elemTltle){
       this.NewProp.SubDivision = this.SubDivision;
       this.NewProp.TitleEnglish = this.TitleEnglish;
       this.NewProp.TitleHebrew = this.TitleHebrew;
-      this.serverService.enterNewDraft(this.NewProp);
-      this.showsaveDraft = true;
+      if (this.NewProp.UserName != null && this.NewProp.UserName != "" && this.NewProp.UserName != undefined) {
+        this.serverService.enterNewDraft(this.NewProp);
+        this.showsaveDraft = true;
+      }
+      else {
+        this.email.nativeElement.style.color = "red";
+        document.getElementById("emailLabel").classList.add("bordercolorRed");
+
+
+      }
     }
     else {
     this.Prop = new Proposals();
@@ -250,7 +271,38 @@ TitleEnglishP(elemTltle){
       this.router.navigateByUrl("/Thank2");
     }
     else {
-      this.showErrEmpty = true;
+      if (this.Keywords == null) {
+        this.key.nativeElement.style.color = "red";
+        document.getElementById("keytext").classList.add("allbordercolorRed");
+      } if (this.TitleEnglish == null) {
+        this.english.nativeElement.style.color = "red";
+        document.getElementById("titenglishinput").classList.add("bordercolorRed");
+      } if (this.TitleHebrew == null) {
+        this.hebrew.nativeElement.style.color = "red";
+        document.getElementById("tithebinput").classList.add("bordercolorRed");
+      } if (this.Proposal == null) {
+        this.abs.nativeElement.style.color = "red";
+        document.getElementById("proptext").classList.add("allbordercolorRed");
+      } if (this.Title == null) {
+        this.title.nativeElement.style.color = "red";
+        document.getElementById("titleselect").classList.add("bordercolorRed");
+      } if (this.Language == null) {
+        this.lang.nativeElement.style.color = "red";
+        document.getElementById("langselect").classList.add("bordercolorRed");
+      } if (this.Division == null) {
+        this.div.nativeElement.style.color = "red";
+        document.getElementById("divisionselect").classList.add("bordercolorRed");
+      } if (this.SubDivision == null) {
+        this.subdiv.nativeElement.style.color = "red";
+        document.getElementById("subdivisionselect").classList.add("bordercolorRed");
+      } if (this.FirstName == null) {
+        this.namee.nativeElement.style.color = "red";
+        document.getElementById("firstnameinput").classList.add("bordercolorRed");
+      } if (this.LastName == null) {
+        this.namee.nativeElement.style.color = "red";
+        document.getElementById("lastnameinput").classList.add("bordercolorRed");
+      }
+      //this.showErrEmpty = true;
 
     }
   }
@@ -275,37 +327,63 @@ TitleEnglishP(elemTltle){
     this.english.nativeElement.style.color = "#27b5e5";
   }
   unfocusenglish() {
+    if (this.TitleEnglish != null && this.TitleEnglish != "" && this.TitleEnglish != undefined) {
+      document.getElementById("titenglishinput").classList.remove("bordercolorRed");
+      this.english.nativeElement.style.color = "gray";
+    }
     this.english.nativeElement.style.color = "gray";
   } 
   focusdiv() {
     this.div.nativeElement.style.color = "#27b5e5";
   }
   unfocusdiv() {
+    if (this.Division != null && this.Division != "" && this.Division != undefined) {
+      document.getElementById("divisionselect").classList.remove("bordercolorRed");
+      this.div.nativeElement.style.color = "gray";
+    }
     this.div.nativeElement.style.color = "gray";
   }
   focushebrew() {
     this.hebrew.nativeElement.style.color = "#27b5e5";
   }
   unfocushebrew() {
+    if (this.TitleHebrew != null && this.TitleHebrew != "" && this.TitleHebrew != undefined) {
+      document.getElementById("tithebinput").classList.remove("bordercolorRed");
+      this.hebrew.nativeElement.style.color = "gray";
+    }
     this.hebrew.nativeElement.style.color = "gray";
   }
   focuslang() {
     this.lang.nativeElement.style.color = "#27b5e5";
   }
   unfocuslang() {
+    if (this.Language != null && this.Language != "" && this.Language != undefined) {
+      document.getElementById("langselect").classList.remove("bordercolorRed");
+      this.lang.nativeElement.style.color = "gray";
+    }
     this.lang.nativeElement.style.color = "gray";
   } 
   focussubdiv() {
     this.subdiv.nativeElement.style.color = "#27b5e5";
   }
   unfocussubdiv() {
+    if (this.SubDivision != null && this.SubDivision != "" && this.SubDivision != undefined) {
+      document.getElementById("subdivisionselect").classList.remove("bordercolorRed");
+      this.subdiv.nativeElement.style.color = "gray";
+    }
     this.subdiv.nativeElement.style.color = "gray";
   }
     focustitle() {
     this.title.nativeElement.style.color = "#27b5e5";
   }
   unfocustitle() {
+
+    if (this.Title != null && this.Title != "" && this.Title != undefined) {
+      document.getElementById("titleselect").classList.remove("bordercolorRed");
+      this.title.nativeElement.style.color = "gray";
+    }
     this.title.nativeElement.style.color = "gray";
+
   }
    focusnameh() {
     this.nameh.nativeElement.style.color = "#27b5e5";
@@ -317,28 +395,54 @@ TitleEnglishP(elemTltle){
     this.namee.nativeElement.style.color = "#27b5e5";
   }
   unfocusnamee() {
+    if (this.LastName != null && this.LastName != "" && this.LastName != undefined) {
+      document.getElementById("lastnameinput").classList.remove("bordercolorRed");
+      this.namee.nativeElement.style.color = "gray";
+    }
+    this.namee.nativeElement.style.color = "gray";
+  }
+  unfocusnamefe() {
+    if (this.FirstName != null && this.FirstName != "" && this.FirstName != undefined) {
+      document.getElementById("firstnameinput").classList.remove("bordercolorRed");
+      this.namee.nativeElement.style.color = "gray";
+    }
     this.namee.nativeElement.style.color = "gray";
   }
    focusemail() {
     this.email.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
+    if (this.LoginUserName != null && this.LoginUserName != "" && this.LoginUserName != undefined) {
+      document.getElementById("emailLabel").classList.remove("bordercolorRed");
+      this.email.nativeElement.style.color = "gray";
+    }
     this.email.nativeElement.style.color = "gray";
+
   }
    focusabs() {
     this.abs.nativeElement.style.color = "#27b5e5";
   }
+
   unfocusabs() {
     this.maxlength(this.Proposal, 250);
 
+    if (this.abs != null &&  this.abs != undefined) {
+      document.getElementById("proptext").classList.remove("allbordercolorRed");
+      this.abs.nativeElement.style.color = "gray";
+    }
     this.abs.nativeElement.style.color = "gray";
+
   } 
   focuskey() {
     this.key.nativeElement.style.color = "#27b5e5";
   }
   unfocuskey() {
+    if (this.Keywords != null &&  this.Keywords != undefined) {
+      document.getElementById("keytext").classList.remove("allbordercolorRed");
+      this.key.nativeElement.style.color = "gray";
+    }
     this.key.nativeElement.style.color = "gray";
-  }
+}
 
 }
 

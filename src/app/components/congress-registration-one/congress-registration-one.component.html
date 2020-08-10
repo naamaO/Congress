@@ -91,10 +91,10 @@
           <!-- <input #testInput id="name" ngModel name="name" formControlName="TitleEnglish" type="text" class="form-control col-md-3" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />-->
           <!-- <input name="firstName" ngModel pattern="[a-zA-Z ]*">-->
           <div class="col-md-6">
-            <input style="width:80%;" (focusout)="unfocusenglish()" (focus)="focusenglish()" #testInput name="firstName" ngModel  [pattern]="'^[a-zA-Z \-\']$'" (change)="TitleEnglishP($event)" type="text" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" />
+            <input style="width:80%;" (focusout)="unfocusenglish()" (focus)="focusenglish()"  ngModel  [pattern]="'^[a-zA-Z \-\']$'" (change)="TitleEnglishP($event)" type="text" [(ngModel)]="TitleEnglish" *ngIf="showLikeProp==false" #titenglishinput id="titenglishinput" name="titenglishinput" />
           </div>
           <div class="col-md-6">
-            <input (focusout)="unfocusacademic()" (focus)="focusacademic()" #testInput type="text" style="margin-left:16%;width:80%; " *ngIf="showLikeProp==false" />
+            <input (focusout)="unfocusacademic()" (focus)="focusacademic()"  type="text" style="margin-left:16%;width:80%; " *ngIf="showLikeProp==false" #titenglishinput id="titenglishinput" name="titenglishinput"/>
           </div>
           <div class="col-md-6">
             <label style="width:80%;" *ngIf="showLikeProp==true">{{TitleEnglish}}</label>
@@ -123,10 +123,10 @@
       </div>
       <div class="row margin-top form-group">
         <div class="col-md-6">
-          <input style="width:80%" (focusout)="unfocushebrew()" (focus)="focushebrew()" #testInput type="text" ng-pattern="pattern" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" />
+          <input style="width:80%" (focusout)="unfocushebrew()" (focus)="focushebrew()"  type="text" ng-pattern="pattern" [(ngModel)]="TitleHebrew" *ngIf="showLikeProp==false" #tithebinput id="tithebinput" name="tithebinput"/>
         </div>
         <div class="col-md-6">
-          <select style="width:80%; margin-left:16%" (click)="focuslang()" (mouseleave)="unfocuslang()" *ngIf="showLikeProp==false" #t (change)="selectlang($event.target.value)" [(ngModel)]="Language">
+          <select style="width:80%; margin-left:16%" (click)="focuslang()" (mouseleave)="unfocuslang()" *ngIf="showLikeProp==false" #t (change)="selectlang($event.target.value)" [(ngModel)]="Language" #langselect id="langselect" name="langselect">
             <option [value]="Language" selected>{{Language}}</option>
             <option *ngFor="let Language of ArrLanguage" [value]="Language">
               {{Language}}
@@ -142,7 +142,7 @@
       </div>
 
       <div class="row margin-top">
-        <label class="col-md-6 headerGray" #abs>Abstract (up tp 250 words):</label>
+        <label class="col-md-6 headerGray" #abs>Abstract (up tp 250 words): {{NumWords}}</label>
         <label class="col-md-5 floatLeft headerGray" #key style="margin-left:8%;">Keywords</label>
       </div>
     </div>
@@ -154,7 +154,7 @@
                     (focus)="focusabs()" 
                     #testInput [(ngModel)]="Proposal"
                     style="width:80%;height:97px;border-radius: 0rem;"
-                     *ngIf="showLikeProp==false">
+                     *ngIf="showLikeProp==false" #proptext id="proptext" name="proptext">
           </textarea>
         </div>
         <div class="col-md-6">
@@ -163,7 +163,7 @@
            (focus)="focuskey()" 
            #testInput [(ngModel)]="Keywords" 
            style="width:80%;height:97px;margin-left:16%;border-radius: 0rem;" 
-           *ngIf="showLikeProp==false"></textarea>
+           *ngIf="showLikeProp==false" #keytext id="keytext" name="keytext"></textarea>
         </div>
         <div class="col-md-6">
           <label style="width:80%" *ngIf="showLikeProp==true">{{Proposal}}</label>

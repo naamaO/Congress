@@ -49,6 +49,8 @@ export class InviteMembersComponent implements OnInit {
   @ViewChild('mechair') mechair: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public NumWords: number = 0;
+
   public RadioEmptyError: string;
   public errMoreThen250: boolean;
   public myControl = new FormControl();
@@ -127,7 +129,9 @@ export class InviteMembersComponent implements OnInit {
   //   });
   //}
    maxlength(element, maxvalue) {
-  var q = element.split(/[\s]+/).length;
+     var q = element.split(/[\s]+/).length;
+     this.NumWords = q;
+
   if (q > maxvalue) {
     var r = q - maxvalue;
     this.errMoreThen250 = true;

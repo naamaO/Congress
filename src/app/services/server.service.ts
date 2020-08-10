@@ -48,13 +48,13 @@ export class ServerService {
     KEY: 'UserName',
     UserName: null
   }
- public port: string = 'http://localhost:64905';
- //public port: string = 'http://jewish-studies.b2story.com/webApi';
+ //public port: string = 'http://localhost:64905';
+ public port: string = 'http://jewish-studies.b2story.com/webApi';
   // public port: string = 'https://jewish-studies.b2story.com/webApi';
 
   constructor(public cookieService: CookieService, private http: HttpClient) {
-    this.port = 'http://localhost:64905';
-     //this.port = ' http://jewish-studies.b2story.com/webApi';
+   // this.port = 'http://localhost:64905';
+     this.port = ' http://jewish-studies.b2story.com/webApi';
     //this.port = ' https://jewish-studies.b2story.com/webApi';
     this.Country = [
       "Afghanistan",

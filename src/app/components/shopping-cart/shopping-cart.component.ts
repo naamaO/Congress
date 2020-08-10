@@ -114,9 +114,12 @@ if(this.getCookie('UserName')) {
         if(events.MemberShip >-1)
         this.IsMemberShip = true;
         if(this.IsMemberShip){
-          this.serverService.setTotal();
+         // this.serverService.setTotal();
         if(this.Total>0){
         this.getDiscountTotal(this.Total);
+        }
+        else{
+          this.TotalAfterDiscount = 0;
         }
         }
       })
@@ -143,6 +146,9 @@ if(!this.DB){
                 if(this.Total>0){
                   this.getDiscountTotal(this.Total);
                   }
+                 else{
+                 this.TotalAfterDiscount = 0;
+                 }
             }
            else{
               this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
@@ -151,6 +157,9 @@ if(!this.DB){
               if(this.Total>0){
               this.getDiscountTotal(this.Total);
               }
+        else{
+          this.TotalAfterDiscount = 0;
+        }
             }
           }
         }
@@ -179,6 +188,9 @@ if(!this.DB){
      this.Total = parseInt(_total);
      if(this.Total>0){
       this.getDiscountTotal(this.Total);
+      }   
+      else{
+        this.TotalAfterDiscount = 0;
       }
     }
     else{
@@ -212,7 +224,10 @@ if(!this.DB){
         if(this.IsMemberShip){
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
-          }
+          }    
+        else{
+          this.TotalAfterDiscount = 0;
+        }
         }
       });
      
@@ -332,7 +347,10 @@ async sync(act:string){
         this.Total = this.Total + this.DB[i].PriceBook;
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
-          }
+          } 
+        else{
+          this.TotalAfterDiscount = 0;
+        }
         this.CART.contents.map(item=>{
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
@@ -344,7 +362,10 @@ async sync(act:string){
         this.Total = this.Total + this.DB[i].SallePrice;
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
-          }
+          }      
+        else{
+          this.TotalAfterDiscount = 0;
+        }
         this.CART.contents.map(item=>{
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
@@ -365,12 +386,18 @@ async sync(act:string){
             this.Total = this.Total -  this.DB[i].PriceBook;
             if(this.Total>0){
               this.getDiscountTotal(this.Total);
-              }
+              }      
+        else{
+          this.TotalAfterDiscount = 0;
+        }
           }
           else{
             this.Total = this.Total -  this.DB[i].SallePrice;
             if(this.Total>0){
               this.getDiscountTotal(this.Total);
+              }
+              else{
+                this.TotalAfterDiscount = 0;
               }
           }
         }
@@ -386,6 +413,9 @@ async sync(act:string){
           if(this.Total>0){
             this.getDiscountTotal(this.Total);
             }
+            else{
+              this.TotalAfterDiscount = 0;
+            }
         }
       }
       else{
@@ -396,11 +426,17 @@ async sync(act:string){
               if(this.Total>0){
                 this.getDiscountTotal(this.Total);
                 }
+                else{
+                  this.TotalAfterDiscount = 0;
+                }
             }
             else{
               this.Total = this.Total -  this.DB[i].SallePrice;
               if(this.Total>0){
                 this.getDiscountTotal(this.Total);
+                }
+                else{
+                  this.TotalAfterDiscount = 0;
                 }
             }
           }
@@ -416,11 +452,17 @@ async sync(act:string){
               if(this.Total>0){
                 this.getDiscountTotal(this.Total);
                 }
+                else{
+                  this.TotalAfterDiscount = 0;
+                }
             }
             else{
               this.Total = this.Total -  this.DB[i].Total;
               if(this.Total>0){
                 this.getDiscountTotal(this.Total);
+                }
+                else{
+                  this.TotalAfterDiscount = 0;
                 }
             }
           }
@@ -442,7 +484,11 @@ else{
         this.Total = this.Total + this.itemToAddQunt1.PriceBook;
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
-          }         this.CART.contents.map(item=>{
+          }
+          else{
+            this.TotalAfterDiscount = 0;
+          }   
+          this.CART.contents.map(item=>{
           if(item.Id === i)
           this.CART.contents[i].Total = this.DB[i].Total;
         });
@@ -465,7 +511,11 @@ else{
           this.Total = this.Total + this.itemToAddQunt1.SallePrice;
           if(this.Total>0){
             this.getDiscountTotal(this.Total);
-            }          this.CART.contents.map(item=>{
+            }  
+        else{
+          this.TotalAfterDiscount = 0;
+        }
+            this.CART.contents.map(item=>{
             if(item.Id === i)
             this.CART.contents[i].Total = this.DB[i].Total;
           });
@@ -491,7 +541,10 @@ else{
          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
          if(this.Total>0){
           this.getDiscountTotal(this.Total);
-          }
+          }         
+        else{
+          this.TotalAfterDiscount = 0;
+        }
           if(this.DB.length>0){
           this.CART.contents.map(item=>{
             let id = this.itemToRedQunt1.Id
@@ -514,7 +567,10 @@ else{
             this.Total = this.Total - this.itemToRedQunt1.SallePrice;
             if(this.Total>0){
               this.getDiscountTotal(this.Total);
-              }
+              }  
+        else{
+          this.TotalAfterDiscount = 0;
+        }
              if(this.DB.length>0){
             this.CART.contents.map(item=>{
               let id;
@@ -533,7 +589,10 @@ else{
           this.Total = this.Total - this.itemToRedQunt1.Total;
           if(this.Total>0){
             this.getDiscountTotal(this.Total);
-            }
+            }  
+        else{
+          this.TotalAfterDiscount = 0;
+        }
         this.num = this.num - this.itemToRedQunt1.Quantity;
     }
     else{
@@ -542,12 +601,18 @@ else{
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
           }
+        else{
+          this.TotalAfterDiscount = 0;
+        }
       }
       else{
         this.Total = this.Total - this.itemToRedQunt1.SallePrice;
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
           }
+        else{
+          this.TotalAfterDiscount = 0;
+        }
     }
       this.num = this.num - 1;
     }

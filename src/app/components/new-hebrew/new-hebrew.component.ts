@@ -76,7 +76,7 @@ if(this.getCookie('UserName')) {
           if(events.MemberShip >-1)
           this.IsMemberShip = true;
           if(this.IsMemberShip){
-            this.serverService.setTotal();
+           // this.serverService.setTotal();
           if(this.Total>0){
           this.getDiscountTotal(this.Total);
           }

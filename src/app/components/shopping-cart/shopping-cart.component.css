@@ -243,6 +243,14 @@ ul {
     color:#026fa7;
   }
 
+  .discount{
+    text-align:right;
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color:#026fa7;
+    float: left;
+  }
 .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #27b5e5 !important;
 }

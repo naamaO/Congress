@@ -15,7 +15,7 @@ import { __await } from 'tslib';
 })
 export class BookDetailsHebrewComponent implements OnInit {
   public Total1: number;
-  public Quantity: number =0;
+  public Quantity: number = 1;
   public MQuantity: number=0;
   public item2: shoppingCart;
   public UserNameLogin: string;
@@ -44,7 +44,7 @@ export class BookDetailsHebrewComponent implements OnInit {
   public enterItemToCart:boolean = true;
 
   constructor(private ngZone: NgZone,public cookieService: CookieService, public routers: Router, public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient) {
-    this.Quantity = 0;
+    this.Quantity = 1;
  //get list of shopping cart//if login
 if(this.getCookie('UserName')) { 
  
@@ -75,7 +75,7 @@ if(this.getCookie('UserName')) {
         if(events.MemberShip >-1)
         this.IsMemberShip = true;
         if(this.IsMemberShip){
-          this.serverService.setTotal();
+         // this.serverService.setTotal();
         if(this.Total>0){
         this.getDiscountTotal(this.Total);
         }

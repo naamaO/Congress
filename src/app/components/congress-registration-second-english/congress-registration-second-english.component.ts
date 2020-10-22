@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-congress-registration-second-english',
   templateUrl: './congress-registration-second-english.component.html',

@@ -1,21 +1,28 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef ,Input} from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
-import { CookieService } from 'angular2-cookie';
+import { CookieService, CookieOptions } from 'ngx-cookie';
+//import { CookieService} from 'ngx-cookie-service';
 import { __await } from 'tslib';
 import { Name } from 'src/classes/Name';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/classes/User';
+import { MONKEY_PATCH_KEY_NAME } from '@angular/core/src/render3/interfaces/context';
 @Component({
   selector: 'app-new-member-account',
   templateUrl: './new-member-account.component.html',
-  styleUrls: ['./new-member-account.component.css']
+  styleUrls: ['./new-member-account.component.css'],
+  //providers: [{
+  //  provide: CookieOptions, useValue: false
+  //}]
 })
 export class NewMemberAccountCompponent implements OnInit {
+  @Input() RoutFromStore: number;
+
   @ViewChild("testInput") testInput;
   @ViewChild('english') english: ElementRef;
   @ViewChild('address') address: ElementRef;
@@ -23,6 +30,11 @@ export class NewMemberAccountCompponent implements OnInit {
   @ViewChild('Id') Id: ElementRef;
   @ViewChild('lastnameh') lastnameh: ElementRef;
   @ViewChild('lastnamee') lastnamee: ElementRef;
+  @ViewChild('addressin') addressin: ElementRef;
+  @ViewChild('telephonenin') telephonein: ElementRef;
+  @ViewChild('Idn') Idin: ElementRef;
+  @ViewChild('lastnamehni') lastnamehin: ElementRef;
+  @ViewChild('lastnameein') lastnameein: ElementRef;
   @ViewChild('hebrew') hebrew: ElementRef;
   @ViewChild('abs') abs: ElementRef;
   @ViewChild('lang') lang: ElementRef;
@@ -30,15 +42,28 @@ export class NewMemberAccountCompponent implements OnInit {
   @ViewChild('subdiv') subdiv: ElementRef;
   @ViewChild('academic') academic: ElementRef;
   @ViewChild('email') email: ElementRef;
+  @ViewChild('emailin') emailin: ElementRef;
   @ViewChild('nameh') nameh: ElementRef;
   @ViewChild('namee') namee: ElementRef;
+  @ViewChild('namehin') namehin: ElementRef;
+  @ViewChild('nameein') nameein: ElementRef;
   @ViewChild('title') title: ElementRef;
   @ViewChild('key') key: ElementRef;
   @ViewChild('coun') coun: ElementRef;
+  @ViewChild('counin') counin: ElementRef;
   @ViewChild('ti') ti: ElementRef;
+  @ViewChild('tiin') tiin: ElementRef;
   @ViewChild('biog') biog: ElementRef;
+  @ViewChild('membershipspan') membershipspan: ElementRef;
+  @ViewChild('languagespan') languagespan: ElementRef;
+  @ViewChild('languageHebrew') languageHebrew: ElementRef;
+  @ViewChild('languageEnglish') languageEnglish: ElementRef;
+  @ViewChild('Top') Top: ElementRef;
 
   //@Input()
+  public newUser: any;
+
+  public OldUser: any;
   public user: User;
   // public FirstNameEnglish: string;
   // public LastNameEnglish: string;
@@ -57,14 +82,14 @@ export class NewMemberAccountCompponent implements OnInit {
   public ArrDivision: string[];
   public ArrSubDivision: string[];
   public ShowSub: boolean;
-  public ArrLanguage: string[]=['English','עברית'];
+  public ArrLanguage: string[] = ['English', 'עברית'];
   public UserName: string;
   public Division: string;
   public SubDivision: string;
   public TitleEnglish: string;
   public TitleHebrew: string;
   public Proposal: string;
- // public Language: string;
+  // public Language: string;
   public Keywords: string;
   public SessionName: string;
   public FirstName: string;
@@ -80,11 +105,11 @@ export class NewMemberAccountCompponent implements OnInit {
   public Street: string;
   public NumberHome: string;
   public Country: string[] = [];
-  public ArrTitle: string[] = ['Prof', 'Dr', 'Mr', 'Ms'];
+  public ArrTitle: string[] = ['Prof', 'Dr', 'Other'];
   public NumberPhone1: string;
   public showLikeProp: boolean = false;
   public Bio: string;
-  public PasportNumber: number;
+  public PasportNumber: string;
   public Hebrew: boolean;
   public English: boolean;
   public Password: string;
@@ -97,44 +122,71 @@ export class NewMemberAccountCompponent implements OnInit {
   public Total: number;
   public membershipType: number;
   public Language: string;
+  public PostCode: number;
   public CARTMEMBERSHIP = {
     KEY: 'ShoppingCart',
     contents: []
   };
+  public UserToRegistration = {
+    KEY: 'UserToRegistration',
+    contents: new User()
+  };
   // public Address: string;
 
   constructor(public route: ActivatedRoute, private fb: FormBuilder, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.OldUser = new User();
+    this.OldUser = this.getCookie2('UserNewMemberAccount');
+    if (this.OldUser != undefined) {
+      this.Title = this.OldUser.selectedTitle;
+      this.FirstName = this.OldUser.FirstNameEnglish;
+      this.LastName = this.OldUser.LastNameEnglish;
+      this.FirstNameHebrew = this.OldUser.FirstNameHebrew;
+      this.LastNameHebrew = this.OldUser.LastNameHebrew;
+      this.LoginUserName = this.OldUser.Email;
+      this.PasportNumber = this.OldUser.PostCode;
+      this.Address = this.OldUser.Address;
+      this.NumberPhone1 = this.OldUser.NumberPhone1;
+      if (this.OldUser.Langugae == "Hebrew") {
+        if (typeof this.languageHebrew !== 'undefined')
+          this.languageHebrew.nativeElement.checked = true;
+      } else {
+        if (typeof this.languageEnglish !== 'undefined')
+          this.languageEnglish.nativeElement.checked = true;
+      }
+      this.Bio = this.OldUser.Bio;
+      this.selectedCountry = this.OldUser.selectedCountry;
+    }
     this.Country = serverService.Country;
     this.ArrMembershipTypes = [
       {
         membershipType: 'Annual Membership',
-        price : 65,
-        tooltipText:'Regular membership for one calendar year',
+        price: 1,
+        tooltipText: 'Regular membership for one calendar year',
         selected: null
       }, {
         membershipType: 'Student/Retiree Membership',
-        price : 40,
-        tooltipText:'Membership for students or retirees with no research fund for one calendar year',
+        price: 40,
+        tooltipText: 'Membership for students or retirees with no research fund for one calendar year',
         selected: null
       }, {
         membershipType: 'Joint Membership',
-        price : 105,
-        tooltipText:'Membership for couples for one calendar year',
+        price: 105,
+        tooltipText: 'Membership for couples for one calendar year',
         selected: null
       }, {
         membershipType: 'Joint Student/Retiree Membership',
-        price : 70,
-        tooltipText:'Membership for student or retiree couples without research fund for one calendar year',
+        price: 70,
+        tooltipText: 'Membership for student or retiree couples without research fund for one calendar year',
         selected: null
       }, {
         membershipType: 'Lifetime Membership',
-        price : 1300,
-        tooltipText:'Membership for life',
+        price: 1300,
+        tooltipText: 'Membership for life',
         selected: null
       }, {
         membershipType: 'Institutional Membership',
-        price : 265,
-        tooltipText:'Membership for Institutions for one calendar year',
+        price: 265,
+        tooltipText: 'Membership for Institutions for one calendar year',
         selected: null
       }
     ]
@@ -181,7 +233,35 @@ export class NewMemberAccountCompponent implements OnInit {
     // });
 
   }
-
+  getCookie2(key: string) {
+    return this.cookieService.getObject(key);
+  }
+  setCookieFirstNameHebrew(name: string) {
+    this.cookieService.put('FirstNameHebrew', name);
+  } setCookieLastNameHebrew(name: string) {
+    this.cookieService.put('LastNameHebrew', name);
+  } setCookieFirstNameEnglish(name: string) {
+    this.cookieService.put('FirstNameEnglish', name);
+  } setCookieLastNameEnglish(name: string) {
+    this.cookieService.put('LastNameEnglish', name);
+  } setCookieBio(name: string) {
+    this.cookieService.put('Bio', name);
+  } setCookieNumPhone1(name: string) {
+    this.cookieService.put('NumPhone1', name);
+  } setCookieAddressUserNew(name: string) {
+    this.cookieService.put('AddressUserNew', name);
+  } setCookieCountryUserNew(name: string) {
+    this.cookieService.put('CountryUserNew', name);
+  } setCookieLanguageUserNew(name: string) {
+    this.cookieService.put('LanguageUserNew', name);
+  } setCookieMemberShipUserNew(name: string) {
+    this.cookieService.put('MemberShipUserNew', name);
+  } setCookieTitleUserNew(name: string) {
+    this.cookieService.put('TitleUserNew', name);
+  }
+  setCookieNewUserToSendToTranzila(name: User) {
+    this.cookieService.putObject('NewUserToSendToTranzila', name);
+  }
   setCookieIlang(ilang: string) {
     this.cookieService.put('ilang', ilang);
   }
@@ -201,6 +281,17 @@ export class NewMemberAccountCompponent implements OnInit {
   setCookieContact(contact: string) {
     this.cookieService.put('contact', contact);
   }
+
+  setCookieUser(User: User) {
+    debugger;
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.putObject('UserNewMemberAccount', User);
+    //this.cookieService.putObject('UserNewMemberAccount', User, new CookieOptions({
+    //  expires,
+    //  path: '/'
+    //}));
+  }
   //SendToTranzila() {
   //  //let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
   //  //localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
@@ -215,88 +306,108 @@ export class NewMemberAccountCompponent implements OnInit {
   //  //this.setCookieRout(1);
   //  //this.router.navigate(['Pay']);
   //} ‏
+
+
+
   SendToTranzila() {
-       let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
+    let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
     localStorage.setItem(this.CARTMEMBERSHIP.KEY, _cart);
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.langg);
     this.setCookieIlang(this.ilang);
     this.setCookieTotal(this.Total);
-    let address:any;
-    let country:any
+    let address: any;
+    let country: any
     country = this.selectedCountry;
-    let detailsAddress:any;
+    let detailsAddress: any;
     detailsAddress = this.Address
     address = country.trimEnd() + " " + detailsAddress.trimRight();
     this.setCookieAddress(address)
     this.LoginUserName = this.getCookie('UserName');
     this.serverService.getName(this.LoginUserName).subscribe((val) => {
-      let first:any;
-      let last:any
+      let first: any;
+      let last: any;
       first = val.FirstName;
       last = val.LastName;
-      let contactName:any;
-      contactName = first.trimEnd() + " " + last.trimEnd();  
-      this.setCookieContact(contactName);  
+      if (first == null) first = " ";
+      if (last == null) last = " ";
+      let contactName: any;
+      contactName = first.trimEnd() + " " + last.trimEnd();
+      this.setCookieContact(contactName);
+      this.serverService.setEmail();
+      //this.cookieService.remove('RoutTranzilaSuccessJewishStudies');
+      const expires = new Date();
+      expires.setHours(expires.getHours() + 1);
+      this.cookieService.put('RoutTranzilaSuccessJewishStudies', '1', {
+        expires,
+        path: '/'
+      });
+      this.setCookieRoutNewMember(1);
     });
+    debugger;
     this.serverService.setEmail();
-    this.setCookieRout(1);
+    // this.cookieService.put('RoutTranzilaSuccessJewishStudies', '1');
+    //this.setCookieRout('1');
+
+    this.setCookieRoutNewMember(1);
     this.router.navigate(['Pay']);
   }
 
   onMemberTypeChange(membershipTypeChanged) {
+    this.membershipspan.nativeElement.style.color = "gray";
     this.CARTMEMBERSHIP.contents = [];
     let obj;
     this.membershipType = membershipTypeChanged;
     if (membershipTypeChanged == 0) {
       obj = { product_name: this.ArrMembershipTypes[0].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[0].price }
-        console.log("this.ArrMembershipTypes[0].price",this.ArrMembershipTypes[0].price)
-        this.Total=this.ArrMembershipTypes[0].price;
-        }
+      console.log("this.ArrMembershipTypes[0].price", this.ArrMembershipTypes[0].price)
+      this.Total = this.ArrMembershipTypes[0].price;
+    }
     else if (membershipTypeChanged == 1) {
       obj = { product_name: this.ArrMembershipTypes[1].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[1].price }
 
-        console.log("this.ArrMembershipTypes[1].price",this.ArrMembershipTypes[1].price)
-        this.Total=this.ArrMembershipTypes[1].price;
-       }
+      console.log("this.ArrMembershipTypes[1].price", this.ArrMembershipTypes[1].price)
+      this.Total = this.ArrMembershipTypes[1].price;
+    }
     else if (membershipTypeChanged == 2) {
       obj = { product_name: this.ArrMembershipTypes[2].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[2].price }
 
-        console.log("this.ArrMembershipTypes[2].price",this.ArrMembershipTypes[2].price)
-        this.Total=this.ArrMembershipTypes[2].price;
-        }
+      console.log("this.ArrMembershipTypes[2].price", this.ArrMembershipTypes[2].price)
+      this.Total = this.ArrMembershipTypes[2].price;
+    }
     else if (membershipTypeChanged == 3) {
       obj = { product_name: this.ArrMembershipTypes[3].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[3].price }
 
-        console.log("this.ArrMembershipTypes[3].price",this.ArrMembershipTypes[3].price)
-        this.Total=this.ArrMembershipTypes[3].price;
-        }
+      console.log("this.ArrMembershipTypes[3].price", this.ArrMembershipTypes[3].price)
+      this.Total = this.ArrMembershipTypes[3].price;
+    }
     else if (membershipTypeChanged == 4) {
       obj = { product_name: this.ArrMembershipTypes[4].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[4].price }
 
-        console.log("this.ArrMembershipTypes[4].price",this.ArrMembershipTypes[4].price)
-        this.Total=this.ArrMembershipTypes[4].price;
-        }
+      console.log("this.ArrMembershipTypes[4].price", this.ArrMembershipTypes[4].price)
+      this.Total = this.ArrMembershipTypes[4].price;
+    }
     else if (membershipTypeChanged == 5) {
       obj = { product_name: this.ArrMembershipTypes[5].tooltipText, product_quantity: 1, product_price: this.ArrMembershipTypes[5].price }
 
-        console.log("this.ArrMembershipTypes[5].price",this.ArrMembershipTypes[5].price)
-        this.Total=this.ArrMembershipTypes[5].price;
+      console.log("this.ArrMembershipTypes[5].price", this.ArrMembershipTypes[5].price)
+      this.Total = this.ArrMembershipTypes[5].price;
     }
     this.CARTMEMBERSHIP.contents[0] = obj;
 
-      console.log("membershipTypeChanged",membershipTypeChanged)
+    console.log("membershipTypeChanged", membershipTypeChanged)
   }
-//dothis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  onLanguageChange(Language){
-    if(Language=='English') {
-        console.log("Language",Language)
-      this.Language ='English';
-        }
-    else if(Language=='Hebrew') {
-        console.log("Language",Language)
-      this.Language ='Hebrew';
-       }
+  //dothis!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  onLanguageChange(Language) {
+    this.languagespan.nativeElement.style.color = "gray";
+    if (Language == 'English') {
+      console.log("Language", Language)
+      this.Language = 'English';
+    }
+    else if (Language == 'Hebrew') {
+      console.log("Language", Language)
+      this.Language = 'Hebrew';
+    }
   }
   // renew(){
   //   this.router.navigate(['Pay', this.Total]);
@@ -332,11 +443,16 @@ export class NewMemberAccountCompponent implements OnInit {
     //alert("hh");
     this.cookieService.put('UserName', UaerName);
   }
-  setCookieRout(Rout: number) {
-    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+  setCookieRout(Rout: string) {
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout);
+  }
+  setCookieRoutNewMember(Rout: number) {
+    this.cookieService.put('setCookieRoutNewMember', Rout.toString());
   }
 
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
     this.Email = this.getCookie('UserName');
     this.UserName = this.Email;
     this.Rout = parseInt(this.getCookie('Rout'));
@@ -344,9 +460,9 @@ export class NewMemberAccountCompponent implements OnInit {
 
     //   this.Rout = urlParams['Rout'];
     //   //alert(this.Email)
-     if (this.Email == "''") {
-        this.Email = "";
-     }
+    if (this.Email == "''") {
+      this.Email = "";
+    }
     // this.route.params.forEach((urlParams) => {
     //   this.Email = urlParams['User'];
     //   this.Rout = urlParams['Rout'];
@@ -382,20 +498,20 @@ export class NewMemberAccountCompponent implements OnInit {
 
   selectlang(lan: string) {
   }
-  TitleEnglishP(event){
+  TitleEnglishP(event) {
   }
   changeProp(element, maxvalue) {
     // var q = element.Proposal.split(/[\s]+/).length;
-    var q = element.Proposal.split(" "); 
-    
-    if(q.length > maxvalue){
-        var r = q.length - maxvalue;
-        alert("You can enter no more than "+ maxvalue+" words");
-        // alert(" you have input "+q.length+" words into the "+
-        // "text area box you just completed. It can return no more than "+
-        // maxvalue+" words to be processed. Please abbreviate "+
-        // "your text by at least "+r+" words");
-        return false;
+    var q = element.Proposal.split(" ");
+
+    if (q.length > maxvalue) {
+      var r = q.length - maxvalue;
+      alert("You can enter no more than " + maxvalue + " words");
+      // alert(" you have input "+q.length+" words into the "+
+      // "text area box you just completed. It can return no more than "+
+      // maxvalue+" words to be processed. Please abbreviate "+
+      // "your text by at least "+r+" words");
+      return false;
     }
   }
   OpenSecondProposal() {
@@ -404,17 +520,23 @@ export class NewMemberAccountCompponent implements OnInit {
 
   }
   RegistrationUser() {
-  console.log("become")
+    console.log("become")
     //check validation
     //this.hasLowerCase(this.Password);
     this.setCookie(this.Email);
     this.user = new User();
     this.user.MemberShip = this.membershipType;
+    //this.setCookieMemberShipUserNew(String(this.membershipType));
     this.user.FirstNameEnglish = this.FirstName;
+    //this.setCookieFirstNameEnglish(this.FirstName);
     this.user.LastNameEnglish = this.LastName;
+    //this.setCookieLastNameEnglish(this.LastName);
     this.user.FirstNameHebrew = this.FirstNameHebrew;
-    this.user.LastNameHebrew = this.LastNameHebrew
-    this.user.Address = this.Address
+    //this.setCookieFirstNameHebrew(this.FirstNameHebrew);
+    this.user.LastNameHebrew = this.LastNameHebrew;
+    // this.setCookieLastNameHebrew(this.LastNameHebrew);
+    this.user.Address = this.Address;
+    // this.setCookieAddressUserNew(this.Address);
     // this.user.City = this.City;
     // this.user.Street = this.Street;
     // this.user.NumberHome = this.NumberHome;
@@ -425,24 +547,33 @@ export class NewMemberAccountCompponent implements OnInit {
     // this.user.PasportNumber =  this.PasportNumber;
 
     this.user.NumberPhone1 = this.NumberPhone1;
+    // this.setCookieNumPhone1(this.NumberPhone1);
+
     // this.user.NumberPhone2 = this.NumberPhone2;
-     this.user.NumberPhone2 = "";
+    this.user.NumberPhone2 = "";
     this.user.selectedTitle = this.Title;
+    // this.setCookieTitleUserNew(this.Title);
 
     // this.user.selectedTitle = this.Title;
     this.user.selectedCountry = this.selectedCountry;
-    // this.user.PostCode = this.PostCode;
-       this.user.PostCode = "";
+    this.setCookieCountryUserNew(this.selectedCountry);
+
+    this.user.PostCode = this.PasportNumber;
+    //this.user.PostCode = "";
     this.user.Email = this.LoginUserName;
     this.user.Language = this.Language;
+    // this.setCookieLanguageUserNew(this.Language);
+
     // this.user.Bio = this.Bio;
     // this.user.Students = this.Students;
     // this.user.WithoutStudemt = this.WithoutStudemt;
     // this.user.EAJS = this.EAJS;
     // this.user.AJS = this.AJS;
-     this.user.Bio = this.Bio;
+    this.user.Bio = this.Bio;
+    //this.setCookieBio(this.Bio);
+
     this.user.Students = true;
-    this.user.WithoutStudemt =false;
+    this.user.WithoutStudemt = false;
     this.user.EAJS = true;
     this.user.AJS = true;
     this.user.Hebrew = this.Hebrew;
@@ -456,24 +587,46 @@ export class NewMemberAccountCompponent implements OnInit {
     this.user.Password = this.Password;
     if (this.user.FirstNameEnglish != null &&
       this.user.LastNameEnglish != null &&
-      this.user.FirstNameHebrew != null &&
-      this.user.LastNameHebrew != null &&
+      //this.user.FirstNameHebrew != null &&
+      //this.user.LastNameHebrew != null &&
       // this.user.Address != null &&
       // this.user.Street != null &&
       // this.user.NumberHome != null &&
       this.user.NumberPhone1 != null &&
-       this.user.Address != null &&
+      this.user.Address != null &&
       this.user.selectedTitle != null &&
       this.user.selectedCountry != null &&
-     // this.user.PostCode != null &&
+      // this.user.PostCode != null &&
       //this.user.Email != null
-       this.user.Bio != null &&
+      //this.user.Bio != null &&
       this.user.UserName != null &&
-      this.user.MemberShip !=null
-      && this.user.Language!=null
-     // this.user.Password != null
+      this.user.MemberShip != null
+      && this.user.Language != null
+      // this.user.Password != null
     ) {
-      this.serverService.Registration(this.user)
+      this.setCookieUser(this.user);
+      //this.CARTMEMBERSHIP.contents[0] = obj;
+
+      this.UserToRegistration.contents = this.user;
+      let _User = JSON.stringify(this.UserToRegistration.contents);
+      localStorage.setItem(this.UserToRegistration.KEY, _User);
+
+     // let obj=this.user;
+     
+      //obj = {
+        //FirstNameEnglish: this.user.FirstNameEnglish, LastNameEnglish: this.user.LastNameEnglish,
+        //FirstNameHebrew: this.user.FirstNameHebrew, LastNameHebrew: this.user.LastNameHebrew,
+        //Address: this.user.Address, selectedTitle:this.user.selectedTitle
+      //}
+
+      debugger;
+      //this.newUser = this.getCookieNewUserToSendToTranzila('UserNewMemberAccount');
+      //this.newUser = this.getCookie2('UserNewMemberAccount');
+      let _User2 = JSON.parse(window.localStorage.getItem(this.UserToRegistration.KEY));
+     // this.newUser = (User)_User2;
+      //this.newUser.LastNameHebrew = this.getCookie('LastNameHebrew');
+
+      // this.serverService.Registration(this.user)
       //  if (this.Rout == 1) {
       //   this.router.navigateByUrl("/RegistrationOneEnglish");
 
@@ -486,17 +639,45 @@ export class NewMemberAccountCompponent implements OnInit {
       // }
 
       // this.ShowMessage = true;
-
- //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
- //this.router.navigate(['Pay', this.Total]).then(result => {  window.open(link, '_blank'); })
+      //this.cookieService.putObject('user', JSON.stringify(this.user));
+      //if(newMemberSaved==true)!!!!!!!!!!!!!!!!!!!!!!
+      //this.router.navigate(['Pay', this.Total]).then(result => {  window.open(link, '_blank'); })
       this.SendToTranzila();
 
     }
     else {
-       alert("All fields must be filled!");
-     }
+      if (this.LoginUserName == null) {
+        this.email.nativeElement.style.color = "red";
+        document.getElementById("emailin").classList.add("bordercolorRed");
+      } if (this.Address == null) {
+        this.address.nativeElement.style.color = "red";
+        document.getElementById("addressin").classList.add("bordercolorRed");
+      } if (this.FirstName == null) {
+        this.namee.nativeElement.style.color = "red";
+        document.getElementById("nameein").classList.add("bordercolorRed");
+      } if (this.LastName == null) {
+        this.lastnamee.nativeElement.style.color = "red";
+        document.getElementById("lastnameein").classList.add("bordercolorRed");
+      } if (this.Title == null) {
+        this.ti.nativeElement.style.color = "red";
+        document.getElementById("tiin").classList.add("bordercolorRed");
+      } if (this.selectedCountry == null) {
+        this.coun.nativeElement.style.color = "red";
+        document.getElementById("counin").classList.add("bordercolorRed");
+      } if (this.PasportNumber == null) {
+        this.Id.nativeElement.style.color = "red";
+        document.getElementById("Idin").classList.add("bordercolorRed");
+      } if (this.NumberPhone1 == null) {
+        this.telephone.nativeElement.style.color = "red";
+        document.getElementById("telephonein").classList.add("bordercolorRed");
+      } if (this.membershipType == null) {
+        this.membershipspan.nativeElement.style.color = "red";
+      } if (this.Language == null) {
+        this.languagespan.nativeElement.style.color = "red";
+      }
+    }
 
-   
+
   }
   //SendToTranzila() {
   //  this.serverService.setCurrency(this.currency);
@@ -506,7 +687,47 @@ export class NewMemberAccountCompponent implements OnInit {
   //  this.setCookieRout(1);
   //  this.router.navigate(['Pay']);
   //}
-  focusacademic() { 
+  OverToHebrew() {
+    debugger;
+    this.setCookie(this.Email);
+    this.user = new User();
+    this.user.MemberShip = this.membershipType;
+    this.user.FirstNameEnglish = this.FirstName;
+    this.user.LastNameEnglish = this.LastName;
+    this.user.FirstNameHebrew = this.FirstNameHebrew;
+    this.user.LastNameHebrew = this.LastNameHebrew;
+    this.user.Address = this.Address;
+    this.user.City = this.City;
+    this.user.Street = this.Street;
+    this.user.NumberHome = this.NumberHome;
+    this.user.NumberPhone1 = this.NumberPhone1;
+    this.user.NumberPhone2 = "";
+    this.user.selectedTitle = this.Title;
+    this.user.selectedCountry = this.selectedCountry;
+    this.setCookieCountryUserNew(this.selectedCountry);
+    this.user.PostCode = this.PasportNumber;
+    this.user.Email = this.LoginUserName;
+    this.user.Language = this.Language;
+    this.user.Bio = this.Bio;
+    this.user.Students = true;
+    this.user.WithoutStudemt = false;
+    this.user.EAJS = true;
+    this.user.AJS = true;
+    this.user.Hebrew = this.Hebrew;
+    this.user.English = this.English;
+    this.user.Both = false;
+    this.user.UserName = this.LoginUserName;
+    this.user.Password = this.Password;
+
+    this.setCookieUser(this.user);
+    debugger;
+    if (this.Rout) {
+      this.router.navigateByUrl("/NewMemberAccountHebrew/6");
+    }
+    else this.router.navigateByUrl("/NewMemberAccountHebrewFromStore");
+
+  }
+  focusacademic() {
     this.academic.nativeElement.style.color = "#27b5e5";
   }
   unfocusacademic() {
@@ -564,22 +785,39 @@ export class NewMemberAccountCompponent implements OnInit {
     this.namee.nativeElement.style.color = "#27b5e5";
   }
   unfocusnamee() {
+    if (this.FirstName != null) {
+      this.namee.nativeElement.style.color = "gray";
+      document.getElementById("nameein").classList.remove("bordercolorRed");
+    }
     this.namee.nativeElement.style.color = "gray";
   } focuslnamee() {
     this.lastnamee.nativeElement.style.color = "#27b5e5";
   }
   unfocuslnamee() {
+    if (this.LastName != null) {
+      this.lastnamee.nativeElement.style.color = "gray";
+      document.getElementById("lastnameein").classList.remove("bordercolorRed");
+    }
     this.lastnamee.nativeElement.style.color = "gray";
   }
   focusemail() {
     this.email.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
+    if (this.LoginUserName != null) {
+      this.email.nativeElement.style.color = "gray";
+      document.getElementById("emailin").classList.remove("bordercolorRed");
+    }
     this.email.nativeElement.style.color = "gray";
-  }focusaddress() {
+  } focusaddress() {
+
     this.address.nativeElement.style.color = "#27b5e5";
   }
   unfocusaddress() {
+    if (this.Address != null) {
+      this.address.nativeElement.style.color = "gray";
+      document.getElementById("addressin").classList.remove("bordercolorRed");
+    }
     this.address.nativeElement.style.color = "gray";
   }
   focuskey() {
@@ -587,27 +825,43 @@ export class NewMemberAccountCompponent implements OnInit {
   }
   unfocuskey() {
     this.key.nativeElement.style.color = "gray";
-  }focustelephone() {
+  } focustelephone() {
     this.telephone.nativeElement.style.color = "#27b5e5";
   }
   unfocustelephone() {
+    if (this.NumberPhone1 != null) {
+      this.telephone.nativeElement.style.color = "gray";
+      document.getElementById("telephonein").classList.remove("bordercolorRed");
+    }
     this.telephone.nativeElement.style.color = "gray";
-  }focusId() {
+  } focusId() {
     this.Id.nativeElement.style.color = "#27b5e5";
   }
   unfocusId() {
+    if (this.PasportNumber != null) {
+      this.Id.nativeElement.style.color = "gray";
+      document.getElementById("Idin").classList.remove("bordercolorRed");
+    }
     this.Id.nativeElement.style.color = "gray";
-  }focusc() {
+  } focusc() {
     this.coun.nativeElement.style.color = "#27b5e5";
   }
   unfocusc() {
+    if (this.selectedCountry != null) {
+      this.coun.nativeElement.style.color = "gray";
+      document.getElementById("counin").classList.remove("bordercolorRed");
+    }
     this.coun.nativeElement.style.color = "gray";
-  }focust() {
+  } focust() {
     this.ti.nativeElement.style.color = "#27b5e5";
   }
   unfocust() {
+    if (this.Title != null) {
+      this.ti.nativeElement.style.color = "gray";
+      document.getElementById("tiin").classList.remove("bordercolorRed");
+    }
     this.ti.nativeElement.style.color = "gray";
-  }focusbiog() {
+  } focusbiog() {
     this.biog.nativeElement.style.color = "#27b5e5";
   }
   unfocusbiog() {

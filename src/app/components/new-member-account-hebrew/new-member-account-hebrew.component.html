@@ -1,0 +1,226 @@
+<div class="col-md-12 marginAuto" style="max-width:1190px" id="Top" #Top>
+  <br />
+
+  <div class="marginAuto col-md-12" style="float:right;padding-right: 0 !important;">
+    <br />
+    <!--<div class=" right">
+      <div class="top-line" style="margin-left:75%;">
+        <img class="logo-img" src="/assets/images/LogoHebrew.png" />
+      </div>
+    </div>-->
+    <h4 class="header-border" style="text-align:right;">
+      חשבון משתמש חדש
+    </h4>
+  </div>
+  <br />
+  <div class="containerDivGeneric">
+    <div class="col-md-12" style="padding-left: 0% !important;">
+      <div class="clearfix"></div>
+      <div class="col-md-12" style="padding: 0;direction:rtl;text-align:right">
+        <br />
+        <div class="row margin-top">
+          <label class="col-md-3 color-gray" #ti>תואר</label>
+          <label class="headerGray color-gray col-md-4" style="right:6%;" #nameh>שם פרטי [עברית]</label>
+          <label class="headerGray color-gray col-md-4" style="right:5%" #lastnameh>
+            שם משפחה [עברית]
+          </label>
+        </div>
+        <div class=" ">
+          <div class=" row col-md-4 floatRight">
+            <select [(ngModel)]="Title" (click)="focust()" (mouseleave)="unfocust()" style="width:30%;direction:rtl;" #tiin id="tiin">
+              <option [value]="Title" selected style="direction:rtl;">{{Title}}</option>
+              <option *ngFor="let title of ArrTitle" [value]="title" style="direction:rtl;">
+                {{title}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4 floatRight">
+            <input style="width: 90%;" (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" #namehin id="namehin" />
+          </div>
+          <div class="col-md-4 floatRight">
+            <input (focusout)="unfocuslnameh()" (focus)="focuslnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width: 90%" #lastnamehin id="lastnamehin" />
+          </div>
+        </div>
+        <div class="row" style="margin-right: -1px;margin-top:5%;">
+
+          <label class="col-md-3 floatRight color-gray" style="padding:0" #email>דוא"ל</label>
+          <label class="color-gray col-md-4 floatRight" style="right:6%;" #namee>שם פרטי [אנגלית]   </label>
+          <label class="color-gray col-md-4 floatRight" style="right:5%" #lastnamee>שם משפחה [אנגלית]</label>
+        </div>
+        <div>
+          <div class="row  col-md-4 floatRight">
+            <input type="text" style="width:90%" value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail()" (focus)="focusemail()" #emailin id="emailin" />
+          </div>
+
+          <div class="col-md-4 floatRight">
+            <input style="width: 90%;" (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName" #nameein id="nameein" />
+          </div>
+          <div class="col-md-4 floatRight">
+            <input (focusout)="unfocuslnamee()" (focus)="focuslnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width: 90%" #lastnameein id="lastnameein" />
+          </div>
+
+
+          <br />
+        </div>
+        <div class="row " style=" margin-top:3%;margin-right:-1px;">
+          <label class=" color-gray col-md-3 floatRight" style="padding:0" #coun>מדינה</label>
+          <label class=" color-gray col-md-4 floatRight" style="right:6%;" #Id>ת.ז. או מספר דרכון</label>
+          <label class=" color-gray col-md-4 floatRight" style="right:5%;" #telephone>
+            טלפון
+            <div class="tooltipSmallName">
+              <img src="/assets/images/TooltipIcon.png" />
+              <span class="tooltiptextSmallName" style="text-align:right;padding-right:2%;">
+                כולל קידומת אזור
+              </span>
+            </div>
+          </label>
+        </div>
+        <div>
+          <div class="row  col-md-4 floatRight">
+            <select [(ngModel)]="selectedCountry" style="width: 90%; margin-right: -1px;direction:rtl;" (click)="focusc()" (mouseleave)="unfocusc()" #counin id="counin">
+              <option [value]="selectedCountry" style="direction:rtl;" selected>{{selectedCountry}}</option>
+              <option *ngFor="let c of Country" [ngValue]="c" style="direction:rtl;">{{c}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 floatRight">
+            <input style="width: 90%;" value="" type="text" value="{{PasportNumber}}" [(ngModel)]="PasportNumber" (focusout)="unfocusId()" (focus)="focusId()" #Idin id="Idin" />
+          </div>
+          <div class="col-md-4 floatRight">
+            <input style="width: 90%;" type="text" value="{{NumberPhone1}}" [(ngModel)]="NumberPhone1" (focusout)="unfocustelephone()" (focus)="focustelephone()" #telephonein id="telephonein" />
+          </div>
+
+
+          <br />
+        </div>
+
+
+        <div class="row " style=" margin-top:3%;margin-right: -1px;">
+          <label class=" color-gray " #address>כתובת</label>
+
+        </div>
+        <div class="row" style="margin-left: -1px;">
+          <div class="row margin-top col-md-12">
+            <input style="width: 94%;" type="text" value="{{Address}}" [(ngModel)]="Address" (focusout)="unfocusaddress()" (focus)="focusaddress()" #addressin id="addressin" />
+          </div>
+        </div>
+
+        <br /><br />
+        <span class="txtStyle bold color-gray" #membershipspan id="membershipspan" style="font-weight:bold;">סוג החברות שלך:</span>
+        <span  style="margin-right: 4%;color: #27b5e5;width: 300px;">ניתן לשלם בדולרים</span><span style="cursor:pointer; color: #27b5e5;width: 300px;text-decoration: underline;" (click)="OverToHebrew()"> בדף התשלום באנגלית</span>
+
+        <div class="row" style="padding-top:30px;margin-left: -1px;  background-color: #f3f2f2;padding-bottom:30px;width:930px;">
+          <div class="col-md-5 modal-content" style="border:0;padding-left: 0;  background-color: #f3f2f2;right:4%;">
+            <!--<span class="txtStyle bold color-gray" #membershipspan id="membershipspan">סוג החברות שלך:</span>-->
+
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(0)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(0)" (click)="onMemberTypeChange(0)" id="ArrMembershipTypes0" name="memberType" #ArrMembershipTypes0>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[0].membershipType" (click)="onMemberTypeChange(0)">{{ArrMembershipTypes[0].membershipType}} </label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:50%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[0].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="height: 80px !important;text-align:right;padding-right:2%;margin-right: 60%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(1)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes1" name="memberType" #ArrMembershipTypes1>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[1].membershipType">{{ArrMembershipTypes[1].membershipType}}</label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:31%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[1].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="text-align:right;padding-right:2%;margin-right: 60%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(2)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(2)" id="ArrMembershipTypes2" name="memberType" #ArrMembershipTypes2>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[2].membershipType">{{ArrMembershipTypes[2].membershipType}}</label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:47%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[2].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="height: 80px !important;text-align:right;padding-right:2%;margin-right: 60%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(3)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(3)" id="ArrMembershipTypes3" name="memberType" #ArrMembershipTypes3>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[3].membershipType">{{ArrMembershipTypes[3].membershipType}}</label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:25%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[3].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="height: 100px !important;text-align:right;padding-right:2%;margin-right: 60%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(4)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes4" name="memberType" #ArrMembershipTypes4>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[4].membershipType">{{ArrMembershipTypes[4].membershipType}}</label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:42%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[4].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="height: 40px !important;text-align: right;padding-right: 2%;margin-right: 60%;float: right;top: -8px !important;">
+                  {{ArrMembershipTypes[4].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;" (click)="onMemberTypeChange(5)">
+              <input type="radio" style="    z-index: 0 !important;left:102% !important;" class="custom-control-input" (change)="onMemberTypeChange(5)" id="ArrMembershipTypes5" name="memberType" #ArrMembershipTypes5>
+              <label style="float:right;" class="custom-control-label" for="ArrMembershipTypes[5].membershipType">{{ArrMembershipTypes[5].membershipType}}</label>
+              <div style="border-bottom: 1px dashed gray;float:right;width:49%;margin-right: 10px;height:21px;margin-left: 2%;"></div>
+              <div style="direction: ltr; display: block;">
+                <span style="float:right;direction: rtl;">{{ArrMembershipTypes[5].price}} ש"ח</span>
+                <div class="tooltipSmall" style="float:right;">
+                  <img src="/assets/images/TooltipIcon.png" style=" float: right;margin-right: 2%;" />
+                  <span class="tooltiptextSmall" style="height: 80px !important;text-align: right;padding-right: 2%;margin-right: 60%;float: right;top: -20px !important;">
+                  {{ArrMembershipTypes[5].tooltipText}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-md-12">
+
+          <div class="col-md-4" style="padding-top:80px;margin-left: -1px;">
+            <div class="modal-content " style="border:0;">
+              <span class="txtStyle bold color-gray" #languagespan id="languagespan">שפת ההתכתבות:</span>
+              <br />
+              <div class="custom-control custom-radio" (click)="onLanguageChange('English')">
+                <input type="radio" style="    z-index: 0 !important;left:102% !important;" (click)="onLanguageChange('English')" class="custom-control-input" (change)="onLanguageChange('English')" id="languageEnglish" name="Language" #languageEnglish>
+                <label (click)="onLanguageChange('English')" class="custom-control-label" style="margin-bottom: 8px !important;" for="languageEnglish">אנגלית</label>
+              </div>
+              <div class="custom-control custom-radio" (click)="onLanguageChange('Hebrew')">
+                <input type="radio" style="    z-index: 0 !important;left:102% !important;" (click)="onLanguageChange('Hebrew')" class="custom-control-input" (change)="onLanguageChange('Hebrew')" id="languageHebrew" name="Language" #languageHebrew>
+                <label class="custom-control-label" for="languageHebrew" (click)="onLanguageChange('Hebrew')">עברית</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7" style="padding-top:80px;margin-left: -1px;">
+            <span class="txtStyle bold color-gray" #biog> ביוגרפיה קצרה</span>
+            <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
+              <label for="bio"></label>
+              <textarea (focusout)="unfocusbiog()" (focus)="focusbiog()" [(ngModel)]="Bio" value="" class="form-control z-depth-1" id="bio" rows="3" placeholder="כתבו כאן...">{{Bio}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div style="padding-left:50px;padding-top:30px;">
+
+          <button (click)="RegistrationUser()" class="fill-btn-blue" style="padding:10px; margin-left: 100px;margin-right: 35%;width: 250px;">תשלום דמי חבר</button>
+        </div>
+        <br /><br />
+      </div>
+    </div>
+  </div>
+</div>
+
+

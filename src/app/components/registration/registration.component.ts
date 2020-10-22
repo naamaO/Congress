@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../../classes/User';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { __await } from 'tslib';
 import { Name } from 'src/classes/Name';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators } from '@angular/forms';

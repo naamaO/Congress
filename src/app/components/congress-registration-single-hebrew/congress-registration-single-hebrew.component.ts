@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
 import { NewProp } from '../../../classes/NewProp';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { Name } from 'src/classes/Name';
 import { ActivatedRoute } from '@angular/router';
 @Component({

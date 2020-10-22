@@ -4,14 +4,8 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\components",
-    "\\src\\app\\components\\congress-registration-session",
-    "\\src\\app\\components\\judges",
-    "\\src\\app\\components\\new-member-account",
-    "\\src\\app\\components\\registration-one-english",
-    "\\src\\app\\components\\thank2",
-    "\\src\\app\\services",
-    "\\src\\classes"
+    "\\src\\app\\components\\invite-members"
   ],
-  "SelectedNode": "\\src\\app\\services\\server.service.ts",
+  "SelectedNode": "\\src\\app\\components\\invite-members\\invite-members.component.ts",
   "PreviewInSolutionExplorer": false
 }

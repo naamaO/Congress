@@ -8,7 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { UserPass } from '../../../classes/UserPass';
 import { MembershipInformation } from '../../../classes/MembershipInformation';
 
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 import { BrowserPlatformLocation } from '@angular/platform-browser/src/browser/location/browser_platform_location';
 @Component({
   selector: 'app-membership-information',

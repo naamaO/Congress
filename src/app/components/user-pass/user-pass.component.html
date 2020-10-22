@@ -1,76 +1,83 @@
-<div class="marginAuto" style="max-width:1190px">
-  <div class="body">
-    <div class="container right" style="float: left;left:0;  width: 50%;padding: 0;">
-      <div class="top-line" style="float: left;  padding: 60px !important;">
-        <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
-      </div>
-      <br /><br /><br /><br />
-      <br /><br />
-      <div *ngIf="resetPassword" class=" center-div-wrap">
-        <div class="col-md-8" style="margin: 0 auto;">
-          <form [formGroup]="userDetail" class="fields">
-            <div class="example-full-width">
-              <div style="margin: 0 auto;padding: 0;">
-                <label class="col-md-8" style="padding: 0;font-size: 18px;" display="flex">
-                  Forgot your password?
-                </label>
-                <br /><br />
-                <div>
+<!--<div class="marginAuto" style="max-width:1190px"  >-->
+  <!--<div class="body">-->
+    <!--<div class="container right" style="float: left;left:0;  width: 50%;padding: 0;">-->
+<div *ngIf="resetPassword" class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
+  <div class=" background-welcome col-md-6" style="float: right;right:0;  width: 500px;padding: 0;">
 
-                  <form class="example-full-width" style="width:100%;margin-right: 0;">
-                    <label style="padding: 0;font-size: 18px;color:gray;margin-left: 10px;" display="flex">
-                      Please enter your user name or email<br />
-                      address to recive a password reset link
-                    </label>
-                    <input #email [formControl]="emailFormControl" style="padding-top:10%;width: 100%;" [(ngModel)]="EmailToResetPassword">
-                  </form>
-                </div>
-                <br /><br /><br />
-                <div style="justify-content: center;">
-                  <button (click)="forgot()" class="fill-btn-blue" style="width:305px;font-weight:bold;">RESET MY PASSWORD</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div *ngIf="!resetPassword" class=" center-div-wrap ">
-        <div class="col-md-8" style="margin: 0 auto;">
-          <form class="fields">
-            <div class="example-full-width">
-              <label color="gray">User Name</label>
-              <input value="" #email
-                     type="text" style="padding: 0;width:100%;color:black;" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"
-                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail()" (focus)="focusemail()" />
-            </div>
+  </div>
+  <div class=" col-md-6" style="width:500px;">
+    <div class="col-md-12" style="margin: 0 auto;padding-top:170px;padding-bottom:170px">
+      <form [formGroup]="userDetail" class="fields">
+        <div class="example-full-width">
+          <div style="margin: 0 auto;padding: 0;">
+            <label class="col-md-8" style="padding: 0;font-size: 18px;" display="flex">
+              Forgot your password?
+            </label>
             <br /><br />
-            <div class="example-full-width">
-              <label color="gray">Password</label>
-              <input #pass type="text" style="padding: 0;width:185%;"
-                     [(ngModel)]="Password" [ngModelOptions]="{standalone: true}" value=""
-                     style="width:100%;color:black;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br />
-              <div style="width: 100%; display: flex;
-                           justify-content: space-between;">
-                <label (click)="forget()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;">Forgot your password?</label>
-                <label (click)="newMember()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;text-align: right;float: right;">New member?</label>
-              </div>
-            </div>
-          </form>
+            <div>
 
-          <label class="red" *ngIf="ShowError" style="font-weight: bolder;margin-left: 35%;">Username or password are incorrect</label>
-          <label class="red" *ngIf="ShowErrorEmail">Enter Email</label>
-          <br /><br /><br />
-          <div style="justify-content: center;">
-            <button (click)="SendCheckUserPassword()" class="fill-btn-blue" style="font-weight:bold;">SIGN IN</button>
+              <form class="example-full-width" style="width:100%;margin-right: 0;">
+                <label style="padding: 0;font-size: 18px;color:gray;margin-left: 10px;" display="flex" #emailResetspan id="emailResetspan">
+                  Please enter your email<br />
+                  address to recive a password reset link
+                </label>
+                <input #emailReset id="emailReset" [formControl]="emailFormControl" style="padding-top:10%;width: 100%;" [(ngModel)]="EmailToResetPassword">
+                <br />  <label style="color:red;" *ngIf="errPass">This email is not registered in our system. </label>
+                <br />  <label style="color:gray;" *ngIf="errPass">Please make sure this is your correct email. If it is correct and the system does not recognise it,<label style="color:gray;text-decoration:underline;cursor:pointer;" *ngIf="errPass" (click)="newMember()"> please sign up as a new user.</label></label>
+              </form>
+            </div>
+            <br /><br /><br />
+            <div style="justify-content: center;">
+              <button (click)="forgot()" class="fill-btn-blue" style="width:305px;">RESET MY PASSWORD</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="container right background-welcome" style="float: right;right:0;  width: 50%;padding: 0;">
-
+      </form>
     </div>
   </div>
-  <div class="container-fluid" *ngIf="showWrongEmail">
+
+</div>
+<div *ngIf="!resetPassword" class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
+  <div class=" background-welcome col-md-6" style="float: right;right:0;  width: 500px;padding: 0;">
+
+  </div>
+  <div class="col-md-6 " id="Top" #Top style="width:500px;">
+    <div class="col-md-12" style="margin: 0 auto;padding-top:170px;padding-bottom:170px">
+      <form class="fields">
+        <div class="example-full-width">
+          <label color="gray" #email>Email address</label>
+          <input value=""
+                 type="text" style="padding: 0;width:100%;color:black;" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"
+                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail1()" (focus)="focusemail1()" />
+        </div>
+        <br /><br />
+        <div class="example-full-width">
+          <label color="gray" #pass>Password</label>
+          <input type="text" style="padding: 0;width:185%;"
+                 [(ngModel)]="Password" [ngModelOptions]="{standalone: true}" value=""
+                 style="width:100%;color:black;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br />
+          <div style="width: 100%; display: flex;
+                           justify-content: space-between;">
+            <label (click)="forget()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;">Forgot your password?</label>
+            <label (click)="newMember()" style="width:50%;cursor:pointer;color:#27b5e5;font-size: small;text-align: right;float: right;">New member?</label>
+          </div>
+        </div>
+      </form>
+
+      <label class="red" *ngIf="ShowError" style="font-weight: bolder;margin-left: 35%;">Username or password are incorrect</label>
+      <label class="red" *ngIf="ShowErrorEmail">Enter Email</label>
+      <br /><br /><br />
+      <div style="justify-content: center;">
+        <button (click)="SendCheckUserPassword()" class="fill-btn-blue" style="margin-left:40%;">SIGN IN</button>
+      </div>
+    </div>
+    <!--</div>
+    </div>
+    <br /><br /><br />-->
+
+  </div>
+  <!--</div>-->
+  <!--<div class="container-fluid" *ngIf="showWrongEmail">
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -101,5 +108,5 @@
       </div>
       <div class="col-md-2"></div>
     </div>
-  </div>
+  </div>-->
 </div>

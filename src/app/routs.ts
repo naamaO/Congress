@@ -9,6 +9,7 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 import { RegistrationComponent } from './components/registration/registration.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserPassComponent } from './components/user-pass/user-pass.component';
+import { UserPassHebrewComponent } from './components/user-pass-hebrew/user-pass-hebrew.component';
 // import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { CongressRegistrationOneComponent } from './components/congress-registration-one/congress-registration-one.component';
 import { CongressRegistrationSessionComponent } from './components/congress-registration-session/congress-registration-session.component';
@@ -36,13 +37,21 @@ import { Thank3Component } from './components/thank3/thank3.component';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
 import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { NewMemberAccountCompponent } from './components/new-member-account/new-member-account.component';
+import { NewMemberAccountHebrewComponent } from './components/new-member-account-hebrew/new-member-account-hebrew.component';
 import { notifyComponent } from './components/notify/notify.component';
 import { failComponent } from './components/fail/fail.component';
 import { ResetPassSuccessComponent } from './components/reset-pass-success/reset-pass-success.component';
+import {ReserPassSuccessHebrewComponent } from './components/reser-pass-success-hebrew/reser-pass-success-hebrew.component';
 import { successComponent } from './components/success/success.component';
 import { NavigatetosinglepropComponent } from './components/navigatetosingleprop/navigatetosingleprop.component';
 import { CongressRegistrationSingleHebrewComponent } from './components/congress-registration-single-hebrew/congress-registration-single-hebrew.component';
 import { NavigatetosinglepropHerbewComponent } from './components/navigatetosingleprop-herbew/navigatetosingleprop-herbew.component';
+import { ShoppingCartOnlyOneComponent } from './components/shopping-cart-only-one/shopping-cart-only-one.component';
+import { ShoppingCartOnlyOneHebrewComponent } from './components/shopping-cart-only-one-hebrew/shopping-cart-only-one-hebrew.component';
+import { UserPassFromStoreComponent } from './components/user-pass-from-store/user-pass-from-store.component';
+import { UserPassHebrewFromStoreComponent } from './components/user-pass-hebrew-from-store/user-pass-hebrew-from-store.component';
+import { NewMemberAccountFromStoreComponent } from './components/new-member-account-from-store/new-member-account-from-store.component';
+import { NewMemberAccountHebrewFromStoreComponent } from './components/new-member-account-hebrew-from-store/new-member-account-hebrew-from-store.component';
 export const route: Routes = [
   {
     path: 'Welcome/:Rout',
@@ -87,10 +96,18 @@ export const route: Routes = [
   {
     path: 'UserPass/:Rout',
     component: UserPassComponent,
+  },{
+    path: 'UserPassHebrew/:Rout',
+    component: UserPassHebrewComponent,
   },
   {
     path: 'NewMemberAccount/:Rout',
     component: NewMemberAccountCompponent,
+   // pathMatch: 'full'
+  },
+  {
+    path: 'NewMemberAccountHebrew/:Rout',
+    component: NewMemberAccountHebrewComponent,
    // pathMatch: 'full'
   },
   {
@@ -200,6 +217,9 @@ export const route: Routes = [
   {
      path: 'ResetPassSuccess',
     component: ResetPassSuccessComponent,
+  },{
+    path: 'ResetPassSuccessHebrew',
+    component: ReserPassSuccessHebrewComponent,
   },
   {
     path: 'notify/:userName/:response/:sum/:currency',
@@ -220,5 +240,32 @@ export const route: Routes = [
   {
     path: 'NavigatHebrew',
     component: NavigatetosinglepropHerbewComponent,
+ },
+  {
+    path: 'ShoppingCartOnlyOne',
+    component: ShoppingCartOnlyOneComponent,
+ },
+  {
+    path: 'ShoppingCartOnlyOneHebrew',
+    component: ShoppingCartOnlyOneHebrewComponent,
+ },
+  {
+    path: 'ShoppingCartOnlyOneHebrew',
+    component: ShoppingCartOnlyOneHebrewComponent,
+ },
+  {
+    path: 'UserPassFromStore',
+    component: UserPassFromStoreComponent,
+ }, {
+    path: 'UserPassHebrewFromStore',
+    component: UserPassHebrewFromStoreComponent,
+ },
+  {
+    path: 'NewMemberAccountHebrewFromStore',
+    component: NewMemberAccountHebrewFromStoreComponent,
+ },
+  {
+    path: 'NewMemberAccountFromStore',
+    component: NewMemberAccountFromStoreComponent,
  }
 ]

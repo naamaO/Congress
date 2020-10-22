@@ -7,6 +7,9 @@ body{
   max-width: 1100px !important;
   margin: auto !important;
 } */
+.CartTooltip {
+  visibility: visible !important;
+}
 
 .body {
   max-width: 1100px;
@@ -430,7 +433,7 @@ ul {
   height: 60px !important;
 }
 
-.tooltipSmall:hover .tooltiptextSmall {
+.tooltipSmall:active .tooltiptextSmall {
   visibility: visible;
 }
 

@@ -11,7 +11,13 @@
   float: left;
   font-size: large;
 }
+.bordercolorRed {
+  border-bottom-color: red !important;
+}
 
+.allbordercolorRed {
+  border-color: red !important;
+}
 
 
 .tooltipSmall {
@@ -70,6 +76,7 @@
 
   /* Tooltip text */
   .tooltip .tooltiptext {
+
     visibility: hidden;
     width: 120px;
     background-color: #27b5e5;
@@ -93,7 +100,7 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid #27b5e5;
   left: -8px;
-  top: 20%;
+  top: 30%;
   color: pink;
 }
 
@@ -135,18 +142,47 @@ select {
 }
 
 .fill-btn-blue {
+  outline: none;
+  /*font-weight: bold;*/
   background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
-  outline: none;
   color: white;
-  font-weight: bold;
   font-size: 19px;
   border-radius: 30px;
   cursor: pointer;
   text-align: center;
-  width: 25%;
+  width: 170px;
 }
+
+  .fill-btn-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 170px;
+  }
+
+  .fill-btn-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 170px;
+  }
+
 
 
 .ddiv:after {

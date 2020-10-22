@@ -36,6 +36,10 @@ body{
   font-size: medium;
   margin-top: 20px;
 }
+.CartTooltip {
+  visibility: visible !important;
+}
+
 .logo-img {
   /*width: 200px;
   height: 150px;*/
@@ -425,7 +429,7 @@ outline:none;
   height: 60px !important;
 }
 
-.tooltipSmall:hover .tooltiptextSmall {
+.tooltipSmall:active .tooltiptextSmall {
   visibility: visible;
 }
 

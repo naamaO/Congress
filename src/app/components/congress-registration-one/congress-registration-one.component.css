@@ -93,7 +93,7 @@ textarea .form-control{
 
 .tooltiptextSmall {
   width: 200px !important;
-  height: 150px !important;
+  height: 130px !important;
 }
 
 .tooltipSmall:hover .tooltiptextSmall {
@@ -166,19 +166,47 @@ select {
   margin-top: 2%;
 }
 
-.fill-btn-blue  {
-  outline:none;
+.fill-btn-blue {
+  outline: none;
+  /*font-weight: bold;*/
   background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
   color: white;
-  font-weight: bold;
   font-size: 19px;
   border-radius: 30px;
   cursor: pointer;
   text-align: center;
   width: 100px;
 }
+
+  .fill-btn-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+  }
+
+  .fill-btn-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+  }
 
 .fill-btn-disabled {
   background-color: #f3f2f2;
@@ -191,8 +219,66 @@ select {
   cursor: pointer;
   text-align: center;
   width: 100px;
-  outline:none;
+  outline: none;
+}
 
+.fill-btn-draft-blue {
+  outline: none;
+  /*font-weight: bold;*/
+  background-color: white;
+  padding: 10px 48px;
+  /*border: none;*/
+  color: #27b5e5;
+  font-size: 19px;
+  border-radius: 30px;
+  border: 1px solid #27b5e5;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+}
+
+  .fill-btn-draft-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+  }
+
+  .fill-btn-draft-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+    content: "Draft saved";
+  }
+
+
+.fill-btn-draft-disabled {
+  background-color: #f3f2f2;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  outline: none;
 }
 
 .big {

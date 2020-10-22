@@ -18,13 +18,15 @@ export class failComponent implements OnInit {
   public response: any;
   public user: string; 
   constructor(public route: ActivatedRoute,public router: Router, private serverService: ServerService, private http: HttpClient) {
+    console.log("fail page on init!")
+
     this.sub = this.route.params.subscribe(params => {
       this.response = params['response'], 
       this.user = params['userName']
        });
   }
   ngOnInit() {
-    //console.log("fail page on init!")
+    console.log("fail page on init!")
   }
 
 }

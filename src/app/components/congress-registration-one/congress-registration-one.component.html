@@ -142,7 +142,7 @@
       </div>
 
       <div class="row margin-top">
-        <label class="col-md-6 headerGray" #abs>Abstract (up tp 250 words): {{NumWords}}</label>
+        <label class="col-md-6 headerGray" #abs>Abstract (up tp 250 words): {{NumWords}}/250</label>
         <label class="col-md-5 floatLeft headerGray" #key style="margin-left:8%;">Keywords</label>
       </div>
     </div>
@@ -156,6 +156,7 @@
                     style="width:80%;height:97px;border-radius: 0rem;"
                      *ngIf="showLikeProp==false" #proptext id="proptext" name="proptext">
           </textarea>
+          <label style="color:red;" *ngIf="errMoreThen250"> Sorry, your abstract is too long. Please make sure it is not longer than 250 words</label>
         </div>
         <div class="col-md-6">
           <textarea class="form-control z-depth-1" 
@@ -172,11 +173,11 @@
           <label style="margin-left:18%;width:80%" *ngIf="showLikeProp==true">{{Keywords}}</label>
         </div>
         <br /><br />
-              <div class="row margin-top form-group col-md-12">
-                <button (click)="Draft()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-left:20%;">Save draft</button>
-                <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-left:3%;">Submit</button>
-                <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:20%;">Save draft</button>
-                <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;">Submit</button>
+              <div class="row margin-top form-group col-md-12" style="padding-bottom: 6%;">
+                <button (click)="Draft()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalraft" class="fill-btn-draft-blue col-md-3" style="margin-left:20%;">{{DraftValue}}</button>
+                <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-left:3%;">SUBMIT</button>
+                <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-draft-disabled col-md-3" style="margin-left:20%;">SAVE DRAFT</button>
+                <button (click)="Save()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-left:3%;">SUBMIT</button>
 
                 <!-- <button (click)="Draft()" *ngIf="showLikeProp==false"data-toggle="modal" data-target="#myModalraft"  class="fill-btn-blue col-md-3" style="margin-left:20%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Save draft</button>
            <button (click)="Save()" *ngIf="showLikeProp==false" class="fill-btn-blue col-md-3" style="margin-left:3%;"(mouseover)="changeStyle($event)" (mouseout)="changeStyleOut($event)" >Submit</button>
@@ -219,7 +220,7 @@
                   </div>
                 </div>
 
-                <div class="container-fluid" *ngIf="errMoreThen250">
+                <!--<div class="container-fluid" *ngIf="errMoreThen250">
                   <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
@@ -252,7 +253,7 @@
                     </div>
                     <div class="col-md-2"></div>
                   </div>
-                </div>
+                </div>-->
 
 
                 <!--<div class="container-fluid">

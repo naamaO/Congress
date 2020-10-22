@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef  } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -6,7 +6,7 @@ import { ServerService } from '../../services/server.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { ChangeDetectorRef } from '@angular/core';
 import { __await } from 'tslib';
 import { shoppingCart } from 'src/classes/shoppingCart';
@@ -17,6 +17,12 @@ import { shoppingCart } from 'src/classes/shoppingCart';
   styleUrls: ['./new-hebrew.component.css']
 })
 export class NewHebrewComponent implements OnInit {
+  @ViewChild('DivRow') DivRow: ElementRef;
+  @ViewChild('CartTooltip') CartTooltip: ElementRef;
+  @ViewChild('arr1') arr1: ElementRef;
+  @ViewChild('arr2') arr2: ElementRef;
+  @ViewChild('arr3') arr3: ElementRef;
+
   public UserNameLogin: string;
   public ShowBlue1: boolean = true;
   public ShowBlue2: boolean = false;
@@ -184,6 +190,13 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
 
     }
   }
+  OpenTooltip() {
+    if (document.getElementById("CartTooltip").classList.contains("CartTooltip"))
+      document.getElementById("CartTooltip").classList.remove("CartTooltip");
+    else
+      document.getElementById("CartTooltip").classList.add("CartTooltip");
+
+  }
   NavigCart() {
     this.router.navigateByUrl("/ShoppingCartHebrew");
 
@@ -290,18 +303,39 @@ console.log("this.DBShoppingCart",this.DBShoppingCart)
 
 
     if (Group == 1) {
+      this.arr1.nativeElement.style.display = "block";
+      this.arr2.nativeElement.style.display = "none";
+      this.arr3.nativeElement.style.display = "none";
+
+      document.getElementById("DivRow").classList.add("divNew");
+      document.getElementById("DivRow").classList.remove("divNew2");
+      document.getElementById("DivRow").classList.remove("divNew3");
       this.ShowBlue1 = true;
       this.ShowBlue2 = false;
       this.ShowBlue3 = false;
     }
 
     if (Group == 2) {
+      this.arr2.nativeElement.style.display = "block";
+      this.arr1.nativeElement.style.display = "none";
+      this.arr3.nativeElement.style.display = "none";
+
+      document.getElementById("DivRow").classList.add("divNew2");
+      document.getElementById("DivRow").classList.remove("divNew3");
+      document.getElementById("DivRow").classList.remove("divNew");
       this.ShowBlue2 = true;
       this.ShowBlue3 = false;
       this.ShowBlue1 = false;
     }
 
     if (Group == 3) {
+      this.arr3.nativeElement.style.display = "block";
+      this.arr2.nativeElement.style.display = "none";
+      this.arr1.nativeElement.style.display = "none";
+
+      document.getElementById("DivRow").classList.add("divNew3");
+      document.getElementById("DivRow").classList.remove("divNew2");
+      document.getElementById("DivRow").classList.remove("divNew");
       this.ShowBlue3 = true;
       this.ShowBlue2 = false;
       this.ShowBlue1 = false;

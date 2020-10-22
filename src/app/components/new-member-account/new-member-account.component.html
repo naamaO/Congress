@@ -1,13 +1,13 @@
-<div class="col-md-12 marginAuto" style="max-width:1190px">
+<div class="col-md-12 marginAuto" style="max-width:1190px" id="Top" #Top>
   <br />
 
   <div class="marginAuto col-md-12" style="float:left;padding-left: 0 !important;">
 
-    <div class=" right">
+    <!--<div class=" right">
       <div class="top-line">
         <img class="logo-img" src="/assets/images/Wujs_NewLogo_Eng.gif" />
       </div>
-    </div>
+    </div>-->
     <h4 class="header-border">New Member Account</h4>
   </div>
   <br />
@@ -25,7 +25,7 @@
         </div>
         <div class=" ">
           <div class=" row col-md-4 floatLeft">
-            <select [(ngModel)]="Title" (click)="focust()" (mouseleave)="unfocust()" style="width:30%;">
+            <select [(ngModel)]="Title" (click)="focust()" (mouseleave)="unfocust()" style="width:30%;" #tiin id="tiin">
               <option [value]="Title" selected>{{Title}}</option>
               <option *ngFor="let title of ArrTitle" [value]="title">
                 {{title}}
@@ -33,10 +33,10 @@
             </select>
           </div>
           <div class="col-md-4 floatLeft">
-            <input style="width: 90%;" (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName" />
+            <input style="width: 90%;" (focusout)="unfocusnamee()" (focus)="focusnamee()" type="text" value="{{FirstName}}" [(ngModel)]="FirstName" #nameein id="nameein" />
           </div>
           <div class="col-md-4 floatLeft">
-            <input (focusout)="unfocuslnamee()" (focus)="focuslnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width: 90%" />
+            <input (focusout)="unfocuslnamee()" (focus)="focuslnamee()" type="text" value="{{LastName}}" [(ngModel)]="LastName" style="width: 90%" #lastnameein id="lastnameein" />
           </div>
         </div>
         <div class="row" style="margin-left: -1px;margin-top:5%;">
@@ -47,14 +47,14 @@
         </div>
         <div>
           <div class="row  col-md-4 floatLeft">
-            <input type="text" style="width:90%" value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail()" (focus)="focusemail()" />
+            <input type="text" style="width:90%" value="{{LoginUserName}}" [(ngModel)]="LoginUserName" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail()" (focus)="focusemail()" #emailin id="emailin" />
           </div>
 
           <div class="col-md-4 floatLeft">
-            <input style="width: 90%;" (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" />
+            <input style="width: 90%;" (focusout)="unfocusnameh()" (focus)="focusnameh()" type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew" #namehin id="namehin" />
           </div>
           <div class="col-md-4 floatLeft">
-            <input (focusout)="unfocuslnameh()" (focus)="focuslnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width: 90%" />
+            <input (focusout)="unfocuslnameh()" (focus)="focuslnameh()" type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew" style="width: 90%" #lastnamehin id="lastnamehin" />
           </div>
 
 
@@ -68,23 +68,24 @@
             <div class="tooltipSmallName">
               <img src="/assets/images/TooltipIcon.png" />
               <span class="tooltiptextSmallName" style="text-align:left;padding-left:2%;">
-                text
+                including area code
               </span>
             </div>
           </label>
         </div>
         <div>
           <div class="row  col-md-4 floatLeft">
-            <select [(ngModel)]="selectedCountry" style="width: 90%; margin-left: -1px;" (click)="focusc()" (mouseleave)="unfocusc()">
+            <select [(ngModel)]="selectedCountry" style="width: 90%; margin-left: -1px;" (click)="focusc()" (mouseleave)="unfocusc()" #counin id="counin">
+              <option [value]="selectedCountry" selected>{{selectedCountry}}</option>
               <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
             </select>
           </div>
 
           <div class="col-md-4 floatLeft">
-            <input style="width: 90%;" value="" type="text" value="{{PasportNumber}}" [(ngModel)]="PasportNumber" (focusout)="unfocusId()" (focus)="focusId()" />
+            <input style="width: 90%;" value="" type="text" value="{{PasportNumber}}" [(ngModel)]="PasportNumber" (focusout)="unfocusId()" (focus)="focusId()" #Idin id="Idin" />
           </div>
           <div class="col-md-4 floatLeft">
-            <input style="width: 90%;" type="text" value="{{NumberPhone1}}" [(ngModel)]="NumberPhone1" (focusout)="unfocustelephone()" (focus)="focustelephone()" />
+            <input style="width: 90%;" type="text" value="{{NumberPhone1}}" [(ngModel)]="NumberPhone1" (focusout)="unfocustelephone()" (focus)="focustelephone()" #telephonein id="telephonein" />
           </div>
 
 
@@ -98,67 +99,76 @@
         </div>
         <div class="row" style="margin-left: -1px;">
           <div class="row margin-top col-md-12">
-            <input style="width: 94%;" type="text" value="{{Address}}" [(ngModel)]="Address" (focusout)="unfocusaddress()" (focus)="focusaddress()" />
+            <input style="width: 94%;" type="text" value="{{Address}}" [(ngModel)]="Address" (focusout)="unfocusaddress()" (focus)="focusaddress()" #addressin id="addressin" />
           </div>
         </div>
 
+        <br /><br />
+        <span class="txtStyle bold color-gray" #membershipspan id="membershipspan" style="font-weight:bold; ">Choose your membership:</span>
+        <span  style="margin-left:4%; cursor:pointer;width: 600px;color: #27b5e5;margin-left: 4%;">You may pay your membership fees in ILS </span><span (click)="OverToHebrew()" style="color: #27b5e5;cursor:pointer;width: 600px;text-decoration: underline;">on the Hebrew site.</span>
 
-        <div class="row" style="padding-top:30px;margin-left: -1px;  background-color: #f3f2f2;padding-bottom:30px;width:93%;">
+        <div class="row" style="padding-top:30px;margin-left: -1px;  background-color: #f3f2f2;padding-bottom:30px;width:930px;">
           <div class="col-md-5 modal-content" style="border:0;padding-left: 0;  background-color: #f3f2f2;">
-            <span class="txtStyle bold color-gray">Choose your membership:</span>
             <br />
-            <div class="custom-control custom-radio" style="width:100%;">
+
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(0)" id="ArrMembershipTypes[0].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[0].membershipType">{{ArrMembershipTypes[0].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:52%;margin-left: 10px;height:21px;"></div>
+              <div style="border-bottom: 1px dashed gray;float:left;width:51%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[0].price}} </span>
               <div class="tooltipSmall" style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
-                <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>
+                <img src="/assets/images/TooltipIcon.png" style=" float: right;" />
+                <span class="tooltiptextSmall" style="height:80px !important;text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[0].tooltipText}}</span>
               </div>
             </div>
-            <div class="custom-control custom-radio" style="width:100%;">
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(1)" id="ArrMembershipTypes[1].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[1].membershipType">{{ArrMembershipTypes[1].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:38%;margin-left: 10px;height:21px;"></div>
+              <div style="border-bottom: 1px dashed gray;float:left;width:37%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[1].price}}</span>
               <div class="tooltipSmall" style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                <img src="/assets/images/TooltipIcon.png" style="float: right;" />
                 <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[1].tooltipText}}</span>
               </div>
             </div>
-            <div class="custom-control custom-radio" style="width:100%;">
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(2)" id="ArrMembershipTypes[2].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[2].membershipType">{{ArrMembershipTypes[2].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:57%;margin-left: 10px;height:21px;"></div>
+              <div style="border-bottom: 1px dashed gray;float:left;width:51%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[2].price}}</span>
               <div class="tooltipSmall" style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
-                <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>
+                <img src="/assets/images/TooltipIcon.png" style=" float: right;" />
+                <span class="tooltiptextSmall" style="height:80px !important;text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[2].tooltipText}}</span>
               </div>
             </div>
-            <div class="custom-control custom-radio" style="width:100%;">
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(3)" id="ArrMembershipTypes[3].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[3].membershipType">{{ArrMembershipTypes[3].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:29%;margin-left: 10px;height:21px;"></div>
+              <div style="border-bottom: 1px dashed gray;float:left;width:29%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[3].price}}</span>
               <div class="tooltipSmall" style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
+                <img src="/assets/images/TooltipIcon.png" style=" float: right;" />
                 <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[3].tooltipText}}</span>
               </div>
             </div>
-            <div class="custom-control custom-radio" style="width:100%;">
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(4)" id="ArrMembershipTypes[4].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[4].membershipType">{{ArrMembershipTypes[4].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:51%;margin-left: 10px;height:21px;"></div>
-              <div class="tooltipSmall"style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
-                <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>
+              <div style="border-bottom: 1px dashed gray;float:left;width:44%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[4].price}}</span>
+              <div class="tooltipSmall" style="float:left;">
+                <img src="/assets/images/TooltipIcon.png" style=" float: right;" />
+                <span class="tooltiptextSmall" style="height:40px !important;top: -8px!important; text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[4].tooltipText}}</span>
               </div>
             </div>
-            <div class="custom-control custom-radio" style="width:100%;">
+            <div class="custom-control custom-radio" style="width:132%;margin-top:10px;margin-left: 4%;">
               <input type="radio" class="custom-control-input" (change)="onMemberTypeChange(5)" id="ArrMembershipTypes[5].membershipType" name="memberType">
               <label style="float:left;" class="custom-control-label" for="ArrMembershipTypes[5].membershipType">{{ArrMembershipTypes[5].membershipType}}</label>
-              <div style="border-bottom: 1px dashed gray;float:left;width:44%;margin-left: 10px;height:21px;"></div>
+              <div style="border-bottom: 1px dashed gray;float:left;width:40%;margin-left: 10px;height:21px;margin-right:1%;"></div>
+              <span>US$ {{ArrMembershipTypes[5].price}}</span>
               <div class="tooltipSmall" style="float:left;">
-                <img src="/assets/images/TooltipIcon.png" style="margin-top: 10px; float: right;" />
-                <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>
+                <img src="/assets/images/TooltipIcon.png" style=" float: right;" />
+                <span class="tooltiptextSmall" style="height:80px !important; text-align:left;padding-left:2%;margin-left: 68%;float: right;">{{ArrMembershipTypes[5].tooltipText}}</span>
               </div>
             </div>
           </div>
@@ -167,20 +177,20 @@
 
           <div class="col-md-4" style="padding-top:80px;margin-left: -1px;">
             <div class="modal-content " style="border:0;">
-              <span class="txtStyle bold color-gray">Language of correspondence:</span>
+              <span class="txtStyle bold color-gray" #languagespan id="languagespan">Language of correspondence:</span>
               <br />
               <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" (change)="onLanguageChange('English')" id="languageEnglish" name="Language">
+                <input type="radio" class="custom-control-input" (change)="onLanguageChange('English')" #languageEnglish id="languageEnglish" name="Language">
                 <label class="custom-control-label" style="margin-bottom: 8px !important;" for="languageEnglish">English</label>
               </div>
               <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" (change)="onLanguageChange('Hebrew')" id="languageHebrew" name="Language">
+                <input type="radio" class="custom-control-input" (change)="onLanguageChange('Hebrew')" #languageHebrew id="languageHebrew" name="Language">
                 <label class="custom-control-label" for="languageHebrew">Hebrew</label>
               </div>
             </div>
           </div>
           <div class="col-md-7" style="padding-top:80px;margin-left: -1px;">
-            <span class="txtStyle bold color-gray" #biog>Biography</span>
+            <span class="txtStyle bold color-gray" #biog>Short biography</span>
             <div class="form-group shadow-textarea" style="width:100% !important;height:100px !important">
               <label for="bio"></label>
               <textarea (focusout)="unfocusbiog()" (focus)="focusbiog()" [(ngModel)]="Bio" value="" class="form-control z-depth-1" id="bio" rows="3" placeholder="Write something here...">{{Bio}}</textarea>
@@ -188,7 +198,7 @@
           </div>
         </div>
         <div style="padding-left:50px;padding-top:30px;">
-          <button (click)="RegistrationUser()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;margin-left: 150px;width: 250px;">BECOME A MEMBER</button>
+          <button (click)="RegistrationUser()" class="fill-btn-blue" style="padding:10px; margin-right: 100px;margin-left: 35%;width: 250px;">BECOME A MEMBER</button>
         </div>
         <br /><br />
       </div>

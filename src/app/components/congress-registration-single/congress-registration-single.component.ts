@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
 import { NewProp } from '../../../classes/NewProp';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { Name } from 'src/classes/Name';
 import { ActivatedRoute } from '@angular/router';
 
@@ -40,6 +40,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
   @ViewChild('proptext') proptext: ElementRef;
   @ViewChild('keytext') keytext: ElementRef;
   @ViewChild('langselect') langselect: ElementRef;
+  @ViewChild('draft') draft: ElementRef;
   public NumWords: number = 0;
   public Name: Name;
   public NameHebrew: Name;
@@ -78,6 +79,7 @@ export class CongressRegistrationSingleComponent implements OnInit {
   public showsaveDraft: boolean = false;
   public Rout: number;
   private sub: any;
+  public DraftValue: string = "SAVE DRAFT";
   constructor(public route: ActivatedRoute,public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     this.serverService.DivisionEnglish().subscribe((events) => {
       this.ArrDivision = events;
@@ -158,6 +160,8 @@ export class CongressRegistrationSingleComponent implements OnInit {
       var r = q - maxvalue;
       this.errMoreThen250 = true;
       return false;
+    } else {
+      this.errMoreThen250 = false;
     }
   }
 
@@ -208,6 +212,7 @@ TitleEnglishP(elemTltle){
     });
   }
   Draft() {
+    this.draft.nativeElement.value = "Draft saved";
     if (this.Rout == 1) {
       this.NewProp = new NewProp();
       this.NewProp.UserName = this.LoginUserName;
@@ -226,6 +231,7 @@ TitleEnglishP(elemTltle){
       this.NewProp.TitleHebrew = this.TitleHebrew;
       if (this.NewProp.UserName != null && this.NewProp.UserName != "" && this.NewProp.UserName != undefined) {
         this.serverService.enterNewDraft(this.NewProp);
+        this.DraftValue = "DRAFT SAVED";
         this.showsaveDraft = true;
       }
       else {
@@ -301,6 +307,9 @@ TitleEnglishP(elemTltle){
       } if (this.LastName == null) {
         this.namee.nativeElement.style.color = "red";
         document.getElementById("lastnameinput").classList.add("bordercolorRed");
+      } if (this.LoginUserName == null || this.LoginUserName == "" || this.LoginUserName == undefined) {
+        this.email.nativeElement.style.color = "red";
+        document.getElementById("emailLabel").classList.add("bordercolorRed");
       }
       //this.showErrEmpty = true;
 

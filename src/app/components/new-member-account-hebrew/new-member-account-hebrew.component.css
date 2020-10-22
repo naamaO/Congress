@@ -1,0 +1,357 @@
+
+
+.custom-control-label::before {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}
+/*.custom-control-label {
+  left: 102%;
+  position: absolute;
+  opacity: 0;
+}*/
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #27b5e5 !important;
+}
+
+.color-gray {
+  color: #a5a0a0;
+  font-size: large;
+}
+
+.tooltipSmallName {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmallName .tooltiptextSmallName {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    /*top: -5%;*/
+  }
+
+.tooltiptextSmallName:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #27b5e5;
+  right: -8px;
+  top: 20%;
+}
+
+.tooltiptextSmallName {
+  width: 200px !important;
+  height: 60px !important;
+}
+
+.tooltipSmallName:hover .tooltiptextSmallName {
+  visibility: visible;
+}
+
+
+.custom-control-label::before {
+  position: absolute;
+  top: .25rem;
+  right: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  content: "";
+  background-color: #fff;
+  border: #adb5bd solid 1px;
+}
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmall .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    right: 35%;
+    top: -28px;
+  }
+
+.tooltiptextSmall:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #27b5e5;
+  right: -8px;
+  top: 41%;
+}
+
+.tooltiptextSmall {
+  width: 200px !important;
+  height: 107px !important;
+}
+
+.tooltipSmall:hover .tooltiptextSmall {
+  visibility: visible;
+}
+
+.tooltipSmall {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltipSmall2 .tooltiptextSmall {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    right: 35%;
+    top: -28px;
+  }
+
+.tooltiptextSmall2:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #27b5e5;
+  right: -8px;
+  top: 41%;
+}
+
+.tooltiptextSmall2 {
+  width: 200px !important;
+  height: 107px !important;
+}
+
+.tooltipSmall2:hover .tooltiptextSmall2 {
+  visibility: visible;
+}
+
+
+
+
+.tooltip {
+  position: relative;
+  display: contents;
+  /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #27b5e5;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    /*border-radius: 6px;*/
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    left: 35%;
+    top: -25px;
+  }
+
+.tooltiptext:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #27b5e5;
+  left: -8px;
+  top: 20%;
+}
+
+.tooltiptext {
+  width: 200px !important;
+  height: 190px !important;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+select {
+  width: 300px;
+  color: black;
+}
+
+.backGray {
+  background-color: #f3f2f2;
+  margin-top: 2%;
+}
+
+.fill-btn-blue {
+  outline: none;
+  /*font-weight: bold;*/
+  background-color: #27b5e5;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-size: 19px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  width: 200px;
+}
+
+  .fill-btn-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+
+  .fill-btn-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+
+.bordercolorRed {
+  border-bottom-color: red !important;
+}
+
+.allbordercolorRed {
+  border-color: red !important;
+}
+
+.fill-btn-disabled {
+  background-color: #f3f2f2;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  outline: none;
+}
+
+.big {
+  /*height: 20%;*/
+  width: 15%;
+  max-height: unset;
+  overflow: hidden;
+  font-size: large;
+  /*min-height: 500px;*/
+}
+
+input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent;
+  border-bottom: 0.1px solid gray;
+}
+
+.btn-primary {
+  color: black;
+}
+
+.over {
+  background-color: white;
+  padding: 10px 48px;
+  border-color: #27b5e5;
+  color: #27b5e5;
+  font-weight: bold;
+  font-size: 19px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  border-bottom-color: #27b5e5;
+}
+
+.out {
+  color: white;
+  background-color: #27b5e5;
+}
+
+select {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.margin-top {
+  margin-top: 1%;
+}
+
+.centerA {
+  width: 80%;
+  /*height: 60%;*/
+  margin: auto;
+  top: 100px;
+  left: 15%;
+  position: fixed;
+  /* background: white; */
+  /*background-color: #ffffffc2;*/
+  /* text-align:center;*/
+  /*margin-left: 40px;*/
+  /*font-size: large;*/
+}
+
+.marg10 {
+  margin-bottom: 10px;
+}

@@ -30,7 +30,7 @@
         Session title [English]
         <div class="tooltipSmall">
           <img src="/assets/images/TooltipIcon.png" />
-          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;height:200px!important;">
+          <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;height:180px!important;">
             Title in English (In the Latin American Jewry Section, titles may be submitted in <br />
             Spanish/Portuguese,  in the Ladino subdivision <br />
             the title may be submitted in Ladino)
@@ -39,7 +39,7 @@
       </label>
     </div>
     <div class="row margin-top6"  style="padding-left: 13px;">
-      <input #testInput type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" (focusout)="unfocusEnglish()" (focus)="focusEnglish()"/>
+      <input #testInput type="text" [(ngModel)]="SessionNameEnglish" style="width:80%;" (focusout)="unfocusEnglish()" (focus)="focusEnglish()" #headerEnglishin id="headerEnglishin"/>
     </div>
     <div class="colorFocus"  style="padding-left: 13px;">
       <div class="row margin-top6"  >
@@ -56,14 +56,14 @@
         </label>
       </div>
       <div class="row margin-top6">
-        <input #testInput type="text" class="input" [(ngModel)]="SessionName" style="width:80%;" (focusout)="unfocusHebrew()" (focus)="focusHebrew()"/>
+        <input #testInput type="text" class="input" [(ngModel)]="SessionName" style="width:80%;" (focusout)="unfocusHebrew()" (focus)="focusHebrew()" #headerHebrewin id="headerHebrewin"/>
       </div>
     </div>
     <div class="row margin-top6 " style="padding-left: 13px;">
       <label class="headerGray" #headerDivision>Division:</label>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <select (click)="focusDivision()" (mouseleave)="unfocusDivision()"  (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;">
+      <select (click)="focusDivision()" (mouseleave)="unfocusDivision()"  (change)="selectDivision($event.target.value)" [(ngModel)]="Division" style="background:none;width:80%;" #headerDivisionin id="headerDivisionin">
         <option *ngFor="let Division of ArrDivision" [value]="Division">
           {{Division}}
         </option>
@@ -73,17 +73,18 @@
       <label class="headerGray" #headerSubDiv>Subdivision:</label>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <select (click)="focusSubDiv()" (mouseleave)="unfocusSubDiv()" [(ngModel)]="SubDivision" style="background:none;width:80%;">
+      <select (click)="focusSubDiv()" (mouseleave)="unfocusSubDiv()" [(ngModel)]="SubDivision" style="background:none;width:80%;" #headerSubDivinin id="headerSubDivinin">
         <option *ngFor="let SubDivision of ArrSubDivision" [ngValue]="SubDivision">
           {{SubDivision}}
         </option>
       </select>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <label class="headerGray" #headerAbs> Session Abstract (up tp 250 words): {{NumWords}}</label>
+      <label class="headerGray" #headerAbs> Session Abstract (up tp 250 words): {{NumWords}}/250</label>
     </div>
     <div class="row margin-top6" style="padding-left: 13px;">
-      <textarea (keypress)="maxlength(ABS,250)" #testInput style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()" id="box_id" [(ngModel)]="ABS"></textarea>
+      <textarea (keypress)="maxlength(ABS,250)"  style="width:80%;height:97px;" (focusout)="unfocusAbs()" (focus)="focusAbs()" [(ngModel)]="ABS" #headerAbsin id="headerAbsin"></textarea>
+      <label style="color:red;" *ngIf="errMoreThen250"> Sorry, your abstract is too long. Please make sure it is not longer than 250 words</label>
 
     </div>
       
@@ -98,7 +99,7 @@
       Session participants
       <div class="tooltipSmall">
         <img src="/assets/images/TooltipIcon.png" />
-        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;width:400px !important; height:200px !important;font-size: 0.975rem;">
+        <span class="tooltiptextSmall" style="text-align:left;padding-left:2%;width:400px !important; height:200px !important;font-size: .875rem !important;margin-bottom:2%;    font-style: normal;font-weight: 400;line-height: 1.5;">
           Please add the names and email addresses of all<br />
           the particlpants in your proposed session, <br />
           including yourself, preferably in the order you <br />
@@ -116,8 +117,9 @@
     </h4>
 
 
-    <h6 style="color:#27b5e5">In the order you would like to be presented at the congress</h6>
-    <h6 style="color:#27b5e5">Please mark the button next to your name. This will identify you as the person who submits the session.</h6>
+    <span style="color:#27b5e5">In the order you would like to be presented at the congress</span>
+    <span style="color:#27b5e5">Please mark the button next to your name. This will identify you as the person who submits the session.</span>
+    <br />
     <br />
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerTC style="left: 0.8rem ">Title</label>
@@ -129,17 +131,17 @@
         <input type="radio" class="custom-control-input" (click)="onMe(5)" id="5" name="5" value="4" #mechair>
         <label style="float:left;" class="custom-control-label"></label>
       </div>
-      <select [(ngModel)]="TitleChair" style="background:content-box;left: 0.8rem " (click)="focusTC()" (mouseleave)="unfocusTC()">
+      <select [(ngModel)]="TitleChair" style="background:content-box;left: 0.8rem " (click)="focusTC()" (mouseleave)="unfocusTC()" #headerTCin id="headerTCin">
         <option value="Prof"> Prof </option>
         <option value="Dr"> Dr</option>
         <option value="Mr"> Mr  </option>
         <option value="Ms"> Ms </option>
       </select>
       <div class="col-md-5">
-        <input (focusout)="unfocusNC()" (focus)="focusNC()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstNameChair" class="margLeft3" />
-        <input (focusout)="unfocusNC()" (focus)="focusNC()" style="width:45%;" #testInput type="text" [(ngModel)]="LastNameChair" class="margLeft3" />
+        <input (focusout)="unfocusNCf()" (focus)="focusNC()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstNameChair" class="margLeft3" #headerNCinf id="headerNCinf"/>
+        <input (focusout)="unfocusNCl()" (focus)="focusNC()" style="width:45%;" #testInput type="text" [(ngModel)]="LastNameChair" class="margLeft3" #headerNCinl id="headerNCinl"/>
       </div>
-      <input (focusout)="unfocusEC()" (focus)="focusEC()" #testInput type="text" [(ngModel)]="ChairmanEmail" class="margLeft3" />
+      <input (focusout)="unfocusEC()" (focus)="focusEC()" #testInput type="text" [(ngModel)]="ChairmanEmail" class="margLeft3" #headerECin id="headerECin"/>
     </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT1 style="left: 0.8rem ">Title</label>
@@ -160,7 +162,7 @@
           <label style="float:left;" class="custom-control-label" ></label>
         </div>
         <!--<div>-->
-        <select [(ngModel)]="Title1" style="background:content-box;" (click)="focusT1()" (mouseleave)="unfocusT1()">
+        <select [(ngModel)]="Title1" style="background:content-box;" (click)="focusT1()" (mouseleave)="unfocusT1()" #headerT1in id="headerT1in">
           <option value="Prof"> Prof </option>
           <option value="Dr"> Dr</option>
           <option value="Mr"> Mr  </option>
@@ -168,10 +170,10 @@
         </select>
 
         <div class="col-md-5">
-          <input (focusout)="unfocusN1()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName1" class="margLeft3" />
-          <input (focusout)="unfocusN1()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName1" class="margLeft3" />
+          <input (focusout)="unfocusN1f()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName1" class="margLeft3" #headerN1inf id="headerN1inf"/>
+          <input (focusout)="unfocusN1l()" (focus)="focusN1()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName1" class="margLeft3" #headerN1inl id="headerN1inl"/>
         </div>
-        <input (focusout)="unfocusE1()" (focus)="focusE1()" #testInput type="text" [(ngModel)]="Email1" class="margLeft3" />
+        <input (focusout)="unfocusE1()" (focus)="focusE1()" #testInput type="text" [(ngModel)]="Email1" class="margLeft3" #headerE1in id="headerE1in"/>
       <!--</div>-->
       </div>
     </div>
@@ -186,17 +188,17 @@
         <label style="float:left;" class="custom-control-label"></label>
       </div>
 
-      <select [(ngModel)]="Title2" style="background:content-box;" (click)="focusT2()" (mouseleave)="unfocusT2()">
+      <select [(ngModel)]="Title2" style="background:content-box;" (click)="focusT2()" (mouseleave)="unfocusT2()" #headerT2in id="headerT2in">
         <option value="Prof"> Prof </option>
         <option value="Dr"> Dr</option>
         <option value="Mr"> Mr  </option>
         <option value="Ms"> Ms </option>
       </select>
       <div class="col-md-5">
-        <input (focusout)="unfocusN2()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName2" class="margLeft3" />
-        <input (focusout)="unfocusN2()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName2" class="margLeft3" />
+        <input (focusout)="unfocusN2f()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName2" class="margLeft3" #headerN2inf id="headerN2inf"/>
+        <input (focusout)="unfocusN2l()" (focus)="focusN2()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName2" class="margLeft3" #headerN2inl id="headerN2inl"/>
       </div>
-      <input (focusout)="unfocusE2()" (focus)="focusE2()" #testInput type="text" [(ngModel)]="Email2" class="margLeft3" />
+      <input (focusout)="unfocusE2()" (focus)="focusE2()" #testInput type="text" [(ngModel)]="Email2" class="margLeft3" #headerE2in id="headerE2in"/>
     </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT3 style="left: 0.8rem ">Title</label>
@@ -208,7 +210,7 @@
           <input type="radio" class="custom-control-input" (change)="onMe(3)" id="3" name="3" #me3>
           <label style="float:left;" class="custom-control-label"></label>
         </div>
-        <select [(ngModel)]="Title3" style="background:content-box;" (click)="focusT3()" (mouseleave)="unfocusT3()">
+        <select [(ngModel)]="Title3" style="background:content-box;" (click)="focusT3()" (mouseleave)="unfocusT3()" #headerT3in id="headerT3in">
           <option value="Prof"> Prof </option>
           <option value="Dr"> Dr</option>
           <option value="Mr"> Mr  </option>
@@ -216,10 +218,10 @@
         </select>
 
         <div class="col-md-5">
-          <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName3" class="margLeft3" />
-          <input (focusout)="unfocusN3()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName3" class="margLeft3" />
+          <input (focusout)="unfocusN3f()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName3" class="margLeft3" #headerN3inf id="headerN3inf"/>
+          <input (focusout)="unfocusN3l()" (focus)="focusN3()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName3" class="margLeft3" #headerN3inl id="headerN3inl"/>
         </div>
-        <input (focusout)="unfocusE3()" (focus)="focusE3()" #testInput type="text" [(ngModel)]="Email3" class="margLeft3" />
+        <input (focusout)="unfocusE3()" (focus)="focusE3()" #testInput type="text" [(ngModel)]="Email3" class="margLeft3" #headerE3in id="headerE3in"/>
       </div>
     <div class="row margTop2">
       <label class="col-md-1 headerGray" #headerT4 style="left: 0.8rem ">Title</label>
@@ -231,7 +233,7 @@
         <input type="radio" class="custom-control-input" (change)="onMe(4)" id="4" name="4" #me4>
         <label style="float:left;" class="custom-control-label"></label>
       </div>
-      <select [(ngModel)]="Title4" style="background:content-box;" (click)="focusT4()" (mouseleave)="unfocusT4()">
+      <select [(ngModel)]="Title4" style="background:content-box;" (click)="focusT4()" (mouseleave)="unfocusT4()" #headerT4in id="headerT4in">
         <option value="Prof"> Prof </option>
         <option value="Dr4"> Dr</option>
         <option value="Mr4"> Mr  </option>
@@ -239,14 +241,15 @@
       </select>
 
       <div class="col-md-5">
-        <input (focusout)="unfocusN4()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName4" class="margLeft3" />
-        <input (focusout)="unfocusN4()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName4" class="margLeft3" />
+        <input (focusout)="unfocusN4f()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="FirstName4" class="margLeft3" #headerN4inf id="headerN4inf"/>
+        <input (focusout)="unfocusN4l()" (focus)="focusN4()" style="width:45%;" #testInput type="text" [(ngModel)]="LastName4" class="margLeft3" #headerN4inl id="headerN4inl"/>
       </div>
-      <input (focusout)="unfocusE4()" (focus)="focusE4()" #testInput type="text" [(ngModel)]="Email4" class="margLeft3" />
+      <input (focusout)="unfocusE4()" (focus)="focusE4()" #testInput type="text" [(ngModel)]="Email4" class="margLeft3" #headerE4in id="headerE4in"/>
     </div>
+    <label style="color:red;" *ngIf="nome">Please mark the button next to your name. This will identify you as the person who submits the session.</label>
     <br />    <br />
   </div>
-        <div class="col-md-8 margTop2" style="text-align:center;">
+        <div class="col-md-8 margTop2" style="text-align:center;padding-bottom:6%;">
           <button (click)="SendInviteMember()" class="fill-btn-blue ">SEND</button>
         </div>
 
@@ -284,7 +287,8 @@
     </div>
     <div class="col-md-2"></div>
   </div>
-</div><div class="container-fluid" *ngIf="errMoreThen250">
+</div>
+<!--<div class="container-fluid" *ngIf="errMoreThen250">
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -315,7 +319,7 @@
     </div>
     <div class="col-md-2"></div>
   </div>
-</div>
+</div>-->
 <script>
   $("input").focus(function () {
     $("header").css("color", "#27b5e5").fadeOut(2000);

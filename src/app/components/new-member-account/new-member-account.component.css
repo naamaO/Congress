@@ -94,7 +94,7 @@
   border-bottom: 8px solid transparent;
   border-right: 8px solid #27b5e5;
   left: -8px;
-  top: 41%;
+  top: 28%;
 }
 
 .tooltiptextSmall {
@@ -165,18 +165,53 @@ select {
   margin-top: 2%;
 }
 
-.fill-btn-blue  {
-  outline:none;
+.fill-btn-blue {
+  outline: none;
+  /*font-weight: bold;*/
   background-color: #27b5e5;
   padding: 10px 48px;
   border: none;
   color: white;
-  font-weight: bold;
   font-size: 19px;
   border-radius: 30px;
   cursor: pointer;
   text-align: center;
-  width: 100px;
+  width: 200px;
+}
+
+  .fill-btn-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+
+  .fill-btn-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+.bordercolorRed {
+  border-bottom-color: red !important;
+}
+
+.allbordercolorRed {
+  border-color: red !important;
 }
 
 .fill-btn-disabled {

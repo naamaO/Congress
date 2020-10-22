@@ -1,0 +1,125 @@
+<!--<div class="marginAuto" style="max-width:1190px" >-->
+  <!--<div class="body">-->
+    <!--<div class="marginAuto col-md-12" style="float:right;padding-right: 0 !important;">-->
+
+      <!--<div class=" right">
+        <div class="top-line" style="margin-left:80%;">
+          <img class="logo-img" src="/assets/images/LogoHebrew.png" />
+        </div>
+      </div>-->
+    <!--</div>-->
+    <!--<div class="container right" style="float: left;left:0;  width: 50%;padding: 0;">
+
+      <br />
+      <br /><br />-->
+      <!--<div class="container right background-welcome" style="float: left;left:0;  width: 100%;padding: 0;">-->
+<div *ngIf="resetPassword" class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
+  <div class="col-md-6" style="float: right;right:0;  width: 50%;padding: 0; width:500px;">
+    <div class="col-md-12" style="margin: 0 auto;padding-top:170px;padding-bottom:170px">
+      <form [formGroup]="userDetail" class="fields">
+        <div class="example-full-width" style="text-align:right;">
+          <div style="margin: 0 auto;padding: 0;">
+            <label class="col-md-8" style="padding: 0;font-size: 18px;" display="flex">
+              ?שכחת סיסמה
+            </label>
+            <br /><br />
+            <div>
+
+              <form class="example-full-width" style="width:100%;margin-right: 0;">
+                <label style="padding: 0;font-size: 18px;color:gray;margin-left: 10px;" display="flex" #emailResetspan id="emailResetspan">
+
+                  דוא"ל לקבל קישור לאיפוס סיסמה
+                  <br />
+                </label>
+                <input #emailReset id="emailReset" [formControl]="emailFormControl" style="padding-top:10%;width: 100%;" [(ngModel)]="EmailToResetPassword">
+                <br />  <label style="color:red;" *ngIf="errPass">אימייל זה אינו רשום במערכת שלנו.</label>
+                <br /> <div style="direction:rtl;"> <label style="color:gray;" *ngIf="errPass">אנא וודא שזה הדוא"ל הנכון. אם זה נכון,</label><label style="color:gray;text-decoration:underline;cursor:pointer;" *ngIf="errPass" (click)="newMember()">הרשם כמשתמש חדש</label></div>
+              </form>
+            </div>
+            <br /><br /><br />
+            <div style="justify-content: center;">
+              <button (click)="forgot()" class="fill-btn-blue" style="width:305px;">איפוס סיסמה</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class=" background-welcome col-md-6" style="width:500px;">
+
+  </div>
+</div>
+   <div *ngIf="!resetPassword" class="col-md-12" style="padding-right: 0px !important;padding-left: 0px !important;">
+
+          <div class=" col-md-6" id="Top" #Top style="float: right;right:0;  width: 500px;padding: 0;">
+            <div class="col-md-12" style="margin: 0 auto;padding-top:170px;padding-bottom:170px">
+              <form class="fields" style="direction:rtl;">
+                <div class="example-full-width">
+                  <label color="gray" style="text-align: right;padding-left: 80%;" #email>דוא"ל</label>
+                  <input value=""
+                         type="text" style="padding: 0;width:100%;color:black;" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"
+                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail1()" (focus)="focusemail1()" />
+                </div>
+                <br /><br />
+                <div class="example-full-width">
+                  <label color="gray" style="text-align: right;padding-left: 86%;" #pass>סיסמה</label>
+                  <input type="text" style="padding: 0;width:185%;"
+                         [(ngModel)]="Password" [ngModelOptions]="{standalone: true}" value=""
+                         style="width:100%;color:black;" (focusout)="unfocuspass()" (focus)="focuspass()" /><br />
+                  <div style="width: 100%; display: flex;
+                           justify-content: space-between;">
+                    <label (click)="forget()" style="width:100%;cursor:pointer;color:#27b5e5;font-size: small;text-align:right;">שכחת סיסמה</label>
+                    <label (click)="newMember()" style="width:100%;cursor:pointer;color:#27b5e5;font-size: small;text-align: left;float: left;">הרשמה לחברות באיגוד</label>
+                  </div>
+                </div>
+              </form>
+
+              <label class="red" *ngIf="ShowError" style="font-weight: bolder;margin-left: 35%;">שם משתמש או סיסמה אינם נכונים</label>
+              <label class="red" *ngIf="ShowErrorEmail">הכנס אימייל</label>
+              <br /><br /><br />
+              <div style="justify-content: center;">
+                <button (click)="SendCheckUserPassword()" class="fill-btn-blue" style="margin-left:40%;">התחברות</button>
+              </div>
+            </div>
+          </div>
+          <div class=" background-welcome col-md-6" style="width:500px;">
+
+          </div>
+        </div>
+      <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+  <div class="container-fluid" *ngIf="showWrongEmail">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="modal fade" data-backdrop="false" id="myModal" role="dialog" style="display:block;opacity:1!important;top: 4%!important;
+    left: 22%!important;width:50% !important">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="showWrongEmail=!showWrongEmail">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="col-md-12 marginAuto" style="text-align: center;margin-top: 20%;">
+                  <div class="divERR col-md-5 marginAuto">
+                    <br />
+                    <h4>ERROR</h4>
+                    <br />  <label>This email is not registered in our system. Please make sure this is your correct email.</label>
+                    <br />  <label>If it is correct and the system does not recognise it, please sign up as a new user.</label>
+                    <br /><br />
+                  </div>
+                </div>
+
+                <br /><br /><br /><br /><br /><br />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+<!--</div>-->

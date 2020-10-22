@@ -18,7 +18,7 @@
 <!-- <div class="top-line" style="width:1550px;height:150px;">
   <img style="width:100%;height:150px;" src="/assets/images/books.PNG" />
 </div> -->
-<div class="body">
+<div class="body" id="Top" #Top>
 
   <div style="background-color:#fff;width:100%;height: 115px;">
     <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
@@ -29,18 +29,22 @@
           <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()" >שלום {{FirstNameHebrew}} {{LastNameHebrew}}, הרשם כחבר וקבל 20% הנחה</span>  -->
           <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;" >שלום {{FirstNameHebrew}} {{LastNameHebrew}}</span> 
 
-          <div style="margin-left:65%;top:0px;position:fixed;"> 
-            <span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
+          <div style="margin-left:92%;top:0px;position:fixed;">
+            <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
+            <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>
+            <!--<span *ngIf="num!=0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="NavigCart()">{{num}}</span>-->
             <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="NavigCart()" />
             <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="NavigCart()" />
-        </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<div class="col-md-8" style="margin:auto;">
-  <div>
-    <span class="span" class="shopping-cart-title" style="direction: rtl;float: right;">  {{num}} ספרים בסל</span><br /><br />
+<div class="col-md-10" style="margin:auto;">
+  <div class="row" style="direction: ltr;text-align: right;">
+    <span (click)="BackToNew()" style="cursor:pointer;text-align:left;" class="shopping-cart-title col-md-5">המשך קניה</span>
+
+    <span  class="shopping-cart-title  col-md-5" style="direction: rtl;float: right;">  {{num}} ספרים בסל</span><br /><br />
   </div>
 </div>
 <br /><br />
@@ -48,9 +52,9 @@
   <div class="header-table" style="width:100%;  padding-left: 100px;margin: auto; color:black;">
     <div class="col-md-10 marginAuto"  style="right: 43px;">
 
-      <span class="col-md-3  floatRight table-title" style="text-align: end;">שם</span>
-      <span class="col-md-3  floatRight table-title">מחיר</span>
-      <span class="col-md-3  floatRight table-title">כמות</span>
+      <span class="col-md-5  floatRight table-title" style="text-align: end;">שם</span>
+      <span class="col-md-2  floatRight table-title">מחיר</span>
+      <span class="col-md-2  floatRight table-title">כמות</span>
       <span class="col-md-3  floatRight table-title" style="padding: 0;">סה"כ</span>
       <span class="col-md-3  floatRight table-title"></span>
     </div>
@@ -70,19 +74,19 @@
 
     <div *ngFor="let item of DB" style="position:relative; ">
       <div class="row" style="margin-bottom:2%;display:block">
-        <div class="col-md-4 floatRight" style="margin-right: 96px; " >
+        <div class="col-md-5 floatRight" style="margin-right: 96px; " >
           <img src="{{item.ImageBook}}" style="width:65px;height:92px;padding-top:0px; margin-right: 47px;float: right;" />
           <span style=" position: absolute;color: #333333;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold;text-align: right;float: left;direction: ltr;padding-right: 114px;padding-top: 0px; width: 82%;">{{item.NameBook}} </span>
         </div>
-        <div class="col-md-2 floatRight" style="text-align:center;">
+        <div class="col-md-1 floatRight" style="text-align:center;">
 
           <span *ngIf="item.SallePrice==0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold;margin-left: 47%;">₪{{item.PriceBook}} </span>
 
           <span *ngIf="item.SallePrice!=0" style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: bold;margin-left: 47%;">₪{{item.SallePrice}} </span>
         </div>
-        <div class="col-md-3 floatRight" style="text-align:center;padding-left: 163px;padding-right: 0;">
+        <div class="col-md-3 floatRight" style="text-align:center;padding-left: 140px;padding-right: 0;">
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid #eaeaea;padding: 5px 12px;" (click)="deleteQuantity(item)">-</label> </span>
-          <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid #eaeaea;padding: 5px 12px;">{{item.Quantity}}</label> </span>
+          <span style="text-align: center;"><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid #eaeaea;padding: 5px 12px;width: 48px;">{{item.Quantity}}</label> </span>
           <span><label style="color: #333333;font-size:18px;font-family:'Open Sans', sans-serif;font-weight: normal;border: 1px solid #eaeaea;padding: 5px 10px;" (click)="AddQuantity(item)">+</label> </span>
         </div>
         <div class="col-md-1 floatRight" style="text-align:center;    padding-left: 162px;">
@@ -126,50 +130,56 @@
 <br /><br />
 <div class="row" style="margin:auto;text-align:center;">
   <div class="col-md-8" style="float: left;margin-left: 0px; margin-right: 30%; margin-bottom: 5%;"> 
-    <div class="col-md-8" style="margin:auto;margin-left: 30px;"> 
-       <span class="span" class="cart-total-title">סה"כ בעגלת הקניות</span>
-       <br /><br />
+    <div class="col-md-8" style="margin:auto;margin-left: 30px;">
+
+      <span class="span" class="cart-total-title">סה"כ בעגלת הקניות</span>
+      <br /><br />
       <div class="container">
         <div class="row" style="margin: auto;height: 0.01px;">
           <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
         </div>
       </div>
-   <div class="col-md-12 input-total" style="padding: 12px;">
-   <label class="col-md-3 label-cart-subtotal" style="color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">:סה"כ </label>
-   <label  class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:black">₪{{this.Total}}</label>
-   <br /><br />
-   <div class="container">
-    <div class="row" style="height: 0.01px;">
-      <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
-    </div>
-  </div>
-  <br />
-  <label class="col-md-6 label-cart-subtotal" *ngIf="!IsMemberShip" style="color: #c0bfbf;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">20% :הנחת חבר</label>
-  <label class="col-md-3 label-cart-total" *ngIf="!IsMemberShip" style="padding-left: 0; text-align: start;float:left ;color:#c0bfbf">₪0</label>
-   <label class="col-md-6 label-cart-subtotal" *ngIf="IsMemberShip" style="color:black;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">20% :הנחת חבר</label>
-   <label class="col-md-3 label-cart-total" *ngIf="IsMemberShip" style="padding-left: 0; text-align: start;float:left ;color:black">₪{{this.TotalAfterDiscount}}</label>
-   <span class="discount" *ngIf="!isSignIn()" style="cursor: pointer;text-decoration:underline" (click)="SendToSignIn()">היכנס לחשבונך או הרשם כחבר</span>
-   <!-- <span class="discount" *ngIf="isSignIn() && IsMemberShip" >קבלת 20% הנחת חבר</span> -->
-   <span class="discount" *ngIf="isSignIn() && !IsMemberShip" style="cursor: pointer;text-decoration:underline" (click)="SendToSignIn()" >הרשם כחבר</span>
+      <div class="col-md-12 input-total" style="padding: 12px;">
+        <label class="col-md-3 label-cart-subtotal" style="color: #000000;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">:סה"כ </label>
+        <label class="col-md-3 label-cart-total" style="padding-left: 0; text-align: start;float:left ;color:black">₪{{this.Total}}</label>
+        <br /><br />
+        <div class="container">
+          <div class="row" style="height: 0.01px;">
+            <div class="col-md-12 border-buttom margin-b-30" style="margin-right: 13%;"></div>
+          </div>
+        </div>
+        <br />
+        <label class="col-md-6 label-cart-subtotal" *ngIf="!IsMemberShip" style="color: #c0bfbf;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">20% :הנחה לחברי איגוד</label>
+        <label class="col-md-3 label-cart-total" *ngIf="!IsMemberShip" style="padding-left: 0; text-align: start;float:left ;color:#c0bfbf">₪0</label>
+        <label class="col-md-6 label-cart-subtotal" *ngIf="IsMemberShip" style="color:black;font-size:18px;font-family:'Open Sans', sans-serif;font-weight:bold;float: right;text-align: end;">20% :הנחה לחברי איגוד</label>
+        <label class="col-md-3 label-cart-total" *ngIf="IsMemberShip" style="padding-left: 0; text-align: start;float:left ;color:black">₪{{this.TotalAfterDiscount}}</label>
+        <!--<span class="discount" *ngIf="!isSignIn()" style="cursor: pointer;text-decoration:underline" (click)="SendToSignIn()">היכנס לחשבונך או הרשם כחבר</span>-->
+        <br /> <br /> <br /><!--<span class="discount" *ngIf="!isSignIn()" style="cursor: pointer;text-decoration:underline;" (click)="SendToSignIn()">Sign in?</span>-->
+        <span>
+          <span class="discount" *ngIf="!isSignIn()" style="cursor: pointer;text-decoration:underline;width:133px;text-align:right;color: #27b5e5" (click)="SendToSignIn()"> כניסה לחשבון   </span>
+          <span class="discount" *ngIf="!isSignIn()" style="padding-right:5%; cursor: pointer;text-decoration:underline;color: #27b5e5" (click)="SendToNewMember()">הרשמה לחברות באיגוד</span>
+        </span>
+        <!-- <span class="discount" *ngIf="isSignIn() && IsMemberShip" >קבלת 20% הנחת חבר</span> -->
+        <span class="discount" *ngIf="isSignIn() && !IsMemberShip" style="cursor: pointer;text-decoration:underline" (click)="SendToSignIn()"> הרשמה לחברות באיגוד</span>
 
-  </div>
-   <br /><br />
-   <div class="container">
-    <div class="row" style="height: 0.01px;">
-      <div class="border-buttom margin-b-30" style="margin-right: 2%;flex: 0 0 94.666667%; max-width: 94.666667%;"></div>
-    </div>
-  </div> 
-  <br />
-  <div class="col-md-12" style="float: left; padding-bottom: 50px;">
-   <button data-toggle="collapse" data-target="#shippingForm" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left; width: 145px;">תשלום</button>
- </div>
- <br /><br />
-  </div> 
+      </div>
+      <br /><br />
+      <div class="container">
+        <div class="row" style="height: 0.01px;">
+          <div class="border-buttom margin-b-30" style="margin-right: 2%;flex: 0 0 94.666667%; max-width: 94.666667%;"></div>
+        </div>
+      </div>
+      <br />
+      <div class="col-md-12" style="float: left; padding-bottom: 50px;">
+        <button (click)="scroll()" data-target="#shippingForm" class="fill-btn-blue checkout-btn" style="padding-right: 0;padding-left: 0; float: left; width: 145px;">תשלום</button>
+      </div>
+      <br /><br />
+    </div> 
 </div>  
  </div>
 
  <br/><br /><br/><br />
-<div id="shippingForm" class="collapse">
+<div  id="shippingForm"  #shippingForm style="visibility:hidden;">
   <br/>  <br/>
 <div class="container">
   <div class="row" style="margin: auto;height: 0.01px;">
@@ -188,22 +198,26 @@
     <!-- #namee -->
     <label class="col-md-6  headerGray color-gray" style="padding-right: 50px;"  #nameh >שם מלא</label>
      <!-- #usernaeemailemail -->
-     <label class="col-md-6 margin headerGray color-gray" #usernameemail >אימייל</label>        
+     <label class="col-md-6 margin headerGray color-gray" #usernameemail >דוא"ל</label>        
   </div>
   <div class="row" style="margin-left: -1px;height: 35px;">
     <div class="col-md-6"  style="padding-right: 64px;">
       <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
       <input type="text" value="{{FirstNameHebrew}}" [(ngModel)]="FirstNameHebrew"   #namehfirstinput 
-      style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+      style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"
+             (focusout)="unfocusName()" (focus)="focusName()"/>
       <!-- (focusout)="unfocusnamee()" (focus)="focusnamee()" -->
       <input  type="text" value="{{LastNameHebrew}}" [(ngModel)]="LastNameHebrew"  #namehlastinput
-      style="width: 30%; margin-right: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+      style="width: 30%; margin-right: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"
+              (focusout)="unfocusName()" (focus)="focusName()"/>
     </div>
 
     <div class="col-md-6" >
   <!-- (focusout)="unfocususenameemil()" (focus)="focususernameemail()" -->
-  <input class="col-md"  name="UserNameLogin" ngDefaultControl #usernameemailinput style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  type="text"
-  value="{{UserNameLogin}}" [(ngModel)]="UserNameLogin"/>
+  <input type="text" class="col-md" [(ngModel)]="UserNameLogin"  name="UserNameLogin"
+         ngDefaultControl #usernameemailinput
+         style="direction: ltr;padding: 0;background-color: #f8f8f8;width:60%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"  
+           (focusout)="unfocusEmailHe()" (focus)="focusEmailHe()"/>
  <div *ngIf="emailvalidate" name="emailvalidate"  ngDefaultControl [(ngModel)]="emailvalidate">
    <small class="text-danger"  >נא לספק כתובת דוא"ל חוקית</small>
    <!-- Please provide a valid email address --> 
@@ -228,7 +242,8 @@
 <div class="row" style="margin-left: -1px;height: 70px;">
 <div class="col-md margin-top" style="margin-left: -1px;padding-right: 56px;">
   <!-- (focusout)="unfocuscountry()" (focus)="focuscountry()" -->
-  <select class="col-md"  [(ngModel)]="selectedCountry" #countryinput  style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
+  <select class="col-md"  [(ngModel)]="selectedCountry" #countryinput  style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"
+           (click)="focuscontry1()" (mouseleave)="unfocuscontry1()">
     <option [value]="selectedCountry" selected>{{selectedCountry}}</option>
     <option *ngFor="let c of Country" [ngValue]="c">{{c}}</option>
   </select>
@@ -237,6 +252,7 @@
 <div class="col-md-6" >
 <!-- (focusout)="unfocusaddress()" (focus)="focusaddress()" -->
 <input class="col-md" type="text" value="{{Address}}" [(ngModel)]="Address"  #addressinput
+         (focusout)="unfocusAddressCountry()" (focus)="focusAddressCountry()"
  style="padding:0;direction: ltr;text-align: end; padding: 0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />   
 </div>
 </div>
@@ -254,23 +270,23 @@
   <div  style="padding-right: 30px;display: flex;margin: 0;text-align:right;justify-content:right;float: right;padding: 0;">
    
     <div class="custom-control custom-radio" style="margin: 0; margin-right: 30px;" >
-      <label class="custom-control-label" style="margin-bottom: 8px !important;" for="yes">כן</label>
-      <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('yes')" id="yes" name="yes" #yes>
+      <label class="" style="margin-bottom: 8px !important;margin-right: 140%;" for="yes">כן</label>
+      <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('yes')" id="yes" name="yes" #yes style="right: 0!important">
     </div>
     <div class="custom-control custom-radio" style="margin: 0;padding-right: 15px;" >
-      <label class="custom-control-label" style="margin-bottom: 8px !important;" for="no">לא</label>
-      <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('no')" id="no" name="no" #no>
+      <label class="" style="margin-bottom: 8px !important;margin-right: 40%;" for="no">לא</label>
+      <input type="radio" class="custom-control-input" (change)="onChangeShippingAddress('no')" id="no" name="no" #no style="right: 0!important">
     </div>
  </div>
   </div>
 
-  <div *ngIf="isYourAddress=='yes'" >
+  <div style="visibility:hidden;" id="AddressYes" #AddressYes>
       <span  class="span" class="row shippingAddressTitle" style="margin-right: 50px;height: auto;">כתובת למשלוח</span>
       <br />
       <label  class="col-md-10" style="height: auto;float: right;text-align: right;margin: 0;direction: rtl;padding: 0;margin-right: 55px;" >{{this.selectedCountry}} {{this.Address}}</label>
   </div>
   
-  <div *ngIf="isYourAddress=='no'">
+  <div style="display:none;" id="AddressNo" #AddressNo>
     <span  class="span" class="shippingAddressTitle">כתובת למשלוח</span> 
     <br/> <br/>
     <div class="col-md" style="direction: rtl;text-align: right;padding: 0;background-color: #f8f8f8;flex: 0 0 90%;max-width: 90%;margin-left: 60px;">
@@ -285,15 +301,18 @@
         <div class="col-md-6"  style="padding-right: 64px;">
         <!-- (focusout)="unfocusnameh2()" (focus)="focusnameh2()" -->
         <input type="text" value="{{FirstNameHebrew2}}" [(ngModel)]="FirstNameHebrew2"    #namehfirstinput2
-        style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
+        style="width: 30%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"
+                (focusout)="unfocusName2()" (focus)="focusName2()"/>
         <!-- (focusout)="unfocusnameh2()" (focus)="focusnameh2()" -->
         <input  type="text" value="{{LastNameHebrew2}}" [(ngModel)]="LastNameHebrew2"     #namehlastinput2
+                (focusout)="unfocusName2()" (focus)="focusName2()"
         style="width: 30%; margin-right: 2%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
       </div>
   
       <div class="col-md-6" >
         <!-- (focusout)="unfocuscountry2()" (focus)="focuscountry2()" -->
-        <select class="col-md"  [(ngModel)]="selectedCountry2" #countryinput2 style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;">
+        <select class="col-md"  [(ngModel)]="selectedCountry2" #countryinput2 style="direction: ltr;padding: 0;width: 63%;background-color: #f8f8f8;outline: none; border: none;border-bottom: 1px solid #c0bfbf;"
+                (click)="focuscontry2()" (mouseleave)="unfocuscontry2()">
           <option [value]="selectedCountry2" selected>{{selectedCountry2}}</option>
           <option *ngFor="let c of Country2" [ngValue]="c">{{c}}</option>
         </select>
@@ -317,6 +336,7 @@
     <div class="col-md margin-top" style="margin-left: -1px;padding-right: 60px;">
          <!-- (focusout)="unfocusaddress2()" (focus)="focusaddress2()" -->
          <input class="col-md-10" type="text" value="{{Address2}}" [(ngModel)]="Address2" #addressinput2
+                (focusout)="unfocusAddress2()" (focus)="focusAddress2()"
          style="padding:0;background-color: #f8f8f8;width:90%;outline: none; border: none;border-bottom: 1px solid #c0bfbf;" />
     </div>
     <!-- <div class="col-md-6" > -->

@@ -1,6 +1,6 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { book } from './../../classes/classItem';
 import { shoppingCart } from 'src/classes/shoppingCart';
@@ -11,9 +11,13 @@ import { NewProp } from '../../classes/NewProp';
 import { invited } from '../../classes/invited';
 import { Judges } from '../../classes/Judges';
 import { Drafts } from 'src/classes/Drafts';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { Name } from 'src/classes/Name';
+import { CartWithAdrdess } from 'src/classes/CartWithAddress';
 import { ReturnStatement } from '@angular/compiler';
+import { CookieService as ngxCookieService } from 'ngx-cookie';
+import { CookieOptions as ngxCookieOptions } from 'ngx-cookie';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +34,7 @@ export class ServerService {
   public contactName: any;
   public address: string;
   public Country: string[] = [];
+  public CountryHebrew: string[] = [];
   public jsonPurchaseData: Array<any> = [];
   public resNotifyTranzila: any;
   public isYourAddress:string;
@@ -49,13 +54,184 @@ export class ServerService {
     UserName: null
   }
  //public port: string = 'http://localhost:64905';
- public port: string = 'http://jewish-studies.b2story.com/webApi';
-  // public port: string = 'https://jewish-studies.b2story.com/webApi';
+ //public port: string = 'http://jewish-studies.b2story.com/webApi';
+   public port: string = 'https://jewish-studies.b2story.com/webApi';
 
-  constructor(public cookieService: CookieService, private http: HttpClient) {
-   // this.port = 'http://localhost:64905';
-     this.port = ' http://jewish-studies.b2story.com/webApi';
-    //this.port = ' https://jewish-studies.b2story.com/webApi';
+  constructor(public cookieService: CookieService, public cookieServicengx: ngxCookieService, private http: HttpClient) {
+  // this.port = 'http://localhost:64905';
+    //this.port = ' http://jewish-studies.b2story.com/webApi';
+    this.port = 'https://jewish-studies.b2story.com/webApi';
+
+    this.CountryHebrew = [
+       "אוגנדה "    
+      ,"אוזבקיסטן"
+      ,"אוסטריה"
+      ,"אוסטרליה"
+      ,"אוקראינה"
+      ,"אורוגוואי"
+      ,"איטליה"
+      , "איי בהאמה"
+      ,"איי מרשל"
+      , "איי שלמה"
+      , "אינדונזיה"
+      ,"איסלנד"
+      ,"איראן"
+      ,"אירלנד"
+      ,"אל סלוודור"
+      ,"אלבניה"
+      ,"אנגולה"
+      ,"אנדורה"
+      ,"אנטיגואה וברבודה"
+      ,"אסטוניה"
+      ,"אפגניסטן"
+      ,"אקוודור"
+      ,"ארגנטינה"
+      ,"אריתריאה"
+      ,"ארמניה"
+      , "ארצות הברית"
+      ,"אתיופיה"
+      ,"בהוטן"
+      ,"בוטסואנה"
+      ,"בולגריה"
+      ,"בוליביה"
+      , "בוסניה והרצגובינה"
+      ,"בורונדי"
+      , "בורקינה פאסו"
+      ,"בחריין"
+      ,"בלארוס"
+      ,"בלגיה"
+      ,"בליז"
+      ,"בנגלדש"
+      ,"בנין"
+      ,"ברוניי"
+      ,"ברזיל"
+      ,"גאורגיה"
+      ,"גאנה"
+      ,"גבון"
+      ,"גואטמלה"
+      ,"גיאנה"
+      ,"גינאה"
+      ,"גמביה"
+      ,"גרמניה"
+      ,"דומיניקה"
+      ,"דנמרק"
+      , "דרום אפריקה"
+      , "דרום סודאן"
+      ,"האיטי"
+      , "האיים המלדיביים"
+      ,"הודו"
+      ,"הולנד"
+      ,"הונגריה"
+      ,"הונדורס"
+      ,"הפיליפינים"
+      , "הרפובליקה הדומיניקנית"
+      , "הרפובליקה הדמוקרטית של קונגו"
+      , "הרפובליקה המרכז - אפריקאית"
+      , "הרפובליקה העממית של סין"
+      , "הרפובליקה של קונגו"
+      ,"וייטנאם"
+      ,"ונואטו"
+      ,"ונצואלה"
+      , "קריית הוותיקן"
+      ,"זימבבואה"
+      ,"זמביה"
+      ,"טאיוואן"
+      ,"טובאלו"
+      ,"טוגו"
+      ,"טונגה"
+      ,"טורקיה"
+      ,"טורקמניסטן"
+      ,"טנזניה"
+      ,"יוון"
+      ,"יפן"
+      ,"ירדן"
+      ,"ישראל"
+      ,"כווית"
+      ,"לאוס"
+      ,"לבנון"
+      ,"לוב"
+      ,"לוקסמבורג"
+      ,"לטביה"
+      ,"ליבריה"
+      ,"ליטא"
+      ,"ליכטנשטיין"
+      ,"לסוטו"
+      ,"מאוריטניה"
+      ,"מאוריציוס"
+      ,"מאלי"
+      ,"מדגסקר"
+      ,"מוזמביק"
+      ,"מולדובה"
+      ,"מונאקו"
+      ,"מונגוליה"
+      ,"מונטנגרו"
+      , "מזרח טימור"
+      ,"מיאנמר"
+      ,"מיקרונזיה"
+      ,"מלאווי"
+      ,"מלזיה"
+      ,"מלטה"
+      ,"מצרים"
+      ,"מקדוניה"
+      ,"מקסיקו"
+      ,"מרוקו"
+      ,"נאורו"
+      ,"נורווגיה"
+      ,"ניגריה"
+      , "ניו זילנד"
+      ,"ניקרגואה"
+      ,"נמיביה"
+      ,"נפאל"
+      ,"סודאן"
+      ,"סווזילנד"
+      ,"סומליה"
+      ,"סומלילנד"
+      ,"סוריה"
+      ,"סורינאם"
+      ,"סין"
+      ,"סלובניה"
+      ,"סלובקיה"
+      ,"סמואה"
+      ,"סנגל"
+      , "סנט קיטס ונוויס"
+      , "ספרד"
+      ,"סרביה"
+      , "סרי לנקה"
+      , "עומאן"
+      ,"עיראק"
+      , "ערב הסעודית"
+      ,"פולין"
+      ,"פורטוגל"
+      ,"פינלנד"
+      ,"פנמה"
+      ,"פקיסטן"
+      ,"פרגוואי"
+      ,"פרו"
+      ,"צרפת"
+      ,"קובה"
+      , "קולומביה"
+      , "קומורו"
+      , "קוסטה ריקה"
+      , "קוריאה הדרומית"
+      , "קוריאה הצפונית"
+      ,"קזחסטן"
+      ,"קטר(מדינה)"
+      ,"קירגיזסטן"
+      ,"קיריבטי"
+      ,"קמבודיה"
+      ,"קמרון"
+      ,"קנדה"
+      ,"קניה"
+      ,"קפריסין"
+      ,"קרואטיה"
+      ,"רואנדה"
+      ,"רומניה"
+      ,"רוסיה"
+      ,"שוודיה"
+      ,"שווייץ"
+      ,"תאילנד"
+      ,"תוניסיה"
+      ,"תימן"]
     this.Country = [
       "Afghanistan",
       "Åland Islands",
@@ -319,22 +495,24 @@ export class ServerService {
     return JSON.parse(localStorage.getItem(this.CARTMEMBERSHIP.KEY)) as any[];
   }
   setTotal() {
-    this.total = JSON.parse(this.getCookie('Total'));
+    this.total = this.getCookiengx('Total');
+    this.total = +this.total;
     return this.total;
   }
 
   setCurrency() {
-    this.currency = JSON.parse(this.getCookie('Currency'));
+    debugger;
+    this.currency = JSON.parse(this.getCookiengx('Currency'));
     return this.currency;
   }
 
   setLang() {
-    this.lang = this.getCookie('Lang');
+    this.lang = this.getCookiengx('Lang');
     return this.lang;
   }
 
   setIlang() {
-    this.ilang = this.getCookie('ilang');
+    this.ilang = this.getCookiengx('ilang');
     return this.ilang;
   }
   setEmail() {
@@ -342,31 +520,31 @@ export class ServerService {
       this.email = localStorage.getItem(this.USERNAME.KEY);
     }
     else{
-      if(this.getCookie('UserName')){
-        this.email = this.getCookie('UserName');
+      if (this.getCookiengx('UserName')){
+        this.email = this.getCookiengx('UserName');
       }
     }
     return this.email;
   }
 
   setContact() {
-  this.contactName = this.getCookie('contact');
+    this.contactName = this.getCookiengx('contact');
   return this.contactName;
   }
   setContact2() {
-    this.contactName2 = this.getCookie('contact2');
+    this.contactName2 = this.getCookiengx('contact2');
     return this.contactName2;
     }
   getIsYourAddress() {
-    this.isYourAddress = this.getCookie('isYourAddress');
+    this.isYourAddress = this.getCookiengx('isYourAddress');
     return this.isYourAddress;
   }
   setAddress() {
-    this.address = this.getCookie('address');
+    this.address = this.getCookiengx('address');
     return this.address;
   }
   setAddress2() {
-    this.address2 = this.getCookie('address2');
+    this.address2 = this.getCookiengx('address2');
     return this.address2;
   }
   setRout(Rout) {
@@ -379,6 +557,9 @@ export class ServerService {
 
   getCookie(key: string) {
     return this.cookieService.get(key);
+  }
+  getCookiengx(key: string) {
+    return this.cookieServicengx.get(key);
   }
   getAllDBFromServer(): Observable<book[]> {
     return this.http.get<book[]>(this.port + "/api/Home/getFromDB");
@@ -401,7 +582,7 @@ export class ServerService {
     //item.login = this.LoginUserName;
     return this.http.post(this.port + "/api/Home/PostToCart", item);
   }
-  AddItemToCart(item: shoppingCart): any {
+  AddItemToCart(item: CartWithAdrdess): any {
     this.LoginUserName = (this.getCookie('UserName'));
     //item.login = this.LoginUserName;
     return this.http.post(this.port + "/api/Home/AddToCart", item);
@@ -435,14 +616,23 @@ export class ServerService {
     return this.http.get<number>(this.port + "/api/Home/getNumProduct?LoginUserName=" + this.LoginUserName)
   }
   RegistrationNewGuest(user: User) {
-    this.http.post(this.port + "/api/Home/RegistrationGuest", user).subscribe();
+    this.http.post(this.port + "/api/Home/RegistrationGuest" , user).subscribe();
   }
-  Registration(user: User) {
-    this.http.post(this.port + "/api/Home/Registration", user).subscribe();
+  RegistrationHebrew(user: User) {
+    this.http.post(this.port + "/api/Home/RegistrationHebrew" , user).subscribe();
   }
+
+Registration(user: User) {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    this.http.post(this.port + "/api/Home/Registration", user, { headers: headers }).subscribe();
+  }
+
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
-    return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item)//.subscribe();
+    // alert(item.Email)
+    return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item);
   }
+
   getUserNameExists(UserName: string): Observable<any> {
     if (this.getCookie('UserName')) {
       this.LoginUserName = (this.getCookie('UserName'));
@@ -540,7 +730,6 @@ export class ServerService {
   }
   enterSecondDraft(Prop: Proposals) {
     this.LoginUserName = (this.getCookie('UserName'));
-    // alert("http://localhost:64905/api/Home/enterSecondDraft?prop=" + Prop + " &LoginUserName=" + this.LoginUserName)
     Prop.UserName = this.LoginUserName;
     this.http.post(this.port + "/api/Home/enterSecondDraft?prop=", Prop).subscribe();
   }
@@ -568,8 +757,10 @@ export class ServerService {
 
   }
   forgetPass(item: string): any {
-    // alert("r")
     return this.http.get<number>(this.port + "/api/Home/forgetPass?email=" + item);
+
+  } forgetPassHebrew(item: string): any {
+    return this.http.get<number>(this.port + "/api/Home/forgetPassHebrew?email=" + item);
 
   }
   getTotalPrice() {

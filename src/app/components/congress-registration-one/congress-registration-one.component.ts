@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proposals } from '../../../classes/Proposals';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { __await } from 'tslib';
 import { Name } from 'src/classes/Name';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators } from '@angular/forms';
@@ -36,6 +36,7 @@ export class CongressRegistrationOneComponent implements OnInit {
   @ViewChild('langselect') langselect: ElementRef;
 //Add field academy to DB
   //@Input()
+  public DraftValue: string = "SAVE DRAFT";
   public NumWords: number = 0;
   userFormGroup: FormGroup;
   public angForm: FormGroup;
@@ -184,6 +185,8 @@ export class CongressRegistrationOneComponent implements OnInit {
     this.Prop.TitleHebrew = this.TitleHebrew;
     
     this.serverService.enterDraft(this.Prop);
+    this.DraftValue = "DRAFT SAVED";
+
     this.showsaveDraft = true;
 
   }
@@ -241,6 +244,8 @@ export class CongressRegistrationOneComponent implements OnInit {
       var r = q - maxvalue;
       this.errMoreThen250 = true;
       return false;
+    } else {
+      this.errMoreThen250 = false;
     }
   }
   changeProp(element, maxvalue) {

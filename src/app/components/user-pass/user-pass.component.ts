@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild ,Input} from '@angular/core';
 import { ServerService } from '../../services/server.service';
 //import { http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -7,17 +7,22 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { UserPass } from '../../../classes/UserPass';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-user-pass',
   templateUrl: './user-pass.component.html',
   styleUrls: ['./user-pass.component.css']
 })
 export class UserPassComponent implements OnInit {
+  @Input() RoutFromStore: number;
+
   @ViewChild('title') title: ElementRef;
-  @ViewChild('email') email: ElementRef =null;
+  @ViewChild('emailReset') emailReset: ElementRef =null;
+  @ViewChild('emailResetspan') emailResetspan: ElementRef =null;
   // @ViewChild('userName') userName: ElementRef;
   @ViewChild('pass') pass: ElementRef = null;
+  @ViewChild('email') email: ElementRef = null;
+  @ViewChild('Top') Top: ElementRef = null;
   userDetail: FormGroup;
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
@@ -30,6 +35,8 @@ export class UserPassComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
+  public errPass: boolean;
+
   public showResetPassword: boolean;
   public Rout: number;
   public UserName: string;
@@ -62,6 +69,8 @@ export class UserPassComponent implements OnInit {
     return this.cookieService.get(key);
   }
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
   }
   forget() {
     if(!this.resetPassword) {
@@ -81,9 +90,14 @@ export class UserPassComponent implements OnInit {
     }
   }
   focusemail() {
-    this.email.nativeElement.style.color = "#27b5e5";
+    this.emailReset.nativeElement.style.color = "#27b5e5";
   }
   unfocusemail() {
+    this.emailReset.nativeElement.style.color = "gray";
+  }  focusemail1() {
+    this.email.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusemail1() {
     this.email.nativeElement.style.color = "gray";
   }
   focuspass() {
@@ -98,7 +112,8 @@ export class UserPassComponent implements OnInit {
   unfocustitle() {
     this.title.nativeElement.style.color = "gray";
   }
-  newMember(){ 
+  newMember() {
+    debugger;
     console.log("new member")
       let email = (this.getCookie('UserName'));
       this.cookieService.put('Rout', this.Rout.toString());
@@ -119,12 +134,16 @@ if(this.Rout==1)
    this.router.navigateByUrl("/NewMemberAccount/4");
    if(this.Rout==6)
    this.router.navigateByUrl("/NewMemberAccount/6");
+   if(this.Rout==222)
+   this.router.navigateByUrl("/NewMemberAccount/222");
+    if(this.Rout==2222)
+   this.router.navigateByUrl("/NewMemberAccount/2222");
    
   }
   SendCheckUserPassword() {
     this.item = new UserPass()
     this.setCookie(this.Email);
-     this.item.Email = (this.getCookie('UserName'));
+    this.item.Email = this.Email;
     this.item.Password = this.Password;
     this.item.Email = this.Email;
     this.serverService.SendCheckUserPassword(this.item).subscribe((events) => {
@@ -176,6 +195,12 @@ if(this.Rout==1)
         if (this.Rout == 22) {
           this.router.navigateByUrl("/newHebrew");
 
+        } if (this.Rout == 222) {
+          this.router.navigateByUrl("/ShoppingCart");
+
+        } if (this.Rout == 2222) {
+          this.router.navigateByUrl("/ShoppingCartHebrew");
+
         }
         if (this.Rout == 5) {
           this.router.navigateByUrl("/FirstPageEnglish");
@@ -197,7 +222,11 @@ if(this.Rout==1)
       if (a == 1)
         this.router.navigateByUrl("/ResetPassSuccess");
       else
-        this.showWrongEmail = true;
+        this.errPass = true;
+      //  this.emailResetspan.nativeElement.style.color = "red";
+      //document.getElementById("emailReset").classList.add("bordercolorRed");
+      //document.getElementById("emailResetspan").classList.add("bordercolorRed");
+        //this.showWrongEmail = true;
     });
 
   }

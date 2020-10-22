@@ -8,7 +8,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { getMaxListeners } from 'process';
 import { JsonPipe } from '@angular/common';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
+import { CookieService as ngxCookieService } from 'ngx-cookie';
+
 import { FormGroup, FormControl } from '@angular/forms';
 
 
@@ -31,8 +33,9 @@ export class TranzilaComponent implements OnInit {
   public notifyUrlAddress: string = 'http://jewish-studies.b2story.com/notify.html';//קישור ל NOTIFY	
   public contactName: any;
 
-  constructor(public router: ActivatedRoute, private serverService: ServerService, private http: HttpClient, private sanitizer: DomSanitizer, public cookieService: CookieService) {
+  constructor(public router: ActivatedRoute, public cookieServicengx: ngxCookieService, private serverService: ServerService, private http: HttpClient, private sanitizer: DomSanitizer, public cookieService: CookieService) {
     this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
+    debugger;
     let arrayPurchaseData: any;
     if (this.Rout == 2) {
       arrayPurchaseData = JSON.parse(this.serverService.setjsonPurchaseData2());
@@ -51,7 +54,12 @@ export class TranzilaComponent implements OnInit {
       });
     }
     else {
+      debugger;
+      this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
+
       this.purchaseData = this.serverService.setjsonPurchaseData1();
+      this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
+
     }
   }
 
@@ -62,9 +70,11 @@ export class TranzilaComponent implements OnInit {
  }
  
   ngAfterViewInit() {
+    debugger;
      const form = this.paymentForm.nativeElement;
     form.action = "https://direct.tranzila.com/bytes2/iframenew.php";
     form['currency'].value = this.serverService.setCurrency().toString();
+    //form['currency'].value = this.serverService.setCurrency().toString();
     form['sum'].value = this.serverService.setTotal();
     form['lang'].value = this.serverService.setLang();
     form['Ilang'].value = this.serverService.setIlang();
@@ -82,7 +92,11 @@ export class TranzilaComponent implements OnInit {
       form['Shipping_address'].value = this.serverService.setAddress();
     }
     form['json_purchase_data'].value = encodeURIComponent(JSON.stringify(this.purchaseData));
+    this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
+
     form.submit();
+    this.Rout = +this.cookieService.get('RoutTranzilaSuccessJewishStudies');
+
   }
 
 }

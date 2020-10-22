@@ -271,13 +271,13 @@ text-decoration: underline #27b5e5;
   min-height: 500px;
 }
 .center-div-wrap {
-  padding-top: 10%;
+  padding-top: 40%;
   position: absolute;
-  top: 40%;
+  top: 5%;
   transform: translateY(-40%);
   width: 60%;
   float: left;
-  left: 0;
+  left: -2%;
 }
 .center {
   text-align: center;
@@ -295,7 +295,7 @@ text-decoration: underline #27b5e5;
 .margin-b-15 {
   margin-bottom: 15px;
 }
-.content-login .fill-btn-blue {
+.content-login  {
   background-color: #026fa7;
   padding: 6px 62px;
   border: none;
@@ -304,6 +304,55 @@ text-decoration: underline #27b5e5;
   font-weight: bold;
   font-size: 19px;
 }
+.bordercolorRed {
+  border-bottom-color: red !important;
+}
+
+.allbordercolorRed {
+  border-color: red !important;
+}
+.fill-btn-blue {
+  outline: none;
+  /*font-weight: bold;*/
+  background-color: #27b5e5;
+  padding: 10px 48px;
+  border: none;
+  color: white;
+  font-size: 19px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  width: 200px;
+}
+
+  .fill-btn-blue:hover {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #0e73a8;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+
+  .fill-btn-blue:active {
+    outline: none;
+    /*font-weight: bold;*/
+    background-color: #026fa7;
+    padding: 10px 48px;
+    border: none;
+    color: white;
+    font-size: 19px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+  }
+
 /* .mat-form-field-appearance-legacy .mat-form-field-ripple */
 .fields ::ng-deep .mat-form-field .mat-focused .mat-form-field-ripple {
   background-color: #27b5e5 !important;
@@ -323,7 +372,7 @@ text-decoration: underline #27b5e5;
   font-size: 19px;
   /*border-radius: 20px;
   cursor: pointer; */  
-    padding: 10px;
+    /*padding: 10px;
     display: flex;
     justify-content: center;
     margin: auto;
@@ -337,7 +386,7 @@ text-decoration: underline #27b5e5;
   cursor: pointer;
   text-align: center;
   width: 176px;
-  outline: none;
+  outline: none;*/
 }
 input {
   border-top: none;

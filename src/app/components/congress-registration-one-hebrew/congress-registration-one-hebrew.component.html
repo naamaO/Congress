@@ -174,7 +174,7 @@
         <label style="margin-left:18%;width:80%" *ngIf="showLikeProp==true">{{Keywords}}</label>
       </div>
       <br /><br />
-      <div class="row margin-top form-group col-md-12">
+      <div class="row margin-top form-group col-md-12" style="padding-bottom: 6%;">
         <button (click)="Draft()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalraft" class="fill-btn-blue col-md-3" style="margin-right:20%;">שמור טיוטה</button>
         <button (click)="Save()" *ngIf="showLikeProp==false" data-toggle="modal" data-target="#myModalSubmit" class="fill-btn-blue col-md-3" style="margin-right:3%;">שלח</button>
         <button (click)="Draft()" disabled *ngIf="showLikeProp==true" class="fill-btn-disabled col-md-3" style="margin-right:20%;">שמור טיוטה</button>

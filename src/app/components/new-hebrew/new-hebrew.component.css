@@ -407,7 +407,7 @@ ul {
 .tooltipSmallC:hover .tooltiptextSmallC {
   visibility: visible;
 }
-.tooltipSmall:hover .tooltiptextSmall {
+.tooltipSmall:active .tooltiptextSmall {
   visibility: visible;
 }
 
@@ -416,7 +416,9 @@ ul {
   height: 150px !important;
 }
 
-
+.CartTooltip{
+  visibility:visible !important;
+}
 .tooltip {
   position: relative;
   display: contents;
@@ -449,6 +451,7 @@ ul {
 }
 
 .overlay{
+  cursor:pointer;
   background-size: contain;
   position: relative;
   z-index: 10;
@@ -459,6 +462,7 @@ ul {
   justify-content: center;
 }
 .overlay:hover{
+  cursor:pointer;
   opacity: 1;
   background: #b0c7d4 !important;
 }
@@ -603,3 +607,62 @@ cursor: default;
  .paginator  ::ng-deep.ngx-pagination .pagination-next a::after,
 .ngx-pagination .pagination-next.disabled::after { 
   content: '>' !important; }
+
+
+/*.divNew:after {
+  left:75%;
+  content: " ";
+  position: absolute;  
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}*/
+
+.divNew {
+  color: #27b5e5;
+  /*border: 1px solid #27b5e5;*/
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/*.divNew2:after {
+  left:48%;
+  content: " ";
+  position: absolute;
+  
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}*/
+
+.divNew2 {
+  color: #27b5e5;
+  /*border: 1px solid #27b5e5;*/
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/*.divNew3:after {
+  left:20%;
+  content: " ";
+  position: absolute;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 13px 0 13px;
+  border-color: #27b5e5 transparent transparent transparent;
+}*/
+
+.divNew3 {
+  color: #27b5e5;
+  /*border: 1px solid #27b5e5;*/
+  border-left: none !important;
+  border-right: none !important;
+}

@@ -36,7 +36,13 @@ body {
   font-family:'OpenSansBold', sans-serif;
   font-weight: 600; 
   font-size:30px;
-  padding-left: 82px;
+  /*padding-left: 82px;*/
+}
+.shopping-cart-title-small {
+  color: #026fa7;
+  font-family: 'OpenSansBold', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
 }
 .header-table {
   /*background-color: #026fa7;

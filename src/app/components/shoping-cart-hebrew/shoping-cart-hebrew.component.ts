@@ -10,8 +10,13 @@ import { Observable } from 'rxjs';
 import { shoppingCart } from '../../../classes/shoppingCart';
 import { ChangeDetectorRef } from '@angular/core';
 import { __await } from 'tslib';
-import { CookieService } from 'angular2-cookie';
+import { CookieService, CookieOptions } from 'ngx-cookie';
+import { CookieService as ngxCookieService } from 'ngx-cookie';
+import { CookieOptionsProvider as ngxCookieOptions } from 'ngx-cookie';
+import { CookieModule } from 'ngx-cookie';
+
 import { User } from 'src/classes/User';
+import { CheckoutServiceService } from 'src/app/services/checkout-service.service';
 @Component({
   selector: 'app-shoping-cart-hebrew',
   templateUrl: './shoping-cart-hebrew.component.html',
@@ -40,6 +45,10 @@ export class ShopingCartHebrewComponent implements OnInit {
 
   @ViewChild('yes') yes: ElementRef;
   @ViewChild('no') no: ElementRef;
+  @ViewChild('shippingForm') shippingForm: ElementRef;
+  @ViewChild('AddressYes') AddressYes: ElementRef;
+  @ViewChild('AddressNo') AddressNo: ElementRef;
+  @ViewChild('Top') Top: ElementRef;
 
   public DB: shoppingCart[];
   public user: User;
@@ -88,123 +97,140 @@ export class ShopingCartHebrewComponent implements OnInit {
   public emailvalidate:boolean=false;
   public rem:boolean = false;
 
-  constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router, private serverService: ServerService, private http: HttpClient) {  
-   this.Country =  this.serverService.Country;
-   this.Country2 =  this.serverService.Country;
+  constructor(public cookieService: CookieService, public checkoutService: CheckoutServiceService, public cookieServicengx: ngxCookieService, private ngZone: NgZone, private cd: ChangeDetectorRef, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    
+    this.Country = this.serverService.CountryHebrew;
+    this.Country2 = this.serverService.CountryHebrew;
 
-    //get list of shopping cart//if login
-if(this.getCookie('UserName')) {     
-  this.serverService.getAllDBShoppingCart().subscribe((resp) => {
-    this.DB = resp;
-    for (var i = 0; i < this.DB.length; i++) {
-      if (this.DB[i].SallePrice == 0)
-        this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-      else
-        this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-    }
-    },
-    error => {  
-      console.log(error)
+    //if(this.getCookie('UserName')) {   
+    this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+      this.DB = resp;
+      if (this.DB.length != 0) {
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+      }
     });
-    this.serverService.getTotalPrice().subscribe((val) => {
-      this.Total = val
-      this.UserNameLogin = this.getCookie('UserName');  
-      if(this.UserNameLogin){
-      this.serverService.getUserDetails().subscribe((events) => {
-        if(events.MemberShip >-1)
-        this.IsMemberShip = true;
-        if(this.IsMemberShip){
-        //  this.serverService.setTotal();
-        //this.Total
-        if(this.Total>0){
-        this.getDiscountTotal(this.Total);
-        }
-        else{
-          this.TotalAfterDiscount = 0;
-        }
-        }
-      })
-    }
+    this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+      this.DB = resp;
+      if (this.DB.length != 0) {
+        this.serverService.getTotalPrice().subscribe((val) => {
+          this.Total = val
+          this.UserNameLogin = this.getCookie('UserName');
+          if (this.UserNameLogin) {
+            this.serverService.getUserDetails().subscribe((events) => {
+              if (events.MemberShip > -1)
+                this.IsMemberShip = true;
+              if (this.IsMemberShip) {
+                // this.serverService.setTotal();
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+            })
+          }
+        });
+      }
     });
-
-    //get list of all books
-    // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
-  this.serverService.getNumProduct().subscribe(val => this.num = val);
-  }
-else{
-if(!this.DB){
+    this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+      this.DB = resp;
+      if (!this.DB || this.DB == undefined || this.DB.length == 0) {
+        //this.DBUndefined = 1;
         //check localStorage and initialize the contents of CART.contents
         let _contents = localStorage.getItem(this.CART.KEY);
-        if(_contents){
-            this.CART.contents = JSON.parse(_contents);
-            this.DB= this.CART.contents;
-            if(this.DB.length > 0){
-              for (var i = 0; i < this.DB.length; i++) {
-                if (this.DB[i].SallePrice == 0){
+        if (_contents) {
+          this.CART.contents = JSON.parse(_contents);
+          this.DB = this.CART.contents;
+          if (this.DB.length > 0) {
+            for (var i = 0; i < this.DB.length; i++) {
+              if (this.DB[i].SallePrice == 0) {
                 this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
                 this.num = this.num + this.DB[i].Quantity;
                 this.Total = this.Total + this.DB[i].Total;
-                if(this.Total>0){
+                if (this.Total > 0) {
                   this.getDiscountTotal(this.Total);
-                  }
-                  else{
-                    this.TotalAfterDiscount = 0;
-                  }
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
               }
-              else{
+              else {
                 this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
                 this.num = this.num + this.DB[i].Quantity;
                 this.Total = this.Total + this.DB[i].Total;
-                if(this.Total>0){
+                if (this.Total > 0) {
                   this.getDiscountTotal(this.Total);
-                  }
-                  else{
-                    this.TotalAfterDiscount = 0;
-                  }
-              }
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
               }
             }
-        }else{
-          
-            //dummy test data
-            this.CART.contents = [];     
-             let _cart = JSON.stringify(this.CART.contents);
-             localStorage.setItem(this.CART.KEY, _cart);
-            // CART.sync();
-            this.DB= this.CART.contents;  
+          }
+        } else {
+          //dummy test data
+          this.CART.contents = [];
+          let _cart = JSON.stringify(this.CART.contents);
+          localStorage.setItem(this.CART.KEY, _cart);
+          // CART.sync();
+          this.DB = this.CART.contents;
         }
         let _num = localStorage.getItem(this.NUM.KEY);
-    if(parseInt(_num)>0){
-      this.NUM.num = parseInt(_num);
-      this.num = parseInt(_num);
-    }
-    else{
-      this.NUM.num = 0;         
-      let _num =  JSON.stringify(this.NUM.num);
-      localStorage.setItem(this.NUM.KEY, _num);
-      this.num = 0;
-    }
-    let _total = localStorage.getItem(this.TOTAL.KEY);
-    if(parseInt(_total)>0){
-      this.TOTAL.total = parseInt(_total);
-     this.Total = parseInt(_total);
-     if(this.Total>0){
-      this.getDiscountTotal(this.Total);
+        if (parseInt(_num) > 0) {
+          this.NUM.num = parseInt(_num);
+          this.num = parseInt(_num);
+        }
+        else {
+          this.NUM.num = 0;
+          let _num = JSON.stringify(this.NUM.num);
+          localStorage.setItem(this.NUM.KEY, _num);
+          this.num = 0;
+        }
+        let _total = localStorage.getItem(this.TOTAL.KEY);
+        if (parseInt(_total) > 0) {
+          this.TOTAL.total = parseInt(_total);
+          this.Total = parseInt(_total);
+          if (this.Total > 0) {
+            this.getDiscountTotal(this.Total);
+          }
+          else {
+            this.TotalAfterDiscount = 0;
+          }
+        }
+        else {
+          this.TOTAL.total = 0;
+          let _total = JSON.stringify(this.TOTAL.total);
+          localStorage.setItem(this.TOTAL.KEY, _total);
+          this.Total = 0;
+          if (this.Total == 0) {
+            this.TotalAfterDiscount = 0;
+          }
+        }
+        //this.num = JSON.stringify(localStorage.getItem(this.NUM.KEY));
       }
-      else{
-        this.TotalAfterDiscount = 0;
+      for (var i = 0; i < this.DB.length; i++) {
+        if (this.DB[i].SallePrice == 0)
+          this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+        else
+          this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
       }
-    }
-    else{
-      this.TOTAL.total = 0;         
-      let _total =  JSON.stringify(this.TOTAL.total);
-      localStorage.setItem(this.TOTAL.KEY, _total);
-      this.Total = 0;
-      this.TotalAfterDiscount = 0;
-    }
-}
+    },
+      error => {
+        console.log(error)
+      });
+    //if (this.DBUndefined == 0) {
 
-}
+    //}
+    //get list of all books
+    // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
+    //if (this.DBUndefined == 0) {
+
+    //}
+    //}
+
+
+
   }
 
   changePlaying() {
@@ -244,7 +270,11 @@ if(!this.DB){
     this.cookieService.put('UserName', UaerName);
   }
   ngOnInit() {
-    this.UserNameLogin = this.getCookie('UserName');
+    document.getElementById("Top").scrollIntoView();
+
+    if (this.getCookie('UserName') != undefined) {
+      this.UserNameLogin = this.getCookie('UserName');
+    }
     if(this.UserNameLogin){
       this.serverService.getUserDetails().subscribe((events) => {
         this.FirstName = events.FirstNameEnglish;
@@ -276,27 +306,27 @@ if(!this.DB){
   }
 
   AddQuantity(item: shoppingCart) {
-    if(this.getCookie('UserName')){
+    if (this.getCookie('UserName')) {
       this.UserNameLogin = (this.getCookie('UserName'));
       this.serverService.postAddQuantity(item)//.subscribe((events) => {
-        this.changePlaying();
-        this.changePlaying(); 
+      this.changePlaying();
+      this.changePlaying();
     }
-    else{
-      this.UserNameLogin=null;
+    else {
+      this.UserNameLogin = null;
       this.add(item)
     }
   }
   RemoveQuantity(item: shoppingCart) {
-    if(this.getCookie('UserName')){
+    if (this.getCookie('UserName')) {
       this.UserNameLogin = (this.getCookie('UserName'));
-    this.serverService.postRemoveQuantity(item)
-    this.changePlaying();
-    this.changePlaying();
+      this.serverService.postRemoveQuantity(item)
+      this.changePlaying();
+      this.changePlaying();
     }
-    else{
-     this.remove(item.Id);
-     this.sync('red')
+    else {
+      this.remove(item.Id);
+      this.sync('red')
     }
   }
   deleteQuantity(item: shoppingCart) {
@@ -312,347 +342,363 @@ if(!this.DB){
   }
   }
   NavigCart() {
-    this.router.navigateByUrl("/ShoppingCart");
+    this.router.navigateByUrl("/ShoppingCartHebrew");
   }
-async sync(act:string){
-  let _cart = JSON.stringify(this.CART.contents);
-  await localStorage.setItem(this.CART.KEY, _cart);
-  this.DB= this.CART.contents;
-  if(this.DB.length==1){
-  for (var i = 0; i < this.DB.length; i++) {
-    if (this.DB[i].SallePrice == 0){ 
-    this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-    this.CART.contents.map(item=>{
-      if(item.Id === i)
-      this.CART.contents[i].Total = this.DB[i].Total;
-    });
+  async sync(act: string) {
     let _cart = JSON.stringify(this.CART.contents);
-    localStorage.setItem(this.CART.KEY, _cart);
-  }
-    else {
-    this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-    this.CART.contents.map(item=>{
-      if(item.Id === i)
-      this.CART.contents[i].Total = this.DB[i].Total;
-    });  
-    let _cart = JSON.stringify(this.CART.contents);
-    localStorage.setItem(this.CART.KEY, _cart);
-  }
-     if(act=='inc'){
-      this.num = this.num + 1;
-      if (this.DB[i].SallePrice == 0){
-        this.Total = this.Total + this.DB[i].PriceBook;
-        if(this.Total>0){
-          this.getDiscountTotal(this.Total);
-          }
-          else{
-            this.TotalAfterDiscount = 0;
-          }
-        this.CART.contents.map(item=>{
-          if(item.Id === i)
-          this.CART.contents[i].Total = this.DB[i].Total;
-        });
-        let _cart = JSON.stringify(this.CART.contents);
-        localStorage.setItem(this.CART.KEY, _cart);
-      }
-      else{
-        this.Total = this.Total + this.DB[i].SallePrice;
-        if(this.Total>0){
-          this.getDiscountTotal(this.Total);
-          }
-          else{
-            this.TotalAfterDiscount = 0;
-          }
-        this.CART.contents.map(item=>{
-          if(item.Id === i)
-          this.CART.contents[i].Total = this.DB[i].Total;
-        });
-        let _cart = JSON.stringify(this.CART.contents);
-        localStorage.setItem(this.CART.KEY, _cart);
-      }
-      }
-      else  if(act=='red'){
-        if (this.itemToRedQunt1){
-          if(!this.rem){ 
-           this.num = this.num - 1;     
-           if (this.itemToRedQunt1.SallePrice == 0){
-               this.Total = this.Total - this.itemToRedQunt1.Total;
-               if(this.Total>0){
-                this.getDiscountTotal(this.Total);
-                }
-                else{
-                  this.TotalAfterDiscount = 0;
-                }
-             }
-             else{
-               this.Total = this.Total - this.itemToRedQunt1.Total;
-               if(this.Total>0){
-                this.getDiscountTotal(this.Total);
-                }
-                else{
-                  this.TotalAfterDiscount = 0;
-                }
-             }
-           }
-           else{//remove the item
-             if(this.itemToRedQunt1.Quantity!=0){
-             this.num = this.num - this.DB[i].Quantity;
-             }
-             else{
-               this.num =  this.num - 1;
-             }
-            this.Total = this.Total - this.itemToRedQunt1.Total; 
-            if(this.Total>0){
-              this.getDiscountTotal(this.Total);
-              }
-              else{
-                this.TotalAfterDiscount = 0;
-              }
-          }
-         }
-         else{
-           if(!this.rem){ 
-             this.num = this.num - 1;     
-             if (this.DB[i].SallePrice == 0){
-                 this.Total = this.Total -  this.DB[i].PriceBook;
-                 if(this.Total>0){
-                  this.getDiscountTotal(this.Total);
-                  }
-                  else{
-                    this.TotalAfterDiscount = 0;
-                  }
-               }
-               else{
-                 this.Total = this.Total -  this.DB[i].SallePrice;
-                 if(this.Total>0){
-                  this.getDiscountTotal(this.Total);
-                  }
-                  else{
-                    this.TotalAfterDiscount = 0;
-                  }
-               }
-             }
-             else{//remove the item
-               if(this.itemToRedQunt1.Quantity!=0){
-               this.num = this.num - this.DB[i].Quantity;
-               }
-               else{
-               this.num =  this.num - 1;
-               }
-               if (this.DB[i].SallePrice == 0){
-                if(this.itemToRedQunt1.Quantity==0){
-                 this.Total = this.Total -  this.DB[i].PriceBook;
-                 if(this.Total>0){
-                  this.getDiscountTotal(this.Total);
-                  }
-                  else{
-                    this.TotalAfterDiscount = 0;
-                  }
-                }
-                else{
-                  this.Total = this.Total -  this.DB[i].Total;
-                  if(this.Total>0){
-                    this.getDiscountTotal(this.Total);
-                    }
-                    else{
-                      this.TotalAfterDiscount = 0;
-                    }
-                }
-               }
-               else{
-                if(this.itemToRedQunt1.Quantity==0){
-                  this.Total = this.Total -  this.DB[i].SallePrice;
-                  if(this.Total>0){
-                    this.getDiscountTotal(this.Total);
-                    }
-                    else{
-                      this.TotalAfterDiscount = 0;
-                    }
-                 }
-                 else{
-                   this.Total = this.Total -  this.DB[i].Total;
-                   if(this.Total>0){
-                    this.getDiscountTotal(this.Total);
-                    }
-                    else{
-                      this.TotalAfterDiscount = 0;
-                    }
-                 }
-               }
-             }
-           }
-         }
-   }
-     }
-   else{
-    if(act=='inc'){
-      // console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
-      if(this.itemToAddQunt1){
-        //let i = this.itemToAddQunt1.Id;
-        if (this.itemToAddQunt1.SallePrice == 0){
-          let d = this.itemToAddQunt1.Id;
-          this.DB.map(item=>{
-            if(item.Id === d)
-            this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+    await localStorage.setItem(this.CART.KEY, _cart);
+    this.DB = this.CART.contents;
+    if (this.DB.length == 1) {
+      for (var i = 0; i < this.DB.length; i++) {
+        if (this.DB[i].SallePrice == 0) {
+          this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+          this.CART.contents.map(item => {
+            if (item.Id === i)
+              this.CART.contents[i].Total = this.DB[i].Total;
           });
-          this.Total = this.Total + this.itemToAddQunt1.PriceBook;
-          if(this.Total>0){
-            this.getDiscountTotal(this.Total);
+          let _cart = JSON.stringify(this.CART.contents);
+          localStorage.setItem(this.CART.KEY, _cart);
+        }
+        else {
+          this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+          this.CART.contents.map(item => {
+            if (item.Id === i)
+              this.CART.contents[i].Total = this.DB[i].Total;
+          });
+          let _cart = JSON.stringify(this.CART.contents);
+          localStorage.setItem(this.CART.KEY, _cart);
+        }
+        if (act == 'inc') {
+          //  if (this.itemToAddQunt1){
+          this.num = this.num + 1;
+          if (this.DB[i].SallePrice == 0) {
+            this.Total = this.Total + this.DB[i].PriceBook;
+            if (this.Total > 0) {
+              this.getDiscountTotal(this.Total);
             }
-            else{
+            else {
               this.TotalAfterDiscount = 0;
             }
-        //this.CART.contents =
-         this.CART.contents.map(item=>{
-          if(item.Id === i)
-          this.CART.contents[i].Total = this.DB[i].Total;
-        });
-        let _cart = JSON.stringify(this.CART.contents);
-        localStorage.setItem(this.CART.KEY, _cart);
-      
-        // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
-        // //this.CART.contents =
-        //  _cart.contents.map(item=>{
-        //   if(item.Id === i)
-        //   _cart.contents[i].Total = this.DB[i].Total;
-        // });
-       //  localStorage.setItem(this.CART.KEY,JSON.stringify( this.CART.contents[i]));
-      }
-        else{
-          let d = this.itemToAddQunt1.Id;
-          this.DB.map(item=>{
-            if(item.Id === d)
-            this.DB[d].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
-          });
-         this.Total = this.Total + this.itemToAddQunt1.SallePrice;
-         if(this.Total>0){
-          this.getDiscountTotal(this.Total);
-          }
-          else{
-            this.TotalAfterDiscount = 0;
-          }
-          this.CART.contents.map(item=>{
-            if(item.Id === i)
-            this.CART.contents[i].Total = this.DB[i].Total;
-          });
-          let _cart = JSON.stringify(this.CART.contents);
-          localStorage.setItem(this.CART.KEY, _cart);
-        }
-        this.num = this.num + 1;
-    }
-      }
-      else  {
-      if(act=='red'){
-        if(this.itemToRedQunt1){
-         // let i = this.itemToRedQunt1.Id;
-         if(!this.rem){
-          if (this.itemToRedQunt1.SallePrice == 0){
-            let c;
-            c = this.itemToRedQunt1.Id;
-            if(this.DB.length>0){
-            //  if(this.DB[c]){
-              this.DB.map(item=>{
-                if(item.Id === c)
-                this.DB[c].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
-              });
-           // }
-          }
-            this.Total = this.Total - this.itemToRedQunt1.PriceBook;
-            if(this.Total>0){
-              this.getDiscountTotal(this.Total);
-              }
-              else{
-                this.TotalAfterDiscount = 0;
-              }
-        if(this.DB.length>0){
-          this.CART.contents.map(item=>{
-            let id = this.itemToRedQunt1.Id
-            if(item.Id === id)
-            this.CART.contents[id].Total = this.DB[id].Total;
-          });
-          let _cart = JSON.stringify(this.CART.contents);
-          localStorage.setItem(this.CART.KEY, _cart);
-        }
-          }
-          else{
-            let c;
-           c = this.itemToRedQunt1.Id;
-            if(this.DB.length>0){
-              this.DB.map(item=>{
-                if(item.Id === c)
-                this.DB[c].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
-              });
-            }
-            this.Total = this.Total - this.itemToRedQunt1.SallePrice;
-            if(this.Total>0){
-              this.getDiscountTotal(this.Total);
-              }
-              else{
-                this.TotalAfterDiscount = 0;
-              }
-            if(this.DB.length>0){
-            this.CART.contents.map(item=>{
-              let id;
-              id =this.itemToRedQunt1.Id;
-              if(item.Id === id)
-              this.CART.contents[id].Total = this.DB[id].Total;
+            this.CART.contents.map(item => {
+              if (item.Id === i)
+                this.CART.contents[i].Total = this.DB[i].Total;
             });
             let _cart = JSON.stringify(this.CART.contents);
             localStorage.setItem(this.CART.KEY, _cart);
           }
-        }
-          this.num = this.num - 1;
-      }
-      else{//this.rem ==true;
-        if (this.itemToRedQunt1.Quantity!=0){
-          this.Total = this.Total - this.itemToRedQunt1.Total;
-          if(this.Total>0){
-            this.getDiscountTotal(this.Total);
+          else {
+            this.Total = this.Total + this.DB[i].SallePrice;
+            if (this.Total > 0) {
+              this.getDiscountTotal(this.Total);
             }
-            else{
+            else {
               this.TotalAfterDiscount = 0;
             }
-        this.num = this.num - this.itemToRedQunt1.Quantity;
-    }
-    else{
-      if (this.itemToRedQunt1.SallePrice == 0){
-        this.Total = this.Total - this.itemToRedQunt1.PriceBook;
-        if(this.Total>0){
-          this.getDiscountTotal(this.Total);
+            this.CART.contents.map(item => {
+              if (item.Id === i)
+                this.CART.contents[i].Total = this.DB[i].Total;
+            });
+            let _cart = JSON.stringify(this.CART.contents);
+            localStorage.setItem(this.CART.KEY, _cart);
           }
-          else{
-            this.TotalAfterDiscount = 0;
+          // this.Total = this.Total + this.DB[i].Total;
+          // }
+        }
+        else if (act == 'red') {
+          if (this.itemToRedQunt1) {
+            if (!this.rem) {
+              // if(this.DB[i].Id==this.itemToRedQunt1.Id){
+              this.num = this.num - 1;
+              // }  
+              if (this.itemToRedQunt1.SallePrice == 0) {
+                this.Total = this.Total - this.DB[i].PriceBook;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+              else {
+                this.Total = this.Total - this.DB[i].SallePrice;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+            }
+            else {//remove the item
+              //if(this.DB[i].Id==this.itemToRedQunt1.Id){
+              if (this.itemToRedQunt1.Quantity != 0) {
+                this.num = this.num - this.itemToRedQunt1.Quantity;
+              }
+              else {
+                this.num = this.num - 1;
+              }
+              this.Total = this.Total - this.itemToRedQunt1.Total;
+              if (this.Total > 0) {
+                this.getDiscountTotal(this.Total);
+              }
+              else {
+                this.TotalAfterDiscount = 0;
+              }
+            }
           }
-      }
-      else{
-        this.Total = this.Total - this.itemToRedQunt1.SallePrice;
-        if(this.Total>0){
-          this.getDiscountTotal(this.Total);
+          else {
+            if (!this.rem) {
+              this.num = this.num - 1;
+              if (this.DB[i].SallePrice == 0) {
+                this.Total = this.Total - this.DB[i].PriceBook;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+              else {
+                this.Total = this.Total - this.DB[i].SallePrice;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+            }
+            else {//remove the item
+              if (this.itemToRedQunt1.Quantity != 0) {
+                this.num = this.num - this.DB[i].Quantity;
+              }
+              else {
+                this.num = this.num - 1;
+              }
+              if (this.DB[i].SallePrice == 0) {
+                this.Total = this.Total - this.DB[i].Total;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+              else {
+                this.Total = this.Total - this.DB[i].Total;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+            }
           }
-          else{
-            this.TotalAfterDiscount = 0;
+        }
+      }
+    }
+    else {
+      if (act == 'inc') {
+        // console.log("this.itemToAddQunt1-inc",this.itemToAddQunt1)
+        if (this.itemToAddQunt1) {
+          //let i = this.itemToAddQunt1.Id;
+          if (this.itemToAddQunt1.SallePrice == 0) {
+            let d = this.itemToAddQunt1.Id;
+            for (var k = 0; k < this.DB.length; k++) {
+              if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                this.DB[k].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+            }
+            //this.DB.map(item => {
+            //  if (item.Id === d)
+            //    this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+            //});
+            this.Total = this.Total + this.itemToAddQunt1.PriceBook;
+            if (this.Total > 0) {
+              this.getDiscountTotal(this.Total);
+            }
+            else {
+              this.TotalAfterDiscount = 0;
+            }
+            for (var k = 0; k < this.DB.length; k++) {
+              if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                this.CART.contents[k].Total=this.DB[k].Total;
+            }            //this.CART.contents.map(item => {
+            //  if (item.Id === i)
+            //    this.CART.contents[i].Total = this.DB[i].Total;
+            //});
+            let _cart = JSON.stringify(this.CART.contents);
+            localStorage.setItem(this.CART.KEY, _cart);
+            // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
+            // //this.CART.contents =
+            //  _cart.contents.map(item=>{
+            //   if(item.Id === i)
+            //   _cart.contents[i].Total = this.DB[i].Total;
+            // });
+            //  localStorage.setItem(this.CART.KEY,JSON.stringify( this.CART.contents[i]));
           }
-    }
-      this.num = this.num - 1;
-    }
-      }
-      }
-      }
-    }
- }
-if(this.DB.length==0){
-  this.num = 0;
-  this.Total = 0;
-  this.TotalAfterDiscount = 0;
-}
-this.NUM.num = this.num;
-let _num =  JSON.stringify(this.NUM.num);
-localStorage.setItem(this.NUM.KEY, _num);
+          else {
+            let d = this.itemToAddQunt1.Id;
+            for (var k = 0; k < this.DB.length; k++) {
+              if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                this.DB[k].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+            }
+            //this.DB.map(item => {
+            //  if (item.Id === d)
+            //    this.DB[d].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+            //});
+            this.Total = this.Total + this.itemToAddQunt1.SallePrice;
+            if (this.Total > 0) {
+              this.getDiscountTotal(this.Total);
+            }
+            else {
+              this.TotalAfterDiscount = 0;
 
-this.TOTAL.total = this.Total;
-let _total =  JSON.stringify(this.TOTAL.total);
-localStorage.setItem(this.TOTAL.KEY, _total);
-}
+              for (var k = 0; k < this.DB.length; k++) {
+                if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                  this.CART.contents[k].Total = this.DB[k].Total;
+              }  
+            }
+            //this.CART.contents.map(item => {
+            //  if (item.Id === i)
+            //    this.CART.contents[i].Total = this.DB[i].Total;
+            //});
+            let _cart = JSON.stringify(this.CART.contents);
+            localStorage.setItem(this.CART.KEY, _cart);
+          }
+          this.num = this.num + 1;
+        }
+      }
+      else {
+        if (act == 'red') {
+          if (this.itemToRedQunt1) {
+            // let i = this.itemToRedQunt1.Id;
+            if (!this.rem) {
+              if (this.itemToRedQunt1.SallePrice == 0) {
+                let c;
+                c = this.itemToRedQunt1.Id;
+                if (this.DB.length > 0) {
+                  for (var k = 0; k < this.DB.length; k++) {
+                    if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                      this.DB[k].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+                  }
+                  //this.DB.map(item => {
+                  //  if (item.Id === c)
+                  //    this.DB[c].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+                  //});
+                }
+                this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+                if (this.DB.length > 0) {
+                  for (var k = 0; k < this.DB.length; k++) {
+                    if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                      this.CART.contents[k].Total = this.DB[k].Total;
+                  }
+                  //this.CART.contents.map(item => {
+                  //  let id = this.itemToRedQunt1.Id
+                  //  if (item.Id === id)
+                  //    this.CART.contents[id].Total = this.DB[id].Total;
+                  //});
+                  let _cart = JSON.stringify(this.CART.contents);
+                  localStorage.setItem(this.CART.KEY, _cart);
+                }
+              }
+              else {
+                let c;
+                c = this.itemToRedQunt1.Id;
+                if (this.DB.length > 0) {
+                  for (var k = 0; k < this.DB.length; k++) {
+                    if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                      this.DB[k].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+                  }
+                  for (var k = 0; k < this.DB.length; k++) {
+                    if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                      this.CART.contents[k].Total = this.DB[k].Total;
+                  }
+                  //this.DB.map(item => {
+                  //  if (item.Id === c)
+                  //    this.DB[c].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+                  //});
+                }
+                this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+                if (this.DB.length > 0) {
+                  for (var k = 0; k < this.DB.length; k++) {
+                    if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                      this.CART.contents[k].Total = this.DB[k].Total;
+                  }
+                  //this.CART.contents.map(item => {
+                  //  let id;
+                  //  id = this.itemToRedQunt1.Id;
+                  //  if (item.Id === id)
+                  //    this.CART.contents[id].Total = this.DB[id].Total;
+                  //});
+                  let _cart = JSON.stringify(this.CART.contents);
+                  localStorage.setItem(this.CART.KEY, _cart);
+                }
+              }
+              this.num = this.num - 1;
+            }
+            else {//this.rem ==true;
+              if (this.itemToRedQunt1.Quantity != 0) {
+                this.Total = this.Total - this.itemToRedQunt1.Total;
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+                this.num = this.num - this.itemToRedQunt1.Quantity;
+              }
+              else {
+                if (this.itemToRedQunt1.SallePrice == 0) {
+                  this.Total = this.Total - this.itemToRedQunt1.PriceBook;
+                  if (this.Total > 0) {
+                    this.getDiscountTotal(this.Total);
+                  }
+                  else {
+                    this.TotalAfterDiscount = 0;
+                  }
+                }
+                else {
+                  this.Total = this.Total - this.itemToRedQunt1.SallePrice;
+                  if (this.Total > 0) {
+                    this.getDiscountTotal(this.Total);
+                  }
+                  else {
+                    this.TotalAfterDiscount = 0;
+                  }
+                }
+                this.num = this.num - 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    if (this.DB.length == 0) {
+      this.num = 0;
+      this.Total = 0;
+      this.TotalAfterDiscount = 0;
+    }
+    this.NUM.num = this.num;
+    let _num = JSON.stringify(this.NUM.num);
+    localStorage.setItem(this.NUM.KEY, _num);
+
+    this.TOTAL.total = this.Total;
+    let _total = JSON.stringify(this.TOTAL.total);
+    localStorage.setItem(this.TOTAL.KEY, _total);
+  }
 find(id){
   //find an item in the cart by it's id
   let match = this.CART.contents.filter(item=>{
@@ -662,42 +708,42 @@ find(id){
   if(match && match[0])
       return match[0];
 }
-add(item,qty=1){
-  //add a new item to the cart
-  //check that it is not in the cart already
-  if(this.find(item.IdBook)){
+  add(item, qty = 1) {
+    //add a new item to the cart
+    //check that it is not in the cart already
+    if (this.find(item.IdBook)) {
       this.increase(item.Id, qty);
-  }
-  else{
-    // let PRODUCTS = [];
-    //   let arr = PRODUCTS.filter(product=>{
-    //       if(product.id == id){
-    //           return true;
-    //       }
-    //   });
+    }
+    else {
+      // let PRODUCTS = [];
+      //   let arr = PRODUCTS.filter(product=>{
+      //       if(product.id == id){
+      //           return true;
+      //       }
+      //   });
       // if(arr && arr[0]){
-          let obj = {
-              Id: this.CART.contents.length,
-              UserName: null,
-              IdBook: item.IdBook,
-              NameBook: item.NameBook,
-              PriceBook: item.PriceBook,
-              ImageBook: item.ImageBook,
-              Quantity: item.Quantity,
-              SallePrice: item.SallePrice,
-              Total: item.Total
-          };
-          this.CART.contents.push(obj);
-          //update localStorage
-          this.rem = false;
-          this.sync('inc');
+      let obj = {
+        Id: this.CART.contents.length,
+        UserName: null,
+        IdBook: item.IdBook,
+        NameBook: item.NameBook,
+        PriceBook: item.PriceBook,
+        ImageBook: item.ImageBook,
+        Quantity: item.Quantity,
+        SallePrice: item.SallePrice,
+        Total: item.Total
+      };
+      this.CART.contents.push(obj);
+      //update localStorage
+      this.rem = false;
+      this.sync('inc');
       // }
       // else{
-          //product id does not exist in products data
-        //  console.error('Invalid Product');
-     // }
+      //product id does not exist in products data
+      //  console.error('Invalid Product');
+      // }
+    }
   }
-}
 increase(id, qty){
   //increase the quantity of an item in the cart
   this.CART.contents = this.CART.contents.map(item=>{
@@ -758,46 +804,164 @@ remove(id){
     this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
   }
   setCookieTotal(total: number) {
-    this.cookieService.put('Total', total.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    //this.cookieServicengx.set('Total', total.toString(), expires, '/');
+
+    //this.cookieService.put('Total', total.toString(), {
+    //  expires,
+    //  path: '/'
+    ////});
+    this.cookieServicengx.put('Total', total.toString(), {
+      expires,
+      path: '/'
+    });
+   // this.cookieService.put('Total', total.toString());
   }
   setCookieCurrency(currency: number) {
-    this.cookieService.put('Currency', currency.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    debugger;
+    //this.cookieServicengx.set('Currency', currency.toString(), expires, '/');
+
+    //this.cookieService.put('Currency', currency.toString(), {
+    //  expires,
+    //  path: '/'
+    //});
+    this.cookieServicengx.put('Currency', currency.toString(), {
+      expires,
+      path: '/'
+    });
+   // this.cookieService.put('Currency', currency.toString());
   }
   setCookieLang(lang: string) {
-    this.cookieService.put('Lang', lang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    //this.cookieServicengx.set('Lang', lang, expires, '/');
+
+    //this.cookieService.put('Lang', lang, {
+    //  expires,
+    //  path: '/'
+    //});
+    this.cookieServicengx.put('Lang', lang, {
+      expires,
+      path: '/'
+    });
+
+    //this.cookieService.put('Lang', lang);
   }
   setCookieIlang(ilang: string) {
-    this.cookieService.put('ilang', ilang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    debugger;
+    //this.cookieServicengx.set('ilang', ilang, expires, '/');
+
+    //this.cookieService.put('ilang', ilang, {
+    //  expires,
+    //  path: '/'
+    //});
+    this.cookieServicengx.put('ilang', ilang, {
+      expires,
+      path: '/'
+    });
+
+    //this.cookieService.put('ilang', ilang);
   }
   setCookieAddress(address: string) {
-    this.cookieService.put('address', address);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    debugger;
+    //this.cookieServicengx.set('address', address, expires, '/');
+
+    //this.cookieService.put('address', address, {
+    //  expires,
+    //  path: '/'
+    //});
+    this.cookieServicengx.put('address', address, {
+      expires,
+      path: '/'
+    });
+
+    //this.cookieService.put('address', address);
   }
   setCookieContact(contact: string) {
-    this.cookieService.put('contact', contact);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    //this.cookieServicengx.set('contact', contact, expires, '/');
+
+    //this.cookieService.put('contact', contact, {
+    //  expires,
+    //  path: '/'
+    //});
+     this.cookieServicengx.put('contact', contact, {
+      expires,
+      path: '/'
+    });
+
+    //this.cookieService.put('contact', contact);
   }
   setCookieAddress2(address2: string) {
-    this.cookieService.put('address2', address2);
+    debugger;
+
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    //this.cookieServicengx.set('address2', address2, expires, '/');
+
+    //this.cookieService.put('address2', address2, {
+    //  expires,
+    //  path: '/'
+    //});
+     this.cookieServicengx.put('address2', address2, {
+      expires,
+      path: '/'
+    });
+
+    //this.cookieService.put('address2', address2);
   }
   setCookieContact2(contact2: string) {
-    this.cookieService.put('contact2', contact2);
+    debugger;
+
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    //this.cookieServicengx.set('contact2', contact2, expires, '/');
+
+    //this.cookieService.put('contact2', contact2, {
+    //  expires,
+    //  path: '/'
+    //});
+      this.cookieServicengx.put('contact2', contact2, {
+      expires,
+      path: '/'
+    });
+
+   // this.cookieService.put('contact2', contact2);
   }
   setCookieIsYourAddress(isYourAddress: string) {
-    this.cookieService.put('isYourAddress', isYourAddress);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    debugger;
+
+    this.checkoutService.put('isYourAddress', isYourAddress);
+    //this.cookieServicengx.set('isYourAddress', isYourAddress,expires,'/');
+    let a= this.checkoutService.get('isYourAddress');
   }
   SendToTranzila() {
+    debugger;
     this.CART.contents = this.DB;
     let _cart = JSON.stringify(this.CART.contents);
     localStorage.setItem(this.CART.KEY, _cart);  
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.lang);
     this.setCookieIlang(this.ilang);
-    if(this.TotalAfterDiscount>0){
-      this.setCookieTotal(this.TotalAfterDiscount);
-    }
-    else{
-      this.setCookieTotal(this.Total);
-    }
-    this.setCookieTotal(this.Total);
+    if (this.getCookie('UserName')) { this.setCookieTotal(this.TotalAfterDiscount); }
+    else { this.setCookieTotal(this.Total); }
+    //if(this.TotalAfterDiscount>0){
+    //  this.setCookieTotal(this.TotalAfterDiscount);
+    //}
+    //else{
+    //  this.setCookieTotal(this.Total);
+    //}
+    //this.setCookieTotal(this.Total);
     let address:any;
     let country:any
     country = this.selectedCountry;
@@ -862,7 +1026,9 @@ remove(id){
     //  }
   }
 
-  checkout(){
+  checkout() {
+    debugger;
+    //alert(this.UserNameLogin);
     if(this.DB.length==0){
       alert('לא נבחרו מוצרים');
     }
@@ -908,7 +1074,8 @@ remove(id){
            }
            return
       }
-      else{
+      else {
+        debugger;
        this.setCookieIsYourAddress(this.isYourAddress);
        let address2:any;
        let country2:any
@@ -923,7 +1090,8 @@ remove(id){
        last2 = this.LastNameHebrew2;
        let contactName2:any;
        contactName2 = first2.trimEnd() + " " + last2.trimEnd();  
-       this.setCookieContact2(contactName2);  
+        this.setCookieContact2(contactName2);
+        debugger;
       }
     }
     if(
@@ -950,7 +1118,7 @@ remove(id){
     // }
      }
     if(this.UserNameLogin || this.UserNameLogin!=''){
-      if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
+      if (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin.trim())){
         this.usernameemail.nativeElement.style.color = "#dc3545";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
         return this.emailvalidate = true;
@@ -977,7 +1145,8 @@ remove(id){
              }
       }
      });
-    }
+      }
+      debugger;
     this.SendToTranzila();  
   }
 
@@ -1033,7 +1202,13 @@ remove(id){
     const ele2 = document.getElementById("yes") as HTMLInputElement
     ele2.checked = true;
     this.no.nativeElement.checked = false;
-    this.yes.nativeElement.checked = true;
+      this.yes.nativeElement.checked = true;
+      this.AddressNo.nativeElement.style.display = "none";
+
+      this.AddressYes.nativeElement.style.display = "block";
+
+      document.getElementById("AddressYes").scrollIntoView();
+
       }
   else if(isYourAddress=='no') {
     this.isYourAddress ='no';
@@ -1042,7 +1217,12 @@ remove(id){
     const ele2 = document.getElementById("no") as HTMLInputElement
     ele2.checked = true;
     this.yes.nativeElement.checked = false;
-    this.no.nativeElement.checked = true;
+      this.no.nativeElement.checked = true;
+      this.AddressYes.nativeElement.style.display = "none";
+      this.AddressNo.nativeElement.style.display = "block";
+
+      document.getElementById("AddressNo").scrollIntoView();
+
      }
   }
 
@@ -1056,12 +1236,29 @@ remove(id){
     this.router.navigateByUrl("/newHebrew");
 
   }
+  BackToNew() {
+    this.router.navigateByUrl("/newHebrew");
+
+  }
+  scroll() {
+    //let el = document.getElementById("shippingForm");
+    //el.scrollTop = el.scrollHeight;
+    //el.scrollIntoView():
+    debugger;
+    this.shippingForm.nativeElement.style.visibility = "visible";
+
+    document.getElementById("shippingForm").scrollIntoView();
+    document.getElementById("scroll").scrollIntoView();
+  }
   SendToSignIn(){
-    this.router.navigateByUrl("/UserPass/2");
+    this.router.navigateByUrl("/UserPassHebrewFromStore");
+  }
+  SendToNewMember() {
+    this.router.navigateByUrl("/NewMemberAccountHebrewFromStore");
   }
   isSignIn(){
-    this.UserNameLogin = this.getCookie('UserName'); 
-    if(this.UserNameLogin!=undefined){
+    //this.UserNameLogin = this.getCookie('UserName'); 
+    if (this.getCookie('UserName')!=undefined){
       return true;
     }
     else{
@@ -1116,5 +1313,49 @@ unfocusaddress() {
 }
 unfocususernameemail() {
   this.nameh.nativeElement.style.color = "gray";
-}
+  }
+  focusName() {
+    this.nameh.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusName() {
+    this.nameh.nativeElement.style.color = "gray";
+  }
+  unfocusEmailHe() {
+    this.usernameemail.nativeElement.style.color = "gray";
+  }
+  focusEmailHe() {
+    this.usernameemail.nativeElement.style.color = "#27b5e5";
+  }
+  focusAddressCountry() {
+    this.address.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusAddressCountry() {
+    this.address.nativeElement.style.color = "gray";
+  }
+  focusName2() {
+    this.nameh2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusName2() {
+    this.nameh2.nativeElement.style.color = "gray";
+  }
+  focusAddress2() {
+    this.address2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusAddress2() {
+    this.address2.nativeElement.style.color = "gray";
+  }
+  focuscontry2() {
+    this.country2.nativeElement.style.color = "#27b5e5";
+
+  }
+  unfocuscontry1() {
+    this.country.nativeElement.style.color = "gray";
+  }
+  focuscontry1() {
+    this.country.nativeElement.style.color = "#27b5e5";
+
+  }
+  unfocuscontry2() {
+    this.country2.nativeElement.style.color = "gray";
+  }
 }

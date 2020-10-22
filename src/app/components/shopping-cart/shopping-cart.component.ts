@@ -10,8 +10,9 @@ import { Observable } from 'rxjs';
 import { shoppingCart } from '../../../classes/shoppingCart';
 import { ChangeDetectorRef } from '@angular/core';
 import { __await } from 'tslib';
-import { CookieService } from 'angular2-cookie';
+import { CookieService } from 'ngx-cookie';
 import { User } from 'src/classes/User';
+import { CheckoutServiceService } from 'src/app/services/checkout-service.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -41,6 +42,10 @@ export class ShoppingCartComponent implements OnInit {
 
   @ViewChild('yes') yes: ElementRef;
   @ViewChild('no') no: ElementRef;
+  @ViewChild('shippingForm') shippingForm: ElementRef;
+  @ViewChild('AddressYes') AddressYes: ElementRef;
+  @ViewChild('AddressNo') AddressNo: ElementRef;
+  @ViewChild('Top') Top: ElementRef;
 
   public DB: shoppingCart[];
   public user: User;
@@ -86,15 +91,122 @@ export class ShoppingCartComponent implements OnInit {
   public itemToRedQunt1:any;
   public emailvalidate:boolean = false;
   public rem:boolean = false;
-  public IsMemberShip:boolean=true;
-  constructor(public cookieService: CookieService,private ngZone: NgZone, private cd: ChangeDetectorRef,public router: Router,private serverService: ServerService, private http: HttpClient) {
-    this.Country =  this.serverService.Country;
+  public IsMemberShip: boolean = true;
+  public DBUndefined: number = 0;
+  constructor(public cookieService: CookieService, private ngZone: NgZone, public checkoutService: CheckoutServiceService, private cd: ChangeDetectorRef, public router: Router, private serverService: ServerService, private http: HttpClient) {
+    this.checkoutService.put('isYourAddress', 'no');
+    //this.cookieServicengx.set('isYourAddress', isYourAddress,expires,'/');
+    let a = this.checkoutService.get('isYourAddress');
+    this.Country = this.serverService.Country;
     this.Country2 =  this.serverService.Country;
 
-if(this.getCookie('UserName')) {   
-
+//if(this.getCookie('UserName')) {   
+    this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+      this.DB = resp;
+      if (this.DB.length != 0) {
+        this.serverService.getNumProduct().subscribe(val => this.num = val);
+      }
+    });
+    this.serverService.getAllDBShoppingCart().subscribe((resp) => {
+      this.DB = resp;
+      if (this.DB.length != 0) {
+        this.serverService.getTotalPrice().subscribe((val) => {
+          this.Total = val
+          this.UserNameLogin = this.getCookie('UserName');
+          if (this.UserNameLogin) {
+            this.serverService.getUserDetails().subscribe((events) => {
+              if (events.MemberShip > -1)
+                this.IsMemberShip = true;
+              if (this.IsMemberShip) {
+                // this.serverService.setTotal();
+                if (this.Total > 0) {
+                  this.getDiscountTotal(this.Total);
+                }
+                else {
+                  this.TotalAfterDiscount = 0;
+                }
+              }
+            })
+          }
+        });
+      }
+    });
   this.serverService.getAllDBShoppingCart().subscribe((resp) => {
     this.DB = resp;
+    if (!this.DB || this.DB == undefined || this.DB.length == 0) {
+      //this.DBUndefined = 1;
+      //check localStorage and initialize the contents of CART.contents
+      let _contents = localStorage.getItem(this.CART.KEY);
+      if (_contents) {
+        this.CART.contents = JSON.parse(_contents);
+        this.DB = this.CART.contents;
+        if (this.DB.length > 0) {
+          for (var i = 0; i < this.DB.length; i++) {
+            if (this.DB[i].SallePrice == 0) {
+              this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
+              this.num = this.num + this.DB[i].Quantity;
+              this.Total = this.Total + this.DB[i].Total;
+              if (this.Total > 0) {
+                this.getDiscountTotal(this.Total);
+              }
+              else {
+                this.TotalAfterDiscount = 0;
+              }
+            }
+            else {
+              this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
+              this.num = this.num + this.DB[i].Quantity;
+              this.Total = this.Total + this.DB[i].Total;
+              if (this.Total > 0) {
+                this.getDiscountTotal(this.Total);
+              }
+              else {
+                this.TotalAfterDiscount = 0;
+              }
+            }
+          }
+        }
+      } else {
+        //dummy test data
+        this.CART.contents = [];
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+        // CART.sync();
+        this.DB = this.CART.contents;
+      }
+      let _num = localStorage.getItem(this.NUM.KEY);
+      if (parseInt(_num) > 0) {
+        this.NUM.num = parseInt(_num);
+        this.num = parseInt(_num);
+      }
+      else {
+        this.NUM.num = 0;
+        let _num = JSON.stringify(this.NUM.num);
+        localStorage.setItem(this.NUM.KEY, _num);
+        this.num = 0;
+      }
+      let _total = localStorage.getItem(this.TOTAL.KEY);
+      if (parseInt(_total) > 0) {
+        this.TOTAL.total = parseInt(_total);
+        this.Total = parseInt(_total);
+        if (this.Total > 0) {
+          this.getDiscountTotal(this.Total);
+        }
+        else {
+          this.TotalAfterDiscount = 0;
+        }
+      }
+      else {
+        this.TOTAL.total = 0;
+        let _total = JSON.stringify(this.TOTAL.total);
+        localStorage.setItem(this.TOTAL.KEY, _total);
+        this.Total = 0;
+        if (this.Total == 0) {
+          this.TotalAfterDiscount = 0;
+        }
+      }
+      //this.num = JSON.stringify(localStorage.getItem(this.NUM.KEY));
+    }
     for (var i = 0; i < this.DB.length; i++) {
       if (this.DB[i].SallePrice == 0)
         this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
@@ -105,105 +217,18 @@ if(this.getCookie('UserName')) {
     error => {  
       console.log(error)
     });
-    
-    this.serverService.getTotalPrice().subscribe((val) => {
-      this.Total = val
-      this.UserNameLogin = this.getCookie('UserName');  
-      if(this.UserNameLogin){
-      this.serverService.getUserDetails().subscribe((events) => {
-        if(events.MemberShip >-1)
-        this.IsMemberShip = true;
-        if(this.IsMemberShip){
-         // this.serverService.setTotal();
-        if(this.Total>0){
-        this.getDiscountTotal(this.Total);
-        }
-        else{
-          this.TotalAfterDiscount = 0;
-        }
-        }
-      })
-    }
-    });
-
+    //if (this.DBUndefined == 0) {
+  
+    //}
     //get list of all books
     // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
-  this.serverService.getNumProduct().subscribe(val => this.num = val);
-  }
-else{
-if(!this.DB){
-        //check localStorage and initialize the contents of CART.contents
-       let  _contents = localStorage.getItem(this.CART.KEY);
-        if(_contents){
-            this.CART.contents = JSON.parse(_contents);
-            this.DB= this.CART.contents;
-            if(this.DB.length > 0){
-            for (var i = 0; i < this.DB.length; i++) {
-            if (this.DB[i].SallePrice == 0){
-                this.DB[i].Total = this.DB[i].PriceBook * this.DB[i].Quantity;
-                this.num = this.num + this.DB[i].Quantity;
-                this.Total = this.Total + this.DB[i].Total;
-                if(this.Total>0){
-                  this.getDiscountTotal(this.Total);
-                  }
-                 else{
-                 this.TotalAfterDiscount = 0;
-                 }
-            }
-           else{
-              this.DB[i].Total = this.DB[i].SallePrice * this.DB[i].Quantity;
-              this.num = this.num + this.DB[i].Quantity;
-              this.Total = this.Total + this.DB[i].Total;
-              if(this.Total>0){
-              this.getDiscountTotal(this.Total);
-              }
-        else{
-          this.TotalAfterDiscount = 0;
-        }
-            }
-          }
-        }
-        }else{
-            //dummy test data
-            this.CART.contents = [];
-             let _cart = JSON.stringify(this.CART.contents);
-             localStorage.setItem(this.CART.KEY, _cart);
-            // CART.sync();
-            this.DB= this.CART.contents;  
-        }
-        let _num = localStorage.getItem(this.NUM.KEY);
-    if(parseInt(_num)>0){
-      this.NUM.num = parseInt(_num);
-      this.num = parseInt(_num);
-    }
-    else{
-      this.NUM.num = 0;         
-      let _num =  JSON.stringify(this.NUM.num);
-      localStorage.setItem(this.NUM.KEY, _num);
-      this.num = 0;
-    }
-    let _total = localStorage.getItem(this.TOTAL.KEY);
-    if(parseInt(_total)>0){
-      this.TOTAL.total = parseInt(_total);
-     this.Total = parseInt(_total);
-     if(this.Total>0){
-      this.getDiscountTotal(this.Total);
-      }   
-      else{
-        this.TotalAfterDiscount = 0;
-      }
-    }
-    else{
-      this.TOTAL.total = 0;         
-      let _total =  JSON.stringify(this.TOTAL.total);
-      localStorage.setItem(this.TOTAL.KEY, _total);
-      this.Total = 0;
-      if(this.Total==0){
-        this.TotalAfterDiscount=0;
-        }
-    }
-}
-}
+    //if (this.DBUndefined == 0) {
+   
+    //}
+  //}
+
+  
+
 }
   changePlaying() {
     __await (1000);
@@ -244,7 +269,12 @@ if(!this.DB){
   }
 
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
+    if (this.getCookie('UserName') != undefined) {
     this.UserNameLogin = this.getCookie('UserName');
+}
+    //this.UserNameLogin = this.getCookie('UserName');
     if(this.UserNameLogin){
       this.serverService.getUserDetails().subscribe((events) => {
         this.FirstName = events.FirstNameEnglish;
@@ -404,7 +434,7 @@ async sync(act:string){
         else{//remove the item
           //if(this.DB[i].Id==this.itemToRedQunt1.Id){
           if(this.itemToRedQunt1.Quantity!=0){
-          this.num = this.num - this.DB[i].Quantity;
+            this.num = this.num - this.itemToRedQunt1.Quantity;
           }
           else{
             this.num =  this.num - 1;
@@ -477,21 +507,29 @@ else{
         //let i = this.itemToAddQunt1.Id;
         if (this.itemToAddQunt1.SallePrice == 0){
           let d = this.itemToAddQunt1.Id;
-          this.DB.map(item=>{
-            if(item.Id === d)
-            this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
-          });
+          for (var k = 0; k < this.DB.length; k++) {
+            if (this.DB[k].Id == this.itemToAddQunt1.Id)
+              this.DB[k].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+          }
+          //this.DB.map(item=>{
+          //  if(item.Id === d)
+          //  this.DB[d].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+          //});
         this.Total = this.Total + this.itemToAddQunt1.PriceBook;
         if(this.Total>0){
           this.getDiscountTotal(this.Total);
           }
           else{
             this.TotalAfterDiscount = 0;
-          }   
-          this.CART.contents.map(item=>{
-          if(item.Id === i)
-          this.CART.contents[i].Total = this.DB[i].Total;
-        });
+          }
+          for (var k = 0; k < this.DB.length; k++) {
+            if (this.DB[k].Id == this.itemToAddQunt1.Id)
+              this.CART.contents[k].Total = this.DB[k].Total;
+          }  
+        //  this.CART.contents.map(item=>{
+        //  if(item.Id === i)
+        //  this.CART.contents[i].Total = this.DB[i].Total;
+        //});
         let _cart = JSON.stringify(this.CART.contents);
         localStorage.setItem(this.CART.KEY, _cart);
         // let _cart = JSON.parse( localStorage.getItem(this.CART.KEY));
@@ -504,21 +542,28 @@ else{
       }
         else{
           let d = this.itemToAddQunt1.Id;
-          this.DB.map(item=>{
-            if(item.Id === d)
-            this.DB[d].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
-          });
+          //this.DB.map(item=>{
+          //  if (item.Id === d)
+              for (var k=0; k < this.DB.length; k++) {
+                if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                this.DB[k].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+              }
+          //});
           this.Total = this.Total + this.itemToAddQunt1.SallePrice;
           if(this.Total>0){
             this.getDiscountTotal(this.Total);
             }  
         else{
           this.TotalAfterDiscount = 0;
-        }
-            this.CART.contents.map(item=>{
-            if(item.Id === i)
-            this.CART.contents[i].Total = this.DB[i].Total;
-          });
+          }
+          for (var k = 0; k < this.DB.length; k++) {
+            if (this.DB[k].Id == this.itemToAddQunt1.Id)
+              this.CART.contents[k].Total = this.DB[k].Total;
+          }  
+          //  this.CART.contents.map(item=>{
+          //  if(item.Id === i)
+          //  this.CART.contents[i].Total = this.DB[i].Total;
+          //});
           let _cart = JSON.stringify(this.CART.contents);
           localStorage.setItem(this.CART.KEY, _cart);
         }
@@ -533,11 +578,16 @@ else{
           if (this.itemToRedQunt1.SallePrice == 0){
             let c;
             c = this.itemToRedQunt1.Id;
-            if(this.DB.length>0){
-              this.DB.map(item=>{
-                if(item.Id === c)
-                this.DB[c].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
-              });             }
+            if (this.DB.length > 0) {
+              for (var k = 0; k < this.DB.length; k++) {
+                if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                  this.DB[k].Total = this.itemToAddQunt1.PriceBook * this.itemToAddQunt1.Quantity;
+              }
+              //this.DB.map(item=>{
+              //  if(item.Id === c)
+              //  this.DB[c].Total = this.itemToRedQunt1.PriceBook * this.itemToRedQunt1.Quantity;
+              //});
+            }
          this.Total = this.Total - this.itemToRedQunt1.PriceBook;
          if(this.Total>0){
           this.getDiscountTotal(this.Total);
@@ -545,12 +595,16 @@ else{
         else{
           this.TotalAfterDiscount = 0;
         }
-          if(this.DB.length>0){
-          this.CART.contents.map(item=>{
-            let id = this.itemToRedQunt1.Id
-            if(item.Id === id)
-            this.CART.contents[id].Total = this.DB[id].Total;
-          });
+            if (this.DB.length > 0) {
+              for (var k = 0; k < this.DB.length; k++) {
+                if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                  this.CART.contents[k].Total = this.DB[k].Total;
+              }
+          //this.CART.contents.map(item=>{
+          //  let id = this.itemToRedQunt1.Id
+          //  if(item.Id === id)
+          //  this.CART.contents[id].Total = this.DB[id].Total;
+          //});
           let _cart = JSON.stringify(this.CART.contents);
           localStorage.setItem(this.CART.KEY, _cart);
         }
@@ -558,11 +612,15 @@ else{
           else{
             let c;
             c = this.itemToRedQunt1.Id;
-            if(this.DB.length>0){
-              this.DB.map(item=>{
-                if(item.Id === c)
-                this.DB[c].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
-              });
+            if (this.DB.length > 0) {
+              for (var k = 0; k < this.DB.length; k++) {
+                if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                  this.DB[k].Total = this.itemToAddQunt1.SallePrice * this.itemToAddQunt1.Quantity;
+              }
+              //this.DB.map(item=>{
+              //  if(item.Id === c)
+              //  this.DB[c].Total = this.itemToRedQunt1.SallePrice * this.itemToRedQunt1.Quantity;
+              //});
             }
             this.Total = this.Total - this.itemToRedQunt1.SallePrice;
             if(this.Total>0){
@@ -572,12 +630,16 @@ else{
           this.TotalAfterDiscount = 0;
         }
              if(this.DB.length>0){
-            this.CART.contents.map(item=>{
-              let id;
-              id = this.itemToRedQunt1.Id;
-              if(item.Id === id)
-              this.CART.contents[id].Total = this.DB[id].Total;
-            });
+            //this.CART.contents.map(item=>{
+            //  let id;
+            //  id = this.itemToRedQunt1.Id;
+            //  if(item.Id === id)
+            //  this.CART.contents[id].Total = this.DB[id].Total;
+            //   });
+                 for (var k = 0; k < this.DB.length; k++) {
+                   if (this.DB[k].Id == this.itemToAddQunt1.Id)
+                     this.CART.contents[k].Total = this.DB[k].Total;
+                 }
             let _cart = JSON.stringify(this.CART.contents);
             localStorage.setItem(this.CART.KEY, _cart);
           }
@@ -732,11 +794,13 @@ remove(id){
   });
   this.rem = true;
   //update localStorage
-//  this.sync('red')
+  //this.sync('red')
   } 
 
-  isSignIn(){
+  isSignIn() {
+    if (this.getCookie('UserName')) {
     this.UserNameLogin = this.getCookie('UserName'); 
+}
     if(this.UserNameLogin!=undefined){
       return true;
     }
@@ -776,6 +840,7 @@ remove(id){
     this.cookieService.put('isYourAddress', isYourAddress);
   }
   SendToTranzila() {
+    debugger;
     this.CART.contents = this.DB;
     let _cart = JSON.stringify(this.CART.contents);
     localStorage.setItem(this.CART.KEY, _cart);
@@ -783,12 +848,14 @@ remove(id){
     this.setCookieCurrency(this.currency);
     this.setCookieLang(this.lang);
     this.setCookieIlang(this.ilang);
-    if(this.TotalAfterDiscount>0){
-      this.setCookieTotal(this.TotalAfterDiscount);
-    }
-    else{
-      this.setCookieTotal(this.Total);
-    }
+    if (this.getCookie('UserName')) { this.setCookieTotal(this.TotalAfterDiscount); }
+    else { this.setCookieTotal(this.Total);}
+    //if(this.TotalAfterDiscount>0){
+    //  this.setCookieTotal(this.TotalAfterDiscount);
+    //}
+    //else{
+    //  this.setCookieTotal(this.Total);
+    //}
     let address:any;
     let country:any
     country = this.selectedCountry;
@@ -800,14 +867,21 @@ remove(id){
    this.serverService.getName(this.UserNameLogin).subscribe((val) => {
     let first:any;
     let last:any
-    first = val.FirstName;
-    last = val.LastName;
+    //first = val.FirstName;
+     //last = val.LastName;
+     first = this.FirstName;
+     last = this.LastName;
     let contactName:any;
     contactName = first.trimEnd() + " " + last.trimEnd();  
     this.setCookieContact(contactName);  
   });
     this.serverService.setEmail();
-    this.setCookieRout(2);
+    //this.setCookieRout(2);
+    const expires = new Date();
+    debugger;
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', '2');
+    debugger;
     this.router.navigate(['Pay']);
   }
   registrationGuest(){
@@ -832,6 +906,7 @@ remove(id){
 
     ) {
       this.serverService.RegistrationNewGuest(this.user)
+     
       //  if (this.Rout == 1) {
       //   this.router.navigateByUrl("/RegistrationOneEnglish");
 
@@ -851,13 +926,25 @@ remove(id){
     //    alert("All fields must be filled!");
     //  }
   }
-  checkout(){
+  scroll() {
+    //let el = document.getElementById("shippingForm");
+    //el.scrollTop = el.scrollHeight;
+    //el.scrollIntoView():
+    debugger;
+    this.shippingForm.nativeElement.style.visibility = "visible";
+
+    document.getElementById("shippingForm").scrollIntoView();
+    document.getElementById("scroll").scrollIntoView();
+  }
+  checkout() {
+    debugger;
+   // alert(this.UserNameLogin);
     if(this.DB.length==0){
       alert('the cart is empty please choose a book');
     }
     else{
     var EMAIL_REGEXP = /^.+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?)$/;
-   if(this.isYourAddress=='no'){
+      if (this.isYourAddress == 'no') {
      if(
           this.FirstName2 == null || 
           this.LastName2 == null ||
@@ -896,7 +983,8 @@ remove(id){
           }
           return
      }
-     else{
+     else {
+       debugger;
       this.setCookieIsYourAddress(this.isYourAddress);
       let address2:any;
       let country2:any
@@ -923,11 +1011,11 @@ remove(id){
       ){
         let user = this.getCookie('UserName');
         this.setCookieIsYourAddress(this.isYourAddress);
-    if(user!=undefined || user!=null){//if logined
+      if ((user != undefined || user != null)){//if logined
 
-    this.UserNameLogin = this.getCookie('UserName');
+      this.UserNameLogin = this.getCookie('UserName');
    // this.SendToTranzila();
-    if(!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin))){
+      if (!localStorage.getItem(this.USERNAME.KEY) && (!this.UserNameLogin || this.UserNameLogin=='' && (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)))){
       this.usernameemail.nativeElement.style.color = "red";
       this.usernameemailinput.nativeElement.style.borderBottom = "1px solid red";
       return this.emailvalidate = true;
@@ -938,35 +1026,40 @@ remove(id){
     // }
     }
 
-    if(this.UserNameLogin){
-      if(this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin)){
-        this.usernameemail.nativeElement.style.color = "#dc3545";
-        this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
-        return this.emailvalidate = true;
-      }
-      this.USERNAME.UserName = this.UserNameLogin;
-      let _username = this.USERNAME.UserName;
-      localStorage.setItem(this.USERNAME.KEY, _username);
-       this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
-       let existUser;
-         existUser = val;
-      // console.log(val)
-     
-      if(existUser==1){//if not  registered
-      this.registrationGuest();
-             //add to all cart 
-             let _contents = localStorage.getItem(this.CART.KEY);
-             //  this.DB= this.CART.contents;
-              for (var i = 0; i < this.DB.length; i++) {
-               this.DB[i].UserName = this.UserNameLogin;
-              //  console.log( this.DB[i])
-               this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
-                //  console.log(res)
-               });
-             }
-      }
- 
-     });
+      if (this.UserNameLogin) {
+        if (this.UserNameLogin.length <= 5 || !EMAIL_REGEXP.test(this.UserNameLogin.trim())) {
+          this.usernameemail.nativeElement.style.color = "#dc3545";
+          this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
+          return this.emailvalidate = true;
+        }
+        this.USERNAME.UserName = this.UserNameLogin;
+        let _username = this.USERNAME.UserName;
+        localStorage.setItem(this.USERNAME.KEY, _username);
+        this.serverService.getUserNameExists(this.UserNameLogin).subscribe((val) => {
+          let existUser;
+          existUser = val;
+          // console.log(val)
+
+          if (existUser == 1) {//if not  registered
+            this.registrationGuest();
+          }
+          //add to all cart
+          let _contents = localStorage.getItem(this.CART.KEY);
+          if (_contents) {
+            this.CART.contents = JSON.parse(_contents);
+            this.DB = this.CART.contents;
+          //let _contents = localStorage.getItem(this.CART.KEY);
+          //  this.DB= this.CART.contents;
+          for (var i = 0; i < this.DB.length; i++) {
+            this.DB[i].UserName = this.UserNameLogin;
+            //  console.log( this.DB[i])
+            this.serverService.enterItemToCart(this.DB[i]).subscribe((res) => {
+              //  console.log(res)
+            });
+          }
+        }
+    });
+      //}
     }
     this.SendToTranzila();
 
@@ -1006,7 +1099,8 @@ remove(id){
       if(!this.UserNameLogin){
         this.usernameemail.nativeElement.style.color = "#dc3545";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #dc3545";
-      }else{
+      }
+      else {
         this.usernameemail.nativeElement.style.color = "gray";
         this.usernameemailinput.nativeElement.style.borderBottom = "1px solid #c0bfbf";
       }
@@ -1022,12 +1116,23 @@ onChangeShippingAddress(isYourAddress){
   if(isYourAddress=='yes') {
     console.log("isYourAddress",isYourAddress)
   this.isYourAddress ='yes';
-  this.no.nativeElement.checked = false;
+    this.no.nativeElement.checked = false;
+    this.AddressNo.nativeElement.style.display = "none";
+
+    this.AddressYes.nativeElement.style.visibility = "visible";
+
+    document.getElementById("AddressYes").scrollIntoView();
+
     }
 else if(isYourAddress=='no') {
     console.log("isYourAddress",isYourAddress)
   this.isYourAddress ='no';
-  this.yes.nativeElement.checked = false;
+    this.yes.nativeElement.checked = false;
+    this.AddressYes.nativeElement.style.visibility = "hidden";
+    this.AddressNo.nativeElement.style.display = "block";
+
+    document.getElementById("AddressNo").scrollIntoView();
+
    }
 }
 
@@ -1035,9 +1140,15 @@ else if(isYourAddress=='no') {
     this.router.navigateByUrl("/new");
 
   }
-  
+  BackToNew() {
+    this.router.navigateByUrl("/new");
+
+  }
   SendToSignIn(){
-    this.router.navigateByUrl("/UserPass/2");
+    this.router.navigateByUrl("/UserPassFromStore");
+  }
+  SendToNewMember() {
+    this.router.navigateByUrl("/NewMemberAccountFromStore");
   }
  focusnamee() {
     this.namee.nativeElement.style.color = "#27b5e5";
@@ -1088,5 +1199,49 @@ unfocusaddress2() {
 }
 unfocususernameemail2() {
   this.namee2.nativeElement.style.color = "gray";
-}
+  }
+  focusName() {
+    this.namee.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusName() {
+    this.namee.nativeElement.style.color = "gray";
+  }
+  unfocusEmailHe() {
+    this.usernameemail.nativeElement.style.color = "gray";
+  }
+  focusEmailHe() {
+    this.usernameemail.nativeElement.style.color = "#27b5e5";
+  }
+  focusAddressCountry() {
+    this.address.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusAddressCountry() {
+    this.address.nativeElement.style.color = "gray";
+  }
+  focusName2() {
+    this.namee2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusName2() {
+    this.namee2.nativeElement.style.color = "gray";
+  }
+  focusAddress2() {
+    this.address2.nativeElement.style.color = "#27b5e5";
+  }
+  unfocusAddress2() {
+    this.address2.nativeElement.style.color = "gray";
+  }
+  focuscontry2() {
+    this.country2.nativeElement.style.color = "#27b5e5";
+
+  }
+  unfocuscontry1() {
+    this.country.nativeElement.style.color = "gray";
+  }
+  focuscontry1() {
+    this.country.nativeElement.style.color = "#27b5e5";
+
+  }
+  unfocuscontry2() {
+    this.country2.nativeElement.style.color = "gray";
+  }
 }

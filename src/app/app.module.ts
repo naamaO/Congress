@@ -37,8 +37,13 @@ import { ShopingCartHebrewComponent } from './components/shoping-cart-hebrew/sho
 import { BookDetailsHebrewComponent } from './components/book-details-hebrew/book-details-hebrew.component';
 import { TranzilaComponent } from './components/tranzila/tranzila.component';
 import { DraftsComponent } from './components/drafts/drafts.component';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { CookieOptions } from 'angular2-cookie';
+import { CookieOptions } from 'ngx-cookie';
+//import { CookieOptions } from 'ngx-cookie';
+//import { CookieService } from 'ngx-cookie-service';
+import { CookieModule, CookieService as ngxCookieService } from 'ngx-cookie';
+import { CookieOptions as ngxCookieOptions } from 'ngx-cookie';
+import { CookieOptionsProvider as ngxCookieOptionsProvider } from 'ngx-cookie';
+
 
 //import { CookieService, CookieOptions } from 'ngx-cookie';
 import { CongressRegistrationSecondEnglishComponent } from './components/congress-registration-second-english/congress-registration-second-english.component';
@@ -70,6 +75,16 @@ import { successComponent } from './components/success/success.component';
 import { NavigatetosinglepropComponent } from './components/navigatetosingleprop/navigatetosingleprop.component';
 import { CongressRegistrationSingleHebrewComponent } from './components/congress-registration-single-hebrew/congress-registration-single-hebrew.component';
 import { NavigatetosinglepropHerbewComponent } from './components/navigatetosingleprop-herbew/navigatetosingleprop-herbew.component';
+import { UserPassHebrewComponent } from './components/user-pass-hebrew/user-pass-hebrew.component';
+import { NewMemberAccountHebrewComponent } from './components/new-member-account-hebrew/new-member-account-hebrew.component';
+import { ShoppingCartOnlyOneComponent } from './components/shopping-cart-only-one/shopping-cart-only-one.component';
+import { ShoppingCartOnlyOneHebrewComponent } from './components/shopping-cart-only-one-hebrew/shopping-cart-only-one-hebrew.component';
+import { ReserPassSuccessHebrewComponent } from './components/reser-pass-success-hebrew/reser-pass-success-hebrew.component';
+import { UserPassHebrewFromStoreComponent } from './components/user-pass-hebrew-from-store/user-pass-hebrew-from-store.component';
+import { UserPassFromStoreComponent } from './components/user-pass-from-store/user-pass-from-store.component';
+import { NewMemberAccountFromStoreComponent } from './components/new-member-account-from-store/new-member-account-from-store.component';
+import { NewMemberAccountHebrewFromStoreComponent } from './components/new-member-account-hebrew-from-store/new-member-account-hebrew-from-store.component';
+import { CheckoutServiceService } from './services/checkout-service.service';
 
 @NgModule({
   declarations: [
@@ -121,7 +136,16 @@ import { NavigatetosinglepropHerbewComponent } from './components/navigatetosing
     ResetPassSuccessComponent,
     NavigatetosinglepropComponent,
     CongressRegistrationSingleHebrewComponent,
-    NavigatetosinglepropHerbewComponent
+    NavigatetosinglepropHerbewComponent,
+    UserPassHebrewComponent,
+    NewMemberAccountHebrewComponent,
+    ShoppingCartOnlyOneComponent,
+    ShoppingCartOnlyOneHebrewComponent,
+    ReserPassSuccessHebrewComponent,
+    UserPassHebrewFromStoreComponent,
+    UserPassFromStoreComponent,
+    NewMemberAccountFromStoreComponent,
+    NewMemberAccountHebrewFromStoreComponent
   ],
   imports: [
     MatAutocompleteModule,
@@ -148,7 +172,8 @@ import { NavigatetosinglepropHerbewComponent } from './components/navigatetosing
     RouterModule.forRoot(route),
     FormsModule,
     HttpClientModule,
-     NgbModule.forRoot()
+    NgbModule.forRoot(),
+    CookieModule.forRoot() 
    
   ],
   exports: [
@@ -157,9 +182,10 @@ import { NavigatetosinglepropHerbewComponent } from './components/navigatetosing
   //  //MatButtonModule,
   //  //MatCheckboxModule, MatSelect, MatOption, MatFormField
   ],
-  providers: [ServerService, CookieService, MatPaginatorIntl,
-    { provide: CookieOptions, useValue: {} },
-],
+  providers: [ServerService, MatPaginatorIntl, CheckoutServiceService
+    //{ provide: CookieOptions, useValue: {} },
+    //{ provide: ngxCookieOptionsProvider, useValue: {} },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,67 @@
+<div id="Top" #Top>
+  <div style="width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
+    <div class="top-line">
+      <div style="z-index: 1000;top: 0;">
+
+        <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;">Welcome {{FirstNameHebrew}} {{LastNameHebrew}}</span>
+        <div style="margin-left:92%;top:0px;position:fixed;">
+          <div class="tooltipSmall">
+            <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+            <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+            <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="OpenTooltip()" />
+            <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="OpenTooltip()" />
+            <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;" #CartTooltip id="CartTooltip">
+              <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+                <div>
+                  <span class="span" class="shopping-cart-title cart-num-books">{{num}} books in your cart</span>
+                  <br />
+                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 40px;"></mat-divider>
+                  <br />
+                </div>
+              </div>
+              <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
+                <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
+                  <div>
+                    <div style="display: flex;justify-content:space-around; padding-top:5%;direction:rtl;">
+                      <span class="col-md-3 cart-item-total">${{item.Total}}</span>
+                      <span class="col-md-5" style="text-align: right;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
+                      <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
+                    </div>
+                    <br />
+                    <mat-divider></mat-divider>
+                  </div>
+                </div>
+              </div>
+              <div style="margin:auto;">
+                <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+                  <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                  <div class="row" style="float: left;width: 370px; margin-top:5px;">
+                    <div class="row" style="width: 370px;">
+                      <label class="col-md-4 cart-total">${{this.Total}}</label>
+                      <label class="col-md-3 cart-total-price">Total</label>
+                    </div>
+                    <div class="row" style=" margin-top: 10px;">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="direction: ltr;text-align: right;margin:auto">
+
+        <span class="shopping-cart-title  " style="direction: ltr;margin: auto;padding-right: 20%;float: right;text-align:left;margin-right:26%;">    Cart total ${{this.Total}}</span><br /><br />
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br /><br /><br /><br />
+
+  <div style="border:1px solid;width: 1100px;margin: auto; display:none;">
+    <app-new-member-account [RoutFromStore]="4"></app-new-member-account>
+  </div><div style="border:1px solid;width: 1100px;margin: auto;height:650px; ">
+    <app-user-pass [RoutFromStore]="4"></app-user-pass>
+  </div>
+</div>

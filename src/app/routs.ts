@@ -10,7 +10,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserPassComponent } from './components/user-pass/user-pass.component';
 import { UserPassHebrewComponent } from './components/user-pass-hebrew/user-pass-hebrew.component';
-// import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
+import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { CongressRegistrationOneComponent } from './components/congress-registration-one/congress-registration-one.component';
 import { CongressRegistrationSessionComponent } from './components/congress-registration-session/congress-registration-session.component';
 import { InviteMembersComponent } from './components/invite-members/invite-members.component';
@@ -35,7 +35,6 @@ import { Thank1Component } from './components/thank1/thank1.component';
 import { Thank2Component } from './components/thank2/thank2.component';
 import { Thank3Component } from './components/thank3/thank3.component';
 import { CongressRegistrationSingleComponent } from './components/congress-registration-single/congress-registration-single.component';
-import { MembershipInformationComponent } from './components/membership-information/membership-information.component';
 import { NewMemberAccountCompponent } from './components/new-member-account/new-member-account.component';
 import { NewMemberAccountHebrewComponent } from './components/new-member-account-hebrew/new-member-account-hebrew.component';
 import { notifyComponent } from './components/notify/notify.component';
@@ -52,6 +51,9 @@ import { UserPassFromStoreComponent } from './components/user-pass-from-store/us
 import { UserPassHebrewFromStoreComponent } from './components/user-pass-hebrew-from-store/user-pass-hebrew-from-store.component';
 import { NewMemberAccountFromStoreComponent } from './components/new-member-account-from-store/new-member-account-from-store.component';
 import { NewMemberAccountHebrewFromStoreComponent } from './components/new-member-account-hebrew-from-store/new-member-account-hebrew-from-store.component';
+import { InformationFromStoreComponent } from './components/information-from-store/information-from-store.component';
+import { InformationHebrewFromStoreComponent } from './components/information-hebrew-from-store/information-hebrew-from-store.component';
+import { MembershipInformationHebrewComponent } from './components/membership-information-hebrew/membership-information-hebrew.component';
 export const route: Routes = [
   {
     path: 'Welcome/:Rout',
@@ -113,6 +115,10 @@ export const route: Routes = [
   {
     path: 'MembershipInformation/:Rout',
     component: MembershipInformationComponent,
+  },
+  {
+    path: 'MembershipInformationHebrew/:Rout',
+    component: MembershipInformationHebrewComponent,
   },
   {
     path: 'CongressRegistrationOneComponent',
@@ -267,5 +273,13 @@ export const route: Routes = [
   {
     path: 'NewMemberAccountFromStore',
     component: NewMemberAccountFromStoreComponent,
+ },
+  {
+    path: 'InformationFromStore/:Id',
+    component: InformationFromStoreComponent,
+ },
+  {
+    path: 'InformationHebrewFromStore/:Id',
+    component: InformationHebrewFromStoreComponent,
  }
 ]

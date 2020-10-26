@@ -62,8 +62,17 @@ export class UserPassHebrewComponent implements OnInit {
     });
   }
   setCookie(UaerName: string) {
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
     console.log("username cookies: " + UaerName)
-    this.cookieService.put('UserName', UaerName);
+    this.cookieService.put('UserName', UaerName, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   getCookie(key: string) {
     return this.cookieService.get(key);
@@ -113,10 +122,25 @@ export class UserPassHebrewComponent implements OnInit {
     this.title.nativeElement.style.color = "gray";
   }
   newMember() {
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
     console.log("new member")
     let email = (this.getCookie('UserName'));
-    this.cookieService.put('Rout', this.Rout.toString());
-    this.cookieService.put('Password', this.Password);
+    this.cookieService.put('Rout', this.Rout.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
+    this.cookieService.put('Password', this.Password, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
 
     // this.router.navigate(['/NewMemberAccount'],{queryParams:{Rout: this.Rout.toString(), User:email}});
     // this.router.navigate(['/NewMemberAccount'],{queryParams:{Rout: this.Rout.toString(), User:email}});
@@ -149,6 +173,12 @@ export class UserPassHebrewComponent implements OnInit {
       this.true = events;
       if (this.true == false) {
         this.ShowError = !this.ShowError;
+      }
+
+      if (this.RoutFromStore) {
+        this.serverService.GetIdMember(this.item.Email).subscribe((val) => {
+          this.router.navigateByUrl("/InformationHebrewFromStore/" + val);
+        });
       }
 
       if (this.true == true) {

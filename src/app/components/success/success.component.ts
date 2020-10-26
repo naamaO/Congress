@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild,NgZone } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -18,6 +18,8 @@ import { debug } from 'util';
   styleUrls: ['./success.component.css']
 })
 export class successComponent implements OnInit {
+  @ViewChild('Top') Top: ElementRef;
+
   public newUser: any;
   public sub: any;
   public Rout: string;
@@ -121,6 +123,8 @@ export class successComponent implements OnInit {
     return this.cookieService.getObject(key);
   }
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
     console.log("success!!!!!");
 
    console.log("success page on init! this.user")

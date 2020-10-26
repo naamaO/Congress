@@ -85,6 +85,10 @@ import { UserPassFromStoreComponent } from './components/user-pass-from-store/us
 import { NewMemberAccountFromStoreComponent } from './components/new-member-account-from-store/new-member-account-from-store.component';
 import { NewMemberAccountHebrewFromStoreComponent } from './components/new-member-account-hebrew-from-store/new-member-account-hebrew-from-store.component';
 import { CheckoutServiceService } from './services/checkout-service.service';
+import { InformationDromStoreComponent } from './components/information-drom-store/information-drom-store.component';
+import { InformationFromStoreComponent } from './components/information-from-store/information-from-store.component';
+import { InformationHebrewFromStoreComponent } from './components/information-hebrew-from-store/information-hebrew-from-store.component';
+import { MembershipInformationHebrewComponent } from './components/membership-information-hebrew/membership-information-hebrew.component';
 
 @NgModule({
   declarations: [
@@ -145,7 +149,11 @@ import { CheckoutServiceService } from './services/checkout-service.service';
     UserPassHebrewFromStoreComponent,
     UserPassFromStoreComponent,
     NewMemberAccountFromStoreComponent,
-    NewMemberAccountHebrewFromStoreComponent
+    NewMemberAccountHebrewFromStoreComponent,
+    InformationDromStoreComponent,
+    InformationFromStoreComponent,
+    InformationHebrewFromStoreComponent,
+    MembershipInformationHebrewComponent
   ],
   imports: [
     MatAutocompleteModule,

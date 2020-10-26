@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -14,6 +14,8 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./fail.component.css']
 })
 export class failComponent implements OnInit {
+  @ViewChild('Top') Top: ElementRef;
+
   public sub: any;
   public response: any;
   public user: string; 
@@ -26,6 +28,8 @@ export class failComponent implements OnInit {
        });
   }
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
     console.log("fail page on init!")
   }
 

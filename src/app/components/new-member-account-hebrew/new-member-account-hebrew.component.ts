@@ -238,49 +238,208 @@ export class NewMemberAccountHebrewComponent implements OnInit {
   } setCookieUser(User: User) {
     const expires = new Date();
     expires.setHours(expires.getHours() + 1);
-    this.cookieService.putObject('UserNewMemberAccount', User);
+    this.cookieService.putObject('UserNewMemberAccount', User, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieFirstNameHebrew(name: string) {
-    this.cookieService.put('FirstNameHebrew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('FirstNameHebrew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieLastNameHebrew(name: string) {
-    this.cookieService.put('LastNameHebrew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('LastNameHebrew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieFirstNameEnglish(name: string) {
-    this.cookieService.put('FirstNameEnglish', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('FirstNameEnglish', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieLastNameEnglish(name: string) {
-    this.cookieService.put('LastNameEnglish', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('LastNameEnglish', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieBio(name: string) {
-    this.cookieService.put('Bio', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('Bio', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieNumPhone1(name: string) {
-    this.cookieService.put('NumPhone1', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('NumPhone1', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieAddressUserNew(name: string) {
-    this.cookieService.put('AddressUserNew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('AddressUserNew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieCountryUserNew(name: string) {
-    this.cookieService.put('CountryUserNew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('CountryUserNew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieLanguageUserNew(name: string) {
-    this.cookieService.put('LanguageUserNew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('LanguageUserNew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieMemberShipUserNew(name: string) {
-    this.cookieService.put('MemberShipUserNew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('MemberShipUserNew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   } setCookieTitleUserNew(name: string) {
-    this.cookieService.put('TitleUserNew', name);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('TitleUserNew', name, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieIlang(ilang: string) {
-    this.cookieService.put('ilang', ilang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('ilang', ilang, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
 
   setCookieLang(lang: string) {
-    this.cookieService.put('Lang', lang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('Lang', lang, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieTotal(total: number) {
-    this.cookieService.put('Total', total.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('Total', total.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieCurrency(currency: number) {
-    this.cookieService.put('Currency', currency.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('Currency', currency.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieAddress(address: string) {
-    this.cookieService.put('address', address);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('address', address, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieContact(contact: string) {
-    this.cookieService.put('contact', contact);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('contact', contact, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   //SendToTranzila() {
   //  //let _cart = JSON.stringify(this.CARTMEMBERSHIP.contents);
@@ -455,11 +614,29 @@ export class NewMemberAccountHebrewComponent implements OnInit {
   }
   setCookie(UaerName: string) {
     //alert("hh");
-    this.cookieService.put('UserName', UaerName);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('UserName', UaerName, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieRout(Rout: number) {
     debugger
-    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
 
   ngOnInit() {

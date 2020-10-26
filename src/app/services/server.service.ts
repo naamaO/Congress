@@ -629,7 +629,6 @@ Registration(user: User) {
   }
 
   SendCheckUserPassword(item: UserPass): Observable<boolean> {
-    // alert(item.Email)
     return this.http.post<boolean>(this.port + "/api/Home/CheckUserPassword", item);
   }
 
@@ -655,6 +654,10 @@ Registration(user: User) {
   }
   SubDivisionHebrew(div: string): Observable<string[]> {
     return this.http.get<string[]>(this.port + "/api/Home/GetSubDivisionHebrew?Div=" + div)
+
+  }
+  GetIdMember(email: string): Observable<number> {
+    return this.http.get<number>(this.port + "/api/Home/GetIdMember?Email=" + email)
 
   }
   GetLanguageEnglish(Subdiv: string): Observable<string[]> {

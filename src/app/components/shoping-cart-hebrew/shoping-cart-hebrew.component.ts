@@ -267,7 +267,18 @@ export class ShopingCartHebrewComponent implements OnInit {
     return this.cookieService.get(key);
   }
   setCookie(UaerName: string) {
-    this.cookieService.put('UserName', UaerName);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    //this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+    this.cookieServicengx.put('UserName', UaerName, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
+    //this.cookieService.put('UserName', UaerName);
   }
   ngOnInit() {
     document.getElementById("Top").scrollIntoView();
@@ -801,7 +812,17 @@ remove(id){
  // this.sync('red')
   }
   setCookieRout(Rout: number) {
-    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    //this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+    this.cookieServicengx.put('RoutTranzilaSuccessJewishStudies', Rout.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieTotal(total: number) {
     const expires = new Date();
@@ -814,7 +835,10 @@ remove(id){
     ////});
     this.cookieServicengx.put('Total', total.toString(), {
       expires,
-      path: '/'
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
     });
    // this.cookieService.put('Total', total.toString());
   }
@@ -830,7 +854,10 @@ remove(id){
     //});
     this.cookieServicengx.put('Currency', currency.toString(), {
       expires,
-      path: '/'
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
     });
    // this.cookieService.put('Currency', currency.toString());
   }
@@ -845,7 +872,11 @@ remove(id){
     //});
     this.cookieServicengx.put('Lang', lang, {
       expires,
-      path: '/'
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+
     });
 
     //this.cookieService.put('Lang', lang);
@@ -862,7 +893,11 @@ remove(id){
     //});
     this.cookieServicengx.put('ilang', ilang, {
       expires,
-      path: '/'
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+
     });
 
     //this.cookieService.put('ilang', ilang);
@@ -879,7 +914,11 @@ remove(id){
     //});
     this.cookieServicengx.put('address', address, {
       expires,
-      path: '/'
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+
     });
 
     //this.cookieService.put('address', address);
@@ -895,7 +934,11 @@ remove(id){
     //});
      this.cookieServicengx.put('contact', contact, {
       expires,
-      path: '/'
+       path: '/',
+       sameSite: 'none',
+       secure: true
+
+
     });
 
     //this.cookieService.put('contact', contact);
@@ -913,7 +956,10 @@ remove(id){
     //});
      this.cookieServicengx.put('address2', address2, {
       expires,
-      path: '/'
+       path: '/',
+       sameSite: 'none',
+       secure: true
+
     });
 
     //this.cookieService.put('address2', address2);
@@ -931,7 +977,10 @@ remove(id){
     //});
       this.cookieServicengx.put('contact2', contact2, {
       expires,
-      path: '/'
+        path: '/',
+        sameSite: 'none',
+        secure: true
+
     });
 
    // this.cookieService.put('contact2', contact2);
@@ -941,9 +990,14 @@ remove(id){
     expires.setHours(expires.getHours() + 1);
     debugger;
 
-    this.checkoutService.put('isYourAddress', isYourAddress);
-    //this.cookieServicengx.set('isYourAddress', isYourAddress,expires,'/');
-    let a= this.checkoutService.get('isYourAddress');
+    //this.checkoutService.put('isYourAddress', isYourAddress);
+    this.cookieServicengx.put('isYourAddress', isYourAddress, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+    });
+    //let a= this.checkoutService.get('isYourAddress');
   }
   SendToTranzila() {
     debugger;

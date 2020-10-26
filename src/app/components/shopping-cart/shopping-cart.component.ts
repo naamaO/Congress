@@ -94,9 +94,9 @@ export class ShoppingCartComponent implements OnInit {
   public IsMemberShip: boolean = true;
   public DBUndefined: number = 0;
   constructor(public cookieService: CookieService, private ngZone: NgZone, public checkoutService: CheckoutServiceService, private cd: ChangeDetectorRef, public router: Router, private serverService: ServerService, private http: HttpClient) {
-    this.checkoutService.put('isYourAddress', 'no');
+    //this.checkoutService.put('isYourAddress', 'no');
     //this.cookieServicengx.set('isYourAddress', isYourAddress,expires,'/');
-    let a = this.checkoutService.get('isYourAddress');
+    //let a = this.checkoutService.get('isYourAddress');
     this.Country = this.serverService.Country;
     this.Country2 =  this.serverService.Country;
 
@@ -265,7 +265,15 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   setCookie(UaerName: string) {
-    this.cookieService.put('UserName', UaerName);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('UserName', UaerName, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
 
   ngOnInit() {
@@ -810,34 +818,114 @@ remove(id){
   }
 
   setCookieRout(Rout: number) {
-    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', Rout.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieLang(lang: string) {
-    this.cookieService.put('Lang', lang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('Lang', lang, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieTotal(total: number) {
-    this.cookieService.put('Total', total.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('Total', total.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieCurrency(currency: number) {
-    this.cookieService.put('Currency', currency.toString());
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('Currency', currency.toString(), {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieIlang(ilang: string) {
-    this.cookieService.put('ilang', ilang);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('ilang', ilang, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieAddress(address: string) {
-    this.cookieService.put('address', address);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('address', address, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieAddress2(address2: string) {
-    this.cookieService.put('address2', address2);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('address2', address2, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieContact(contact: string) {
-    this.cookieService.put('contact', contact);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('contact', contact, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieContact2(contact2: string) {
-    this.cookieService.put('contact2', contact2);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('contact2', contact2, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   setCookieIsYourAddress(isYourAddress: string) {
-    this.cookieService.put('isYourAddress', isYourAddress);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+    this.cookieService.put('isYourAddress', isYourAddress, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   SendToTranzila() {
     debugger;
@@ -880,7 +968,13 @@ remove(id){
     const expires = new Date();
     debugger;
     expires.setHours(expires.getHours() + 1);
-    this.cookieService.put('RoutTranzilaSuccessJewishStudies', '2');
+    this.cookieService.put('RoutTranzilaSuccessJewishStudies', '2', {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
     debugger;
     this.router.navigate(['Pay']);
   }

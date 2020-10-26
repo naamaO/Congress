@@ -22,6 +22,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 export class TranzilaComponent implements OnInit {
   @ViewChild('paymentForm') paymentForm: ElementRef;
+  @ViewChild('Top') Top: ElementRef;
 
   private purchaseData: any[];
   private sub: any;
@@ -67,6 +68,8 @@ export class TranzilaComponent implements OnInit {
 
   
   ngOnInit() {
+    document.getElementById("Top").scrollIntoView();
+
  }
  
   ngAfterViewInit() {

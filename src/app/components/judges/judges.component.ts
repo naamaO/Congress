@@ -30,7 +30,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class JudgesComponent  implements OnInit  {
 
-    @ViewChild('myModal') openModal: ElementRef;
+  @ViewChild('myModal') openModal: ElementRef;
   @ViewChild('SelectDiv') SelectDiv: ElementRef;
   @ViewChild('Accepted1') Accepted1: ElementRef;
   @ViewChild('Accepted2') Accepted2: ElementRef;

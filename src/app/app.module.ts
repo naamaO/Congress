@@ -89,6 +89,7 @@ import { InformationDromStoreComponent } from './components/information-drom-sto
 import { InformationFromStoreComponent } from './components/information-from-store/information-from-store.component';
 import { InformationHebrewFromStoreComponent } from './components/information-hebrew-from-store/information-hebrew-from-store.component';
 import { MembershipInformationHebrewComponent } from './components/membership-information-hebrew/membership-information-hebrew.component';
+import { UserPassHeComponent } from './components/user-pass-he/user-pass-he.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +154,8 @@ import { MembershipInformationHebrewComponent } from './components/membership-in
     InformationDromStoreComponent,
     InformationFromStoreComponent,
     InformationHebrewFromStoreComponent,
-    MembershipInformationHebrewComponent
+    MembershipInformationHebrewComponent,
+    UserPassHeComponent
   ],
   imports: [
     MatAutocompleteModule,

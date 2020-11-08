@@ -9,4 +9,5 @@ export class CartWithAdrdess {
   SallePrice: number;
   Total: number;
   Address:string;
+  Currency:number;
    }    

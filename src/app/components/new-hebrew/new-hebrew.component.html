@@ -1,209 +1,230 @@
 <div class="body">
-  <!--<div class="center">
+    <!--<div class="center">
     <form class="center-form">-->
-  <!-- <div style="position:relative;">
+    <!-- <div style="position:relative;">
     <div style="background-color:#fff;height:100%;width:100%;">
      -->
-  <div style="background-color:#fff;width:100%;height: 115px;">
-    <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
-      <div class="top-line">
-        <div style="z-index: 1000;top: 0;">
-          <!-- <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">!היכנס לחשבון חבר שלך או הרשם וקבל %20 הנחה</span>
+    <div style="background-color:#fff;width:100%;height: 115px;">
+        <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
+            <div class="top-line">
+                <div style="z-index: 1000;top: 0;">
+                    <!-- <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">!היכנס לחשבון חבר שלך או הרשם וקבל %20 הנחה</span>
           <span class="book-name" *ngIf="isSignIn() && IsMemberShip" style="float: left;cursor: pointer;padding: 15px;" >שלום {{FirstNameHebrew}} {{LastNameHebrew}} קבלת 20% הנחת חבר</span>
           <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()" >שלום {{FirstNameHebrew}} {{LastNameHebrew}}, הרשם כחבר וקבל 20% הנחה</span>
            -->
-          <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;">שלום {{FirstNameHebrew}} {{LastNameHebrew}}</span>
-          <div style="margin-left:92%;top:0px;position:fixed;">
-            <div class="tooltipSmall">
-              <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
-              <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
-              <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="OpenTooltip()" />
-              <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="OpenTooltip()" />
-              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;" #CartTooltip id="CartTooltip">
-                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
-                  <div>
-                    <span class="span" class="shopping-cart-title cart-num-books">ספרים בסל {{num}}</span>
-                    <br />
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
-                    <br />
-                  </div>
-                </div>
-                <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
-                  <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
-                    <div>
-                      <div style="display: flex;justify-content:space-around; padding-top:5%;">
-                        <span class="col-md-3 cart-item-total">₪{{item.Total}}</span>
-                        <span class="col-md-5" style="text-align: right;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
-                        <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
-                      </div>
-                      <br />
-                      <mat-divider></mat-divider>
-                    </div>
-                  </div>
-                </div>
-                <div style="margin:auto;">
-                  <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
-                    <div class="row" style="float: left;width: 370px; margin-top:5px;">
-                      <div class="row" style="width: 370px;">
-                        <label class="col-md-4 cart-total">₪{{this.Total}}</label>
-                        <label class="col-md-3 cart-total-price">סה"כ</label>
-                      </div>
-                      <div class="row" style=" margin-top: 10px;">
-                        <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
-                        <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
+                    <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;">שלום {{FirstNameHebrew}}
+            {{LastNameHebrew}}</span>
+                    <div style="margin-left:92%;top:0px;position:fixed;">
+                        <div class="tooltipSmall">
+                            <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+                            <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+                            <img *ngIf="num!=0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="OpenTooltip()" />
+                            <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="OpenTooltip()" />
+                            <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;" #CartTooltip id="CartTooltip">
+                                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+                                    <div>
+                                        <span class="span" class="shopping-cart-title cart-num-books">ספרים בסל {{num}}</span>
+                                        <br />
+                                        <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
+                                    <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
+                                        <div>
+                                            <div style="display: flex;justify-content:space-around; padding-top:5%;">
+                                                <span class="col-md-3 cart-item-total">{{item.TotalILS|currency:'ILS'}}</span>
+                                                <span class="col-md-3 cart-item-total" *ngIf="currencyCode==2">{{item.TotalISD|currency:'USD'}}</span>
+                                                <span class="col-md-5" style="text-align: right;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}}
+                        </span>
+                                                <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
+                                            </div>
+                                            <br />
+                                            <mat-divider></mat-divider>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin:auto;">
+                                    <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+                                        <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                                        <div class="row" style="float: left;width: 370px; margin-top:5px;">
+                                            <div class="row" style="width: 370px;">
+                                                <label class="col-md-4 cart-total">{{TotalILS|currency:'ILS'}}</label>
+                                                <label class="col-md-4 cart-total" *ngIf="currencyCode==2">{{TotalISD|currency:'USD'}}</label>
+                                                <label class="col-md-3 cart-total-price">סה"כ</label>
+                                            </div>
+                                            <div class="row" style=" margin-top: 10px;">
+                                                <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;width: 155px;margin-left: 31px;" >הצג/ערוך עגלה</button>    -->
+                                                <button class="fill-btn-blue checkout-btn" (click)="NavigCart()" style="padding-right: 5px;
                       padding-left: 0;
                       float: right;
                       width: 333px;
                       height: 54px;">
                           תשלום
                         </button>
-                      </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </mat-card>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="col-md-12" style="margin:auto;text-align:left">
-    <div>
-      <br />
-    </div>
-    <div class="row width100" style="text-align:center"></div>
+    <div class="col-md-12" style="margin:auto;text-align:left">
+        <div>
+            <br />
+        </div>
+        <div class="row width100" style="text-align:center"></div>
 
-    <div class="col-md-4 floatRight ">
+        <div class="col-md-4 floatRight ">
 
-      <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
-      <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
-      <br />
-      <label class="label" style="float: right;margin-top: 20px;margin-bottom: 25px;margin-right: 45px;" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות היהודית</label>
+            <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(1)" *ngIf="ShowBlue1==false" />
+            <img style="margin: 0px 48%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(1)" *ngIf="ShowBlue1==true" />
+            <br />
+            <label class="label" style="float: right;margin-top: 20px;margin-bottom: 25px;margin-right: 45px;" (click)="SelectFilter(1)" [ngStyle]="{'color': ShowBlue1 == true ? '#026fa7' : '#27b5e5'}">מקורות התרבות
+        היהודית</label>
+        </div>
+        <div class="col-md-4 floatRight ">
+            <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
+            <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
+            <br />
+            <label class="label" style="margin: 0px 30%;margin-top: 20px;margin-bottom: 25px;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">מדעי יהדות</label>
+        </div>
+        <div class="col-md-4 floatRight ">
+            <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
+            <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(3)" *ngIf="ShowBlue3==true" />
+            <br />
+            <label class="label" style="float: left;margin-top: 20px;margin-bottom: 25px;margin-left: 45px;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">אשכולות</label>
+        </div>
     </div>
-    <div class="col-md-4 floatRight ">
-      <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(2)" *ngIf="ShowBlue2==false" />
-      <img style="margin: 0px 33%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(2)" *ngIf="ShowBlue2==true" />
-      <br />
-      <label class="label" style="margin: 0px 30%;margin-top: 20px;margin-bottom: 25px;" (click)="SelectFilter(2)" [ngStyle]="{'color': ShowBlue2 == true ? '#026fa7' : '#27b5e5'}">מדעי יהדות</label>
-    </div>
-    <div class="col-md-4 floatRight ">
-      <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category.gif" (click)="SelectFilter(3)" *ngIf="ShowBlue3==false" />
-      <img style="margin: 0px 13%;cursor:pointer;height: 85px;width: auto;" src="/assets/images/Category_Selected.gif" (click)="SelectFilter(3)" *ngIf="ShowBlue3==true" />
-      <br />
-      <label class="label" style="float: left;margin-top: 20px;margin-bottom: 25px;margin-left: 45px;" (click)="SelectFilter(3)" [ngStyle]="{'color': ShowBlue3 == true ? '#026fa7' : '#27b5e5'}">אשכולות</label>
-    </div>
-  </div>
 
-  <div class="clear"></div>
-  <div class="container">
-    <div class="row">
-      <div class="co-md-10 border-buttom margin-b-30 divNew" #DivRow id="DivRow" name="DivRow"></div>
+    <div class="clear"></div>
+    <div class="container">
+        <div class="row">
+            <div class="co-md-10 border-buttom margin-b-30 divNew" #DivRow id="DivRow" name="DivRow"></div>
+        </div>
     </div>
-  </div>
-  <img src="/assets/images/arrowDown.gif" style="   margin-left: 84%;display:none;" id="arr1" #arr1 />
-  <img src="/assets/images/arrowDown.gif" style="  margin-left:47%; display:none;" id="arr2" #arr2 />
-  <img src="/assets/images/arrowDown.gif" style="  margin-left:9%;display:none;" id="arr3" #arr3 />
+    <img src="/assets/images/arrowDown.gif" style="   margin-left: 84%;display:none;" id="arr1" #arr1 />
+    <img src="/assets/images/arrowDown.gif" style="  margin-left:47%; display:none;" id="arr2" #arr2 />
+    <img src="/assets/images/arrowDown.gif" style="  margin-left:9%;display:none;" id="arr3" #arr3 />
 
-  <br />
-  <div class="col-md-12 " style="margin:auto;text-align:right">
-    <div class="category-paragraph">
-      <div *ngIf="ShowBlue1==true" class="category-paragraph">
-        <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span>
-        <span class="span">קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר ראוי.</span><br /><br /><br />
+    <br />
+    <div class="col-md-12 " style="margin:auto;text-align:right">
+        <div class="category-paragraph">
+            <div *ngIf="ShowBlue1==true" class="category-paragraph">
+                <span class="span">סדרת "מקורות לחקר תרבות ישראל" יוצאת בשיתוף "קרן הרב משה דוד ועמליה רוזן". הספרים היוצאים
+          בסדרה הם פרסומים או מחקרים של יצירות מאוצר תרבות ישראל בימי</span>
+                <span class="span">קדם ובימי הבינים אשר טרם פורסמו או טרם זכו לההדרה מדעית או מחקר
+          ראוי.</span><br /><br /><br />
 
-      </div>
-      <div *ngIf="ShowBlue2==true" class="category-paragraph">
-        <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
-        <span class="span"> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך <a href="https://www.jstor.org/journal/jewishstudies2" class="span-link" target="_blank"> .Jstor</a></span><br />
-        <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא <a href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link" target="_blank"> בקישור</a></span><br /><br /><br />
-      </div>
-      <div *ngIf="ShowBlue3==true" class="category-paragraph">
-        <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12 marginAuto" style="padding:0px;">
-    <ul class="products clearfix products-4" style="padding:0px;">
-      <div *ngIf="DB">
-        <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
-          <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
-          <li>
-            <div class="container">
-              <div class="background" style="text-align:center; align-items: center">
-                <div style="margin:auto;"></div>
-              </div>
             </div>
-            <div class="hover" style="cursor:pointer;">
-              <div class="border-book featured-image content" (click)="Detais(item)"
-                   style="background-size: contain; position:relative;
+            <div *ngIf="ShowBlue2==true" class="category-paragraph">
+                <span class="span">.מדעי היהדות" הוא כתב העת השנתי של האיגוד העולמי למדעי היהדות"</span><br />
+                <span class="span"> ניתן להוריד את תכני העניינים של גליונות "מדעי היהדות" בלחיצה על הקישורים, לרכוש גליונות של
+          "מדעי היהדות" דרכנו ולגשת למאמרים בודדים דרך <a href="https://www.jstor.org/journal/jewishstudies2"
+            class="span-link" target="_blank"> .Jstor</a></span><br />
+                <span class="span"> הנחיות להגשת מאמרים לכתב העת מדעי היהדות ניתן למצוא <a
+            href="https://drive.google.com/file/d/1KswpTN3C_zDzXYT7ujHrxtV5k0sYy6XD/view" class="span-link"
+            target="_blank"> בקישור</a></span><br /><br /><br />
+            </div>
+            <div *ngIf="ShowBlue3==true" class="category-paragraph">
+                <span class="span">.סדרת "אשכולות" יוצאת בשיתוף עם מכללת הרצוג</span><br /><br /><br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 marginAuto" style="padding:0px;">
+        <ul class="products clearfix products-4" style="padding:0px;">
+            <div *ngIf="DB">
+                <div *ngFor="let item of DB | paginate: { itemsPerPage: 15, currentPage: p , totalItems:DB.length}  " class="col-md-4 floatRight" style="height:670px;">
+                    <!-- <li class="product-grid-view product type-product post-17222 status-publish first instock product_cat-women product_cat-dress product_tag-flowers product_tag-outdoors product_tag-summer has-post-thumbnail shipping-taxable purchasable product-type-simple" style="width:400px;height:600px;margin:auto;padding:10px;"> -->
+                    <li>
+                        <div class="container">
+                            <div class="background" style="text-align:center; align-items: center">
+                                <div style="margin:auto;"></div>
+                            </div>
+                        </div>
+                        <div class="hover" style="cursor:pointer;">
+                            <div class="border-book featured-image content" (click)="Detais(item)" style="background-size: contain; position:relative;
         z-index:10; height: 404px;width:296px; color:#85a6b7; text-align:
          center; display: flex;align-items: center;justify-content: center;cursor:pointer;">
-                <div class="view overlay" [style.background-image]="'url('+item.Image+')'" style="background-repeat: no-repeat !important; background-size: 279px 387px;cursor:pointer;">
-                  <!-- <img (click)="Detais(item)"
+                                <div class="view overlay" [style.background-image]="'url('+item.Image+')'" style="background-repeat: no-repeat !important; background-size: 279px 387px;cursor:pointer;">
+                                    <!-- <img (click)="Detais(item)"
                              style="margin:8px; width:279px; height:387px" src={{item.Image}}
                               class="attachment-shop_catalog size-shop_catalog wp-post-image"
                              sizes="(max-width: 500px) 100vw, 500px">  -->
-                  <div class="cart-loading">
-                    <i class="fusion-icon-spinner"></i>
-                  </div>
-                </div>
-              
-              </div>
-            </div>
+                                    <div class="cart-loading">
+                                        <i class="fusion-icon-spinner"></i>
+                                    </div>
+                                </div>
 
-            <div class="fusion-product-content" style="width: 296px; margin: auto;">
-              <div class="product-details">
-                <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
+                            </div>
+                        </div>
 
-                  <span title="{{item.Name| slice:0:100}}" class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
+                        <div class="fusion-product-content" style="width: 296px; margin: auto;">
+                            <div class="product-details">
+                                <div class="product-details-container" style="margin-top:20px;margin-bottom:30px;height:130px;font-size:18px;float:right;text-align:center;">
+
+                                    <span title="{{item.Name| slice:0:100}}" class="product-title" data-fontsize="18" data-lineheight="30" (click)="Detais(item)">
                     <div class="tooltipSmallC">
-                      <a style="margin-right: 26px;direction: rtl;width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
+                      <a
+                        style="margin-right: 26px;direction: rtl;width: 296px;display:inline-block; white-space: nowrap;overflow:hidden !important;text-overflow: ellipsis;">
                         {{item.Name}}
                       </a>
                       <!--<span class="tooltiptextSmallC" style="width: 296px !important;bottom: 39%;left: 46%;z-index: 1001;margin-left: -153px;text-align:right;padding:2%;height: auto !important;">
                         {{item.Name}}
                       </span>-->
-                    </div>
+                                </div>
 
-                  </span>
-                  <div class="fusion-price-rating" style="padding-bottom:15px; padding-top: 15px;">
-                    <span class="price" style="font-size:18px">
+                                </span>
+                                <div class="fusion-price-rating" style="padding-bottom:15px; padding-top: 15px;">
+                                    <span class="price" style="font-size:18px">
                       <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0">
-                        <span class="woocommerce-Price-currencySymbol">₪</span> {{item.Price}}
+                        {{item.PriceILS| currency:'ILS'}} 
                       </span>
-                    </span>
+                                    <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice==0 && currencyCode==2">
+                        {{item.PriceUSD| currency:'USD'}} 
+                      </span>
+                                    </span>
 
-                    <span class="old-price" style="font-size:18px;text-decoration: line-through;">
+                                    <span class="old-price" style="font-size:18px;text-decoration: line-through;">
                       <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0" style="color: #026fa7;">
-                        <span class="woocommerce-Price-currencySymbol">₪</span>{{item.Price}}
+                        {{item.PriceILS| currency:'ILS'}} 
                       </span>
-                    </span>
-
-                    <span class="price" style="font-size:18px">
-                      <span class="woocommerce-Price-amount amount"
-                            *ngIf="item.SallePrice!=0">
-                        <span class="woocommerce-Price-currencySymbol">₪</span>{{item.SallePrice}}
+                                    <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0 && currencyCode==2" style="color: #026fa7;">
+                      {{item.PriceUSD| currency:'USD'}} 
                       </span>
-                    </span>
-                  </div>
 
-                  <div class="product-buttons">
-                    <div class="product-buttons-container clearfix">
-                      <button *ngIf="item.Available" (click)="Detais(item)" class="buy-btn">קניה</button>
-                      <button *ngIf="!item.Available" style="background-color:#e9e9e4;color: #0b4e6f;" (click)="Detais(item)" class="buy-btn">אזל במלאי</button>
-                    </div>
-                  </div>
+                                    </span>
 
-                  <!-- <br /><br /><br /> -->
+                                    <span class="price" style="font-size:18px">
+                      <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0">
+                        {{item.SalePriceILS| currency:'ILS'}} 
+                      </span>
+                                    <span class="woocommerce-Price-amount amount" *ngIf="item.SallePrice!=0 && currencyCode==2">
+                        {{item.SalePriceUSD| currency:'USD'}} 
+                      </span>
+                                    </span>
+                                </div>
+
+                                <div class="product-buttons">
+                                    <div class="product-buttons-container clearfix">
+                                        <button *ngIf="item.Available" (click)="Detais(item)" class="buy-btn">קניה</button>
+                                        <button *ngIf="!item.Available" style="background-color:#e9e9e4;color: #0b4e6f;" (click)="Detais(item)" class="buy-btn">אזל במלאי</button>
+                                    </div>
+                                </div>
+
+                                <!-- <br /><br /><br /> -->
+                            </div>
+                        </div>
                 </div>
-              </div>
+                </li>
             </div>
-          </li>
-        </div>
-      </div>
+    </div>
     </ul>
-    <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5"></pagination-controls>
+    <pagination-controls class="paginator" previousLabel="" nextLabel="" (pageChange)="p = $event" maxSize="5">
+    </pagination-controls>
     <br /><br /><br />
-  </div>
+</div>

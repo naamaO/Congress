@@ -30,6 +30,7 @@ export class successComponent implements OnInit {
   public DB: shoppingCart[];
   public RoutNum: number;
   public RoutNum1: number;
+  public Button: boolean = false;
   public USERNAME = {
     KEY: 'UserName',
     UserName: null
@@ -55,6 +56,8 @@ export class successComponent implements OnInit {
     this.Rout = this.getCookie('RoutTranzilaSuccessJewishStudies');
     debugger
     this.RoutNum = +this.Rout;
+    if (this.RoutNum == 1)
+      this.Button = true;
     console.log(this.RoutNum , "routNum");
 
     //this.newUser = new User();
@@ -131,8 +134,16 @@ export class successComponent implements OnInit {
   }
   setCookie(UaerName: string) {
     console.log("username!!!!!");
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
 
-    this.cookieService.put('UserName', UaerName);
+    this.cookieService.put('UserName', UaerName, {
+      expires,
+      path: '/',
+      sameSite: 'none',
+      secure: true
+
+    });
   }
   getCookie(key: string) {
     return this.cookieService.get(key);
@@ -140,9 +151,17 @@ export class successComponent implements OnInit {
   getCookieNewUserToSendToTranzila(key: string) {
     return this.cookieService.getObject(key);
   }
+  BackToShoppingCartStore() {
+    debugger;
+    if (this.getCookie('Currency')=='2')
+      this.router.navigateByUrl("jewish-studies.b2story.com/ShoppingCart");
+    else
+      this.router.navigateByUrl("jewish-studies.b2story.com/ShoppingCartHebrew");
+
+  }
   addToCart() {
     console.log("addToCart1");
-
+    debugger;
      // if(this.serverService.resNotifyTranzila==000){}
      if(this.getCookie('UserName')) {     
       this.serverService.getAllDBShoppingCart().subscribe((val) => {

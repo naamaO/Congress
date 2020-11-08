@@ -1,85 +1,89 @@
 <div class="body" id="Top" #Top>
 
-  <div style="background-color:#fff;width:100%;height: 115px;">
-    <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
-      <div class="top-line">
-        <div style="z-index: 1000;top: 0;">
-          <!-- <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">Log into your member's account or sign up and get a 20% discount</span>
+    <div style="background-color:#fff;width:100%;height: 115px;">
+        <div style="max-width: 1100px;width:100%;position:fixed;height:115px;background-color: white;z-index: 1000;top: 0;">
+            <div class="top-line">
+                <div style="z-index: 1000;top: 0;">
+                    <!-- <span class="book-name" *ngIf="!isSignIn()" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()">Log into your member's account or sign up and get a 20% discount</span>
           <span class="book-name" *ngIf="isSignIn() && IsMemberShip" style="float: left;cursor: pointer;padding: 15px;" >Welcome {{FirstName}} {{LastName}}, you have just received a 20% member discount</span>
           <span class="book-name" *ngIf="isSignIn() && !IsMemberShip" style="float: left;cursor: pointer;text-decoration:underline;padding: 15px;" (click)="SendToSignIn()" >Welcome {{FirstName}} {{LastName}}, Sign up for membership and get a 20% discount</span> -->
-          <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;" >Welcome {{FirstName}} {{LastName}}</span>
+                    <span class="book-name" *ngIf="isSignIn()" style="float: left;padding: 15px;">Welcome {{FirstName}}
+            {{LastName}}</span>
 
-          <div style="margin-left:92%;top:0px;position:fixed;">
-            <div class="tooltipSmall">
-              <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
-              <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
-              <!--<span *ngIf="num>0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg">{{this.num}}</span>-->
-              <img *ngIf="num>0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="OpenTooltip()"/>
-              <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="OpenTooltip()"/>
-              <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;" #CartTooltip id="CartTooltip">
-                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
-                  <div>
-                    <span class="span" class="shopping-cart-title cart-num-books">{{num}} books in your cart</span>
-                    <br />
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
-                    <br />
-                  </div>
-                </div>
-                <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
-                  <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
-                    <div>
-                      <div style="display: flex;justify-content:space-around; padding-top:5%;">
-                        <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
-                        <span class="col-md-5" style="text-align: left;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}} </span>
-                        <span class="col-md-3 cart-item-total">${{item.Total}}</span>
-                      </div>
-                      <br />
-                      <mat-divider></mat-divider>
-                    </div>
-                  </div>
-                </div>
-                <div style="margin:auto;">
-                  <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
-                    <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
-                    <div class="row" style="float: left;width: 370px; margin-top:5px;">
-                      <div class="row" style="width: 370px;">
-                        <label class="col-md-4 cart-total">Total</label>
-                        <label class="col-md-3 cart-total-price">${{this.Total}}</label>
-                      </div>
-                      <div class="row" style="margin-top: 10px;">
-                        <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
-                        <button class="fill-btn-blue checkout-btn" (click)="NavigCart1()" style="    padding-right: 5px;
+                    <div style="margin-left:92%;top:0px;position:fixed;">
+                        <div class="tooltipSmall">
+                            <span *ngIf="num!=0 && num<10" style="margin-left:4%" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+                            <span *ngIf="num!=0 && num>9" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg" (click)="OpenTooltip()">{{num}}</span>
+                            <!--<span *ngIf="num>0" class="right-cart-number" id="right-cart-num" data-spm-anchor-id="a2g0o.productlist.1000002.i0.14015a2cFC9YMg">{{this.num}}</span>-->
+                            <img *ngIf="num>0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart_Number.png" (click)="OpenTooltip()" />
+                            <img *ngIf="num==0" style="width: 77px; height: 94px; cursor:pointer;" src="/assets/images/Cart.png" (click)="OpenTooltip()" />
+                            <mat-card class="tooltiptextSmall" style="background-color:white !important;top: 74px;right: 0; height: 508px !important;width: 370px!important;" #CartTooltip id="CartTooltip">
+                                <div class="col-md" style="margin:auto;display: flex;justify-content:space-around;">
+                                    <div>
+                                        <span class="span" class="shopping-cart-title cart-num-books">{{num}} books in your cart</span>
+                                        <br />
+                                        <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;top: 30px;"></mat-divider>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="col-md" style="height: 65%;overflow-y: scroll; margin:auto;">
+                                    <div *ngFor="let item of DBShoppingCart; let i = index" style="position:relative; ">
+                                        <div>
+                                            <div style="display: flex;justify-content:space-around; padding-top:5%;">
+                                                <img src="{{item.ImageBook}}" style="width: 75px;height: 102px;" />
+                                                <span class="col-md-5" style="text-align: left;color: #026fa7;font-size:12px;font-family:'Open Sans', sans-serif;font-weight: bold; ">{{item.NameBook}}
+                        </span>
+                                                <span class="col-md-3 cart-item-total" *ngIf="currencyCode==1">{{item.TotalILS|currency:'ILS'}}</span>
+                                                <span class="col-md-3 cart-item-total">{{item.TotalUSD|currency:'USD'}}</span>
+                                            </div>
+                                            <br />
+                                            <mat-divider></mat-divider>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin:auto;">
+                                    <div class="col-md" style="justify-content:space-around;z-index: 1000;margin:auto;background-color:#fff;">
+                                        <mat-divider style="left: 0; right: 0;margin: auto; width: 90%;"></mat-divider>
+                                        <div class="row" style="float: left;width: 370px; margin-top:5px;">
+                                            <div class="row" style="width: 370px;">
+                                                <label class="col-md-4 cart-total">Total</label>
+                                                <label class="col-md-3 cart-total-price">{{this.TotalUSD|currency:'USD'}}</label>
+                                                <label class="col-md-3 cart-total-price" *ngIf="currencyCode==1">{{this.TotalILS |currency:'ILS'}}</label>
+                                            </div>
+                                            <div class="row" style="margin-top: 10px;">
+                                                <!-- <button  class="view-cart-btn" (click)="NavigCart()"style="float: left;margin-right: 0; margin-right: 22px; width: 155px; padding-right: 0px; padding-left: 0; margin-left: 34px;" >VIEW/EDIT CART</button>    -->
+                                                <button class="fill-btn-blue checkout-btn" (click)="NavigCart1()" style="    padding-right: 5px;
                           padding-left: 0;
                           float: right;
                           width: 333px;
                           height: 54px;">
                           CHECKOUT
                         </button>
-                      </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+
                     </div>
-                  </div>
                 </div>
-              </mat-card>
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>
-    <br />  <br />  <br />  <br />  <br /> <br />  <br />
-    <div *ngIf="DetailsBook">
+        <br /> <br /> <br /> <br /> <br /> <br /> <br />
+        <div *ngIf="DetailsBook">
 
-    <div class="col-md-12  marginAuto" style="display:flex; padding-bottom: 50px;">
-      <div >
-        <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;">
-          <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
-        </div>
+            <div class="col-md-12  marginAuto" style="display:flex; padding-bottom: 50px;">
+                <div>
+                    <div data-thumb="/assets/images/book1.PNG" data-thumb-alt="" class="woocommerce-product-gallery__image" style="position: relative; overflow: hidden;">
+                        <img src={{DetailsBook.Image}} class="wp-post-image" alt="" title="modern_love_tee" data-caption="" data-large_image_width="500" data-large_image_height="650" sizes="(max-width: 500px) 100vw, 500px" />
+                    </div>
 
-      </div>
-      <div class="col-md-6 floatRight">
+                </div>
+                <div class="col-md-6 floatRight">
 
-        <h1 class="book-name">{{DetailsBook.Name}}</h1>
-        <!-- <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;" (click)="Quantity=Quantity-1">-</label> </span>
+                    <h1 class="book-name">{{DetailsBook.Name}}</h1>
+                    <!-- <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;" (click)="Quantity=Quantity-1">-</label> </span>
         <span  style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;">{{Quantity}}</label> </span>
         <span style="text-align:center;"><label style="color: #494949;padding: 10px;border: 1px solid gray;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px;" (click)="Quantity=Quantity+1">+</label> </span>
          <br /><br />
@@ -87,35 +91,48 @@
          <span class="price" *ngIf="DetailsBook.SallePrice!=0" style=" text-decoration: line-through;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
          <span class="price" *ngIf="DetailsBook.SallePrice!=0"><span>$</span>{{DetailsBook.SallePrice}}</span>
           -->
-        <br />
-        <div class="row">
-          <div style="margin-left: 15px;">
-            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;"><span>$</span>{{DetailsBook.SallePrice}}</span>
-            <span class="old-price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;"><span>$</span>{{DetailsBook.Price}}</span>
-            <span class="price" *ngIf="DetailsBook.SallePrice==0"><span>$</span>{{DetailsBook.Price}}</span>
-          </div>
-          <div style="margin: 0; margin-left: 55px;">
-            <span style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;" (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1">-</label> </span>
-            <span style="text-align:center;"><label style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;">{{this.Quantity}}</label> </span>
-            <span style="width:200px;text-align:center;"><label style="color: #494949;padding: 5px 10px;border: 1px solid #eaeaea;" (click)="Quantity=Quantity+1">+</label> </span>
-          </div>
-          
-        <button *ngIf="DetailsBook.Available" class="add-to-cart-btn" (click)="AddCart(DetailsBook)" style="margin: 0;margin-left: 10px;">ADD TO CART</button>    
-        <button *ngIf="!DetailsBook.Available" class="add-to-cart-btn" style="background-color:#e9e9e4;color: #0b4e6f;padding: 10px 44px;margin: 0;margin-left: 10px;">OUT OF STOCK</button>   
+                    <br />
+                    <div class="row">
+                        <div style="margin-left: 15px;">
+                            <span class="price" *ngIf="DetailsBook.SallePrice!=0" style="margin-right: 30px;">{{DetailsBook.SalePriceUSD | currency:'USD'}}</span>
+                            <span class="price" *ngIf="DetailsBook.SallePrice!=0 && currencyCode==1" style="margin-right: 30px;">{{DetailsBook.SalePriceILS  | currency:'ILS'}}</span>
 
-        </div>
-        <br />
-        <p style="font-size:medium;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px; color: #026fa7">{{DetailsBook.Details}}</p>
-        <div class="row col-md" style="display: contents;">
-          <button *ngIf="DetailsBook.Available" class="buy-btn" (click)="NavigCart(DetailsBook)">BUY</button>
-          <button *ngIf="!DetailsBook.Available" class="buy-btn" style="width:230px;background-color:#e9e9e4;color: #0b4e6f;">OUT OF STOCK</button>
+                            <span class="old-price" *ngIf="DetailsBook.SallePrice!=0" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;">{{DetailsBook.PriceUSD | currency:'USD'}}</span>
+                            <span class="old-price" *ngIf="DetailsBook.SallePrice!=0 && currencyCode==1" style="text-decoration: line-through #27b5e5;font-weight: normal;margin-right:30px;">{{DetailsBook.PriceILS | currency:'ILS'}}</span>
 
-          <!--  <button *ngIf="DetailsBook.Available" class="add-to-cart-btn" (click)="AddCart(DetailsBook)">ADD TO CART</button>
+                            <span class="price curr-nis" *ngIf="DetailsBook.SallePrice==0">{{DetailsBook.PriceUSD|currency:'USD'}}</span>
+
+                            <span class="price curr-d" *ngIf="DetailsBook.SallePrice==0&&currencyCode==1">{{DetailsBook.PriceILS|currency: 'ILS'}}</span>
+                        </div>
+                        <div style="margin: 0; margin-left: 55px;">
+                            <span style="text-align:center;"><label
+                  style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;"
+                  (click)="Quantity>1 ? Quantity=Quantity-1:Quantity=1">-</label> </span>
+                            <span style="text-align:center;"><label
+                  style="color: #494949;padding: 5px 12px;border: 1px solid #eaeaea;">{{this.Quantity}}</label> </span>
+                            <span style="width:200px;text-align:center;"><label
+                  style="color: #494949;padding: 5px 10px;border: 1px solid #eaeaea;"
+                  (click)="Quantity=Quantity+1">+</label> </span>
+                        </div>
+
+                        <button *ngIf="DetailsBook.Available" class="add-to-cart-btn" (click)="AddCart(DetailsBook)" style="margin: 0;margin-left: 10px;">ADD TO CART</button>
+                        <button *ngIf="!DetailsBook.Available" class="add-to-cart-btn" style="background-color:#e9e9e4;color: #0b4e6f;padding: 10px 44px;margin: 0;margin-left: 10px;">OUT OF
+              STOCK</button>
+
+                    </div>
+                    <br />
+                    <p style="font-size:medium;font-family: 'Open Sans', sans-serif;font-weight: normal; font-size: 18px; color: #026fa7">
+                        {{DetailsBook.Details}}</p>
+                    <div class="row col-md" style="display: contents;">
+                        <button *ngIf="DetailsBook.Available" class="buy-btn" (click)="NavigCart(DetailsBook)">BUY</button>
+                        <button *ngIf="!DetailsBook.Available" class="buy-btn" style="width:230px;background-color:#e9e9e4;color: #0b4e6f;">OUT OF STOCK</button>
+
+                        <!--  <button *ngIf="DetailsBook.Available" class="add-to-cart-btn" (click)="AddCart(DetailsBook)">ADD TO CART</button>
    <button *ngIf="!DetailsBook.Available" class="add-to-cart-btn" style="background-color:#e9e9e4;color: #0b4e6f;padding: 10px 44px;">OUT OF STOCK</button>    -->
-        </div>
-        <br /><br />
-      </div>
+                    </div>
+                    <br /><br />
+                </div>
 
+            </div>
+        </div>
     </div>
-  </div>
-  </div>

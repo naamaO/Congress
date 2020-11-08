@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,ViewChild, ElementRef  } from '@angular/core'
+import { Component, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core'
 import { book } from '../../../classes/classItem'
 import { text } from '@angular/core/src/render3';
 import { ServerService } from '../../services/server.service';
@@ -12,6 +12,7 @@ import { __await } from 'tslib';
 import { shoppingCart } from 'src/classes/shoppingCart';
 import { group } from '@angular/animations';
 import { HostListener } from "@angular/core";
+import { RealExchangeService } from 'src/app/services/real-exchange.service';
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
@@ -29,8 +30,8 @@ export class NewComponent implements OnInit {
   public screenWidth: number;
   public UserNameLogin: string;
   public ShowBlue1: boolean = true;
-  public ShowBlue2: boolean=false;
-  public ShowBlue3: boolean=false;
+  public ShowBlue2: boolean = false;
+  public ShowBlue3: boolean = false;
   public first_name: string[] = ['Hadas', 'Shira', 'Efrat'];
   public last_name: string[] = ['ww', 'ww', 'ww'];
   public tel: string[] = ['22', '22', '22',];
@@ -52,10 +53,15 @@ export class NewComponent implements OnInit {
   p: number = 1;
   changeImg: boolean;
   public Total: number = 0;
-  public TotalAfterDiscount:number = 0;
+  public TotalUSD: number = 0;
+  public TotalILS: number = 0;
+
+  public TotalAfterDiscount: number = 0;
+  public TotalAfterDiscountUSD: number = 0;
+  public TotalAfterDiscountILS: number = 0;
   public FirstName: string;
   public LastName: string;
-  public IsMemberShip:boolean = false;
+  public IsMemberShip: boolean = false;
   public DBShoppingCart: shoppingCart[];
   public CART = {
     KEY: 'ShoppingCartGuest',
@@ -69,107 +75,172 @@ export class NewComponent implements OnInit {
     KEY: 'ShoppingCartTotal',
     total: 0
   }
-  constructor(private ngZone: NgZone,private cd: ChangeDetectorRef,public cookieService: CookieService,public router: Router, private serverService: ServerService, private http: HttpClient) {
+
+  public TOTALUSD = {
+    KEY: 'ShoppingCartTotalUSD',
+    total: 0
+  }
+  public TOTALILS = {
+    KEY: 'ShoppingCartTotalILS',
+    total: 0
+  }
+
+  public CURRENCYCODE = {
+    KEY: 'CurrencyCode',
+    code: '2'
+  }
+  constructor(private ngZone: NgZone, private realExchangeService: RealExchangeService, private cd: ChangeDetectorRef, public cookieService: CookieService, public router: Router, private serverService: ServerService, private http: HttpClient) {
     // this.serverService.getAllDBFromServer().subscribe(val => this.DB = val);
-   //get list of shopping cart//if login
-if(this.getCookie('UserName')) {     
-    this.serverService.getAllDBShoppingCart().subscribe((val) => {
-      this.DBShoppingCart = val;
+    //get list of shopping cart//if login
+    var bookActualPrice, bookActualPriceUSD, bookActualPriceILS;
+
+    if (this.getCookie('UserName')) {
+      this.serverService.getAllDBShoppingCart().subscribe((val) => {
+        this.DBShoppingCart = val;
         for (var i = 0; i < this.DBShoppingCart.length; i++) {
-          if (this.DBShoppingCart[i].SallePrice == 0)
-            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
-          else
-            this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
+
+          if (this.DBShoppingCart[i].SallePrice == 0) {
+            bookActualPrice = this.DBShoppingCart[i].PriceBook;
+            bookActualPriceUSD = this.DBShoppingCart[i].PriceUSD;
+            bookActualPriceILS = this.DBShoppingCart[i].PriceILS;
+          }
+          else {
+            bookActualPrice = this.DBShoppingCart[i].SallePrice;
+            bookActualPriceUSD = this.DBShoppingCart[i].SalePriceUSD;
+            bookActualPriceILS = this.DBShoppingCart[i].SalePriceILS;
+          }
+          this.DBShoppingCart[i].Total = bookActualPrice * this.DBShoppingCart[i].Quantity;
+          this.DBShoppingCart[i].TotalUSD = bookActualPriceUSD * this.DBShoppingCart[i].Quantity;
+          this.DBShoppingCart[i].TotalILS = bookActualPriceILS * this.DBShoppingCart[i].Quantity;
         }
       });
-      this.serverService.getTotalPrice().subscribe((val) => {
-        this.Total = val
-        this.UserNameLogin = this.getCookie('UserName');  
-        if(this.UserNameLogin){
-        this.serverService.getUserDetails().subscribe((events) => {
-          this.FirstName = events.FirstNameEnglish;
-          this.LastName = events.LastNameEnglish; 
-          if(events.MemberShip >-1)
-          this.IsMemberShip = true;
-          if(this.IsMemberShip){
-            this.serverService.setTotal();
-          if(this.Total>0){
-          this.getDiscountTotal(this.Total);
-          }
-          }
-        })
-      }
+
+      this.serverService.getTotalPrice().subscribe((values) => {
+        
+        this.Total = values['Total'];
+        this.TotalUSD = values['TotalUSD'];
+        this.TotalILS = values['TotalILS'];
+
+        this.UserNameLogin = this.getCookie('UserName');
+        if (this.UserNameLogin) {
+          this.serverService.getUserDetails().subscribe((events) => {
+            this.FirstName = events.FirstNameEnglish;
+            this.LastName = events.LastNameEnglish;
+            if (events.MemberShip > -1)
+              this.IsMemberShip = true;
+            if (this.IsMemberShip) {
+              this.serverService.setTotal();
+              if (this.Total > 0) {
+                this.getDiscountTotal(this.Total, this.TotalUSD, this.TotalILS);
+              }
+            }
+          })
+        }
       });
       //get list of all books
       // this.serverService.getAllDBFromServerHebrew().subscribe(val => this.DB = val);
-    this.serverService.getNumProduct().subscribe(val => this.num = val);
+      this.serverService.getNumProduct().subscribe(val => this.num = val);
     }
-else{
-  if(!this.DBShoppingCart){
-          //check localStorage and initialize the contents of CART.contents
-          let _contents = localStorage.getItem(this.CART.KEY);
-          if(_contents){
-              this.CART.contents = JSON.parse(_contents);
-              this.DBShoppingCart= this.CART.contents;
-              if(this.DBShoppingCart.length > 0){
-              for (var i = 0; i < this.DBShoppingCart.length; i++) {
-              if (this.DBShoppingCart[i].SallePrice == 0){
-                  this.DBShoppingCart[i].Total = this.DBShoppingCart[i].PriceBook * this.DBShoppingCart[i].Quantity;
-                  this.num = this.num + this.DBShoppingCart[i].Quantity;
-                  this.Total = this.Total + this.DBShoppingCart[i].Total;
-                  if(this.Total>0){
-                    this.getDiscountTotal(this.Total);
-                    }
+    else {
+      if (!this.DBShoppingCart) {
+        //check localStorage and initialize the contents of CART.contents
+        let _contents = localStorage.getItem(this.CART.KEY);
+        if (_contents) {
+          this.CART.contents = JSON.parse(_contents);
+          this.DBShoppingCart = this.CART.contents;
+          if (this.DBShoppingCart.length > 0) {
+            for (var i = 0; i < this.DBShoppingCart.length; i++) {
+
+              if (this.DBShoppingCart[i].SallePrice == 0) {
+                bookActualPrice = this.DBShoppingCart[i].PriceBook;
+                bookActualPriceUSD = this.DBShoppingCart[i].PriceUSD;
+                bookActualPriceILS = this.DBShoppingCart[i].PriceILS;
               }
-             else{
-                this.DBShoppingCart[i].Total = this.DBShoppingCart[i].SallePrice * this.DBShoppingCart[i].Quantity;
-                this.num = this.num + this.DBShoppingCart[i].Quantity;
-                this.Total = this.Total + this.DBShoppingCart[i].Total;
-                if(this.Total>0){
-                  this.getDiscountTotal(this.Total);
-                  }
+              else {
+                bookActualPrice = this.DBShoppingCart[i].SallePrice;
+                bookActualPriceUSD = this.DBShoppingCart[i].SalePriceUSD;
+                bookActualPriceILS = this.DBShoppingCart[i].SalePriceILS;
+              }
+
+              this.DBShoppingCart[i].Total = bookActualPrice * this.DBShoppingCart[i].Quantity;
+              this.DBShoppingCart[i].TotalUSD = bookActualPriceUSD * this.DBShoppingCart[i].Quantity;
+              this.DBShoppingCart[i].TotalILS = bookActualPriceILS * this.DBShoppingCart[i].Quantity;
+
+              this.num = this.num + this.DBShoppingCart[i].Quantity;
+
+              this.Total += this.DBShoppingCart[i].Total;
+              this.TotalUSD += this.DBShoppingCart[i].TotalUSD;
+              this.TotalILS += this.DBShoppingCart[i].TotalILS;
+
+              if (this.Total > 0) {
+                this.getDiscountTotal(this.Total, this.TotalUSD, this.TotalILS);
               }
             }
+
           }
-          }else{
-              //dummy test data
-              this.CART.contents = [];  
-               let _cart = JSON.stringify(this.CART.contents);
-               localStorage.setItem(this.CART.KEY, _cart);
-              // CART.sync();
-              this.DBShoppingCart= this.CART.contents;  
-          }
-          let _num = localStorage.getItem(this.NUM.KEY);
-          if(parseInt(_num)>0){
-            this.NUM.num = parseInt(_num);
-            this.num = parseInt(_num);
-          }
-          else{
-            this.NUM.num = 0;         
-            let _num =  JSON.stringify(this.NUM.num);
-            localStorage.setItem(this.NUM.KEY, _num);
-            this.num = 0;
-          }
-          let _total = localStorage.getItem(this.TOTAL.KEY);
-          if(parseInt(_total)>0){
-            this.TOTAL.total = parseInt(_total);
-           this.Total = parseInt(_total);
-           if(this.Total>0){
-            this.getDiscountTotal(this.Total);
-            }
-          }
-          else{
-            this.TOTAL.total = 0;         
-            let _total =  JSON.stringify(this.TOTAL.total);
-            localStorage.setItem(this.TOTAL.KEY, _total);
-            this.Total = 0;
-            if(this.Total==0){
-              this.TotalAfterDiscount = 0;
-              }
-          }
-}
- }
+        }
+      } else {
+        //dummy test data
+        this.CART.contents = [];
+        let _cart = JSON.stringify(this.CART.contents);
+        localStorage.setItem(this.CART.KEY, _cart);
+        // CART.sync();
+        this.DBShoppingCart = this.CART.contents;
+      }
+      let _num = localStorage.getItem(this.NUM.KEY);
+      if (parseInt(_num) > 0) {
+        this.NUM.num = parseInt(_num);
+        this.num = parseInt(_num);
+      }
+      else {
+        this.NUM.num = 0;
+        let _num = JSON.stringify(this.NUM.num);
+        localStorage.setItem(this.NUM.KEY, _num);
+        this.num = 0;
+      }
+      let _total = localStorage.getItem(this.TOTAL.KEY);
+      let _totalUSD = localStorage.getItem(this.TOTALUSD.KEY);
+      let _totalILS = localStorage.getItem(this.TOTALILS.KEY);
+
+      if (parseInt(_total) > 0) {
+        this.TOTAL.total = parseInt(_total);
+        this.TOTALUSD.total = parseInt(_total);
+        this.TOTALILS.total = parseInt(_total);
+
+        this.Total = parseInt(_total);
+        this.TotalUSD = parseInt(_totalUSD);
+        this.TotalILS = parseInt(_totalILS);
+
+        if (this.Total > 0) {
+          this.getDiscountTotal(this.Total, this.TotalUSD, this.TotalILS);
+        }
+      }
+      else {
+        this.TOTAL.total = 0;
+        this.TOTALUSD.total = 0;
+        this.TOTALILS.total = 0;
+
+        let _total = JSON.stringify(this.TOTAL.total);
+        let _totalUSD = JSON.stringify(this.TOTALUSD.total);
+        let _totalILS = JSON.stringify(this.TOTALILS.total);
+
+        localStorage.setItem(this.TOTAL.KEY, _total);
+        localStorage.setItem(this.TOTALUSD.KEY, _totalUSD);
+        localStorage.setItem(this.TOTALILS.KEY, _totalILS);
+
+        this.Total = 0;
+        this.TotalUSD = 0;
+        this.TotalILS = 0;
+
+        if (this.Total == 0) {
+          this.TotalAfterDiscount = 0;
+          this.TotalAfterDiscountUSD = 0;
+          this.TotalAfterDiscountILS = 0;
+        }
+      }
+    }
   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event?) {
@@ -184,9 +255,10 @@ else{
       this.serverService.getNumProduct().subscribe((val) => {
         this.num = val;
         this.cd.detectChanges();
-      });    });
+      });
+    });
   }
-  
+
   ngOnInit() {
 
     this.serverService.getAllDBFromServer().subscribe(
@@ -194,33 +266,39 @@ else{
         this.DB = resp;
         this.DB = this.DB.filter(book => book.GroupBook == 1);
       },
-      error => {  
+      error => {
         console.log(error)
       });
-     // console.log("this.DB",this.DB)
+    // console.log("this.DB",this.DB)
 
-      this.UserNameLogin = this.getCookie('UserName');
-      if(this.UserNameLogin){
-        console.log(this.UserNameLogin)
+    this.UserNameLogin = this.getCookie('UserName');
+    if (this.UserNameLogin) {
+      console.log(this.UserNameLogin)
+    }
+    else if (!this.UserNameLogin || this.UserNameLogin == null) {
+      let _num = localStorage.getItem(this.NUM.KEY);
+      if (_num) {
+        this.NUM.num = JSON.parse(_num);
       }
-      else  if(!this.UserNameLogin||this.UserNameLogin==null){
-          let  _num = localStorage.getItem(this.NUM.KEY);
-          if(_num){
-              this.NUM.num = JSON.parse(_num);
-            }
-            let  _total = localStorage.getItem(this.TOTAL.KEY);
-            if(_total){
-                this.TOTAL.total = JSON.parse(_total);
-              }
-              this.IsMemberShip = false;
+      let _total = localStorage.getItem(this.TOTAL.KEY);
+      let _totalUSD = localStorage.getItem(this.TOTALUSD.KEY);
+      let _totalILS = localStorage.getItem(this.TOTALILS.KEY);
+
+      if (_total) {
+        this.TOTAL.total = JSON.parse(_total);
+        this.TOTALUSD.total = JSON.parse(_totalUSD);
+        this.TOTALILS.total = JSON.parse(_totalILS);
+
+      }
+      this.IsMemberShip = false;
     }
   }
-  
+
   SendToTranzila() {
     this.router.navigate(['Pay', this.Total]);
- }
- SendToSignIn(){
-  this.router.navigateByUrl("/UserPass/2");
+  }
+  SendToSignIn() {
+    this.router.navigateByUrl("/UserPass/2");
   }
   OpenTooltip() {
     if (document.getElementById("CartTooltip").classList.contains("CartTooltip"))
@@ -250,21 +328,24 @@ else{
   //}
 
   add() {
-   alert(this.first_name);
+    alert(this.first_name);
     this.serverService.getAllDBFromServer().subscribe((events) => {
 
       console.log(events + "kk");
       this.DB = events;
-     // alert(this.t + "uu");
+      // alert(this.t + "uu");
     });
   }
   getCookie(key: string) {
     return this.cookieService.get(key);
   }
-  getDiscountTotal(Total){
-    let discount = Total * ( 20 / 100);
-     this.TotalAfterDiscount =  Total - discount;
-}
+
+  getDiscountTotal(Total, TotalUSD, TotalILS) {
+    let discount = Total * (20 / 100);
+    this.TotalAfterDiscount = Total - discount;
+    this.TotalAfterDiscountUSD = 0.8 * TotalUSD;
+    this.TotalAfterDiscountILS = 0.8 * TotalILS;
+  }
 
   AddCart(item: book) {
     // this.cart.push(item);
@@ -281,13 +362,14 @@ else{
     this.item2.Quantity = 1
     this.item2.SallePrice = item.SallePrice;
     this.item2.UserName = this.UserNameLogin;
+    this.item2.Currency = item.Currency;
     if (this.UserNameLogin != "") {
-        this.serverService.enterItemToCart(this.item2);
-      }
-      else {
-        this.router.navigateByUrl("/");
+      this.serverService.enterItemToCart(this.item2);
+    }
+    else {
+      this.router.navigateByUrl("/");
 
-      }
+    }
     this.serverService.getNumProduct().subscribe((val) => {
       this.num = val;
       this.cd.detectChanges();
@@ -300,7 +382,7 @@ else{
     this.router.navigateByUrl("/ShoppingCart");
   }
   Details(item: book) {
-   // this.ShowDetails = !this.ShowDetails;
+    // this.ShowDetails = !this.ShowDetails;
     //this.IdDetails = item.Id;
     //this.serverService.Detais(item.Id).subscribe((events) => {
 
@@ -310,12 +392,12 @@ else{
     //  // alert(this.t + "uu");
     //});
   }
-  isSignIn(){
-    this.UserNameLogin = this.getCookie('UserName'); 
-    if(this.UserNameLogin!=undefined){
+  isSignIn() {
+    this.UserNameLogin = this.getCookie('UserName');
+    if (this.UserNameLogin != undefined) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
@@ -363,5 +445,5 @@ else{
       this.ShowBlue1 = false;
     }
   }
-  
+
 }

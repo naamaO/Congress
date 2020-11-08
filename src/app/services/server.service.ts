@@ -28,6 +28,8 @@ export class ServerService {
   public LoginDiv: string;
   public currency: number = 1;
   public total: any;
+  public totalUSD:number;
+  public totalILS:number;
   public lang: string = 'il';
   public ilang: string = 'HEB';
   public email: string;
@@ -53,7 +55,7 @@ export class ServerService {
     KEY: 'UserName',
     UserName: null
   }
- //public port: string = 'http://localhost:64905';
+// public port: string = 'http://localhost:64905';
  //public port: string = 'http://jewish-studies.b2story.com/webApi';
    public port: string = 'https://jewish-studies.b2story.com/webApi';
 
@@ -769,8 +771,8 @@ Registration(user: User) {
   getTotalPrice() {
     this.LoginUserName = (this.getCookie('UserName'));
 
-    return this.http.get<number>(this.port + "/api/Home/getPriceShoppCart?LoginUserName=" + this.LoginUserName)
-
+   // return this.http.get<number>(this.port + "/api/Home/getPriceShoppCart?LoginUserName=" + this.LoginUserName)
+    return this.http.get<any>(this.port + "/api/Home/getPriceShoppCart?LoginUserName=" + this.LoginUserName)
   }
   InviteMembers(arr: invited[]) {
     this.LoginUserName = (this.getCookie('UserName'));

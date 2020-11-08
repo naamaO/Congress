@@ -37,22 +37,7 @@
       </div>
       <br />
       <br />
-      <div style="display: flex;direction:rtl;">
-        <label style="color:#27b5e5">סוג חברות</label>
-        <div>
-          <label name="Type" ngDefaultControl>{{ArrMembershipTypes[UserMemberShipType].membershipType}}</label>
-          <!--<label style="color:#27b5e5">סוג חברות</label>-->
-
-          <!-- <label name="" (click)="showChooseMembership(showChoose)"  ngDefaultControl style="color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">change</label> -->
-          <!-- <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
-  <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu> -->
-        </div>
-
-      </div>
-
+    
       <!--<div *ngIf="showChoose">
            <div  class="row" style="padding-top:10px;margin-left: -1px;">
             <div class="modal-content" style="border:0;">
@@ -135,15 +120,6 @@
         <br /> <br />
         <mat-divider style="left: 0; right: 0;margin: auto; width: 125%;"></mat-divider>
         <div style="padding-top:30px;padding-bottom:30px;direction:rtl">
-          <div class="row" style="margin-left: -1px;direction:ltr;margin-left:20%;">
-            <div class="modal-content" style="border:0;width: max-content;margin: auto 40%;">
-              <div class="alert-img"></div>
-              <span class="txtStyle" style="color:gray;font-weight: bold;font-weight: bold;">החשבון מסתיים בעוד 30 יום</span>
-              <br />
-                <!--<label name="" (click)="showChoose2(showChooseExpire)" style="width:100%; margin: auto;color:#27b5e5 ;text-decoration-line: underline;font-size: 16px;cursor: pointer;">חידוש חברות באופן מאובטח</label>-->
-            </div>
-          </div>
-
           <div *ngIf="showChooseExpire" class="col-md-8" style="padding:0;">
             <span class="txtStyle" style="color:gray">בחר סוג חברות:</span>
 

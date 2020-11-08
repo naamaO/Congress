@@ -23,18 +23,16 @@ export class UserPassHebrewComponent implements OnInit {
   @ViewChild('pass') pass: ElementRef = null;
   @ViewChild('email') email: ElementRef = null;
   @ViewChild('Top') Top: ElementRef = null;
+ 
   userDetail: FormGroup;
+ 
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
   resetPassword: boolean = false;
-  passwordFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  passwordFormControl = new FormControl('', [Validators.required ]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email ]);
+  
   public errPass: boolean;
 
   public showResetPassword: boolean;
@@ -57,7 +55,8 @@ export class UserPassHebrewComponent implements OnInit {
       floatLabel: this.floatLabelControl,
     });
     this.sub = this.route.params.subscribe(params => {
-      this.Rout = +params['Rout']; // (+) converts string 'id' to a number
+      
+      this.Rout = params['Rout']||1; // (+) converts string 'id' to a number
 
     });
   }
@@ -169,6 +168,7 @@ export class UserPassHebrewComponent implements OnInit {
     this.item.Email = (this.getCookie('UserName'));
     this.item.Password = this.Password;
     this.item.Email = this.Email;
+    
     this.serverService.SendCheckUserPassword(this.item).subscribe((events) => {
       this.true = events;
       if (this.true == false) {

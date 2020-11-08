@@ -11,6 +11,17 @@
   border-width: 15px 13px 0 13px;
   border-color: #27b5e5 transparent transparent transparent;
 }
+.fill-btn-blue {
+  background-color: #026fa7;
+  padding: 10px 0px;
+  border: none;
+  color: white;
+  /* font-weight: bold; */
+  font-size: 18px;
+  outline: none;
+  cursor: pointer;
+}
+
 
 .div:before {
   content: " ";

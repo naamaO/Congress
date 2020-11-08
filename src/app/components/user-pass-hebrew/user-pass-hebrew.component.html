@@ -33,7 +33,8 @@
                 </label>
                 <input #emailReset id="emailReset" [formControl]="emailFormControl" style="padding-top:10%;width: 100%;" [(ngModel)]="EmailToResetPassword">
                 <br />  <label style="color:red;" *ngIf="errPass">אימייל זה אינו רשום במערכת שלנו.</label>
-                <br /> <div style="direction:rtl;"> <label style="color:gray;" *ngIf="errPass">אנא וודא שזה הדוא"ל הנכון. אם זה נכון,</label><label style="color:gray;text-decoration:underline;cursor:pointer;" *ngIf="errPass" (click)="newMember()">הרשם כמשתמש חדש</label></div>
+                <br /> <div style="direction:rtl;"> <label style="color:gray;" *ngIf="errPass">אנא וודא שזה הדוא"ל הנכון. אם זה נכון,</label>
+                  <label style="color:gray;text-decoration:underline;cursor:pointer;" *ngIf="errPass" (click)="newMember()">הרשם כמשתמש חדש</label></div>
               </form>
             </div>
             <br /><br /><br />
@@ -56,9 +57,12 @@
               <form class="fields" style="direction:rtl;">
                 <div class="example-full-width">
                   <label color="gray" style="text-align: right;padding-left: 80%;" #email>דוא"ל</label>
+                  <!-- <input value=""
+                  type="text" style="padding: 0;width:100%;color:black;" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail1()" (focus)="focusemail1()" /> -->
                   <input value=""
                          type="text" style="padding: 0;width:100%;color:black;" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"
-                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focusout)="unfocusemail1()" (focus)="focusemail1()" />
+                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  (focusout)="unfocusemail1()" (focus)="focusemail1()" />
                 </div>
                 <br /><br />
                 <div class="example-full-width">
